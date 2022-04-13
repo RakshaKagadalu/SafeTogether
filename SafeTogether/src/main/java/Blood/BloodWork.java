@@ -78,5 +78,4 @@ public class BloodWork {
     String password;
     Map<String, Integer> newMap = new HashMap<String, Integer>();
     
-    
 }
