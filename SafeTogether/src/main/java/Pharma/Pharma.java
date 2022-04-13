@@ -22,7 +22,8 @@ public class Pharma {
         setPharmaPassword(pharmaPassword);
     }
     
-
+    
+    // All the getter and setter for the Pharma class
 
     public String getPharmaName() {
         return pharmaName;
