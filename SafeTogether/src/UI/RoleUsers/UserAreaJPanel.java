@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.RoleCustomer;
+package UI.RoleUsers;
 
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  * @author raunak
  */
-public class CustomerAreaJPanel extends javax.swing.JPanel {
+public class UserAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
 
@@ -25,7 +25,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
      * Creates new form DoctorWorkAreaJPanel
      */
     
-    public CustomerAreaJPanel(JPanel userProcessContainer, UserAcc userAcc, EcoSystem ecosystem) {
+    public UserAreaJPanel(JPanel userProcessContainer, UserAcc userAcc, EcoSystem ecosystem) {
         //this.set
 
         initComponents();
