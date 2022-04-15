@@ -4,7 +4,7 @@
  */
 package Business.EmergencyAmbulance;
 
-import Business.Roles.DriverAmbulance;
+import Business.Roles.Driver_Ambulance;
 import Business.UserAcc.UserAcc;
 
 /**
@@ -28,7 +28,7 @@ public class Ambulance extends UserAcc {
         this.phNum = phNum;
         setUserName(user_Id);
         setPwd(pwd);
-        setRole(new DriverAmbulance());
+        setRole(new Driver_Ambulance());
     }
 
     public String getUser_Id() {
