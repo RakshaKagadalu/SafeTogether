@@ -3,21 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Business.Laboratory;
+import Business.UserAcc.UserAcc;
 import java.util.*;
 
 /**
  *
  * @author shrikrishnajoisa
  */
-public class BloodWork {
+public class BloodWork extends UserAcc{
     // Blood work class for the hospitals
-    String userName;
+    String userNames;
     String userLocation;
     String userPhone;
 
-    public BloodWork(String userName, String userLocation, String userPhone, String userId, String password) {
-        setPassword(password);
-        this.userName = userName;
+    public BloodWork(String userNames, String userLocation, String userPhone, String userId, String password) {
+        setUserName(userNames);
+        setPwd(password);
+        this.userNames = userNames;
         this.userLocation = userLocation;
         this.userPhone = userPhone;
         this.userId = userId;
@@ -25,13 +27,12 @@ public class BloodWork {
     }
     
     // Generate the getter and setter method the variables
-
-    public String getUserName() {
-        return userName;
+    public String getUserNames() {
+        return userNames;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserNames(String userName) {
+        this.userNames = userName;
     }
 
     public String getUserLocation() {
@@ -77,5 +78,4 @@ public class BloodWork {
     String userId;
     String password;
     Map<String, Integer> newMap = new HashMap<String, Integer>();
-    
 }

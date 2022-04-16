@@ -4,18 +4,20 @@
  */
 package Business.Vac;
 
+import Business.UserAcc.UserAcc;
 import java.util.logging.Logger;
 
 /**
  *
  * @author shrikrishnajoisa
  */
-public class Vaccinations {
+public class Vaccinations extends UserAcc {
 
     String name;
 
     public Vaccinations(String name, String phoneNumber, String location, String userID, String password) {
-        setPassword(password);
+        setUserName(userID);
+        setPwd(password);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.location = location;
