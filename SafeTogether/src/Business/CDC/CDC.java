@@ -4,14 +4,19 @@
  */
 package Business.CDC;
 
+import Business.UserAcc.UserAcc;
+
 /**
  *
  * @author shrikrishnajoisa
  */
-public class CDC {
+
+public class CDC extends UserAcc{
 
     // variable which is used to set everything
     public CDC(String firstName, String secondName, String userID, String userPassword, String phoneNumber) {
+        setUserName(userID);
+        setPwd(userPassword);
         this.firstName = firstName;
         this.secondName = secondName;
         this.userID = userID;
@@ -65,5 +70,5 @@ public class CDC {
     String userID;
     String userPassword;
     String phoneNumber;
-          
+
 }
