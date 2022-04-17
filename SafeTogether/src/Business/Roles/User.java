@@ -4,10 +4,18 @@
  */
 package Business.Roles;
 
+import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import UI.RoleUsers.UserAreaJPanel;
+import javax.swing.JPanel;
+
 /**
  *
  * @author raksh
  */
-public class User {
+public class User  extends Roles {
+     public JPanel createWorkArea(JPanel userProcessContainer, UserAcc account, EcoSystem business) {
+        return new UserAreaJPanel(userProcessContainer, account, business);
+    }
     
 }
