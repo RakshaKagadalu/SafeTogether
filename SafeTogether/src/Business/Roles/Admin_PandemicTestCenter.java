@@ -6,7 +6,8 @@ package Business.Roles;
 
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
-import UI.RoleUsers.UserAreaJPanel;
+import UserInterface.userRole.UserAreaJPanel;
+
 import javax.swing.JPanel;
 
 /**

@@ -2,30 +2,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.SysAdmin;
+package UserInterface.userRole;
 
 import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
 import javax.swing.JPanel;
 
 /**
  *
  * @author raksh
  */
-
-public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
+public class UserAreaJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form SysAdminWorkAreaJPanel
+     * Creates new form UserAreaJPanel
      */
-    JPanel container;
-    EcoSystem ecosystem;
-    public SysAdminWorkAreaJPanel(JPanel container,EcoSystem ecosystem) {
-        initComponents();
-         this.container=container;
-   
-        this.ecosystem=ecosystem;
-    }
+    private UserAcc userAcc;
+    private EcoSystem ecosystem;
+     private JPanel userProcessContainer;
 
+    
+    public UserAreaJPanel(  JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
+        initComponents();
+        this.ecosystem = ecosystem;
+        this.userProcessContainer = userProcessContainer;
+        
+        this.userAcc = userAcc;
+    }
+ public void displayRequestTable(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
