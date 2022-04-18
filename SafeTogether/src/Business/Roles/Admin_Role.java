@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 //to provide user role to admin
 public class Admin_Role extends Roles {
      //@Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAcc account, EcoSystem ecosystem) {
-        return new AdminWorkAreaJPanel(userProcessContainer, account, ecosystem);
-    }
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAcc account, EcoSystem ecosystem) {
+////        return new AdminWorkAreaJPanel(userProcessContainer, account, ecosystem);
+//    }
 }
