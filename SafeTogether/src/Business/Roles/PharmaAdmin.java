@@ -4,10 +4,17 @@
  */
 package Business.Roles;
 
+import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import UserInterface.userRole.UserAreaJPanel;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class PharmaAdmin {
-    
+          public JPanel createWorkArea(JPanel userProcessContainer, UserAcc account, EcoSystem business) {
+         return new UserAreaJPanel(userProcessContainer, account, business);
+     }
 }

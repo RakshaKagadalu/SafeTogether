@@ -2,28 +2,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.SysAdmin;
+package UserInterface.userRole;
 
-import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JPanel;
 
 /**
  *
  * @author raksh
  */
-
-public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
+public class LabTestReports extends javax.swing.JPanel {
 
     /**
-     * Creates new form SysAdminWorkAreaJPanel
+     * Creates new form LabTestReports
      */
-    JPanel container;
-    EcoSystem ecosystem;
-    public SysAdminWorkAreaJPanel(JPanel container,EcoSystem ecosystem) {
-        initComponents();
-         this.container=container;
+     private UserAcc userAcc;
+    private JPanel userProcessContainer;
+    
    
-        this.ecosystem=ecosystem;
+    public LabTestReports(UserAcc uAccount, JPanel userProcessContainer) {
+        initComponents();
+        this.userAcc = uAccount;
+        this.userProcessContainer = userProcessContainer;
+        
+        
+        //if there is a back button
+//         userProcessContainer.remove(this);
+//        Component[] componentArray = userProcessContainer.getComponents();
+//        Component component = componentArray[componentArray.length - 1];
+//        CustomerAreaJPanel dwjp = (CustomerAreaJPanel) component;
+//        dwjp.populateRequestTable();
+//        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+//        layout.previous(userProcessContainer);
+        
     }
 
     /**
