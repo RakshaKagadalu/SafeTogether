@@ -5,8 +5,6 @@
 package Business.Roles;
 
 import Business.EcoSystem;
-import Business.UserAcc.UserAcc;
-import UI.RoleUsers.UserAreaJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -14,7 +12,5 @@ import javax.swing.JPanel;
  * @author raksh
  */
 public class Admin_Pharmacy {
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAcc account, EcoSystem business) {
-        return new UserAreaJPanel(userProcessContainer, account, business);
-    }
+
 }
