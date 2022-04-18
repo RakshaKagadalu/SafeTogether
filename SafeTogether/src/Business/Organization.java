@@ -40,12 +40,12 @@ abstract class Organization{
     DoctorsAppointment_Dir docAppDir;
     
     
-     report_emergency_directory report_emergency_directory;
-     medrequest_directory medrequest_directory;
-     bloodbank_directory bloodbankdirectory;
-     app_check appcheck;
-     Covid19_directory cdd;
-     request_blood_directory rbd;
+//     report_emergency_directory report_emergency_directory;
+//     medrequest_directory medrequest_directory;
+//     bloodbank_directory bloodbankdirectory;
+//     app_check appcheck;
+//     Covid19_directory cdd;
+//     request_blood_directory rbd;
      
      private int organizationID;
     private static int counter=0; 
@@ -79,12 +79,12 @@ abstract class Organization{
         docAppDir = new DoctorsAppointment_Dir();
         
         
-        cdd = new Covid19_directory();
-        rbd=new request_blood_directory()
-         report_emergency_directory = new report_emergency_directory();
-        bloodbankdirectory = new bloodbank();
-        medrequest_directory = new medrequest_directory();
-        appcheck = new app_check();
+//        cdd = new Covid19_directory();
+//        rbd=new request_blood_directory();
+//         report_emergency_directory = new report_emergency_directory();
+//        bloodbankdirectory = new bloodbank();
+//        medrequest_directory = new medrequest_directory();
+//        appcheck = new app_check();
         
         organizationID = counter;
         ++counter;
@@ -118,6 +118,10 @@ abstract class Organization{
 
     public void setUserAccDir(UserAccDir userAccDir) {
         this.userAccDir = userAccDir;
+    }
+    
+    public UserAccDir getUserAccountDirectory() {
+        return userAccDir;
     }
 
     public User_Directory getUserDir() {
