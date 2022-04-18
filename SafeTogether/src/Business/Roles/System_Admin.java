@@ -6,7 +6,7 @@ package Business.Roles;
 
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
-import UI.SysAdmin.SysAdminWorkAreaJPanel;
+import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import javax.swing.JPanel;
 
 /**
