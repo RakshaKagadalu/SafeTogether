@@ -26,13 +26,6 @@ public class UserAcc {
         workQueue =  new WorkQueue();
     }
 
-//    public Employee getEmployee() {
-//        return employee;
-//    }
-//
-//    public void setEmployee(Employee employee) {
-//        this.employee = employee;
-//    }
 
     public Roles getRole() {
         return role;

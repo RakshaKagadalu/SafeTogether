@@ -11,20 +11,21 @@ package Business.WorkQueue;
 public class DonateBlood {
     
     
-    String userId;
-    String appoinmentDate;
-    String firstName;
-    String lastName;
-    String bloodGroup;
-    String time;
-    String status;
-    String blood_bankName;
-    String appoinmentTime;
-    
+  
     int RBC;
     int WBC;
     int cholesterol;
     int platelets;
+    String time;
+    String status;
+    String blood_bankName;
+    String appoinmentTime;
+      String userId;
+    String appoinmentDate;
+    String firstName;
+    String lastName;
+    String bloodGroup;
+    
 
     public String getUserId() {
         return userId;
