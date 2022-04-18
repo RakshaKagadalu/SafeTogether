@@ -12,10 +12,15 @@ import java.util.*;
  */
 public class BloodWork extends UserAcc{
     // Blood work class for the hospitals
+    
+     Map<String, Integer> labMap = new HashMap<String, Integer>();
+     String userId;
+    String password;
     String userNames;
     String userLocation;
     String userPhone;
-
+   
+       
     public BloodWork(String userNames, String userLocation, String userPhone, String userId, String password) {
         setUserName(userNames);
         setPwd(password);
@@ -59,6 +64,9 @@ public class BloodWork extends UserAcc{
         this.userId = userId;
     }
 
+   
+    
+
     public String getPassword() {
         return password;
     }
@@ -67,15 +75,14 @@ public class BloodWork extends UserAcc{
         this.password = password;
     }
 
-    public Map<String, Integer> getNewMap() {
-        return newMap;
+    public Map<String, Integer> getLabMap() {
+        return labMap;
     }
 
-    public void setNewMap(Map<String, Integer> newMap) {
-        this.newMap = newMap;
+    public void setLabMap(Map<String, Integer> labMap) {
+        this.labMap = labMap;
     }
 
-    String userId;
-    String password;
-    Map<String, Integer> newMap = new HashMap<String, Integer>();
+ 
+
 }
