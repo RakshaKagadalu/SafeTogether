@@ -12,17 +12,21 @@ import java.util.logging.Logger;
  * @author shrikrishnajoisa
  */
 public class Vaccinations extends UserAcc {
-
+    
+    String userID;
+    String pwd;
+    String phoneNumber;
+    String location;
     String name;
 
-    public Vaccinations(String name, String phoneNumber, String location, String userID, String password) {
+    public Vaccinations(String name, String phoneNumber, String location, String userID, String pwd) {
         setUserName(userID);
-        setPwd(password);
+        setPwd(pwd);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.location = location;
         this.userID = userID;
-        this.password = password;
+        this.pwd = pwd;
     }
 
     public String getName() {
@@ -57,17 +61,17 @@ public class Vaccinations extends UserAcc {
         this.userID = userID;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setPassword(String Password) {
-        this.password = Password;
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
+
+  
     
-    String phoneNumber;
-    String location;
-    String userID;
-    String password;
+    
+    
        
 }
