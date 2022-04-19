@@ -4,12 +4,19 @@
  */
 package UserInterface;
 
+import Business.DatabaseUtil.DB4OUtil;
+import Business.EcoSystem;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author shrikrishnajoisa
  */
+
 public class MainJFrame extends javax.swing.JFrame {
 
     /**
@@ -17,11 +24,14 @@ public class MainJFrame extends javax.swing.JFrame {
      */
 
     // set the default size of the main frame
-    
+     private EcoSystem system;
+    public static DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     public MainJFrame() {
         initComponents();
         this.setSize(1920, 1080);
         this.setResizable(false);
+         system = dB4OUtil.retrieveSystem();
+         setAdminPage();
     }
     
 
@@ -34,17 +44,22 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        workArea = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
+
+        workArea.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(workArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(workArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -85,15 +100,23 @@ public class MainJFrame extends javax.swing.JFrame {
         });
     }
     
-    // Initial launch screen for the adminPage
-    private void setAdminPage() {
-        // The calorie deficit
-        
-    }
+ 
     
     
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
+   // Initial launch screen for the adminPage
+    private void setAdminPage() {
+         UserLogins wa=new UserLogins(workArea,system);
+        workArea.add("UserLogins",wa);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+        
+        
+    }
+  
+
 }
