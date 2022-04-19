@@ -7,6 +7,7 @@ package Business;
 import Business.CDC.CDCDirectory;
 import Business.Doctor.DoctorDir;
 import Business.EmergencyAmbulance.AmbulanceDir;
+import Business.Laboratory.BloodWorkDirectory;
 import Business.PandemicCenter.PandemicCenter_Dir;
 import Business.Pharma.PharmaDirectory;
 import Business.Roles.Roles;
@@ -14,6 +15,11 @@ import Business.UserAcc.UserAccDir;
 import Business.Vac.VacDirectory;
 import Business.WorkQueue.DoctorsAppointment_Dir;
 import Business.WorkQueue.DonateBlood_Dir;
+import Business.WorkQueue.OutbreakTracerDir;
+import Business.WorkQueue.Req_BloodDir;
+import Business.WorkQueue.Req_EmergencyDir;
+import Business.WorkQueue.Req_MedicineDir;
+import Business.WorkQueue.SearchApp;
 import Business.WorkQueue.VacRequest_Dir;
 import Business.WorkQueue.WorkQueue;
 import Business.user.User_Directory;
@@ -40,12 +46,20 @@ abstract class Organization{
     DoctorsAppointment_Dir docAppDir;
     
     
-//     report_emergency_directory report_emergency_directory;
-//     medrequest_directory medrequest_directory;
-//     bloodbank_directory bloodbankdirectory;
-//     app_check appcheck;
-//     Covid19_directory cdd;
-//     request_blood_directory rbd;
+     Req_EmergencyDir emergencyReqDir;
+     Req_MedicineDir medicineReqDir;
+     BloodWorkDirectory bloodBankDir;
+     SearchApp checkApplication;
+     OutbreakTracerDir outbreakStatusDir;
+     Req_BloodDir reqBloodDir;
+     
+//            outbreakStatusDir = new outbreakStatusDir();
+//        reqBloodDir=new reqBloodDir();
+//         emergencyReqDir = new Req_EmergencyDir();
+//        bloodBankDir = new bloodBankDir();
+//        medicineReqDir = new  Req_MedicineDir();
+//        checkApplication = new checkApplication();
+//        
      
      private int organizationID;
     private static int counter=0; 
@@ -79,12 +93,13 @@ abstract class Organization{
         docAppDir = new DoctorsAppointment_Dir();
         
         
-//        cdd = new Covid19_directory();
-//        rbd=new request_blood_directory();
-//         report_emergency_directory = new report_emergency_directory();
-//        bloodbankdirectory = new bloodbank();
-//        medrequest_directory = new medrequest_directory();
-//        appcheck = new app_check();
+          outbreakStatusDir = new OutbreakTracerDir();
+        reqBloodDir=new Req_BloodDir();
+         emergencyReqDir = new Req_EmergencyDir();
+        bloodBankDir = new BloodWorkDirectory();
+        medicineReqDir = new  Req_MedicineDir();
+        checkApplication = new SearchApp();
+        
         
         organizationID = counter;
         ++counter;
@@ -262,6 +277,86 @@ abstract class Organization{
     }
     
    public abstract ArrayList<Roles> getRoleSupported();
+   
+   
+   
+
+    public Req_EmergencyDir getEmergencyReqDir() {
+         if(emergencyReqDir==null)
+        {
+            emergencyReqDir = new Req_EmergencyDir();        
+        }
+        return emergencyReqDir;
+    }
+
+    public void setEmergencyReqDir(Req_EmergencyDir emergencyReqDir) {
+        this.emergencyReqDir = emergencyReqDir;
+    }
+
+    public Req_MedicineDir getMedicineReqDir() {
+          if(medicineReqDir==null)
+        {
+            medicineReqDir = new Req_MedicineDir();        
+        }
+        return medicineReqDir;
+    }
+
+    public void setMedicineReqDir(Req_MedicineDir medicineReqDir) {
+        this.medicineReqDir = medicineReqDir;
+    }
+
+    public BloodWorkDirectory getBloodBankDir() {
+          if(bloodBankDir==null)
+        {
+            bloodBankDir = new BloodWorkDirectory();        
+        }
+        return bloodBankDir;
+    }
+
+    public void setBloodBankDir(BloodWorkDirectory bloodBankDir) {
+        this.bloodBankDir = bloodBankDir;
+    }
+
+    public SearchApp getCheckApplication() {
+         if(checkApplication==null)
+        {
+            checkApplication = new SearchApp();        
+        }
+        return checkApplication;
+    }
+
+    public void setCheckApplication(SearchApp checkApplication) {
+        this.checkApplication = checkApplication;
+    }
+
+    public OutbreakTracerDir getOutbreakStatusDir() {
+          if(outbreakStatusDir==null)
+        {
+            outbreakStatusDir = new OutbreakTracerDir();        
+        }
+        return outbreakStatusDir;
+    }
+
+    public void setOutbreakStatusDir(OutbreakTracerDir outbreakStatusDir) {
+        
+        this.outbreakStatusDir = outbreakStatusDir;
+    }
+
+    public Req_BloodDir getReqBloodDir() {
+          if(reqBloodDir==null)
+        {
+            reqBloodDir = new Req_BloodDir();        
+        }
+        return reqBloodDir;
+    }
+
+    public void setReqBloodDir(Req_BloodDir reqBloodDir) {
+        this.reqBloodDir = reqBloodDir;
+    }
+   
+   
+   
+   
    
     @Override
     public String toString() {
