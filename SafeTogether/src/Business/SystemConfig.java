@@ -17,7 +17,7 @@ public class SystemConfig {
         EcoSystem system = EcoSystem.getInstance();
         
         
-        UserAcc ua = system.getUserAcc().createUserAccount("sysadmin", "sysadmin", new System_Admin());
+        UserAcc ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", new System_Admin());
         
         return system;
     }
