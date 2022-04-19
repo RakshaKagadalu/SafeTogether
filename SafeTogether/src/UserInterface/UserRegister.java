@@ -63,6 +63,7 @@ public class UserRegister extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/2565809.png"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 1080));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
