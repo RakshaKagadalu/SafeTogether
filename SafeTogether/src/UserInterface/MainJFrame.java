@@ -32,7 +32,8 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setSize(1920, 1080);
         this.setResizable(false);
          system = dB4OUtil.retrieveSystem();
-         setSystemAdmin();
+         //setSystemAdmin();
+         setAdminPage();
     }
     
 
@@ -111,7 +112,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
    // Initial launch screen for the adminPage
     private void setAdminPage() {
-         UserLogins wa=new UserLogins(workArea,system);
+         UserLogin wa=new UserLogin(workArea,system);
         workArea.add("UserLogins",wa);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
