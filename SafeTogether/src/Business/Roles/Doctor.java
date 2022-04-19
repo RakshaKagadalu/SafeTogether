@@ -5,6 +5,8 @@
 package Business.Roles;
 
 import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import UserInterface.userRole.UserAreaJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -13,7 +15,7 @@ import javax.swing.JPanel;
  */
 
 public class Doctor  extends Roles{
-//      public JPanel createWorkArea(JPanel userProcessContainer, UserAcc account, EcoSystem business) {
-//         return new UserAreaJPanel(userProcessContainer, account, business);
-//     }
+      public JPanel createWorkArea(JPanel userProcessContainer, UserAcc account, EcoSystem business) {
+         return new UserAreaJPanel(userProcessContainer, account, business);
+     }
 }

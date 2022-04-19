@@ -21,8 +21,8 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
     EcoSystem ecosystem;
     public SysAdminWorkAreaJPanel(JPanel container,EcoSystem ecosystem) {
         initComponents();
-        this.setSize(1920, 1080);
-        this.container=container;
+         this.container=container;
+   
         this.ecosystem=ecosystem;
     }
 
@@ -34,6 +34,7 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -236,10 +237,12 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 320, 290));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+
     private javax.swing.JButton emergencyButton;
     private javax.swing.JButton governmentButton;
     private javax.swing.JButton hospitalButton;
@@ -273,5 +276,6 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JButton nonProfitButton;
     private javax.swing.JButton pharmaButton;
+
     // End of variables declaration//GEN-END:variables
 }
