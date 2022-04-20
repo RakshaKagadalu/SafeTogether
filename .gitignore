@@ -11,7 +11,7 @@
 .mtj.tmp/
 
 .DS_Store
-bin/
+/bin/
 # Package Files #
 *.jar
 *.war
@@ -25,4 +25,7 @@ bin/
 hs_err_pid*
 /SafeTogether/nbproject/private/
 /SafeTogether/build/
-/SafeTogether/nbproject
+/SafeTogether/nbproject/
+project.properties
+/target/
+Databank.db40
