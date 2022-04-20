@@ -11,7 +11,7 @@
 .mtj.tmp/
 
 .DS_Store
-
+bin/
 # Package Files #
 *.jar
 *.war
