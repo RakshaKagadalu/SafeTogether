@@ -2,12 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Business.user;
+package Business.userR;
+
+import Business.Roles.UserR;
+import Business.UserAcc.UserAcc;
+
 /**
  *
  * @author arjunbirju
  */
-public class User {
+public class User extends UserAcc{
     String firstName;
     String lastName;
     String email;
@@ -17,6 +21,9 @@ public class User {
     String location;
 
     public User(String firstName, String lastName, String email, String phoneNumber, String userId, String password, String location) {
+        setUserName(userId);
+        setPassword(password);
+        setRole(new UserR());
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
