@@ -4,13 +4,10 @@
  */
 package UserInterface;
 
-import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
-import Business.user.User;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import java.awt.CardLayout;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
