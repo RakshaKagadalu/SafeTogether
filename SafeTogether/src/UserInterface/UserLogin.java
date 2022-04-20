@@ -4,10 +4,14 @@
  */
 package UserInterface;
 
+import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
+import Business.user.User;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -21,7 +25,7 @@ public class UserLogin extends javax.swing.JPanel {
      */
      EcoSystem system;
     JPanel workArea;
-    UserAcc userAccount;
+    UserAcc userAcc;
     public UserLogin(JPanel workArea, EcoSystem system) {
         initComponents();
          
@@ -45,11 +49,11 @@ public class UserLogin extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         userNameTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        passwordTextField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         signUpButton = new javax.swing.JButton();
+        passwordTextField = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1920, 1080));
@@ -75,9 +79,6 @@ public class UserLogin extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(73, 84, 90));
         jLabel5.setText("Password");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 200, -1));
-
-        passwordTextField.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel1.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 450, 48));
 
         loginButton.setBackground(new java.awt.Color(235, 97, 91));
         loginButton.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
@@ -112,6 +113,11 @@ public class UserLogin extends javax.swing.JPanel {
         });
         jPanel1.add(signUpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 450, 50));
 
+        passwordTextField.setBackground(new java.awt.Color(248, 248, 249));
+        passwordTextField.setText("jPasswordField1");
+        passwordTextField.setPreferredSize(new java.awt.Dimension(7, 20));
+        jPanel1.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 450, 50));
+
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 530, 520));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/kristaps-grundsteins-phv0kzqMJyk-unsplash.jpg"))); // NOI18N
@@ -120,6 +126,248 @@ public class UserLogin extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
+        String uName = userNameTextField.getText();
+        char[] upwdCharArray = passwordTextField.getPassword();
+        String pwd = String.valueOf(upwdCharArray);
+
+       userAcc = system.getUserAccountDirectory().authenticateUser(uName, pwd);
+      
+        if(userAcc==null){
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            return;
+        }
+        else{
+            userNameTextField.setText("");
+            passwordTextField.setText("");
+            System.out.println("logged in role as :"+userAcc.getRole());
+            String userRole=(userAcc.getRole().toString());
+            
+            if(userRole.equals("Business.Roles.System_Admin"))
+            {
+                showSysAdminWorkAreaJPanel();
+                
+            }
+//            else if(userRole.equals("Business.Role.CustomerRole"))
+//            {
+//                CustomerDirectory cd=system.getCustomerDirectory();
+//                ArrayList<Customer> c=cd.getA();
+//                int size=c.size();
+//                int count=0;
+//                for(int i=0;i<size;i++)
+//                {
+//                Customer c1=c.get(i);
+//                if(userAcc.getUsername().matches(c1.getUsername()))
+//                {
+//                callCustomerAreaJPanel();
+//                count+=1;
+//                }            
+//                }
+//                if(count==0)
+//                {
+//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+//                }
+//            }
+//            else if(userRole.equals("Business.Role.AdminRole"))
+//            {
+//                
+//                RestaurantDirectory cd=system.getRestaurantDirectory();
+//                ArrayList<Restaurant> c=cd.getRestaurantList();
+//                int size=c.size();
+//                int count=0;
+//                for(int i=0;i<size;i++)
+//                {
+//                Restaurant c1=c.get(i);
+//                if(userAcc.getUsername().matches(c1.getUsername()))
+//                {
+//                callAdminWorkAreaJPanel();
+//                count+=1;
+//                }            
+//                }
+//                if(count==0)
+//                {
+//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+//                }
+//            }
+//            else if(userRole.equals("Business.Role.UserRole"))
+//            {
+//                User_directory cd=system.getUserdirectory();
+//                ArrayList<User> c=cd.getUser();
+//                int size=c.size();
+//                System.out.println(c.size());
+//                int count=0;
+//                for(int i=0;i<size;i++)
+//                {
+//                User c1=c.get(i);
+//                if(userAcc.getUsername().matches(c1.getUser_id()))
+//                {
+//                calluser();
+//                count+=1;
+//                }            
+//                }
+//                if(count==0)
+//                {
+//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+//                }
+//            }
+//            else if(userRole.equals("Business.Role.DoctorRole"))
+//            {
+//                Doctor_Directory cd=system.getDoctordirectory();
+//                ArrayList<Doctor> c=cd.getA();
+//                int size=c.size();
+//                System.out.println(c.size());
+//                int count=0;
+//                for(int i=0;i<size;i++)
+//                {
+//                Doctor c1=c.get(i);
+//                System.out.println(userAcc.getUsername());
+//                System.out.println(c1.getUserid());                
+//                if(userAcc.getUsername().matches(c1.getUsername()))
+//                {
+//                    
+//                calldoctor();
+//                count+=1;
+//                }       
+//                }
+//                if(count==0)
+//                {
+//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+//                }
+//            }
+//            else if(userRole.equals("Business.Role.bloodbankadminrole"))
+//            {
+//                bloodbank_directory cd=system.getBloodbankdirectory();
+//                ArrayList<BloodBank> c=cd.getA();
+//                int size=c.size();
+//                System.out.println(c.size());
+//                int count=0;
+//                for(int i=0;i<size;i++)
+//                {
+//                BloodBank c1=c.get(i);
+//                if(userAcc.getUsername().matches(c1.getUserid()))
+//                {
+//                callbloodbank();
+//                count+=1;
+//                }            
+//                }
+//                if(count==0)
+//                {
+//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+//                }
+//            }
+//            else if(userRole.equals("Business.Role.PharmacyAdmin"))
+//            {
+//                Pharmacy_directory cd=system.getPharmacy_directory();
+//                ArrayList<Pharmacy> c=cd.getA();
+//                int size=c.size();
+//                System.out.println(c.size());
+//                int count=0;
+//                for(int i=0;i<size;i++)
+//                {
+//                Pharmacy c1=c.get(i);
+//                if(userAcc.getUsername().matches(c1.getUserid()))
+//                {
+//                callpharmacy();
+//                count+=1;
+//                }            
+//                }
+//                if(count==0)
+//                {
+//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+//                }
+//            }
+//           
+//         
+//            else if(userRole.equals("Business.Role.governmantOfficial"))
+//            {
+//                governmentoffical_directory cd=system.getGovdirectory();
+//                ArrayList<governmentofficial> c=cd.getA();
+//                int size=c.size();
+//                System.out.println(c.size());
+//                int count=0;
+//                for(int i=0;i<size;i++)
+//                {
+//                governmentofficial c1=c.get(i);
+//                if(userAcc.getUsername().matches(c1.getUser_id()))
+//                {
+//                callgov();
+//                count+=1;
+//                }            
+//                }
+//                if(count==0)
+//                {
+//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+//                }
+//            }
+//            else if(userRole.equals("Business.Role.AmbulanceDriver"))
+//            {
+//                ambulance_directory cd=system.getAmbulancedirectory();
+//                ArrayList<Ambulance> c=cd.getA();
+//                int size=c.size();
+//                System.out.println(c.size());
+//                int count=0;
+//                for(int i=0;i<size;i++)
+//                {
+//                Ambulance c1=c.get(i);
+//                if(userAcc.getUsername().matches(c1.getUser_id()))
+//                {
+//                callambulance();
+//                count+=1;
+//                }            
+//                }
+//                if(count==0)
+//                {
+//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+//                }
+//            }
+//            else if(userRole.equals("Business.Role.covidtestingadmin"))
+//            {
+//                covidcenter_directory cd=system.getCd();
+//                ArrayList<covidcenter> c=cd.getA();
+//                int size=c.size();
+//                System.out.println(c.size());
+//                int count=0;
+//                for(int i=0;i<size;i++)
+//                {
+//                covidcenter c1=c.get(i);
+//                if(userAcc.getUsername().matches(c1.getUserid()))
+//                {
+//                callambulance1();
+//                count+=1;
+//                }            
+//                }
+//                if(count==0)
+//                {
+//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+//                }
+//            }
+//            else if(userRole.equals("Business.Role.Vaccination_admin"))
+//            {
+//                vaccination_org_directory cd=system.getVacc_org();
+//                ArrayList<vaccination_org> c=cd.getA();
+//                int size=c.size();
+//                System.out.println(c.size());
+//                int count=0;
+//                for(int i=0;i<size;i++)
+//                {
+//                vaccination_org c1=c.get(i);
+//                if(userAcc.getUsername().matches(c1.getUserid()))
+//                {
+//                vaccination();
+//                count+=1;
+//                }            
+//                }
+//                if(count==0)
+//                {
+//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+//                }
+//            }
+//            
+            else
+            {
+                System.out.println(userAcc.getRole());
+            }           
+            
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
@@ -143,8 +391,19 @@ public class UserLogin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginButton;
-    private javax.swing.JTextField passwordTextField;
+    private javax.swing.JPasswordField passwordTextField;
     private javax.swing.JButton signUpButton;
     private javax.swing.JTextField userNameTextField;
     // End of variables declaration//GEN-END:variables
+
+    private void showSysAdminWorkAreaJPanel() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      
+       // System.out.println("im inside login cardlayout");
+        SysAdminWorkAreaJPanel sysadmin=new SysAdminWorkAreaJPanel(workArea,system);
+        workArea.add("SysAdminWorkAreaJPanel",sysadmin);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    
+    }
 }
