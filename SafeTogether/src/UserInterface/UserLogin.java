@@ -129,6 +129,7 @@ public class UserLogin extends javax.swing.JPanel {
 
        userAcc = system.getUserAccountDirectory().authenticateUser(uName, pwd);
       
+       //to check if the useraccount is null and display an error message
         if(userAcc==null){
             JOptionPane.showMessageDialog(null, "Invalid credentials");
             return;
