@@ -242,13 +242,13 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 320, 290));
 
-        exitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-exit-66.png"))); // NOI18N
+        exitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-logout-50.png"))); // NOI18N
         exitLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 exitLabelMousePressed(evt);
             }
         });
-        jPanel1.add(exitLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 40, -1, -1));
+        jPanel1.add(exitLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 50, -1, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
