@@ -6,6 +6,7 @@ package UserInterface;
 
 import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
+import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setSize(1920, 1080);
         this.setResizable(false);
          system = dB4OUtil.retrieveSystem();
-         setAdminPage();
+         setSystemAdmin();
     }
     
 
@@ -114,8 +115,13 @@ public class MainJFrame extends javax.swing.JFrame {
         workArea.add("UserLogins",wa);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
-        
-        
+    }
+    
+    private void setSystemAdmin() {
+        SysAdminWorkAreaJPanel wa=new SysAdminWorkAreaJPanel(workArea,system);
+        workArea.add("UserLogins",wa);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
     }
   
 
