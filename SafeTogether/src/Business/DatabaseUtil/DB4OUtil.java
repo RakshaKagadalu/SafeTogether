@@ -39,10 +39,11 @@ public class DB4OUtil {
         }
     }
 
-    private ObjectContainer createConnection() {
+    public ObjectContainer createConnection() {
+        System.out.println("in create connection");
         try {
-
             EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
+            System.out.println("config" + config);
             config.common().add(new TransparentPersistenceSupport());
             //Controls the number of objects in memory
             config.common().activationDepth(Integer.MAX_VALUE);
@@ -51,11 +52,12 @@ public class DB4OUtil {
 
             //Register your top most Class here
             config.common().objectClass(EcoSystem.class).cascadeOnUpdate(true); // Change to the object you want to save
-
+            System.out.println("Filename: "+ FILENAME);
             ObjectContainer db = Db4oEmbedded.openFile(config, FILENAME);
             return db;
         } catch (DatabaseFileLockedException | DatabaseReadOnlyException | Db4oIOException | IncompatibleFileFormatException | OldFormatException ex) {
-            System.out.print(ex.getMessage());
+            System.out.println(ex.getCause());
+            System.out.println(ex.getMessage());
         }
         return null;
     }
@@ -69,6 +71,7 @@ public class DB4OUtil {
     
     public EcoSystem retrieveSystem(){
         ObjectContainer conn = createConnection();
+        System.out.println("retrieveSystem" + conn);
         ObjectSet<EcoSystem> systems = conn.query(EcoSystem.class); // Change to the object you want to save
         EcoSystem system;
 //        system = SystemConfig.SysConfigure();

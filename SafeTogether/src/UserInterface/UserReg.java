@@ -4,21 +4,45 @@
  */
 package UserInterface;
 
+import javax.swing.JOptionPane;
+import Business.EcoSystem;
+import Business.userR.User;
+import java.util.Properties;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class UserReg extends javax.swing.JFrame {
+    
+    private final EcoSystem ecosystem;
 
     /**
      * Creates new form UserReg
      * Init functions to load to start with
+     * @param ecosystem
      */
-    public UserReg() {
+    public UserReg(EcoSystem ecosystem) {
         initComponents();
         this.setSize(1920, 1080);
         this.setResizable(false);
+        this.ecosystem=ecosystem;
     }
+
+    private UserReg() {
+        initComponents();
+        this.setSize(1920, 1080);
+        this.setResizable(false);
+        this.ecosystem=null; // change this
+    }
+
+//    private UserReg() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -164,7 +188,7 @@ public class UserReg extends javax.swing.JFrame {
                                         .addComponent(lastNameTextField))
                                     .addComponent(jLabel8)
                                     .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(115, 115, 115))))
+                        .addGap(120, 120, 120))))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(244, 244, 244)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +267,7 @@ public class UserReg extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(467, Short.MAX_VALUE))
+                .addContainerGap(448, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,12 +278,81 @@ public class UserReg extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public  void sendmail()
+        {
+        String ToEmail = emailTextField.getText();
+        String myAccountEmail = "aedtesting123";
+        String password = "aedtesting123456";
+       
+        
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        
+        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+            
+        });
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(ToEmail));
+            message.setSubject("User Account Created!!");
+            message.setText("Your User ID : "+userNameTextField.getText()+"\n"+"Password : "+passwordTextField.getText());
+            javax.mail.Transport.send(message);
+        }catch(Exception ex){
+            System.out.println(""+ex);
+        }
+        
+        }
+    
+    
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
         // TODO add your handling code here:
+        if(userNameTextField.getText().isEmpty() || phoneTextField.getText().isEmpty() || firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || passwordTextField.getText().isEmpty() || locationTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        } 
+        if(ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(userNameTextField.getText())){
+            if(!phoneTextField.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+            {
+                JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                phoneTextField.setText("");
+                return;
+            }
+            if(!emailTextField.getText().matches("^[a-zA-Z0-9]+@[a-z]*.com"))
+            {
+                JOptionPane.showMessageDialog(null, "Please enter valid email address!!");
+                emailTextField.setText("");
+                return;
+            }
+            User customer = new User(firstNameTextField.getText(),lastNameTextField.getText(), emailTextField.getText(),phoneTextField.getText(),userNameTextField.getText(),passwordTextField.getText(), locationTextField.getText());
+            ecosystem.getUserAccountDirectory().addAccount(customer);
+            ecosystem.getUserDir().addUser(customer);
+            sendmail();
+            userNameTextField.setText("");
+            emailTextField.setText("");
+            firstNameTextField.setText("");
+            phoneTextField.setText("");
+            lastNameTextField.setText("");
+            passwordTextField.setText("");
+            locationTextField.setText("");
+            
+            JOptionPane.showMessageDialog(null, "User Account Created!!");
+            
+            
+         }else{
+            JOptionPane.showMessageDialog(null, "Username " + userNameTextField.getText() + " already exists !!!, Please try a new one");
+         }
     }//GEN-LAST:event_signUpButtonActionPerformed
 
     /**
@@ -291,6 +384,7 @@ public class UserReg extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new UserReg().setVisible(true);
             }
