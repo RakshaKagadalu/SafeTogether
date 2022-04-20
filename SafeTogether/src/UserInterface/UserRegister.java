@@ -5,6 +5,13 @@
 package UserInterface;
 
 import Business.EcoSystem;
+import Business.userR.User;
+import java.util.Properties;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -16,16 +23,53 @@ public class UserRegister extends javax.swing.JPanel {
     /**
      * Creates new form UserRegister
      */
-         EcoSystem system;
+         EcoSystem ecosystem;
     JPanel workArea;
+    
+        private UserRegister() {
+        initComponents();
+        this.setSize(1920, 1080);
+        
+        this.ecosystem=null; // change this
+    }
     public UserRegister(JPanel workArea,EcoSystem system) {
         initComponents();
-         this.system=system;
+         this.ecosystem=system;
         this.workArea=workArea;
         this.setSize(1920, 1080);
        
     }
-
+public  void sendmail()
+        {
+        String ToEmail = emailTextField.getText();
+        String myAccountEmail = "aedtesting123";
+        String password = "aedtesting123456";
+       
+        
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        
+        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+            
+        });
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(ToEmail));
+            message.setSubject("User Account Created!!");
+            message.setText("Your User ID : "+userNameTextField.getText()+"\n"+"Password : "+passwordTextField.getText());
+            javax.mail.Transport.send(message);
+        }catch(Exception ex){
+            System.out.println(""+ex);
+        }
+        
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,12 +101,13 @@ public class UserRegister extends javax.swing.JPanel {
         loginButton = new javax.swing.JButton();
         signUpButton = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(1020, 1080));
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/2565809.png"))); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(1920, 1080));
         jLabel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 1080));
 
@@ -182,6 +227,41 @@ public class UserRegister extends javax.swing.JPanel {
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
         // TODO add your handling code here:
+          if(userNameTextField.getText().isEmpty() || phoneTextField.getText().isEmpty() || firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || passwordTextField.getText().isEmpty() || locationTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        } 
+        if(ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(userNameTextField.getText())){
+            if(!phoneTextField.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+            {
+                JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                phoneTextField.setText("");
+                return;
+            }
+            if(!emailTextField.getText().matches("^[a-zA-Z0-9]+@[a-z]*.com"))
+            {
+                JOptionPane.showMessageDialog(null, "Please enter valid email address!!");
+                emailTextField.setText("");
+                return;
+            }
+            User customer = new User(firstNameTextField.getText(),lastNameTextField.getText(), emailTextField.getText(),phoneTextField.getText(),userNameTextField.getText(),passwordTextField.getText(), locationTextField.getText());
+            ecosystem.getUserAccountDirectory().addAccount(customer);
+            ecosystem.getUserDir().addUser(customer);
+            sendmail();
+            userNameTextField.setText("");
+            emailTextField.setText("");
+            firstNameTextField.setText("");
+            phoneTextField.setText("");
+            lastNameTextField.setText("");
+            passwordTextField.setText("");
+            locationTextField.setText("");
+            
+            JOptionPane.showMessageDialog(null, "User Account Created!!");
+            
+            
+         }else{
+            JOptionPane.showMessageDialog(null, "Username " + userNameTextField.getText() + " already exists !!!, Please try a new one");
+         }
     }//GEN-LAST:event_signUpButtonActionPerformed
 
 
