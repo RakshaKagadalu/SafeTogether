@@ -69,6 +69,7 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         hospitalButton = new javax.swing.JButton();
+        exitLabel = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1920, 1080));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -241,6 +242,14 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 320, 290));
 
+        exitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-exit-66.png"))); // NOI18N
+        exitLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                exitLabelMousePressed(evt);
+            }
+        });
+        jPanel1.add(exitLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 40, -1, -1));
+
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -252,9 +261,14 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(container);
     }//GEN-LAST:event_hospitalButtonActionPerformed
 
+    private void exitLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exitLabelMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton emergencyButton;
+    private javax.swing.JLabel exitLabel;
     private javax.swing.JButton governmentButton;
     private javax.swing.JButton hospitalButton;
     private javax.swing.JLabel jLabel1;
