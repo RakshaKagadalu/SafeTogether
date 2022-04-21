@@ -6,6 +6,7 @@ package UserInterface.SysAdmin;
 
 import Business.EcoSystem;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -265,6 +266,7 @@ public class GovernmentEnterprise extends javax.swing.JPanel {
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
         // Removing the container and replacing it with the system work area panel
+        goBack.setBackground(new Color(213,230,249));
         container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
