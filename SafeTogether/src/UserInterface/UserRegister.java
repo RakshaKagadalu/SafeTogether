@@ -26,12 +26,12 @@ public class UserRegister extends javax.swing.JPanel {
          EcoSystem ecosystem;
     JPanel workArea;
     
-        private UserRegister() {
-        initComponents();
-        this.setSize(1920, 1080);
-        
-        this.ecosystem=null; // change this
-    }
+//        private UserRegister() {
+//        initComponents();
+//        this.setSize(1920, 1080);
+//        
+//        this.ecosystem=null; // change this
+//    }
     public UserRegister(JPanel workArea,EcoSystem system) {
         initComponents();
          this.ecosystem=system;

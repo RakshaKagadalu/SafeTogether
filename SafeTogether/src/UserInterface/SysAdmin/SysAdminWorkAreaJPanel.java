@@ -5,7 +5,10 @@
 package UserInterface.SysAdmin;
 
 import Business.EcoSystem;
+import UserInterface.UserLogin;
 import java.awt.CardLayout;
+import java.awt.Component;
+import java.awt.Container;
 import javax.swing.JPanel;
 
 /**
@@ -283,6 +286,17 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void exitLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelMousePressed
         // TODO add your handling code here:
+
+      
+       container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+       //        container.remove(this);
+//        Component[] componentArray = container.getComponents();
+//        Component component = componentArray[componentArray.length - 1];
+//        UserLogin manageSuppliersJPanel = (UserLogin) component;        
+//        CardLayout layout = (CardLayout) container.getLayout();
+//        layout.previous(container);
     }//GEN-LAST:event_exitLabelMousePressed
 
     private void nonProfitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nonProfitButtonActionPerformed

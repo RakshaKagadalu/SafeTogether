@@ -4,13 +4,16 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.Doctor.Doctor;
+import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author shrikrishnajoisa
- */
+
+
 public class DoctorRegistration extends javax.swing.JPanel {
 
     /**
@@ -18,12 +21,13 @@ public class DoctorRegistration extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel rightSidePanel;
-    
+     Doctor per;
     public DoctorRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
         this.system = system;
         this.rightSidePanel = rightSidePanel;
         this.setSize(1160, 750);
+        displayTable();
     }
 
     /**
@@ -133,6 +137,11 @@ public class DoctorRegistration extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 370));
@@ -171,6 +180,11 @@ public class DoctorRegistration extends javax.swing.JPanel {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Delete");
         jButton3.setBorder(null);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel7.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 140, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
@@ -191,6 +205,11 @@ public class DoctorRegistration extends javax.swing.JPanel {
         jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
 
         userNameTextField4.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        userNameTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNameTextField4ActionPerformed(evt);
+            }
+        });
         jPanel7.add(userNameTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 420, 40));
 
         userNameTextField5.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
@@ -259,11 +278,229 @@ public class DoctorRegistration extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+          String name = (userNameTextField4.getText());
+            String hospital = (userNameTextField3.getText());
+            String specialization = (userNameTextField5.getText());
+            String userId = (userNameTextField6.getText());
+            String pwd = (userNameTextField7.getText());
+            String phoneNum = (userNameTextField8.getText());
+             Doctor doc = new Doctor(name,hospital,specialization,userId,pwd,phoneNum);
+           // system.getUserAccountDirectory().addAccount(doc);
+            system.getUserAccDir().addAccount(doc);
+            system.getDoctorDir().addNewDoc(doc);
+           System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
+            displayTable();
+            
+              userNameTextField3.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+            userNameTextField8.setText("");
+            
+//            Person per = personDir.addPerson();
+//            per.setName(name);
+//            per.setAge(age);
+//             per.setSsn(ssn);
+//            House house = new House();
+//            house.setCityName(city);
+//            house.setCommunityName(community);
+//            house.setAddress(address);
+//            house.setSetPerson(per);
+//            house.setCommunityList(house);
+//            house.setHouseList(house);
+//            per.setHouse(house);
+//
+//            JOptionPane.showMessageDialog(this, "New Person Details added!");
+
+//            txtName.setText("");
+//            txtAge.setText("");
+//            txtCity.setText("");
+//            txtComm.setText("");
+//            txtAddress.setText("");
+//            txtSsn.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1=jTable1.getSelectedRow();
+        if(t1>=0)
+        {
+             
+        String a=(String)t.getValueAt(t1, 3);
+        DoctorDir doctorDirectory = system.getDoctorDir();
+        ArrayList<Doctor> cd1=doctorDirectory.getDoc();
+        int z=cd1.size();
+        for(int i=0;i<z;i++)
+        {
+            Doctor c=cd1.get(i);
+            System.out.println(c.getUserName());
+            
+            if(c.getUserName().matches(a))
+                    {
+                        if(!userNameTextField8.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+            {
+                JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                userNameTextField8.setText("");
+                return;
+            }
+
+                     c.setFirstName(userNameTextField4.getText());
+                        c.setHospital(userNameTextField3.getText());
+                        c.setSpecialization(userNameTextField5.getText());
+                        c.setUserId(userNameTextField6.getText());
+                        c.setAccPassword(userNameTextField7.getText());
+                        c.setPhoneNum(userNameTextField8.getText());
+                    
+                    }
+        }
+          displayTable();
+            
+              userNameTextField3.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+            userNameTextField8.setText("");
+             }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
+//        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+//        int selectedRow=jTable1.getSelectedRow();
+//          if (selectedRow < 0) {
+//            JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
+//            return;
+//        } else{
+//        String a=(String)table.getValueAt(selectedRow, 3);
+//        DoctorDir doctorDirectory = system.getDoctorDir();
+//        ArrayList<Doctor> cd1=doctorDirectory.getDoc();
+//        int z=cd1.size();
+//        for(int i=0;i<z;i++)
+//        {
+//            Doctor c=cd1.get(i);
+//            if(c.getUserName().matches(a))
+//                        c.setFirstName(userNameTextField4.getText());
+//                        c.setHospital(userNameTextField3.getText());
+//                        c.setSpecialization(userNameTextField5.getText());
+//                        c.setUserId(userNameTextField6.getText());
+//                        c.setAccPassword(userNameTextField7.getText());
+//                        c.setPhoneNum(userNameTextField8.getText());
+//                    
+//        }
+//              displayTable();
+//            
+//              userNameTextField3.setText("");
+//            userNameTextField4.setText("");
+//            userNameTextField5.setText("");
+//            userNameTextField6.setText("");
+//            userNameTextField7.setText("");
+//            userNameTextField8.setText("");
+//          }
+//         
+//       int selectedRow = jTable1.getSelectedRow();
+//        if (selectedRow < 0) {
+//            JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
+//            return;
+//        } else{
+//         System.out.println("row" + selectedRow);
+//        System.out.println("Value" + jTable1.getValueAt(selectedRow, 0));
+//        
+////         DefaultTableModel dtm = (DefaultTableModel) labTable.getModel();
+////
+////        String name = dtm.getValueAt(labTable.getSelectedRow(), 0).toString();
+////        String address = dtm.getValueAt(labTable.getSelectedRow(), 1).toString();
+////        nameTxtField.setText(name);
+////        addrTxtField.setText(address);
+//
+//        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+//        
+//       // Doctor per= (Doctor) jTable1.getValueAt(selectedRow, 0);
+//         String name =  model.getValueAt(jTable1.getSelectedRow(), 0).toString();
+//         String hospital =  model.getValueAt(jTable1.getSelectedRow(), 1).toString();
+//         String specialization =  model.getValueAt(jTable1.getSelectedRow(), 2).toString();
+//          String userid =  model.getValueAt(jTable1.getSelectedRow(), 3).toString();
+//            String pwd =  model.getValueAt(jTable1.getSelectedRow(), 4).toString();
+//             String phnum =  model.getValueAt(jTable1.getSelectedRow(), 5).toString();
+//        //System.out.println(per);
+//        
+// //        System.out.println("to be displayed" + per.getFirstName());
+//       userNameTextField4.setText(name);
+//       userNameTextField3.setText(hospital);
+//       userNameTextField5.setText(specialization);
+//       userNameTextField6.setText(userid);
+//       userNameTextField7.setText(pwd);
+//       userNameTextField8.setText(phnum);
+//        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void userNameTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userNameTextField4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        
+         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1=jTable1.getSelectedRow();
+        if(t1>=0)
+        {
+             
+        String a=(String)t.getValueAt(t1, 3);
+        DoctorDir doctorDirectory = system.getDoctorDir();
+        ArrayList<Doctor> cd1=doctorDirectory.getDoc();
+        int z=cd1.size();
+        for(int i=0;i<z;i++)
+           {
+            Doctor c=cd1.get(i);
+            if(c.getUserName().matches(a))
+                    {
+                       doctorDirectory.removeDoc(c);
+                       system.getUserAccDir().removeccount(c);
+                  
+                        break;
+                    }
+        }
+          displayTable();
+          userNameTextField3.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+            userNameTextField8.setText("");
+             }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        
+          DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+          if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else{
+        userNameTextField4.setText(t.getValueAt(selectedRow,0).toString());
+        userNameTextField3.setText(t.getValueAt(selectedRow,1).toString());
+        userNameTextField5.setText(t.getValueAt(selectedRow,2).toString());
+        userNameTextField6.setText(t.getValueAt(selectedRow,3).toString());
+        userNameTextField7.setText(t.getValueAt(selectedRow,4).toString());
+        userNameTextField8.setText(t.getValueAt(selectedRow,5).toString());
+        
+          }
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -303,4 +540,26 @@ public class DoctorRegistration extends javax.swing.JPanel {
     private javax.swing.JTextField userNameTextField7;
     private javax.swing.JTextField userNameTextField8;
     // End of variables declaration//GEN-END:variables
-}
+
+    private void displayTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DoctorDir docDir = system.getDoctorDir();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        model.setRowCount(0);
+        for (Doctor doc : docDir.getDoc()) {
+                    Object[] row = new Object[6];
+                    row[0] = doc.getFirstName();
+                    row[1] = doc.getHospital();
+                    row[2] = doc.getSpecialization();
+                    row[3] = doc.getUserId();
+                    row[4] = doc.getAccPassword();
+                    row[5] = doc.getPhoneNum();
+
+                    model.addRow(row);
+                
+            }
+        
+    }
+    }
+
