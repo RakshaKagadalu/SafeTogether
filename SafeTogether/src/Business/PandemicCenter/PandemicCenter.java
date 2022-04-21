@@ -20,7 +20,7 @@ public class PandemicCenter extends UserAcc {
     String email;
     String result;
 
-    public PandemicCenter(String userId, String password, String location, String phoneNumber, String name, String email, String result) {
+    public PandemicCenter( String name,String location, String phoneNumber,String userId, String password) {
         setUserName(userId);
         setPassword(password);
 //        setRole(new covidtestingadmin());
@@ -29,8 +29,8 @@ public class PandemicCenter extends UserAcc {
         this.location = location;
         this.phoneNumber = phoneNumber;
         this.name = name;
-        this.email = email;
-        this.result = result;
+//        this.email = email;
+//        this.result = result;
     }
 
     public String getUserId() {
