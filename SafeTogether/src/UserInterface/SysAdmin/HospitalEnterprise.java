@@ -143,7 +143,7 @@ public class HospitalEnterprise extends javax.swing.JPanel {
 
         jLabel24.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel24.setText("Centres");
+        jLabel24.setText("Test Centres");
         PandemicTestCentreJPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel2.add(PandemicTestCentreJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 290, 60));

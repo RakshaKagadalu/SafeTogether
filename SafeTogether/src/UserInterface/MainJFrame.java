@@ -5,7 +5,9 @@
 package UserInterface;
 
 import Business.DatabaseUtil.DB4OUtil;
+import Business.Doctor.Doctor;
 import Business.EcoSystem;
+import Business.PandemicCenter.PandemicCenter;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -27,6 +29,10 @@ public class MainJFrame extends javax.swing.JFrame {
     // set the default size of the main frame
      private EcoSystem system;
     public static DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    
+    
+    
+    
     public MainJFrame() {
         initComponents();
         this.setSize(1920, 1080);
@@ -34,6 +40,22 @@ public class MainJFrame extends javax.swing.JFrame {
          system = dB4OUtil.retrieveSystem();
          setSystemAdmin();
          //setAdminPage();
+         
+         
+        
+       
+         
+         
+         //Creation of test data for all the tables
+          Doctor doc = new Doctor("Raksha","Boston Public Hospital","Cardio","doctor1","doctor1","1111111111");
+            system.getUserAccDir().addAccount(doc);
+            system.getDoctorDir().addNewDoc(doc);
+            
+          PandemicCenter pCenter = new PandemicCenter("Raksha","Boston","1111111111","center1","center1");
+              system.getUserAccDir().addAccount(pCenter);
+            system.getPandemicCenterDir().addPandemicCenter(pCenter);
+            
+         
     }
     
 
