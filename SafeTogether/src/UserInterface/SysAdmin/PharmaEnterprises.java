@@ -6,7 +6,13 @@ package UserInterface.SysAdmin;
 
 import Business.EcoSystem;
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
@@ -19,11 +25,28 @@ public class PharmaEnterprises extends javax.swing.JPanel {
      */
     private final JPanel container;
     private final EcoSystem system;
+    Timer timer;
+    
+    private void Time() {
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date date= new Date();
+                DateFormat timeFormat =  new SimpleDateFormat("HH:mm a");
+                String time = timeFormat.format(date);
+                timeLabel.setText(time);
+            }
+        };
+        timer = new Timer(100, actionListener);
+        timer.setInitialDelay(0);
+        timer.start();
+    }
 
     public PharmaEnterprises(EcoSystem system, JPanel container) {
         initComponents();
         this.system = system;
         this.container = container;
+        Time();
     }
 
     /**
@@ -51,7 +74,7 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         rightSidePanel = new javax.swing.JPanel();
@@ -155,9 +178,9 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
-        jLabel9.setText("3:45 PM");
-        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
+        timeLabel.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
+        timeLabel.setText("3:45 PM");
+        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel10.setText("Pharmaceuticals");
@@ -299,7 +322,6 @@ public class PharmaEnterprises extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -315,6 +337,7 @@ public class PharmaEnterprises extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JPanel rightSidePanel;
+    private javax.swing.JLabel timeLabel;
     private javax.swing.JPanel vaccination;
     // End of variables declaration//GEN-END:variables
 }
