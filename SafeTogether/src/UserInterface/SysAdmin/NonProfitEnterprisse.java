@@ -4,6 +4,10 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.EcoSystem;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +17,13 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
     /**
      * Creates new form NonProfitEnterprisse
      */
-    public NonProfitEnterprisse() {
+    private final JPanel container;
+    private final EcoSystem system;
+   
+    public NonProfitEnterprisse(EcoSystem system, JPanel container) {
         initComponents();
+        this.container = container;
+        this.system = system;
     }
 
     /**
@@ -30,15 +39,12 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        doctorCentres = new javax.swing.JPanel();
+        goBack = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         doctorAssociationPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        goBack = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -80,24 +86,24 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1040, 190, 30));
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
-        doctorCentres.setBackground(new java.awt.Color(255, 255, 255));
-        doctorCentres.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorCentres.addMouseListener(new java.awt.event.MouseAdapter() {
+        goBack.setBackground(new java.awt.Color(255, 255, 255));
+        goBack.setPreferredSize(new java.awt.Dimension(100, 48));
+        goBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorCentresMousePressed(evt);
+                goBackMousePressed(evt);
             }
         });
-        doctorCentres.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        goBack.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-logout-24.png"))); // NOI18N
-        doctorCentres.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        goBack.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel22.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(115, 120, 128));
         jLabel22.setText("Return");
-        doctorCentres.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        goBack.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(doctorCentres, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
+        jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
         doctorAssociationPanel.setBackground(new java.awt.Color(255, 255, 255));
         doctorAssociationPanel.setPreferredSize(new java.awt.Dimension(100, 48));
@@ -117,25 +123,6 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
         doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 290, 60));
-
-        goBack.setBackground(new java.awt.Color(255, 255, 255));
-        goBack.setPreferredSize(new java.awt.Dimension(100, 48));
-        goBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                goBackMousePressed(evt);
-            }
-        });
-        goBack.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-city-buildings-24.png"))); // NOI18N
-        goBack.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
-
-        jLabel24.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel24.setText("Centres");
-        goBack.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
-
-        jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 290, 60));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
@@ -250,22 +237,29 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
         add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void doctorCentresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorCentresMousePressed
+    private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorCentresMousePressed
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+    }//GEN-LAST:event_goBackMousePressed
 
     private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
 
+
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
     }//GEN-LAST:event_goBackMousePressed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel doctorAssociationPanel;
-    private javax.swing.JPanel doctorCentres;
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -282,8 +276,6 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

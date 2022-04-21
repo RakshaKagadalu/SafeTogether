@@ -116,6 +116,11 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         pharmaButton.setText("Manage");
         pharmaButton.setBorder(null);
         pharmaButton.setFocusPainted(false);
+        pharmaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pharmaButtonActionPerformed(evt);
+            }
+        });
         jPanel4.add(pharmaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 180, 40));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 150, 320, 290));
@@ -146,6 +151,11 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         emergencyButton.setText("Manage");
         emergencyButton.setBorder(null);
         emergencyButton.setFocusPainted(false);
+        emergencyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emergencyButtonActionPerformed(evt);
+            }
+        });
         jPanel6.add(emergencyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 180, 40));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 520, 320, 290));
@@ -176,6 +186,11 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         nonProfitButton.setText("Manage");
         nonProfitButton.setBorder(null);
         nonProfitButton.setFocusPainted(false);
+        nonProfitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nonProfitButtonActionPerformed(evt);
+            }
+        });
         jPanel2.add(nonProfitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 180, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 320, 290));
@@ -206,6 +221,11 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         governmentButton.setText("Manage");
         governmentButton.setBorder(null);
         governmentButton.setFocusPainted(false);
+        governmentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                governmentButtonActionPerformed(evt);
+            }
+        });
         jPanel5.add(governmentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 180, 40));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, 320, 290));
@@ -278,6 +298,38 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
 //        CardLayout layout = (CardLayout) container.getLayout();
 //        layout.previous(container);
     }//GEN-LAST:event_exitLabelMousePressed
+
+    private void nonProfitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nonProfitButtonActionPerformed
+        // TODO add your handling code here:
+        NonProfitEnterprisse sy=new NonProfitEnterprisse(ecosystem, container);
+        container.add(sy);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_nonProfitButtonActionPerformed
+
+    private void pharmaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pharmaButtonActionPerformed
+        // TODO add your handling code here:
+        PharmaEnterprises sy=new PharmaEnterprises(ecosystem, container);
+        container.add(sy);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_pharmaButtonActionPerformed
+
+    private void governmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_governmentButtonActionPerformed
+        // TODO add your handling code here:
+        GovernmentEnterprise sy=new GovernmentEnterprise(ecosystem, container);
+        container.add(sy);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_governmentButtonActionPerformed
+
+    private void emergencyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emergencyButtonActionPerformed
+        // TODO add your handling code here:
+        EmergencyEnterprises sy=new EmergencyEnterprises(ecosystem, container);
+        container.add(sy);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_emergencyButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

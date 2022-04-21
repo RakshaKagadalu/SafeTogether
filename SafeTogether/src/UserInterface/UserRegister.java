@@ -26,12 +26,12 @@ public class UserRegister extends javax.swing.JPanel {
          EcoSystem ecosystem;
     JPanel workArea;
     
-        private UserRegister() {
-        initComponents();
-        this.setSize(1920, 1080);
-        
-        this.ecosystem=null; // change this
-    }
+//        private UserRegister() {
+//        initComponents();
+//        this.setSize(1920, 1080);
+//        
+//        this.ecosystem=null; // change this
+//    }
     public UserRegister(JPanel workArea,EcoSystem system) {
         initComponents();
          this.ecosystem=system;
@@ -211,8 +211,8 @@ public  void sendmail()
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(381, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
