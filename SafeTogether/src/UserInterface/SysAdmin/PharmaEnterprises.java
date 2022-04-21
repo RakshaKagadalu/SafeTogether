@@ -270,15 +270,9 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         // TODO add your handling code here:
        // manageDoctor();
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
-
   
     
-   private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
-   
-    }//GEN-LAST:event_goBackMousePressed
-
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+      // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel doctorAssociationPanel;
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
