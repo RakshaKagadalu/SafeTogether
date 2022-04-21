@@ -20,7 +20,8 @@ public class GovernmentEnterprise extends javax.swing.JPanel {
      */
     private final JPanel container;
     private final EcoSystem system;
-    public GovernmentEnterprise( JPanel container, EcoSystem system ) {
+    
+    public GovernmentEnterprise(EcoSystem system, JPanel container ) {
         initComponents();
         this.container = container;
         this.system = system;
