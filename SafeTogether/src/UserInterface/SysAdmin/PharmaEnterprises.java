@@ -4,6 +4,10 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.EcoSystem;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +17,13 @@ public class PharmaEnterprises extends javax.swing.JPanel {
     /**
      * Creates new form PharmaEnterprises
      */
-    public PharmaEnterprises() {
+    private final JPanel container;
+    private final EcoSystem system;
+
+    public PharmaEnterprises(EcoSystem system, JPanel container) {
         initComponents();
+        this.system = system;
+        this.container = container;
     }
 
     /**
@@ -256,11 +265,15 @@ public class PharmaEnterprises extends javax.swing.JPanel {
 
     private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
         // TODO add your handling code here:
-        manageDoctor();
+ 
+       
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
     }//GEN-LAST:event_goBackMousePressed
 
 
