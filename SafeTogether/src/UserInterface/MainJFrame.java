@@ -32,8 +32,8 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setSize(1920, 1080);
         this.setResizable(false);
          system = dB4OUtil.retrieveSystem();
-         //setSystemAdmin();
-         setAdminPage();
+         setSystemAdmin();
+         //setAdminPage();
     }
     
 
@@ -49,7 +49,6 @@ public class MainJFrame extends javax.swing.JFrame {
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         workArea.setLayout(new java.awt.CardLayout());
 
@@ -57,11 +56,11 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(workArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(workArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(workArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(workArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
         );
 
         pack();
@@ -113,7 +112,7 @@ public class MainJFrame extends javax.swing.JFrame {
    // Initial launch screen for the adminPage
     private void setAdminPage() {
          UserLogin wa=new UserLogin(workArea,system);
-        workArea.add("UserLogins",wa);
+        workArea.add("UserLogin",wa);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     }

@@ -4,6 +4,9 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.EcoSystem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +16,13 @@ public class PandemicRegistration extends javax.swing.JPanel {
     /**
      * Creates new form PandemicRegistration
      */
-    public PandemicRegistration() {
+     EcoSystem system;
+    JPanel rightSidePanel;
+    public PandemicRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
+         this.system = system;
+        this.rightSidePanel = rightSidePanel;
+        this.setSize(1160, 750);
     }
 
     /**
