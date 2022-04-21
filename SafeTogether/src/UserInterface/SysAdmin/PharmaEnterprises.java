@@ -259,12 +259,12 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
+    private void goBackMousePressed(java.awt.event.MouseEvent evt) {                                    
         // TODO add your handling code here:
         container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
-    }//GEN-LAST:event_goBackMousePressed
+    }                                   
 
     private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
         // TODO add your handling code here:
@@ -272,11 +272,9 @@ public class PharmaEnterprises extends javax.swing.JPanel {
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
 
   
+    
    private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
-        // TODO add your handling code here:
-        container.remove(this);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
+   
     }//GEN-LAST:event_goBackMousePressed
 
     
