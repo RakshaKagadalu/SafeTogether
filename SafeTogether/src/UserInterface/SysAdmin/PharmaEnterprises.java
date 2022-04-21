@@ -72,9 +72,6 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        vaccination = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         timeLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -142,12 +139,12 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         });
         doctorAssociationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-stethoscope-24.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-medical-expenses-insurance-24.png"))); // NOI18N
         doctorAssociationPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel6.setText("Doctors");
+        jLabel6.setText("Pharmacies");
         doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
@@ -155,25 +152,6 @@ public class PharmaEnterprises extends javax.swing.JPanel {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 90));
-
-        vaccination.setBackground(new java.awt.Color(255, 255, 255));
-        vaccination.setPreferredSize(new java.awt.Dimension(100, 48));
-        vaccination.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                vaccinationMousePressed(evt);
-            }
-        });
-        vaccination.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-stethoscope-24.png"))); // NOI18N
-        vaccination.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
-
-        jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel7.setText("Doctors");
-        vaccination.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
-
-        jPanel2.add(vaccination, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 290, 60));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 288, 1080));
 
@@ -296,10 +274,6 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         // TODO add your handling code here:
        // manageDoctor();
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
-
-    private void vaccinationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vaccinationMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vaccinationMousePressed
   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -321,10 +295,8 @@ public class PharmaEnterprises extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -341,6 +313,5 @@ public class PharmaEnterprises extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
-    private javax.swing.JPanel vaccination;
     // End of variables declaration//GEN-END:variables
 }
