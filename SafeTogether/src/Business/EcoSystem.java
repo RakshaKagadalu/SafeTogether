@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class EcoSystem extends Organization {
     
       private static EcoSystem business;
-      private User_Directory userDir;
+//      private User_Directory userDir;
      
      public EcoSystem( User_Directory userDir) {
 
