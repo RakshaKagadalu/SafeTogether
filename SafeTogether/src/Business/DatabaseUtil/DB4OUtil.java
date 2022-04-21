@@ -59,22 +59,39 @@ public class DB4OUtil {
         conn.commit();
         conn.close();
     }
-    public EcoSystem retrieveSystem(){
-        try{
-             ObjectContainer conn = createConnection();
-            ObjectSet<EcoSystem> systems = conn.query(EcoSystem.class); // Change to the object you want to save
-            EcoSystem system;
-            if (systems.size() == 0){
-                system = SystemConfig.SysConfigure();  // If there’s no System in the record, create a new one
-            }
-            else{
-                system = systems.get(systems.size() - 1);
-            }
-            conn.close();
-            return system;
-        } catch(Exception ex) {
-            System.out.print(ex.getMessage());
-        }
-        return null;
+//    public EcoSystem retrieveSystem(){
+//        try{
+//             ObjectContainer conn = createConnection();
+//            ObjectSet<EcoSystem> systems = conn.query(EcoSystem.class); // Change to the object you want to save
+//            EcoSystem system;
+//            system = SystemConfig.SysConfigure();
+//            if (systems.size() == 0){
+//                system = SystemConfig.SysConfigure();  // If there’s no System in the record, create a new one
+//            }
+//            else{
+//                systems.clear();
+//                system = systems.get(systems.size() - 1);
+//            }
+//            conn.close();
+//            return system;
+//        } catch(Exception ex) {
+//            System.out.print("insideDb"+ex.getMessage());
+//        }
+//        return null;
+//    }
+     public EcoSystem retrieveSystem(){
+        ObjectContainer conn = createConnection();
+        //ObjectSet<EcoSystem> systems = conn.query(EcoSystem.class); // Change to the object you want to save
+        EcoSystem system;
+        system = SystemConfig.SysConfigure();  
+//        if (systems.size() == 0){
+//            system = ConfigureASystem.configure();  // If there's no System in the record, create a new one
+//        }
+//        else{
+//            systems.clear();
+//            system = systems.get(systems.size() - 1);
+//        }
+//        conn.close();
+        return system;
     }
 }

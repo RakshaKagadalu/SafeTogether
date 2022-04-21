@@ -124,10 +124,7 @@ abstract class Organization{
     }
 
     public UserAccDir getUserAccDir() {
-        if(userAccDir==null)
-        {
-            userAccDir =new UserAccDir();
-        }
+        
         return userAccDir;
     }
 

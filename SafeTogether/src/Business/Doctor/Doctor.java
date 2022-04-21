@@ -4,6 +4,7 @@
  */
 package Business.Doctor;
 
+import Business.Roles.DoctorRole;
 import Business.UserAcc.UserAcc;
 
 
@@ -15,17 +16,20 @@ public class Doctor extends UserAcc {
     String userId;
      String accPassword;
     String firstName;
-    String lastName;
+    String specialization;
     String phoneNum;
-    String dept;
+    String hospital;
 
-    public Doctor(String userId, String accPassword, String firstName, String lastName, String phoneNum, String dept) {
+    public Doctor(String userId, String accPassword, String firstName, String specialization, String phoneNum, String hospital) {
+        setUserName(userId);
+        setPwd(accPassword);
+        setRole(new DoctorRole());
         this.userId = userId;
         this.accPassword = accPassword;
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.specialization = specialization;
         this.phoneNum = phoneNum;
-        this.dept = dept;
+        this.hospital = hospital;
     }
 
     public String getUserId() {
@@ -52,13 +56,7 @@ public class Doctor extends UserAcc {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getPhoneNum() {
         return phoneNum;
@@ -68,12 +66,22 @@ public class Doctor extends UserAcc {
         this.phoneNum = phoneNum;
     }
 
-    public String getDept() {
-        return dept;
+    public String getSpecialization() {
+        return specialization;
     }
 
-    public void setDept(String dept) {
-        this.dept = dept;
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
+
+    public String getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
+    }
+
+ 
     
 }

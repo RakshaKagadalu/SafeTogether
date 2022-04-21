@@ -29,4 +29,16 @@ public class DoctorDir {
     {        
        docs.remove(doctor);
     }
+             
+              public Doctor findDoctor(String name){
+        
+         
+         for(Doctor net : docs){
+            // if(net.getEmployee().getName().equals(name)){
+                  if(net.getFirstName().equals(name)){
+                 return net;
+             }
+         }
+         return null;
+     }
 }
