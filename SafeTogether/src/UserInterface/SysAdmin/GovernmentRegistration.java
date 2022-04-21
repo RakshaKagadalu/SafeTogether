@@ -4,17 +4,32 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.CDC.CDC;
+import Business.CDC.CDCDirectory;
+import Business.EcoSystem;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class GovernmentRegistration extends javax.swing.JPanel {
+    private final JPanel container;
+    private final EcoSystem system;
 
     /**
      * Creates new form GovernmentRegistration
      */
-    public GovernmentRegistration() {
+    public GovernmentRegistration(JPanel container,EcoSystem system) {
         initComponents();
+        this.container=container;
+        this.system=system;
+//        this.setSize(619,600);
+        populateTable();
+        
     }
 
     /**
@@ -32,20 +47,20 @@ public class GovernmentRegistration extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addbtn = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        userNameTextField3 = new javax.swing.JTextField();
+        lastNameTxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        userNameTextField4 = new javax.swing.JTextField();
-        userNameTextField5 = new javax.swing.JTextField();
+        firstNameTxt = new javax.swing.JTextField();
+        userIdTxt = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        userNameTextField6 = new javax.swing.JTextField();
+        passwordTxt = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        userNameTextField7 = new javax.swing.JTextField();
+        phoneTxt = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -86,36 +101,41 @@ public class GovernmentRegistration extends javax.swing.JPanel {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(10, 132, 255));
-        jButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addbtn.setBackground(new java.awt.Color(10, 132, 255));
+        addbtn.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        addbtn.setForeground(new java.awt.Color(255, 255, 255));
+        addbtn.setText("Add");
+        addbtn.setBorder(null);
+        addbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addbtnActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 140, 39));
+        jPanel7.add(addbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 140, 39));
 
-        jButton2.setBackground(new java.awt.Color(94, 92, 230));
-        jButton2.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Update");
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        updateBtn.setBackground(new java.awt.Color(94, 92, 230));
+        updateBtn.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        updateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn.setText("Update");
+        updateBtn.setBorder(null);
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                updateBtnActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 140, 39));
+        jPanel7.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 140, 39));
 
-        jButton3.setBackground(new java.awt.Color(255, 55, 95));
-        jButton3.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Delete");
-        jButton3.setBorder(null);
-        jPanel7.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 140, 39));
+        deleteBtn.setBackground(new java.awt.Color(255, 55, 95));
+        deleteBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
+        deleteBtn.setText("Delete");
+        deleteBtn.setBorder(null);
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+        jPanel7.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 140, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel2.setText("Enter Details");
@@ -126,27 +146,27 @@ public class GovernmentRegistration extends javax.swing.JPanel {
         jLabel7.setText("First Name");
         jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 220, -1));
 
-        userNameTextField3.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(userNameTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 420, 40));
+        lastNameTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(lastNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 420, 40));
 
         jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(73, 84, 90));
         jLabel8.setText("Last Name");
         jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
 
-        userNameTextField4.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(userNameTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 420, 40));
+        firstNameTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(firstNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 420, 40));
 
-        userNameTextField5.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(userNameTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 40));
+        userIdTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(userIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 40));
 
         jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(73, 84, 90));
         jLabel9.setText("User ID");
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 220, -1));
 
-        userNameTextField6.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(userNameTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 420, 40));
+        passwordTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 420, 40));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(73, 84, 90));
@@ -158,27 +178,148 @@ public class GovernmentRegistration extends javax.swing.JPanel {
         jLabel11.setText("Phone Number");
         jPanel7.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 220, -1));
 
-        userNameTextField7.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(userNameTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 420, 40));
+        phoneTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 420, 40));
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 740));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if( firstNameTxt.getText().isEmpty()||lastNameTxt.getText().isEmpty()|| userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(system.getUserAccountDirectory().checkIfUsernameIsUnique(userIdTxt.getText())){
+            if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+            {
+                JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                phoneTxt.setText("");
+                return;
+            }
+
+            CDC customer = new CDC(firstNameTxt.getText(),lastNameTxt.getText(), userIdTxt.getText(),passwordTxt.getText(), phoneTxt.getText() );
+            system.getUserAccountDirectory().addAccount(customer);
+            system.getcDCDir().addCDCPeople(customer);
+            populateTable();
+            firstNameTxt.setText("");
+            lastNameTxt.setText("");
+            phoneTxt.setText("");
+            userIdTxt.setText("");
+            passwordTxt.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Username " + userIdTxt.getText() + " already exists !!!, Please try a new one");
+        }
+    }//GEN-LAST:event_addbtnActionPerformed
+
+    private void populateTable() {
+        CDCDirectory cdcDir = system.getcDCDir();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        model.setRowCount(0);
+        for (CDC customer : cdcDir.getCdcList()) {
+                    Object[] row = new Object[5];
+                    row[0] = customer.getFirstName();
+                    row[1] = customer.getSecondName();                    
+                    row[2] = customer.getPhoneNumber();
+                    row[3] = customer.getUserID();
+                    row[4] = customer.getUserPassword();
+
+                    model.addRow(row);
+                
+            }
+        
+    }
+    
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        String username=userIdTxt.getText();
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1=jTable1.getSelectedRow();
+        if(t1>=0)
+        {
+            
+            {
+                String a=(String)t.getValueAt(t1, 3);
+                CDCDirectory bbd = system.getcDCDir();
+                ArrayList<CDC> cd1=bbd.getCdcList();
+                int z=cd1.size();
+                for(int i=0;i<z;i++)
+                {
+                    CDC c=cd1.get(i);
+                    c.getUserID();
+                    if(c.getUserID().matches(a))
+                    {
+                        if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+                        {
+                            JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                            phoneTxt.setText("");
+                            return;
+                        }
+
+                        c.setFirstName(firstNameTxt.getText());
+                        c.setSecondName(lastNameTxt.getText());
+                        c.setPhoneNumber(phoneTxt.getText());
+                        c.setUserID(userIdTxt.getText());
+                        c.setUserPassword(passwordTxt.getText());
+                    }
+                }
+            populateTable();
+            }                                        
+        }
+            else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+        String username=userIdTxt.getText();
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1=jTable1.getSelectedRow();
+        if(t1>=0)
+        {
+            String a=(String)t.getValueAt(t1, 3);
+            System.out.println(a);
+            CDCDirectory bbd = system.getcDCDir();
+            ArrayList<CDC> cd1=bbd.getCdcList();
+            int z=cd1.size();
+            for(int i=0;i<z;i++)
+            {
+                CDC c=cd1.get(i);
+                System.out.println(c.getUserID());
+                if(c.getUserID().matches(a))
+                {
+                    cd1.remove(c);
+                    System.out.println("delete");
+                    system.getUserAccountDirectory().removeccount(c);
+                     break;
+                }
+            }
+            populateTable();
+            firstNameTxt.setText("");
+            lastNameTxt.setText("");
+            phoneTxt.setText("");
+            userIdTxt.setText("");
+            passwordTxt.setText("");
+
+        }                                        
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton addbtn;
+    private javax.swing.JButton deleteBtn;
+    private javax.swing.JTextField firstNameTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -191,10 +332,10 @@ public class GovernmentRegistration extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField userNameTextField3;
-    private javax.swing.JTextField userNameTextField4;
-    private javax.swing.JTextField userNameTextField5;
-    private javax.swing.JTextField userNameTextField6;
-    private javax.swing.JTextField userNameTextField7;
+    private javax.swing.JTextField lastNameTxt;
+    private javax.swing.JTextField passwordTxt;
+    private javax.swing.JTextField phoneTxt;
+    private javax.swing.JButton updateBtn;
+    private javax.swing.JTextField userIdTxt;
     // End of variables declaration//GEN-END:variables
 }

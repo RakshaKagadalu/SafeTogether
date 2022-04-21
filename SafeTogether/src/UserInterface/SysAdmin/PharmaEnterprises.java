@@ -268,7 +268,8 @@ public class PharmaEnterprises extends javax.swing.JPanel {
 
     private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
         // TODO add your handling code here:
-       
+//        manageDoctor();
+
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
 
   
