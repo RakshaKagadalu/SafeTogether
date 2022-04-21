@@ -45,11 +45,11 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         doctorAssociationPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        vaccination = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
+        vaccination = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -125,7 +125,11 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         jLabel6.setText("Doctors");
         doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 290, 60));
+        jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 90));
 
         vaccination.setBackground(new java.awt.Color(255, 255, 255));
         vaccination.setPreferredSize(new java.awt.Dimension(100, 48));
@@ -136,19 +140,15 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         });
         vaccination.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-city-buildings-24.png"))); // NOI18N
-        vaccination.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-stethoscope-24.png"))); // NOI18N
+        vaccination.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
-        jLabel24.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel24.setText("Centres");
-        vaccination.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(115, 120, 128));
+        jLabel7.setText("Doctors");
+        vaccination.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(vaccination, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 290, 60));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 90));
+        jPanel2.add(vaccination, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 290, 60));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 288, 1080));
 
@@ -270,9 +270,13 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         // TODO add your handling code here:
        // manageDoctor();
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
+
+    private void vaccinationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vaccinationMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vaccinationMousePressed
   
     
-      // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel doctorAssociationPanel;
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
@@ -290,11 +294,11 @@ public class PharmaEnterprises extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
