@@ -4,6 +4,10 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.EcoSystem;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +17,13 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
     /**
      * Creates new form NonProfitEnterprisse
      */
-    public NonProfitEnterprisse() {
+    private final JPanel container;
+    private final EcoSystem system;
+   
+    public NonProfitEnterprisse(EcoSystem system, JPanel container) {
         initComponents();
+        this.container = container;
+        this.system = system;
     }
 
     /**
@@ -260,6 +269,9 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
     }//GEN-LAST:event_goBackMousePressed
 
 

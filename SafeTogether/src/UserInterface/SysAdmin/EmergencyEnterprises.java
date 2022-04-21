@@ -4,6 +4,10 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.EcoSystem;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +17,13 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
     /**
      * Creates new form EmergencyEnterprises
      */
-    public EmergencyEnterprises() {
+    private final EcoSystem system;
+    private final JPanel container;
+    
+    public EmergencyEnterprises(EcoSystem system, JPanel container) {
         initComponents();
+        this.system = system;
+        this.container = container;
     }
 
     /**
@@ -30,7 +39,7 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        doctorCentres = new javax.swing.JPanel();
+        goBackButton = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         ambulancePanel = new javax.swing.JPanel();
@@ -83,24 +92,24 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1040, 190, 30));
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
-        doctorCentres.setBackground(new java.awt.Color(255, 255, 255));
-        doctorCentres.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorCentres.addMouseListener(new java.awt.event.MouseAdapter() {
+        goBackButton.setBackground(new java.awt.Color(255, 255, 255));
+        goBackButton.setPreferredSize(new java.awt.Dimension(100, 48));
+        goBackButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorCentresMousePressed(evt);
+                goBackButtonMousePressed(evt);
             }
         });
-        doctorCentres.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        goBackButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-logout-24.png"))); // NOI18N
-        doctorCentres.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        goBackButton.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel22.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(115, 120, 128));
         jLabel22.setText("Return");
-        doctorCentres.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        goBackButton.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(doctorCentres, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
+        jPanel2.add(goBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
         ambulancePanel.setBackground(new java.awt.Color(255, 255, 255));
         ambulancePanel.setPreferredSize(new java.awt.Dimension(100, 48));
@@ -272,9 +281,12 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
         add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void doctorCentresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorCentresMousePressed
+    private void goBackButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackButtonMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorCentresMousePressed
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+    }//GEN-LAST:event_goBackButtonMousePressed
 
     private void ambulancePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ambulancePanelMousePressed
         // TODO add your handling code here
@@ -292,8 +304,8 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ambulancePanel;
-    private javax.swing.JPanel doctorCentres;
     private javax.swing.JPanel fireDeptPanel;
+    private javax.swing.JPanel goBackButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
