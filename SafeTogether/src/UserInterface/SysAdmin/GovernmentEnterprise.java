@@ -274,8 +274,18 @@ public class GovernmentEnterprise extends javax.swing.JPanel {
 
     private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
         // TODO add your handling code here:
+        manageGovtEnterprise();
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
 
+    private void manageGovtEnterprise() {
+         doctorAssociationPanel.setBackground(new Color(213,230,249));
+//        PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
+//        PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
+        GovernmentRegistration gov =new GovernmentRegistration (container,system);
+        rightSidePanel.add(gov);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel doctorAssociationPanel;
