@@ -19,7 +19,7 @@ public class Ambulance extends UserAcc {
     String nameDriver;
     String phNum;
 
-    public Ambulance(String user_Id, String pwd, String ambulanceServName, String nameDriver, String phNum, String firstName, String lastName, String email, String phoneNumber, String userId, String password, String location) {
+    public Ambulance(String user_Id,String pwd,String ambulanceServName,String nameDriver,String phNum) {
         
         this.user_Id = user_Id;
         this.pwd = pwd;

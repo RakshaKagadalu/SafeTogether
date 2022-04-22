@@ -92,6 +92,11 @@ public class GovernmentRegistration extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 630));
@@ -225,9 +230,9 @@ public class GovernmentRegistration extends javax.swing.JPanel {
                     Object[] row = new Object[5];
                     row[0] = customer.getFirstName();
                     row[1] = customer.getSecondName();                    
-                    row[2] = customer.getPhoneNumber();
-                    row[3] = customer.getUserID();
-                    row[4] = customer.getUserPassword();
+                    row[2] = customer.getUserID();
+                    row[3] = customer.getUserPassword();
+                    row[4] = customer.getPhoneNumber();
 
                     model.addRow(row);
                 
@@ -315,6 +320,24 @@ public class GovernmentRegistration extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a Official from the table", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else{
+            firstNameTxt.setText(table.getValueAt(selectedRow,0).toString());
+            lastNameTxt.setText(table.getValueAt(selectedRow,1).toString());
+            userIdTxt.setText(table.getValueAt(selectedRow,2).toString());
+            passwordTxt.setText(table.getValueAt(selectedRow,3).toString());
+            phoneTxt.setText(table.getValueAt(selectedRow,4).toString());
+        
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addbtn;

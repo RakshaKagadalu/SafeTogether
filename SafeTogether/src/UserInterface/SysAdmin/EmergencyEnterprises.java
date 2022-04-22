@@ -352,7 +352,7 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
 
     private void manageEmergencyEnterpriseFire() {
         ambulancePanel.setBackground(new Color(255,255,255));
-        policePanel.setBackground(new Color(213,230,249));
+        policePanel.setBackground(new Color(255,255,255));
         fireDeptPanel.setBackground(new Color(213,230,249));
         FireDepartmentRegistration amb =new FireDepartmentRegistration(system,container);
         rightSidePanel.add(amb);

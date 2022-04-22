@@ -14,14 +14,14 @@ import Business.UserAcc.UserAcc;
 public class Police extends UserAcc {
     String user_Id;
     String pwd;
-    String PoliceServName;
+    String PoliceLocation;
     String namePolice;
     String phNum;
 
-    public Police(String user_Id, String pwd, String PoliceServName, String namePolice, String phNum) {
+    public Police(String user_Id, String pwd, String PoliceLocation, String namePolice, String phNum) {
         this.user_Id = user_Id;
         this.pwd = pwd;
-        this.PoliceServName = PoliceServName;
+        this.PoliceLocation = PoliceLocation;
         this.namePolice = namePolice;
         this.phNum = phNum;
         setUserName(user_Id);
@@ -45,12 +45,12 @@ public class Police extends UserAcc {
         this.pwd = pwd;
     }
 
-    public String getPoliceServName() {
-        return PoliceServName;
+    public String getPoliceLocation() {
+        return PoliceLocation;
     }
 
-    public void setPoliceServName(String PoliceServName) {
-        this.PoliceServName = PoliceServName;
+    public void setPoliceLocation(String PoliceLocation) {
+        this.PoliceLocation = PoliceLocation;
     }
 
     public String getNamePolice() {

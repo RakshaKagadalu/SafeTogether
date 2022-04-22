@@ -6,7 +6,11 @@ package UserInterface.SysAdmin;
 
 import Business.EcoSystem;
 import Business.EmergencyPolice.Police;
+import Business.EmergencyPolice.PoliceDir;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,6 +33,7 @@ public class PoliceRegistration extends javax.swing.JPanel {
         this.system = system;
         this.rightSidePanel = rightSidePanel;
         this.setSize(1160, 750);
+        populateTable();
 //        displayTable();
     }
     /**
@@ -46,20 +51,20 @@ public class PoliceRegistration extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
+        DelBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        pharmaLocationTextField = new javax.swing.JTextField();
+        locationTxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        pharmaNameTextField = new javax.swing.JTextField();
-        pharmaUserIDTextField = new javax.swing.JTextField();
+        firstNameTxt = new javax.swing.JTextField();
+        userIdTxt = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        pharmaPasswordTextField = new javax.swing.JTextField();
+        passwordTxt = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        pharmaPhoneNumberTextField = new javax.swing.JTextField();
+        phoneTxt = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -91,6 +96,11 @@ public class PoliceRegistration extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 630));
@@ -100,36 +110,41 @@ public class PoliceRegistration extends javax.swing.JPanel {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(10, 132, 255));
-        jButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setBackground(new java.awt.Color(10, 132, 255));
+        addBtn.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        addBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addBtn.setText("Add");
+        addBtn.setBorder(null);
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 140, 39));
+        jPanel7.add(addBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 140, 39));
 
-        jButton2.setBackground(new java.awt.Color(94, 92, 230));
-        jButton2.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Update");
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        updateBtn.setBackground(new java.awt.Color(94, 92, 230));
+        updateBtn.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        updateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn.setText("Update");
+        updateBtn.setBorder(null);
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                updateBtnActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 140, 39));
+        jPanel7.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 140, 39));
 
-        jButton3.setBackground(new java.awt.Color(255, 55, 95));
-        jButton3.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Delete");
-        jButton3.setBorder(null);
-        jPanel7.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 140, 39));
+        DelBtn.setBackground(new java.awt.Color(255, 55, 95));
+        DelBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        DelBtn.setForeground(new java.awt.Color(255, 255, 255));
+        DelBtn.setText("Delete");
+        DelBtn.setBorder(null);
+        DelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DelBtnActionPerformed(evt);
+            }
+        });
+        jPanel7.add(DelBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 140, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel2.setText("Enter Details");
@@ -140,27 +155,27 @@ public class PoliceRegistration extends javax.swing.JPanel {
         jLabel7.setText("Name");
         jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 220, -1));
 
-        pharmaLocationTextField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(pharmaLocationTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 420, 40));
+        locationTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(locationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 420, 40));
 
         jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(73, 84, 90));
         jLabel8.setText("Location");
         jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
 
-        pharmaNameTextField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(pharmaNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 420, 40));
+        firstNameTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(firstNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 420, 40));
 
-        pharmaUserIDTextField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(pharmaUserIDTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 40));
+        userIdTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(userIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 40));
 
         jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(73, 84, 90));
         jLabel9.setText("User ID");
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 220, -1));
 
-        pharmaPasswordTextField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(pharmaPasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 420, 40));
+        passwordTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 420, 40));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(73, 84, 90));
@@ -172,27 +187,167 @@ public class PoliceRegistration extends javax.swing.JPanel {
         jLabel11.setText("Phone Number");
         jPanel7.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 220, -1));
 
-        pharmaPhoneNumberTextField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(pharmaPhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 420, 40));
+        phoneTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 420, 40));
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 740));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if( firstNameTxt.getText().isEmpty()||locationTxt.getText().isEmpty()|| userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(system.getUserAccountDirectory().checkIfUsernameIsUnique(userIdTxt.getText())){
+            if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+            {
+                JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                phoneTxt.setText("");
+                return;
+            }
+
+            Police customer = new Police(userIdTxt.getText(),passwordTxt.getText(),locationTxt.getText(),firstNameTxt.getText(),phoneTxt.getText() );
+            system.getUserAccountDirectory().addAccount(customer);
+            system.getPoliceDir().addNewPolice(customer);
+            populateTable();
+            firstNameTxt.setText("");
+            phoneTxt.setText("");
+            userIdTxt.setText("");
+            passwordTxt.setText("");
+            locationTxt.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Username " + userIdTxt.getText() + " already exists !!!, Please try a new one");
+        }
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void populateTable() {
+        PoliceDir policeDir = system.getPoliceDir();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        model.setRowCount(0);
+        for (Police customer : policeDir.getPoliceList()) {
+                    Object[] row = new Object[5];
+                    row[0] = customer.getNamePolice();
+                    row[1] = customer.getPoliceLocation();                    
+                    row[2] = customer.getUser_Id();
+                    row[3] = customer.getPwd();
+                    row[4] = customer.getPhNum();
+
+                    model.addRow(row);
+                
+            }
+    }
+    
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        String username=userIdTxt.getText();
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1=jTable1.getSelectedRow();
+        if(t1>=0)
+        {
+            
+            {
+                String a=(String)t.getValueAt(t1, 2);
+                PoliceDir pol = system.getPoliceDir();
+                ArrayList<Police> cd1= pol.getPoliceList();
+                int z=cd1.size();
+                for(int i=0;i<z;i++)
+                {
+                    Police c=cd1.get(i);
+                    c.getUser_Id();
+                    if(c.getUser_Id().matches(a))
+                    {
+                        if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+                        {
+                            JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                            phoneTxt.setText("");
+                            return;
+                        }
+
+                        c.setNamePolice(firstNameTxt.getText());
+                        c.setPoliceLocation(locationTxt.getText());
+                        c.setPhNum(phoneTxt.getText());
+                        c.setUser_Id(userIdTxt.getText());
+                        c.setPwd(passwordTxt.getText());
+                    }
+                }
+            populateTable();
+            }                                        
+        }
+            else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    
+    
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a Official from the table", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else{
+            firstNameTxt.setText(table.getValueAt(selectedRow,0).toString());
+            locationTxt.setText(table.getValueAt(selectedRow,1).toString());
+            userIdTxt.setText(table.getValueAt(selectedRow,2).toString());
+            passwordTxt.setText(table.getValueAt(selectedRow,3).toString());
+            phoneTxt.setText(table.getValueAt(selectedRow,4).toString());
+        
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void DelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnActionPerformed
+        // TODO add your handling code here:
+        
+        String username=userIdTxt.getText();
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1=jTable1.getSelectedRow();
+        if(t1>=0)
+        {
+            String a=(String)t.getValueAt(t1, 2);
+            System.out.println(a);
+            PoliceDir bbd = system.getPoliceDir();
+            ArrayList<Police> cd1=bbd.getPoliceList();
+            int z=cd1.size();
+            for(int i=0;i<z;i++)
+            {
+                Police c=cd1.get(i);
+                System.out.println(c.getUser_Id());
+                if(c.getUser_Id().matches(a))
+                {
+                    cd1.remove(c);
+                    System.out.println("delete");
+                    system.getUserAccountDirectory().removeccount(c);
+                     break;
+                }
+            }
+            populateTable();
+            firstNameTxt.setText("");
+            locationTxt.setText("");
+            phoneTxt.setText("");
+            userIdTxt.setText("");
+            passwordTxt.setText("");
+
+        }                                        
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
+    }//GEN-LAST:event_DelBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton DelBtn;
+    private javax.swing.JButton addBtn;
+    private javax.swing.JTextField firstNameTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -205,10 +360,10 @@ public class PoliceRegistration extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField pharmaLocationTextField;
-    private javax.swing.JTextField pharmaNameTextField;
-    private javax.swing.JTextField pharmaPasswordTextField;
-    private javax.swing.JTextField pharmaPhoneNumberTextField;
-    private javax.swing.JTextField pharmaUserIDTextField;
+    private javax.swing.JTextField locationTxt;
+    private javax.swing.JTextField passwordTxt;
+    private javax.swing.JTextField phoneTxt;
+    private javax.swing.JButton updateBtn;
+    private javax.swing.JTextField userIdTxt;
     // End of variables declaration//GEN-END:variables
 }
