@@ -222,12 +222,13 @@ public class BloodRegistration extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        String username=userNameTextField5.getText(); 
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int sRow=jTable1.getSelectedRow();
         if(sRow>=0)
         {
              
-        String value=(String)table.getValueAt(sRow, 3);
+        //String value=(String)table.getValueAt(sRow, 3);
             BloodWorkDirectory doctorDirectory = system.getBloodBankDir();
         ArrayList<BloodWork> list=doctorDirectory.getBloodWorkList();
         int listsize=list.size();
@@ -236,7 +237,7 @@ public class BloodRegistration extends javax.swing.JPanel {
             BloodWork doc=list.get(i);
             //System.out.println(doc.getUserName());
             
-            if(doc.getUserName().matches(value))
+            if(doc.getUserName().matches(username))
                     {
                         if(!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
             {
@@ -253,6 +254,9 @@ public class BloodRegistration extends javax.swing.JPanel {
                       
                     
                     }
+             else {
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+            }
         }
           displayTable();
             
@@ -272,7 +276,7 @@ public class BloodRegistration extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-                
+             String username=userNameTextField5.getText();   
          DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int sRow=jTable1.getSelectedRow();
         if(sRow>=0)
@@ -285,13 +289,14 @@ public class BloodRegistration extends javax.swing.JPanel {
         for(int i=0;i<z;i++)
            {
             BloodWork d=list.get(i);
-            if(d.getUserName().matches(value))
+            if(d.getUserName().matches(username))
                     {
                        doctorDirectory.removeBloodWork(d);
                        system.getUserAccDir().removeccount(d);
                   
                         break;
                     }
+           
         }
           displayTable();
           userNameTextField3.setText("");

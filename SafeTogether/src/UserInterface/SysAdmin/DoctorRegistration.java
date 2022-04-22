@@ -355,6 +355,9 @@ public class DoctorRegistration extends javax.swing.JPanel {
                         doc.setPhoneNum(userNameTextField8.getText());
                     
                     }
+            else {
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+            }
         }
           displayTable();
             

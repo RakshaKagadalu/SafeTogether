@@ -250,6 +250,9 @@ public class PandemicRegistration extends javax.swing.JPanel {
                 c.setPassword(userNameTextField6.getText());
                 c.setPhoneNumber(userNameTextField7.getText());
             }
+            else {
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+            }
         }
         displayTable();
             }}else
