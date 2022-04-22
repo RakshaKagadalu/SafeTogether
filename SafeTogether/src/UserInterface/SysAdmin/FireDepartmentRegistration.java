@@ -4,6 +4,10 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.EcoSystem;
+import Business.EmergencyFire.Fire;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -15,6 +19,16 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
      */
     public FireDepartmentRegistration() {
         initComponents();
+    }
+
+    EcoSystem system;
+    JPanel rightSidePanel;
+    Fire amb;
+    FireDepartmentRegistration(EcoSystem system, JPanel container) {
+         initComponents();
+        this.system = system;
+        this.rightSidePanel = rightSidePanel;
+        this.setSize(1160, 750); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**

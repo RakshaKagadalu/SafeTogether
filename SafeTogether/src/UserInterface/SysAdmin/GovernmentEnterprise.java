@@ -279,7 +279,8 @@ public class GovernmentEnterprise extends javax.swing.JPanel {
 
     private void manageGovtEnterprise() {
          doctorAssociationPanel.setBackground(new Color(213,230,249));
-//         PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
+//        PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
+//        PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
         GovernmentRegistration gov =new GovernmentRegistration (container,system);
         rightSidePanel.add(gov);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();

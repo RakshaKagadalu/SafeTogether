@@ -333,12 +333,32 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
     
     private void policePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_policePanelMousePressed
         // TODO add your handling code here:
+        manageEmergencyEnterprisePolice();
     }//GEN-LAST:event_policePanelMousePressed
 
+    private void manageEmergencyEnterprisePolice() {
+        ambulancePanel.setBackground(new Color(255,255,255));
+        policePanel.setBackground(new Color(213,230,249));
+        fireDeptPanel.setBackground(new Color(255,255,255));
+        PoliceRegistration amb =new PoliceRegistration(system,container);
+        rightSidePanel.add(amb);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }
     private void fireDeptPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fireDeptPanelMousePressed
         // TODO add your handling code here:
+        manageEmergencyEnterpriseFire();
     }//GEN-LAST:event_fireDeptPanelMousePressed
 
+    private void manageEmergencyEnterpriseFire() {
+        ambulancePanel.setBackground(new Color(255,255,255));
+        policePanel.setBackground(new Color(213,230,249));
+        fireDeptPanel.setBackground(new Color(213,230,249));
+        FireDepartmentRegistration amb =new FireDepartmentRegistration(system,container);
+        rightSidePanel.add(amb);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ambulancePanel;

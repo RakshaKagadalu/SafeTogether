@@ -356,7 +356,7 @@ public class HospitalEnterprise extends javax.swing.JPanel {
     private void manageDoctor() {
          doctorAssociationPanel.setBackground(new Color(213,230,249));
          PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
-        DoctorRegistration dr=new DoctorRegistration (system, container);
+        DoctorRegistration dr=new DoctorRegistration(system, container);
         rightSidePanel.add(dr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
