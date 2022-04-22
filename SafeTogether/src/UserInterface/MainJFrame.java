@@ -7,6 +7,7 @@ package UserInterface;
 import Business.DatabaseUtil.DB4OUtil;
 import Business.Doctor.Doctor;
 import Business.EcoSystem;
+import Business.Laboratory.BloodWork;
 import Business.PandemicCenter.PandemicCenter;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import java.awt.CardLayout;
@@ -46,16 +47,20 @@ public class MainJFrame extends javax.swing.JFrame {
        
          
          
-         //Creation of test data for all the tables
-          Doctor doc = new Doctor("Raksha","Boston Public Hospital","Cardio","doctor1","doctor1","1111111111");
+         //Creation of test data for adding Doctors to Sys Admin tables
+          Doctor doc = new Doctor("Raksha","Boston Public Hospital","Cardio","doctor1","pass","1111111111");
             system.getUserAccDir().addAccount(doc);
             system.getDoctorDir().addNewDoc(doc);
             
-          PandemicCenter pCenter = new PandemicCenter("Raksha","Boston","1111111111","center1","center1");
+         //Creation of test data for adding Pandemic Ceters to Sys Admin tables   
+          PandemicCenter pCenter = new PandemicCenter("Pancentre","Boston","center1","pass","3333333333");
               system.getUserAccDir().addAccount(pCenter);
             system.getPandemicCenterDir().addPandemicCenter(pCenter);
             
-         
+        //Creation of test data for adding BloodBanks to Sys Admin tables       
+         BloodWork bBank = new BloodWork("Raksha","Boston","BloodBank1","pass","2222222222");
+              system.getUserAccDir().addAccount(bBank);
+            system.getBloodBankDir().addBloodWork(bBank);
     }
     
 

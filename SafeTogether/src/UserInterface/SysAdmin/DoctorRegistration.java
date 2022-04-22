@@ -21,7 +21,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel rightSidePanel;
-     Doctor per;
+     //Doctor per;
     public DoctorRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
         this.system = system;
@@ -355,6 +355,9 @@ public class DoctorRegistration extends javax.swing.JPanel {
                         doc.setPhoneNum(userNameTextField8.getText());
                     
                     }
+            else {
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+            }
         }
           displayTable();
             
