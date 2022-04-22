@@ -4,6 +4,18 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.EcoSystem;
+import Business.Laboratory.BloodWork;
+import Business.Laboratory.BloodWorkDirectory;
+import Business.PandemicCenter.PandemicCenter;
+import Business.PandemicCenter.PandemicCenter_Dir;
+import Business.Pharma.Pharma;
+import Business.Pharma.PharmaDirectory;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +25,14 @@ public class PharmacyRegistration extends javax.swing.JPanel {
     /**
      * Creates new form PharmacyRegistration
      */
-    public PharmacyRegistration() {
+     EcoSystem system;
+    JPanel rightSidePanel;
+    public PharmacyRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
+        this.system = system;
+        this.rightSidePanel = rightSidePanel;
+        this.setSize(1160, 750);
+        displayTable();
     }
 
     /**
@@ -116,6 +134,11 @@ public class PharmacyRegistration extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 370));
@@ -154,6 +177,11 @@ public class PharmacyRegistration extends javax.swing.JPanel {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Delete");
         jButton3.setBorder(null);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel7.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 140, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
@@ -234,11 +262,137 @@ public class PharmacyRegistration extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         String name = (userNameTextField4.getText());
+            String location = (userNameTextField3.getText());
+            String phoneNum = (userNameTextField7.getText());
+            String userId = (userNameTextField5.getText());
+            String pwd = (userNameTextField6.getText());
+ 
+             Pharma pc = new Pharma(name,location,userId,pwd,phoneNum);
+            system.getUserAccDir().addAccount(pc);
+            system.getPharmaDir().addToPharma(pc);
+         //  System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
+            displayTable();
+            
+            userNameTextField3.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+           
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+         String username= userNameTextField5.getText();
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1=jTable1.getSelectedRow();
+        if(t1>=0)
+        {
+           
+            {
+        //String a=(String)t.getValueAt(t1, 3);
+        PharmaDirectory bbd = system.getPharmaDir();
+        ArrayList<Pharma> cd1=bbd.getPharmaArrayList();
+        int z=cd1.size();
+        for(int i=0;i<z;i++)
+        {
+            Pharma c=cd1.get(i);
+            c.getUserName();
+            if(c.getUserName().matches(username))
+            {
+                if(!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+            {
+                JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                userNameTextField7.setText("");
+                return;
+            }
+
+                c.setPharmaName(userNameTextField4.getText());
+                c.setPharmaLocation(userNameTextField3.getText());
+                c.setPharmaUserID(userNameTextField5.getText());
+                c.setPharmaPassword(userNameTextField6.getText());
+                c.setPharmaPhoneNumber(userNameTextField7.getText());
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+            }
+        }
+        displayTable();
+            }}else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         
+         String username=userNameTextField5.getText();
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1=jTable1.getSelectedRow();
+        if(t1>=0)
+        {
+        String a=(String)t.getValueAt(t1, 3);
+        PharmaDirectory bbd = system.getPharmaDir();
+        ArrayList<Pharma> cd1=bbd.getPharmaArrayList();
+        int z=cd1.size();
+        for(int i=0;i<z;i++)
+        {
+            Pharma c=cd1.get(i);
+          
+            
+            if(c.getUserName().matches(username))
+            {
+                bbd.removeFromPharma(c);
+                system.getUserAccDir().removeccount(c);
+               // System.out.println("delete");
+                 break;
+            }
+        }
+        displayTable();
+        userNameTextField3.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+        
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+            DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+          if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else{
+        userNameTextField4.setText(table.getValueAt(selectedRow,0).toString());
+        userNameTextField3.setText(table.getValueAt(selectedRow,1).toString());
+        userNameTextField5.setText(table.getValueAt(selectedRow,2).toString());
+        userNameTextField6.setText(table.getValueAt(selectedRow,3).toString());
+        userNameTextField7.setText(table.getValueAt(selectedRow,4).toString());
+       
+        
+          }
+        
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -275,4 +429,23 @@ public class PharmacyRegistration extends javax.swing.JPanel {
     private javax.swing.JTextField userNameTextField6;
     private javax.swing.JTextField userNameTextField7;
     // End of variables declaration//GEN-END:variables
-}
+private void displayTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       PharmaDirectory docDir = system.getPharmaDir();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        model.setRowCount(0);
+        for (Pharma doc : docDir.getPharmaArrayList()) {
+                    Object[] row = new Object[6];
+                    row[0] = doc.getPharmaName();
+                    row[1] = doc.getPharmaLocation();
+                    row[2] = doc.getPharmaUserID();
+                    row[3] = doc.getPharmaPassword();
+                    row[4] = doc.getPharmaPhoneNumber();
+                    
+
+                    model.addRow(row);
+                
+            }
+        
+    }}

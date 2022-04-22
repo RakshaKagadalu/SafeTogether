@@ -5,7 +5,11 @@
 package UserInterface;
 
 import Business.DatabaseUtil.DB4OUtil;
+import Business.Doctor.Doctor;
 import Business.EcoSystem;
+import Business.Laboratory.BloodWork;
+import Business.PandemicCenter.PandemicCenter;
+import Business.Pharma.Pharma;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -27,6 +31,10 @@ public class MainJFrame extends javax.swing.JFrame {
     // set the default size of the main frame
      private EcoSystem system;
     public static DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    
+    
+    
+    
     public MainJFrame() {
         initComponents();
         this.setSize(1920, 1080);
@@ -34,6 +42,31 @@ public class MainJFrame extends javax.swing.JFrame {
          system = dB4OUtil.retrieveSystem();
          setSystemAdmin();
          //setAdminPage();
+         
+         
+        
+       
+         
+         
+         //Creation of test data for adding Doctors to Sys Admin tables
+          Doctor doc = new Doctor("Raksha","Boston Public","Cardio","raksha","pass","1111111111");
+            system.getUserAccDir().addAccount(doc);
+            system.getDoctorDir().addNewDoc(doc);
+            
+         //Creation of test data for adding Pandemic Ceters to Sys Admin tables   
+          PandemicCenter pCenter = new PandemicCenter("Cabot","Boston","cabot","pass","3333333333");
+              system.getUserAccDir().addAccount(pCenter);
+            system.getPandemicCenterDir().addPandemicCenter(pCenter);
+            
+        //Creation of test data for adding BloodBanks to Sys Admin tables       
+         BloodWork bBank = new BloodWork("Red Cross","Boston","redcross","pass","2222222222");
+              system.getUserAccDir().addAccount(bBank);
+            system.getBloodBankDir().addBloodWork(bBank);
+            
+             //Creation of test data for adding pharmacies to Sys Admin tables       
+         Pharma pharma = new Pharma("CVS","Boston","cvs","pass","2222222222");
+              system.getUserAccDir().addAccount(pharma);
+            system.getPharmaDir().addToPharma(pharma);
     }
     
 

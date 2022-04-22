@@ -21,7 +21,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel rightSidePanel;
-     Doctor per;
+     //Doctor per;
     public DoctorRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
         this.system = system;
@@ -286,10 +286,9 @@ public class DoctorRegistration extends javax.swing.JPanel {
             String pwd = (userNameTextField7.getText());
             String phoneNum = (userNameTextField8.getText());
              Doctor doc = new Doctor(name,hospital,specialization,userId,pwd,phoneNum);
-           // system.getUserAccountDirectory().addAccount(doc);
             system.getUserAccDir().addAccount(doc);
             system.getDoctorDir().addNewDoc(doc);
-           System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
+           //System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
             displayTable();
             
               userNameTextField3.setText("");
@@ -325,21 +324,21 @@ public class DoctorRegistration extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int sRow=jTable1.getSelectedRow();
+        if(sRow>=0)
         {
              
-        String a=(String)t.getValueAt(t1, 3);
+        String value=(String)table.getValueAt(sRow, 3);
         DoctorDir doctorDirectory = system.getDoctorDir();
-        ArrayList<Doctor> cd1=doctorDirectory.getDoc();
-        int z=cd1.size();
-        for(int i=0;i<z;i++)
+        ArrayList<Doctor> list=doctorDirectory.getDoc();
+        int listsize=list.size();
+        for(int i=0;i<listsize;i++)
         {
-            Doctor c=cd1.get(i);
-            System.out.println(c.getUserName());
+            Doctor doc=list.get(i);
+            //System.out.println(doc.getUserName());
             
-            if(c.getUserName().matches(a))
+            if(doc.getUserName().matches(value))
                     {
                         if(!userNameTextField8.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
             {
@@ -348,14 +347,17 @@ public class DoctorRegistration extends javax.swing.JPanel {
                 return;
             }
 
-                     c.setFirstName(userNameTextField4.getText());
-                        c.setHospital(userNameTextField3.getText());
-                        c.setSpecialization(userNameTextField5.getText());
-                        c.setUserId(userNameTextField6.getText());
-                        c.setAccPassword(userNameTextField7.getText());
-                        c.setPhoneNum(userNameTextField8.getText());
+                     doc.setFirstName(userNameTextField4.getText());
+                        doc.setHospital(userNameTextField3.getText());
+                        doc.setSpecialization(userNameTextField5.getText());
+                        doc.setUserId(userNameTextField6.getText());
+                        doc.setAccPassword(userNameTextField7.getText());
+                        doc.setPhoneNum(userNameTextField8.getText());
                     
                     }
+            else {
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+            }
         }
           displayTable();
             
@@ -446,22 +448,22 @@ public class DoctorRegistration extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
-         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
+         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int sRow=jTable1.getSelectedRow();
+        if(sRow>=0)
         {
              
-        String a=(String)t.getValueAt(t1, 3);
+        String value=(String)table.getValueAt(sRow, 3);
         DoctorDir doctorDirectory = system.getDoctorDir();
-        ArrayList<Doctor> cd1=doctorDirectory.getDoc();
-        int z=cd1.size();
+        ArrayList<Doctor> docs=doctorDirectory.getDoc();
+        int z=docs.size();
         for(int i=0;i<z;i++)
            {
-            Doctor c=cd1.get(i);
-            if(c.getUserName().matches(a))
+            Doctor d=docs.get(i);
+            if(d.getUserName().matches(value))
                     {
-                       doctorDirectory.removeDoc(c);
-                       system.getUserAccDir().removeccount(c);
+                       doctorDirectory.removeDoc(d);
+                       system.getUserAccDir().removeccount(d);
                   
                         break;
                     }
@@ -484,18 +486,18 @@ public class DoctorRegistration extends javax.swing.JPanel {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         
-          DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+          DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
           if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else{
-        userNameTextField4.setText(t.getValueAt(selectedRow,0).toString());
-        userNameTextField3.setText(t.getValueAt(selectedRow,1).toString());
-        userNameTextField5.setText(t.getValueAt(selectedRow,2).toString());
-        userNameTextField6.setText(t.getValueAt(selectedRow,3).toString());
-        userNameTextField7.setText(t.getValueAt(selectedRow,4).toString());
-        userNameTextField8.setText(t.getValueAt(selectedRow,5).toString());
+        userNameTextField4.setText(table.getValueAt(selectedRow,0).toString());
+        userNameTextField3.setText(table.getValueAt(selectedRow,1).toString());
+        userNameTextField5.setText(table.getValueAt(selectedRow,2).toString());
+        userNameTextField6.setText(table.getValueAt(selectedRow,3).toString());
+        userNameTextField7.setText(table.getValueAt(selectedRow,4).toString());
+        userNameTextField8.setText(table.getValueAt(selectedRow,5).toString());
         
           }
         

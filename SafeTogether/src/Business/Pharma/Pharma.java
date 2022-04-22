@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Business.Pharma;
+import Business.Roles.Admin_Pharmacy;
+import Business.Roles.DoctorRole;
 import Business.UserAcc.UserAcc;
 import java.util.*;
 
@@ -13,10 +15,11 @@ import java.util.*;
  */
 public class Pharma extends UserAcc{
 
-    public Pharma(String pharmaName, String pharmaLocation, String pharmaPhoneNumber, String pharmaUserID, String pharmaPassword) { 
+    public Pharma(String pharmaName, String pharmaLocation, String pharmaUserID, String pharmaPassword, String pharmaPhoneNumber) { 
         // Addition of few stuff is remaining
-        setUserName(pharmaName);
+        setUserName(pharmaUserID);
         setPwd(pharmaPassword);
+         setRole(new Admin_Pharmacy());
         this.pharmaName = pharmaName;
         this.pharmaLocation = pharmaLocation;
         this.pharmaPhoneNumber = pharmaPhoneNumber;

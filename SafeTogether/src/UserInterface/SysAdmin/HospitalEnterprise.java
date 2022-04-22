@@ -152,10 +152,10 @@ public class HospitalEnterprise extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel6.setText("Doctors");
+        jLabel6.setText("Manage Doctors");
         doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 290, 60));
+        jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 290, 60));
 
         PandemicTestCentreJPanel.setBackground(new java.awt.Color(255, 255, 255));
         PandemicTestCentreJPanel.setPreferredSize(new java.awt.Dimension(100, 48));
@@ -171,10 +171,10 @@ public class HospitalEnterprise extends javax.swing.JPanel {
 
         jLabel24.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel24.setText("Centres");
+        jLabel24.setText("Manage Test Centres");
         PandemicTestCentreJPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(PandemicTestCentreJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 290, 60));
+        jPanel2.add(PandemicTestCentreJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 290, 60));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
@@ -356,7 +356,7 @@ public class HospitalEnterprise extends javax.swing.JPanel {
     private void manageDoctor() {
          doctorAssociationPanel.setBackground(new Color(213,230,249));
          PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
-        DoctorRegistration dr=new DoctorRegistration (system, container);
+        DoctorRegistration dr=new DoctorRegistration(system, container);
         rightSidePanel.add(dr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
