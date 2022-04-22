@@ -7,6 +7,7 @@ package Business;
 import Business.CDC.CDCDirectory;
 import Business.Doctor.DoctorDir;
 import Business.EmergencyAmbulance.AmbulanceDir;
+import Business.EmergencyFire.FireDir;
 import Business.Laboratory.BloodWorkDirectory;
 import Business.PandemicCenter.PandemicCenter_Dir;
 import Business.Pharma.PharmaDirectory;
@@ -23,6 +24,7 @@ import Business.WorkQueue.SearchApp;
 import Business.WorkQueue.VacRequest_Dir;
 import Business.WorkQueue.WorkQueue;
 import Business.userR.User_Directory;
+import Business.EmergencyPolice.PoliceDir;
 import java.util.ArrayList;
 
 /**
@@ -44,6 +46,8 @@ abstract class Organization{
     VacDirectory vaccDir;
     VacRequest_Dir vaccReqDir;
     DoctorsAppointment_Dir docAppDir;
+    FireDir fireDir;
+    PoliceDir policeDir;
     
     
      Req_EmergencyDir emergencyReqDir;
@@ -91,6 +95,8 @@ abstract class Organization{
         vaccDir =new VacDirectory();
         vaccReqDir=new VacRequest_Dir();
         docAppDir = new DoctorsAppointment_Dir();
+        fireDir = new FireDir();
+        policeDir = new PoliceDir();
         
         
           outbreakStatusDir = new OutbreakTracerDir();
@@ -196,6 +202,31 @@ abstract class Organization{
         
         return ambulanceDir;
     }
+
+    public FireDir getFireDir() {
+        if(fireDir==null)
+        {
+            fireDir = new FireDir();
+        }
+        return fireDir;
+    }
+
+    public void setFireDir(FireDir fireDir) {
+        this.fireDir = fireDir;
+    }
+
+    public PoliceDir getPoliceDir() {
+        if(policeDir == null){
+            policeDir = new PoliceDir();
+        }
+        return policeDir;
+    }
+
+    public void setPoliceDir(PoliceDir policeDir) {
+        this.policeDir = policeDir;
+    }
+    
+    
 
     public void setAmbulanceDir(AmbulanceDir ambulanceDir) {
         this.ambulanceDir = ambulanceDir;

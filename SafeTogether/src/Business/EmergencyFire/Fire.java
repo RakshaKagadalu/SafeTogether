@@ -14,14 +14,14 @@ import Business.UserAcc.UserAcc;
 public class Fire extends UserAcc {
     String user_Id;
     String pwd;
-    String FireServName;
+    String FireServLocation;
     String nameFireman;
     String phNum;
 
-    public Fire(String user_Id, String pwd, String FireServName, String nameFireman, String phNum) {
+    public Fire(String user_Id, String pwd, String FireServLocation, String nameFireman, String phNum) {
         this.user_Id = user_Id;
         this.pwd = pwd;
-        this.FireServName = FireServName;
+        this.FireServLocation = FireServLocation;
         this.nameFireman = nameFireman;
         this.phNum = phNum;
         setUserName(user_Id);
@@ -46,12 +46,12 @@ public class Fire extends UserAcc {
         this.pwd = pwd;
     }
 
-    public String getFireServName() {
-        return FireServName;
+    public String getFireServLocation() {
+        return FireServLocation;
     }
 
-    public void setFireServName(String FireServName) {
-        this.FireServName = FireServName;
+    public void setFireServLocation(String FireServLocation) {
+        this.FireServLocation = FireServLocation;
     }
 
     public String getNameFireman() {
