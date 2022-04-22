@@ -136,6 +136,11 @@ public class PandemicRegistration extends javax.swing.JPanel {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Delete");
         jButton3.setBorder(null);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel7.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 140, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
@@ -191,13 +196,13 @@ public class PandemicRegistration extends javax.swing.JPanel {
         // TODO add your handling code here:
          String name = (userNameTextField4.getText());
             String location = (userNameTextField3.getText());
-            String phoneNum = (userNameTextField5.getText());
-            String userId = (userNameTextField6.getText());
-            String pwd = (userNameTextField7.getText());
+            String phoneNum = (userNameTextField7.getText());
+            String userId = (userNameTextField5.getText());
+            String pwd = (userNameTextField6.getText());
  
-             PandemicCenter doc = new PandemicCenter(name,location,phoneNum,userId,pwd);
-            system.getUserAccDir().addAccount(doc);
-            system.getPandemicCenterDir().addPandemicCenter(doc);
+             PandemicCenter pc = new PandemicCenter(name,location,userId,pwd,phoneNum);
+            system.getUserAccDir().addAccount(pc);
+            system.getPandemicCenterDir().addPandemicCenter(pc);
          //  System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
             displayTable();
             
@@ -215,55 +220,42 @@ public class PandemicRegistration extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-         
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int sRow=jTable1.getSelectedRow();
-        if(sRow>=0)
+        String username= userNameTextField5.getText();
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1=jTable1.getSelectedRow();
+        if(t1>=0)
         {
-             
-        String value=(String)table.getValueAt(sRow, 3);
-        PandemicCenter_Dir doctorDirectory = system.getPandemicCenterDir();
-        ArrayList<PandemicCenter> list=doctorDirectory.getPandemicdirectory();
-        int listsize=list.size();
-        for(int i=0;i<listsize;i++)
+           
+            {
+        //String a=(String)t.getValueAt(t1, 3);
+        PandemicCenter_Dir bbd = system.getPandemicCenterDir();
+        ArrayList<PandemicCenter> cd1=bbd.getPandemicdirectory();
+        int z=cd1.size();
+        for(int i=0;i<z;i++)
         {
-            PandemicCenter doc=list.get(i);
-            //System.out.println(doc.getUserName());
-            
-            if(doc.getUserName().matches(value))
-                    {
-                        if(!userNameTextField5.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+            PandemicCenter c=cd1.get(i);
+            c.getUserName();
+            if(c.getUserName().matches(username))
+            {
+                if(!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
             {
                 JOptionPane.showMessageDialog(null, " 10 digit phone number");
-                userNameTextField5.setText("");
+                userNameTextField7.setText("");
                 return;
             }
 
-                     doc.setName(userNameTextField4.getText());
-                        doc.setLocation(userNameTextField3.getText());
-                        doc.setPhoneNumber(userNameTextField5.getText());
-                        doc.setUserId(userNameTextField6.getText());
-                        doc.setPassword(userNameTextField7.getText());
-                      
-                    
-                    }
+                c.setName(userNameTextField4.getText());
+                c.setLocation(userNameTextField3.getText());
+                c.setUserId(userNameTextField5.getText());
+                c.setPassword(userNameTextField6.getText());
+                c.setPhoneNumber(userNameTextField7.getText());
+            }
         }
-          displayTable();
-            
-              userNameTextField3.setText("");
-            userNameTextField4.setText("");
-            userNameTextField5.setText("");
-            userNameTextField6.setText("");
-            userNameTextField7.setText("");
-           
-             }
-        else
+        displayTable();
+            }}else
         {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
-        
-        
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -285,6 +277,81 @@ public class PandemicRegistration extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+         String username=userNameTextField5.getText();
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1=jTable1.getSelectedRow();
+        if(t1>=0)
+        {
+        String a=(String)t.getValueAt(t1, 3);
+        PandemicCenter_Dir bbd = system.getPandemicCenterDir();
+        ArrayList<PandemicCenter> cd1=bbd.getPandemicdirectory();
+        int z=cd1.size();
+        for(int i=0;i<z;i++)
+        {
+            PandemicCenter c=cd1.get(i);
+          
+            
+            if(c.getUserName().matches(username))
+            {
+                cd1.remove(c);
+                system.getUserAccDir().removeccount(c);
+               // System.out.println("delete");
+                 break;
+            }
+        }
+        displayTable();
+        userNameTextField3.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+        
+        }
+        
+        
+        
+        
+        
+         
+//         String username= userNameTextField5.getText();
+//        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+//        int sRow=jTable1.getSelectedRow();
+//        if(sRow>=0)
+//        {
+//             
+//      //  String value=(String)table.getValueAt(sRow, 3);
+//        PandemicCenter_Dir doctorDirectory = system.getPandemicCenterDir();
+//        ArrayList<PandemicCenter> list=doctorDirectory.getPandemicdirectory();
+//        int z=list.size();
+//        for(int i=0;i<z;i++)
+//           {
+//            PandemicCenter d=list.get(i);
+//            if(d.getUserName().matches(username))
+//                    {
+//                       doctorDirectory.removePandemicCenter(d);
+//                       system.getUserAccDir().removeccount(d);
+//                  
+//                        break;
+//                    }
+//        }
+//          displayTable();
+//          userNameTextField3.setText("");
+//            userNameTextField4.setText("");
+//            userNameTextField5.setText("");
+//            userNameTextField6.setText("");
+//            userNameTextField7.setText("");
+//           
+//             }
+//        else
+//        {
+//            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+//        }
+//        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -319,9 +386,9 @@ public class PandemicRegistration extends javax.swing.JPanel {
                     Object[] row = new Object[6];
                     row[0] = doc.getName();
                     row[1] = doc.getLocation();
-                    row[2] = doc.getPhoneNumber();
-                    row[3] = doc.getUserId();
-                    row[4] = doc.getPassword();
+                    row[2] = doc.getUserId();
+                    row[3] = doc.getPassword();
+                    row[4] = doc.getPhoneNumber();
                     
 
                     model.addRow(row);

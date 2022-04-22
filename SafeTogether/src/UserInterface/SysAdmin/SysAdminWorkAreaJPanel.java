@@ -97,7 +97,7 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2.setText("Easily manage your enteprise in this section");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(250, 249, 251));
+        jPanel4.setBackground(new java.awt.Color(242, 242, 242));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-supplement-bottle-96.png"))); // NOI18N
@@ -130,9 +130,9 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel4.add(pharmaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 180, 40));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 150, 320, 290));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 150, 320, 290));
 
-        jPanel6.setBackground(new java.awt.Color(250, 249, 251));
+        jPanel6.setBackground(new java.awt.Color(242, 242, 242));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-siren-96.png"))); // NOI18N
@@ -165,9 +165,9 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel6.add(emergencyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 180, 40));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 520, 320, 290));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 510, 320, 290));
 
-        jPanel2.setBackground(new java.awt.Color(250, 249, 251));
+        jPanel2.setBackground(new java.awt.Color(242, 242, 242));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-world-health-organization-96.png"))); // NOI18N
@@ -200,9 +200,9 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel2.add(nonProfitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 180, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 320, 290));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 320, 290));
 
-        jPanel5.setBackground(new java.awt.Color(250, 249, 251));
+        jPanel5.setBackground(new java.awt.Color(242, 242, 242));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-city-hall-96.png"))); // NOI18N
@@ -235,9 +235,9 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel5.add(governmentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 180, 40));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, 320, 290));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, 320, 290));
 
-        jPanel3.setBackground(new java.awt.Color(250, 249, 251));
+        jPanel3.setBackground(new java.awt.Color(242, 242, 242));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-hospital-room-96.png"))); // NOI18N
@@ -278,7 +278,7 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
                 exitLabelMousePressed(evt);
             }
         });
-        jPanel1.add(exitLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 50, -1, -1));
+        jPanel1.add(exitLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 30, -1, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents

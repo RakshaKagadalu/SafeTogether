@@ -21,7 +21,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel rightSidePanel;
-     Doctor per;
+     //Doctor per;
     public DoctorRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
         this.system = system;

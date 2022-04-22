@@ -48,6 +48,7 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
         this.container = container;
         this.system = system;
         Time();
+       // displayTable();
     }
 
     /**
@@ -146,7 +147,7 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
         jLabel6.setText("Blood Banks");
         doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 290, 60));
+        jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 290, 60));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
@@ -271,6 +272,7 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
 
     private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
         // TODO add your handling code here:
+          manageBloodBank();
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -311,4 +313,16 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
     private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void manageBloodBank() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     doctorAssociationPanel.setBackground(new Color(213,230,249));
+         //PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
+        BloodRegistration br=new BloodRegistration (system, container);
+        rightSidePanel.add(br);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    
+    }
 }
