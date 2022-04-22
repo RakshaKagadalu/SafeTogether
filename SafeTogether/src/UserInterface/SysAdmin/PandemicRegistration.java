@@ -300,7 +300,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
             
             if(c.getUserName().matches(username))
             {
-                cd1.remove(c);
+                bbd.removePandemicCenter(c);
                 system.getUserAccDir().removeccount(c);
                // System.out.println("delete");
                  break;
@@ -313,6 +313,10 @@ public class PandemicRegistration extends javax.swing.JPanel {
             userNameTextField6.setText("");
             userNameTextField7.setText("");
         
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
         
         

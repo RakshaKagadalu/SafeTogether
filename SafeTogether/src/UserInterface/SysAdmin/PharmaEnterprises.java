@@ -144,7 +144,7 @@ public class PharmaEnterprises extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel6.setText("Pharmacies");
+        jLabel6.setText("Manage Pharmacies");
         doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
@@ -272,7 +272,7 @@ public class PharmaEnterprises extends javax.swing.JPanel {
 
     private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
         // TODO add your handling code here:
-       // manageDoctor();
+       managePharmacy();
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
   
     
@@ -314,4 +314,16 @@ public class PharmaEnterprises extends javax.swing.JPanel {
     private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void managePharmacy() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    doctorAssociationPanel.setBackground(new Color(213,230,249));
+        //255,255,255 PandemicTestCentreJPanel
+        PharmacyRegistration pcr=new PharmacyRegistration (system, container);
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    
+    }
 }
