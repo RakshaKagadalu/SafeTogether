@@ -4,6 +4,7 @@
  */
 package Business.PandemicCenter;
 
+import Business.Roles.Admin_PandemicTestCenter;
 import Business.UserAcc.UserAcc;
 
 /**
@@ -20,17 +21,17 @@ public class PandemicCenter extends UserAcc {
     String email;
     String result;
 
-    public PandemicCenter(String userId, String password, String location, String phoneNumber, String name, String email, String result) {
+    public PandemicCenter( String name,String location,String userId, String password, String phoneNumber) {
         setUserName(userId);
-        setPassword(password);
-//        setRole(new covidtestingadmin());
+        setPwd(password);
+      setRole(new Admin_PandemicTestCenter());
         this.userId = userId;
         this.password = password;
         this.location = location;
         this.phoneNumber = phoneNumber;
         this.name = name;
-        this.email = email;
-        this.result = result;
+//        this.email = email;
+//        this.result = result;
     }
 
     public String getUserId() {

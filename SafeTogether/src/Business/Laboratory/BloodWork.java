@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Business.Laboratory;
+import Business.Roles.Admin_BloodBank;
 import Business.UserAcc.UserAcc;
 import java.util.*;
 
@@ -21,9 +22,10 @@ public class BloodWork extends UserAcc{
     String userPhone;
    
        
-    public BloodWork(String userNames, String userLocation, String userPhone, String userId, String password) {
-        setUserName(userNames);
+    public BloodWork(String userNames, String userLocation, String userId, String password, String userPhone) {
+       setUserName(userId);
         setPwd(password);
+        setRole(new Admin_BloodBank());
         this.userNames = userNames;
         this.userLocation = userLocation;
         this.userPhone = userPhone;
