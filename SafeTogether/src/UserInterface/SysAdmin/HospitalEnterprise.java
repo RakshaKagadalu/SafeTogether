@@ -152,7 +152,7 @@ public class HospitalEnterprise extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel6.setText("Doctors");
+        jLabel6.setText("Manage Doctors");
         doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 290, 60));
@@ -171,7 +171,7 @@ public class HospitalEnterprise extends javax.swing.JPanel {
 
         jLabel24.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel24.setText("Test Centres");
+        jLabel24.setText("Manage Test Centres");
         PandemicTestCentreJPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel2.add(PandemicTestCentreJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 290, 60));
