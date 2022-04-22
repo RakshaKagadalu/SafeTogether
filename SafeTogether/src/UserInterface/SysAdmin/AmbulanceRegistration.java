@@ -4,6 +4,10 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.EmergencyAmbulance.Ambulance;
+import Business.EcoSystem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -17,6 +21,16 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
         initComponents();
     }
 
+    EcoSystem system;
+    JPanel rightSidePanel;
+    Ambulance amb;
+    public AmbulanceRegistration(EcoSystem system, JPanel rightSidePanel) {
+        initComponents();
+        this.system = system;
+        this.rightSidePanel = rightSidePanel;
+        this.setSize(1160, 750);
+//        displayTable();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
