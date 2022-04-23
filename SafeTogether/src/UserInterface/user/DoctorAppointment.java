@@ -4,8 +4,30 @@
  */
 package UserInterface.user;
 
+import Business.DatabaseUtil.DB4OUtil;
+import Business.Doctor.Doctor;
 import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.DoctorsAppointment;
+import Business.WorkQueue.DoctorsAppointment_Dir;
+import Business.WorkQueue.SearchApp;
+import Business.userR.User;
+import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,13 +38,16 @@ public class DoctorAppointment extends javax.swing.JPanel {
     /**
      * Creates new form DoctorAppointment
      */
+    UserAcc userAcc;
       EcoSystem system;
     JPanel rightSidePanel;
-    public DoctorAppointment(EcoSystem system, JPanel rightSidePanel) {
+    public DoctorAppointment(EcoSystem system, JPanel rightSidePanel,UserAcc userAcc) {
         initComponents();
          this.system = system;
         this.rightSidePanel = rightSidePanel;
+        this.userAcc=userAcc;
         this.setSize(1160, 750);
+         specializationCombo();
     }
 
     /**
@@ -34,53 +59,49 @@ public class DoctorAppointment extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        container = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        timeCombo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        specializationCombo = new javax.swing.JComboBox<>();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         bookAppointment1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDocAvail = new javax.swing.JTable();
         bookAppointment2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(240, 240, 241));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1160, 750));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        container.setBackground(new java.awt.Color(240, 240, 241));
+        container.setPreferredSize(new java.awt.Dimension(1160, 750));
+        container.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel1.setText("Book Appointment");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
+        container.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Text", 0, 16)); // NOI18N
         jLabel2.setText("Date");
 
-        jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
-        jDateChooser1.setMaxSelectableDate(new java.util.Date(1641016905000L));
-        jDateChooser1.setPreferredSize(new java.awt.Dimension(140, 30));
-
         jLabel3.setFont(new java.awt.Font("SF Pro Text", 0, 16)); // NOI18N
         jLabel3.setText("Time");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00" }));
+        timeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00" }));
 
         jLabel4.setFont(new java.awt.Font("SF Pro Text", 0, 16)); // NOI18N
         jLabel4.setText("Specialization");
 
-        jComboBox1.setPreferredSize(new java.awt.Dimension(140, 30));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        specializationCombo.setPreferredSize(new java.awt.Dimension(140, 30));
+        specializationCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                specializationComboActionPerformed(evt);
             }
         });
 
@@ -92,14 +113,17 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(specializationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(119, 119, 119)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(153, 153, 153)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                        .addGap(363, 363, 363)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(66, 66, 66))
         );
@@ -112,14 +136,17 @@ public class DoctorAppointment extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(specializationCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(timeCombo))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 1090, 80));
+        container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 1090, 80));
 
         bookAppointment1.setBackground(new java.awt.Color(10, 132, 255));
         bookAppointment1.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
@@ -132,22 +159,19 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 bookAppointment1ActionPerformed(evt);
             }
         });
-        jPanel1.add(bookAppointment1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, 230, 50));
+        container.add(bookAppointment1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, 230, 50));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDocAvail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name", "Specialization", "Hospital", "Phone Number"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblDocAvail);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 900, 210));
+        container.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 900, 210));
 
         bookAppointment2.setBackground(new java.awt.Color(10, 132, 255));
         bookAppointment2.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
@@ -160,38 +184,231 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 bookAppointment2ActionPerformed(evt);
             }
         });
-        jPanel1.add(bookAppointment2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 560, 230, 50));
+        container.add(bookAppointment2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 560, 230, 50));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1139, 1073));
+        add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1139, 1073));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void specializationComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_specializationComboActionPerformed
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+DoctorDisplay();
+    }//GEN-LAST:event_specializationComboActionPerformed
 
     private void bookAppointment1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment1ActionPerformed
         // TODO add your handling code here:
+        viewAppointmentStatus();
     }//GEN-LAST:event_bookAppointment1ActionPerformed
 
     private void bookAppointment2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment2ActionPerformed
         // TODO add your handling code here:
+        
+        bookDocAppointment();
     }//GEN-LAST:event_bookAppointment2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookAppointment1;
     private javax.swing.JButton bookAppointment2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JPanel container;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> specializationCombo;
+    private javax.swing.JTable tblDocAvail;
+    private javax.swing.JComboBox<String> timeCombo;
     // End of variables declaration//GEN-END:variables
+
+    private void specializationCombo() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    ArrayList<Doctor> d=system.getDoctorDir().getDoc();
+        int s=d.size();
+        ArrayList<String> spe =new ArrayList<String>();
+        for(int i=0;i<s;i++)
+        {
+            Doctor d1=d.get(i);
+            if(!spe.contains(d1.getSpecialization()))
+                    {
+                        spe.add(d1.getSpecialization());
+                    }
+            
+        }
+        for(int i=0;i<spe.size();i++)
+        {
+            specializationCombo.addItem(spe.get(i));
+        }
+    
+    
+    
+    }
+
+    private void DoctorDisplay() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    {
+        String specialSelect=specializationCombo.getSelectedItem().toString();
+         ArrayList<Doctor> doclist=system.getDoctorDir().getDoc();
+        int s=doclist.size();
+        
+        tblDocAvail.setModel(new DefaultTableModel(null,new String[]{"Name","Hospital","Spealization","Phone Number","status"}));
+        for(int i=0;i<s;i++)
+        {
+            Doctor doc=doclist.get(i);
+            if(doc.getSpecialization().matches(specialSelect))
+            {
+                DefaultTableModel table = (DefaultTableModel) tblDocAvail.getModel();    
+                String content[]={doc.getFirstName(),doc.getSpecialization(),doc.getHospital(),doc.getPhoneNum()};
+                table.addRow(content);
+            }
+        }
+    }
+    
+    
+    
+    
+    }
+
+    private void bookDocAppointment() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+     DefaultTableModel model = (DefaultTableModel) tblDocAvail.getModel();
+        int selectedRow=tblDocAvail.getSelectedRow();
+        if(selectedRow>=0)
+        {
+            if(jDateChooser1.getDate()!=null)
+            {
+                int rand = 1 + (int) (Math.random() * 100);
+                boolean appoint=false;
+                SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd");
+                String appDate = sdate.format(jDateChooser1.getDate());
+                DateTimeFormatter datetf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDateTime date2 = LocalDateTime.now();
+                String name=(model.getValueAt(selectedRow, 0).toString());
+                String date=specializationCombo.getSelectedItem().toString();
+                if(appDate.compareTo(date2.toString()) >= 0) {
+                    appoint=verify(name,appDate,date);
+                    if(appoint==false)
+                    {
+                        DoctorsAppointment doc=new DoctorsAppointment();
+                    doc.setId(rand);                    
+                    doc.setDoctorsName(name);
+                    String verifyName=(model.getValueAt(selectedRow, 1).toString());
+                    doc.setLastName(verifyName);
+                    doc.setDate(appDate);
+                    doc.setStatus("Appointment Booked");
+                    doc.setTime(date);
+                    User user=(User)(userAcc);
+                    doc.setUserId(user.getUserId());
+                    doc.setUserName(user.getFirstName());
+                    DoctorsAppointment_Dir docDir=system.getDocAppDir();
+                    docDir.addrequest(doc);
+                    SearchApp check= system.getCheckApplication();
+                    Map<String,List<String>> a=check.getSearchByName();
+                    List<String> list = new ArrayList<>();
+                    list.add(appDate);
+                    list.add(timeCombo.getSelectedItem().toString());                    
+                    a.put(name, list);
+                    //DB4OUtil.dB4OUtil.storeSystem(system);
+                     
+                    //code to send email
+                    {
+        String ToEmail = user.getEmail();
+        String myAccountEmail = "aedproject22@gmail.com";
+        String password = "aedproject123";
+       
+        
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        
+        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+            
+        });
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(ToEmail));
+            message.setSubject("Appointment Booked!!");
+            message.setText("Doctor : "+name+"\n"+"Hospital : "+verifyName+"\n"+"Date : "+appDate+"\n"+"Time : "+timeCombo.getSelectedItem().toString());
+            javax.mail.Transport.send(message);
+        }catch(MessagingException ex){
+            System.out.println(""+ex);
+        }
+        
+        }
+                    //end of code
+                    JOptionPane.showMessageDialog(null,"Your Appointment request is successfull!!");
+
+                }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"Appointment slot not available!!");
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Please select any future date!");
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Date is mandatory!!");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Doctor you want to book an appointment with!!");
+        }
+    
+    
+    
+    
+    
+    
+    }
+
+    private boolean verify(String name, String date1, String date) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+     boolean rand=false;
+        SearchApp check= system.getCheckApplication();
+        Map<String,List<String>> appList=check.getSearchByName();
+        for (Map.Entry mapElement : appList.entrySet()) {
+            if(mapElement.getKey().toString().matches(name))
+            {
+                List<String>appointmet=(List)mapElement.getValue();
+                String name1=appointmet.get(0);
+                String name2=appointmet.get(1);
+                if(name1.matches(date1))
+                {
+                    if(name2.matches(date))
+                    {
+                        rand=true;
+                        break;
+                    }
+                }
+            }
+           
+        }
+        return rand;
+    
+    
+    }
+
+    private void viewAppointmentStatus() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    DocAppointmentStatus docApp=new DocAppointmentStatus(rightSidePanel,system,userAcc);
+        container.add(docApp);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container); 
+    
+    }
 }

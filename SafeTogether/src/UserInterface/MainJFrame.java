@@ -53,9 +53,17 @@ public class MainJFrame extends javax.swing.JFrame {
          
          
          //Creation of test data for adding Doctors to Sys Admin tables
-          Doctor doc = new Doctor("Raksha","Boston Public","Cardio","raksha","pass","1111111111");
+          Doctor doc = new Doctor("Raksha","Cardio","Boston Public","raksha","pass","1111111111");
             system.getUserAccDir().addAccount(doc);
             system.getDoctorDir().addNewDoc(doc);
+            
+              Doctor doc2 = new Doctor("Krishna","Neuro","CityView Hospital","krishna","pass","1911111111");
+            system.getUserAccDir().addAccount(doc2);
+            system.getDoctorDir().addNewDoc(doc2);
+            
+              Doctor doc3 = new Doctor("Arjun","Ortho","Roxbury Hospital","arjun","pass","1011111111");
+            system.getUserAccDir().addAccount(doc3);
+            system.getDoctorDir().addNewDoc(doc3);
             
          //Creation of test data for adding Pandemic Ceters to Sys Admin tables   
           PandemicCenter pCenter = new PandemicCenter("Cabot","Boston","cabot","pass","3333333333");

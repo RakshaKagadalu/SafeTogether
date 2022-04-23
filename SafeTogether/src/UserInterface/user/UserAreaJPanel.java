@@ -363,7 +363,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         testing.setBackground(new Color(255,255,255));
     bookAppointment.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
-        DoctorAppointment pcr=new DoctorAppointment (system, container);
+        DoctorAppointment pcr=new DoctorAppointment (system, container,userAcc);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
