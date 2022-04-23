@@ -8,8 +8,11 @@ import Business.EcoSystem;
 import Business.userR.User;
 import java.awt.CardLayout;
 import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
@@ -40,7 +43,7 @@ public class UserRegister extends javax.swing.JPanel {
         this.setSize(1920, 1080);
        
     }
-public  void sendmail()
+public  void sendemail()
         {
         String ToEmail = emailTextField.getText();
         String myAccountEmail = "aedtesting123";
@@ -71,6 +74,59 @@ public  void sendmail()
         }
         
         }
+
+ public static void sendTextMessage(String contact) {
+        // Recipient's email ID needs to be mentioned.
+        String to = contact;
+        System.out.println(contact);
+        String from = "donotreplyers@gmail.com";
+        String pass = "devhuskies";
+        // Assuming you are sending email from localhost
+        // String host = "192.168.0.16";
+        // Get system properties
+        Properties properties = System.getProperties();
+        String host = "smtp.gmail.com";
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.ssl.trust", host);
+        properties.put("mail.smtp.user", from);
+        // properties.put("mail.smtp.password", pass);
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", "true");
+        // Setup mail server
+        // properties.setProperty("mail.smtp.host", host);
+        //  properties.put("mail.smtp.starttls.enable", "true");
+        // Get the default Session object.
+        Session session = Session.getDefaultInstance(properties);
+        //       final PasswordAuthentication auth = new PasswordAuthentication(from, pass);
+//Session session = Session.getDefaultInstance(properties, new Authenticator() {
+//    @Override
+//    protected PasswordAuthentication getPasswordAuthentication() { return auth; }
+//});
+//Session session = Session.getInstance(properties);
+        try {
+            // Create a default MimeMessage object.
+            MimeMessage message = new MimeMessage(session);
+
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
+
+            // Set To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+            // Set Subject: header field
+            message.setSubject("Patient Registration");
+            message.setText("Thank you for registering with us. Your account will be activated within 24 hours. We will keep you posted in case of emergencies.");
+            // Send message
+            Transport transport = session.getTransport("smtp");
+            transport.connect(host, from, pass);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+            System.out.println("Sent message successfully....");
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Invalid email id");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -253,7 +309,7 @@ public  void sendmail()
             User customer = new User(firstNameTextField.getText(),lastNameTextField.getText(), emailTextField.getText(),phoneTextField.getText(),userNameTextField.getText(),passwordTextField.getText(), locationTextField.getText());
             ecosystem.getUserAccDir().addAccount(customer);
             ecosystem.getUserDir().addUser(customer);
-           //sendmail();
+           sendemail();
             userNameTextField.setText("");
             emailTextField.setText("");
             firstNameTextField.setText("");
