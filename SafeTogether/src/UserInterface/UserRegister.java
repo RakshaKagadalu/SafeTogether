@@ -7,12 +7,13 @@ package UserInterface;
 import Business.EcoSystem;
 import Business.userR.User;
 import java.util.Properties;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import javax.mail.*;
 
 /**
  *
@@ -40,34 +41,34 @@ public class UserRegister extends javax.swing.JPanel {
        
     }
 public  void sendmail()
-        {
-        String ToEmail = emailTextField.getText();
-        String myAccountEmail = "aedtesting123";
-        String password = "aedtesting123456";
-       
-        
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth","true");
-        properties.put("mail.smtp.starttls.enable","true");
-        properties.put("mail.smtp.host","smtp.gmail.com");
-        properties.put("mail.smtp.port","587");
-        
-        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication(){
-                return new PasswordAuthentication(myAccountEmail, password);
+        {           
+            String ToEmail = emailTextField.getText();
+            String myAccountEmail = "safetogetherhelp2022@gmail.com";
+            String password = "INFO5100aed";
+
+            System.out.println("to : "+ ToEmail);
+            Properties properties = new Properties();
+            properties.put("mail.smtp.auth","true");
+            properties.put("mail.smtp.starttls.enable","true");
+            properties.put("mail.smtp.host","smtp.gmail.com");
+            properties.put("mail.smtp.port","587");
+
+            Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication(){
+                    return new PasswordAuthentication(myAccountEmail, password);
+                }
+
+            });
+            try{
+                MimeMessage message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(myAccountEmail));
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(ToEmail));
+                message.setSubject("User Account Created!!");
+                message.setText("Welcome to SafeTogether");
+                Transport.send(message);
+            } catch(Exception ex){
+                System.out.println(""+ex);
             }
-            
-        });
-        try{
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(myAccountEmail));
-            message.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(ToEmail));
-            message.setSubject("User Account Created!!");
-            message.setText("Your User ID : "+userNameTextField.getText()+"\n"+"Password : "+passwordTextField.getText());
-            javax.mail.Transport.send(message);
-        }catch(Exception ex){
-            System.out.println(""+ex);
-        }
         
         }
     /**
