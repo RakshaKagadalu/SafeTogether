@@ -22,7 +22,7 @@ public class User extends UserAcc{
 
     public User(String firstName, String lastName, String email, String phoneNumber, String userId, String password, String location) {
         setUserName(userId);
-        setPassword(password);
+        setPwd(password);
         setRole(new UserR());
         this.firstName = firstName;
         this.lastName = lastName;
