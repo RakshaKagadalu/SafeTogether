@@ -9,9 +9,15 @@ import Business.UserAcc.UserAcc;
 import UserInterface.SysAdmin.PandemicRegistration;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import static java.time.Clock.system;
 import static java.time.InstantSource.system;
+import java.util.Date;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
@@ -24,16 +30,34 @@ public class UserAreaJPanel extends javax.swing.JPanel {
      */
     private UserAcc userAcc;
     private EcoSystem system;
-     private JPanel container;
+    private JPanel container;
+     
+    Timer timer;
+    
+    private void Time() {
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date date= new Date();
+                DateFormat timeFormat =  new SimpleDateFormat("HH:mm a");
+                String time = timeFormat.format(date);
+                timeLabel.setText(time);
+            }
+        };
+        timer = new Timer(100, actionListener);
+        timer.setInitialDelay(0);
+        timer.start();
+    }
 
     
     public UserAreaJPanel(  JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
         initComponents();
         this.system = ecosystem;
         this.container = userProcessContainer;
-        
         this.userAcc = userAcc;
+        Time();
     }
+ 
  public void displayRequestTable(){
         
     }
@@ -75,7 +99,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         rightSidePanel = new javax.swing.JPanel();
@@ -238,9 +262,9 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
-        jLabel9.setText("3:45 PM");
-        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
+        timeLabel.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
+        timeLabel.setText("3:45 PM");
+        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel10.setText("User Requests");
@@ -319,7 +343,6 @@ public class UserAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -329,6 +352,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel medicine;
     private javax.swing.JPanel rightSidePanel;
     private javax.swing.JPanel testing;
+    private javax.swing.JLabel timeLabel;
     private javax.swing.JPanel vaccination;
     // End of variables declaration//GEN-END:variables
 
@@ -342,6 +366,8 @@ public class UserAreaJPanel extends javax.swing.JPanel {
     bookAppointment.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
         BloodDonations pcr=new BloodDonations (system, container);
+        DoctorAppointment pcr=new DoctorAppointment (system, container,userAcc);
+
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
