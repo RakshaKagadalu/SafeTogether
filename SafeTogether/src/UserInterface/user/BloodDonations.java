@@ -4,19 +4,29 @@
  */
 package UserInterface.user;
 
+import Business.EcoSystem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class BloodDonations extends javax.swing.JPanel {
 
+    EcoSystem system;
+    JPanel rightSidePanel;
     /**
      * Creates new form BloodDonations
+     * @param system
+     * @param rightSidePanel
      */
-    public BloodDonations() {
+    public BloodDonations(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
+        this.system = system;
+        this.rightSidePanel = rightSidePanel;
+        this.setSize(1160, 750);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

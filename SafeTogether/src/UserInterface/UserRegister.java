@@ -6,17 +6,10 @@ package UserInterface;
 
 import Business.EcoSystem;
 import Business.userR.User;
+import Utility.Notification;
 import java.awt.CardLayout;
-import java.util.Properties;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import javax.mail.*;
-
 /**
  *
  * @author raksh
@@ -29,52 +22,29 @@ public class UserRegister extends javax.swing.JPanel {
          EcoSystem ecosystem;
     JPanel workArea;
     
-//        private UserRegister() {
-//        initComponents();
-//        this.setSize(1920, 1080);
-//        
-//        this.ecosystem=null; // change this
-//    }
+
     public UserRegister(JPanel workArea,EcoSystem system) {
         initComponents();
          this.ecosystem=system;
         this.workArea=workArea;
         this.setSize(1920, 1080);
-       
-    }
-public  void sendmail()
-        {           
-            String ToEmail = emailTextField.getText();
-            String myAccountEmail = "safetogetherhelp2022@gmail.com";
-            String password = "INFO5100aed";
-
-            System.out.println("to : "+ ToEmail);
-            Properties properties = new Properties();
-            properties.put("mail.smtp.auth","true");
-            properties.put("mail.smtp.starttls.enable","true");
-            properties.put("mail.smtp.host","smtp.gmail.com");
-            properties.put("mail.smtp.port","587");
-
-            Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication(){
-                    return new PasswordAuthentication(myAccountEmail, password);
-                }
-
-            });
-            try{
-                MimeMessage message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(myAccountEmail));
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(ToEmail));
-                message.setSubject("User Account Created!!");
-                message.setText("Welcome to SafeTogether");
-                Transport.send(message);
-            } catch(Exception ex){
-                System.out.println(""+ex);
-            }
         
-        }
+    }
+    public  void sendmail()
+    {   
+        Notification notification = new Notification();
+        String toEmail = emailTextField.getText();
+        String emailSubject = "User Account Created!!";
+        String emailContent = "Welcome to SafeTogether"; 
+        notification.sendMail(toEmail, emailSubject, emailContent);
+    }
 
-
+    public void sendSMS() {
+        Notification notification = new Notification();
+        String toPhone = phoneTextField.getText();
+        String smsContent = "Welcome to SafeTogether" + firstNameTextField.getText() + " " + lastNameTextField.getText();
+        notification.sendSms(toPhone, smsContent);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -257,7 +227,8 @@ public  void sendmail()
             User customer = new User(firstNameTextField.getText(),lastNameTextField.getText(), emailTextField.getText(),phoneTextField.getText(),userNameTextField.getText(),passwordTextField.getText(), locationTextField.getText());
             ecosystem.getUserAccDir().addAccount(customer);
             ecosystem.getUserDir().addUser(customer);
-           sendmail();
+            sendmail();
+            sendSMS(); // costly keep it commented 
             userNameTextField.setText("");
             emailTextField.setText("");
             firstNameTextField.setText("");
