@@ -9,6 +9,7 @@ import Business.userR.User;
 import java.awt.CardLayout;
 import java.util.Properties;
 import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
@@ -72,6 +73,8 @@ public  void sendmail()
             }
         
         }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -254,7 +257,7 @@ public  void sendmail()
             User customer = new User(firstNameTextField.getText(),lastNameTextField.getText(), emailTextField.getText(),phoneTextField.getText(),userNameTextField.getText(),passwordTextField.getText(), locationTextField.getText());
             ecosystem.getUserAccDir().addAccount(customer);
             ecosystem.getUserDir().addUser(customer);
-           //sendmail();
+           sendmail();
             userNameTextField.setText("");
             emailTextField.setText("");
             firstNameTextField.setText("");
