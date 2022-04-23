@@ -10,6 +10,7 @@ import Business.EcoSystem;
 import Business.Laboratory.BloodWork;
 import Business.PandemicCenter.PandemicCenter;
 import Business.Pharma.Pharma;
+import Business.userR.User;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -40,8 +41,8 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setSize(1920, 1080);
         this.setResizable(false);
          system = dB4OUtil.retrieveSystem();
-         setSystemAdmin();
-         //setAdminPage();
+         //setSystemAdmin();
+         setAdminPage();
          
          
         
@@ -67,6 +68,16 @@ public class MainJFrame extends javax.swing.JFrame {
          Pharma pharma = new Pharma("CVS","Boston","cvs","pass","2222222222");
               system.getUserAccDir().addAccount(pharma);
             system.getPharmaDir().addToPharma(pharma);
+            
+            //creating test data for user
+            User user1 = new User("Rambo", "kr", "abc@gmail.com", "2222222222", "rambo", "rambo", "boston");
+            system.getUserAccDir().addAccount(user1);
+            system.getUserDir().addUser(user1);
+            
+             User user2 = new User("Bo", "kr", "abc@gmail.com", "2222222222", "bo", "bo", "boston");
+            system.getUserAccDir().addAccount(user2);
+            system.getUserDir().addUser(user2);
+            //System.out.println(system.getUserAccDir().getUserAccList());
     }
     
 
@@ -152,7 +163,7 @@ public class MainJFrame extends javax.swing.JFrame {
     
     private void setSystemAdmin() {
         SysAdminWorkAreaJPanel wa=new SysAdminWorkAreaJPanel(workArea,system);
-        workArea.add("UserLogins",wa);
+        workArea.add("UserLogin",wa);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     }

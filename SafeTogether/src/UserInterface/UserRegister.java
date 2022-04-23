@@ -6,6 +6,7 @@ package UserInterface;
 
 import Business.EcoSystem;
 import Business.userR.User;
+import java.awt.CardLayout;
 import java.util.Properties;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -223,6 +224,11 @@ public  void sendmail()
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
+           UserLogin wa=new UserLogin(workArea,ecosystem);
+        workArea.add("UserLogin",wa);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+        
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
@@ -245,9 +251,9 @@ public  void sendmail()
                 return;
             }
             User customer = new User(firstNameTextField.getText(),lastNameTextField.getText(), emailTextField.getText(),phoneTextField.getText(),userNameTextField.getText(),passwordTextField.getText(), locationTextField.getText());
-            ecosystem.getUserAccountDirectory().addAccount(customer);
+            ecosystem.getUserAccDir().addAccount(customer);
             ecosystem.getUserDir().addUser(customer);
-            sendmail();
+           //sendmail();
             userNameTextField.setText("");
             emailTextField.setText("");
             firstNameTextField.setText("");

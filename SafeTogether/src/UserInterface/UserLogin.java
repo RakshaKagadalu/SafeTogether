@@ -4,10 +4,17 @@
  */
 package UserInterface;
 
+import Business.Doctor.Doctor;
+import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
+import Business.UserAcc.UserAccDir;
+import Business.userR.User;
+import Business.userR.User_Directory;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
+import UserInterface.user.UserAreaJPanel;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -145,18 +152,45 @@ public class UserLogin extends javax.swing.JPanel {
                 showSysAdminWorkAreaJPanel();
                 
             }
-//            else if(userRole.equals("Business.Role.CustomerRole"))
-//            {
-//                CustomerDirectory cd=system.getCustomerDirectory();
-//                ArrayList<Customer> c=cd.getA();
+            else if(userRole.equals("Business.Roles.DoctorRole"))
+            {
+                DoctorDir cd=system.getDoctorDir();
+                ArrayList<Doctor> doc=cd.getDoc();
+                int size=doc.size();
+                //System.out.println(doc.size());
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                Doctor c1=doc.get(i);
+                //System.out.println(userAcc.getUserName());
+                //System.out.println(c1.getUserId());                
+                if(userAcc.getUserName().matches(c1.getUserName()))
+                {
+                    
+                viewDocScreen();
+                count+=1;
+                }       
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
+            }
+             else if(userRole.equals("Business.Roles.UserR"))
+            {
+             displayUserPanel();
+//                User_Directory cd=system.getUserDir();
+//                ArrayList<User> c=cd.getUsers();
 //                int size=c.size();
+//                System.out.println("size:"+c.size());
 //                int count=0;
 //                for(int i=0;i<size;i++)
 //                {
-//                Customer c1=c.get(i);
-//                if(userAcc.getUsername().matches(c1.getUsername()))
+//                User c1=c.get(i);
+//                if(userAcc.getUserName().matches(c1.getUserId()))
 //                {
-//                callCustomerAreaJPanel();
+//                    System.out.print("inside user role method");
+//               displayUserPanel();
 //                count+=1;
 //                }            
 //                }
@@ -164,7 +198,7 @@ public class UserLogin extends javax.swing.JPanel {
 //                {
 //                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
 //                }
-//            }
+            }
 //            else if(userRole.equals("Business.Role.AdminRole"))
 //            {
 //                
@@ -402,6 +436,27 @@ public class UserLogin extends javax.swing.JPanel {
         workArea.add("SysAdminWorkAreaJPanel",sysadmin);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
+    
+    }
+
+    private void viewDocScreen() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    
+//     Doctorframe ur=new Doctorframe(container,system,userAccount);
+//        container.add(ur);
+//        CardLayout layout = (CardLayout) container.getLayout();
+//        layout.next(container); 
+//    
+    
+    }
+
+    private void displayUserPanel() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    UserAreaJPanel ur=new UserAreaJPanel(workArea,userAcc,system);
+        workArea.add(ur);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea); 
+    
     
     }
 }
