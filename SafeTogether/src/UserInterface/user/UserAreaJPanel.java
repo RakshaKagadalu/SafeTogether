@@ -307,10 +307,12 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
     private void bloodDonationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloodDonationMousePressed
         // TODO add your handling code here:
+        BloodDonation();
     }//GEN-LAST:event_bloodDonationMousePressed
 
     private void medicineMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicineMousePressed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_medicineMousePressed
 
     private void emergencyReportMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emergencyReportMousePressed
@@ -363,7 +365,9 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         testing.setBackground(new Color(255,255,255));
     bookAppointment.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
+        BloodDonations pcr=new BloodDonations (system, container);
         DoctorAppointment pcr=new DoctorAppointment (system, container,userAcc);
+
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
@@ -401,5 +405,37 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
+    }
+    
+    private void BloodDonation() {
+        
+        emergencyReport.setBackground(new Color(255,255,255));
+        medicine.setBackground(new Color(255,255,255));
+        bloodDonation.setBackground(new Color(213,230,249));
+        vaccination.setBackground(new Color(255,255,255));
+        testing.setBackground(new Color(255,255,255));
+        bookAppointment.setBackground(new Color(255,255,255));
+      
+        BloodDonations pcr = new BloodDonations(system, container);
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    }
+    
+    private void OrderMedicine() {
+        
+        emergencyReport.setBackground(new Color(255,255,255));
+        medicine.setBackground(new Color(213,230,249));
+        bloodDonation.setBackground(new Color(255,255,255));
+        vaccination.setBackground(new Color(255,255,255));
+        testing.setBackground(new Color(255,255,255));
+        bookAppointment.setBackground(new Color(255,255,255));
+      
+        BloodDonations pcr = new BloodDonations(system, container);
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
     }
 }
