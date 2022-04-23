@@ -118,7 +118,6 @@ public class UserLogin extends javax.swing.JPanel {
         jPanel1.add(signUpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 450, 50));
 
         passwordTextField.setBackground(new java.awt.Color(248, 248, 249));
-        passwordTextField.setText("jPasswordField1");
         passwordTextField.setPreferredSize(new java.awt.Dimension(7, 20));
         jPanel1.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 450, 50));
 

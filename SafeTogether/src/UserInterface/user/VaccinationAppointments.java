@@ -4,6 +4,9 @@
  */
 package UserInterface.user;
 
+import Business.EcoSystem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +16,13 @@ public class VaccinationAppointments extends javax.swing.JPanel {
     /**
      * Creates new form VaccinationAppointments
      */
-    public VaccinationAppointments() {
+     EcoSystem system;
+    JPanel rightSidePanel;
+    public VaccinationAppointments(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
+         this.system = system;
+        this.rightSidePanel = rightSidePanel;
+        this.setSize(1160, 750);
     }
 
     /**
@@ -51,7 +59,7 @@ public class VaccinationAppointments extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1160, 750));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(250, 249, 251));
+        jPanel1.setBackground(new java.awt.Color(240, 240, 241));
         jPanel1.setPreferredSize(new java.awt.Dimension(1160, 750));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

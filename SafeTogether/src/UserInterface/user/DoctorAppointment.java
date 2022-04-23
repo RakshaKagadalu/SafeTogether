@@ -4,6 +4,9 @@
  */
 package UserInterface.user;
 
+import Business.EcoSystem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +16,13 @@ public class DoctorAppointment extends javax.swing.JPanel {
     /**
      * Creates new form DoctorAppointment
      */
-    public DoctorAppointment() {
+      EcoSystem system;
+    JPanel rightSidePanel;
+    public DoctorAppointment(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
+         this.system = system;
+        this.rightSidePanel = rightSidePanel;
+        this.setSize(1160, 750);
     }
 
     /**
@@ -35,16 +43,16 @@ public class DoctorAppointment extends javax.swing.JPanel {
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        bookAppointment = new javax.swing.JButton();
         bookAppointment1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        bookAppointment2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(250, 249, 251));
+        jPanel1.setBackground(new java.awt.Color(240, 240, 241));
         jPanel1.setPreferredSize(new java.awt.Dimension(1160, 750));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -85,7 +93,7 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -108,26 +116,15 @@ public class DoctorAppointment extends javax.swing.JPanel {
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBox2))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 1080, 80));
-
-        bookAppointment.setBackground(new java.awt.Color(64, 200, 224));
-        bookAppointment.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
-        bookAppointment.setForeground(new java.awt.Color(255, 255, 255));
-        bookAppointment.setText("Book Appointment");
-        bookAppointment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookAppointmentActionPerformed(evt);
-            }
-        });
-        jPanel1.add(bookAppointment, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 230, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 1090, 80));
 
         bookAppointment1.setBackground(new java.awt.Color(10, 132, 255));
         bookAppointment1.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
         bookAppointment1.setForeground(new java.awt.Color(255, 255, 255));
-        bookAppointment1.setText("Book Appointment");
+        bookAppointment1.setText("View Appointment Status");
         bookAppointment1.setBorder(null);
         bookAppointment1.setFocusPainted(false);
         bookAppointment1.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +132,7 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 bookAppointment1ActionPerformed(evt);
             }
         });
-        jPanel1.add(bookAppointment1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 190, 230, 50));
+        jPanel1.add(bookAppointment1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, 230, 50));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,7 +147,20 @@ public class DoctorAppointment extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 1080, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 900, 210));
+
+        bookAppointment2.setBackground(new java.awt.Color(10, 132, 255));
+        bookAppointment2.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        bookAppointment2.setForeground(new java.awt.Color(255, 255, 255));
+        bookAppointment2.setText("Book Appointment");
+        bookAppointment2.setBorder(null);
+        bookAppointment2.setFocusPainted(false);
+        bookAppointment2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookAppointment2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bookAppointment2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 560, 230, 50));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1139, 1073));
     }// </editor-fold>//GEN-END:initComponents
@@ -160,18 +170,18 @@ public class DoctorAppointment extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void bookAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointmentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bookAppointmentActionPerformed
-
     private void bookAppointment1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bookAppointment1ActionPerformed
 
+    private void bookAppointment2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookAppointment2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookAppointment;
     private javax.swing.JButton bookAppointment1;
+    private javax.swing.JButton bookAppointment2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;

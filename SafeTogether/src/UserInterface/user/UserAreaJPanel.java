@@ -6,6 +6,11 @@ package UserInterface.user;
 
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
+import UserInterface.SysAdmin.PandemicRegistration;
+import java.awt.CardLayout;
+import java.awt.Color;
+import static java.time.Clock.system;
+import static java.time.InstantSource.system;
 import javax.swing.JPanel;
 
 /**
@@ -18,14 +23,14 @@ public class UserAreaJPanel extends javax.swing.JPanel {
      * Creates new form UserAreaJPanel
      */
     private UserAcc userAcc;
-    private EcoSystem ecosystem;
-     private JPanel userProcessContainer;
+    private EcoSystem system;
+     private JPanel container;
 
     
     public UserAreaJPanel(  JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
         initComponents();
-        this.ecosystem = ecosystem;
-        this.userProcessContainer = userProcessContainer;
+        this.system = ecosystem;
+        this.container = userProcessContainer;
         
         this.userAcc = userAcc;
     }
@@ -262,14 +267,18 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
     private void bookAppointmentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMousePressed
         // TODO add your handling code here:
+        
+        bookAppointment();
     }//GEN-LAST:event_bookAppointmentMousePressed
 
     private void vaccinationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vaccinationMousePressed
         // TODO add your handling code here:
+        vaccinationStatus();
     }//GEN-LAST:event_vaccinationMousePressed
 
     private void testingMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testingMousePressed
         // TODO add your handling code here:
+        PandemicTest();
     }//GEN-LAST:event_testingMousePressed
 
     private void bloodDonationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloodDonationMousePressed
@@ -320,4 +329,53 @@ public class UserAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel testing;
     private javax.swing.JPanel vaccination;
     // End of variables declaration//GEN-END:variables
+
+    private void bookAppointment() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      emergencyReport.setBackground(new Color(255,255,255));
+        medicine.setBackground(new Color(255,255,255));
+         bloodDonation.setBackground(new Color(255,255,255));
+         vaccination.setBackground(new Color(255,255,255));
+        testing.setBackground(new Color(255,255,255));
+    bookAppointment.setBackground(new Color(213,230,249));
+        //255,255,255 PandemicTestCentreJPanel
+        DoctorAppointment pcr=new DoctorAppointment (system, container);
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    
+    }
+
+    private void vaccinationStatus() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    emergencyReport.setBackground(new Color(255,255,255));
+        medicine.setBackground(new Color(255,255,255));
+         bloodDonation.setBackground(new Color(255,255,255));
+         bookAppointment.setBackground(new Color(255,255,255));
+        testing.setBackground(new Color(255,255,255));
+    vaccination.setBackground(new Color(213,230,249));
+        //255,255,255 PandemicTestCentreJPanel
+        VaccinationAppointments pcr=new VaccinationAppointments (system, container);
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    }
+
+    private void PandemicTest() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     emergencyReport.setBackground(new Color(255,255,255));
+        medicine.setBackground(new Color(255,255,255));
+         bloodDonation.setBackground(new Color(255,255,255));
+         vaccination.setBackground(new Color(255,255,255));
+        bookAppointment.setBackground(new Color(255,255,255));
+    testing.setBackground(new Color(213,230,249));
+        //255,255,255 PandemicTestCentreJPanel
+        TestRegistration pcr=new TestRegistration (system, container);
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }
 }
