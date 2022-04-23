@@ -4,6 +4,7 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
 import java.awt.CardLayout;
@@ -301,7 +302,9 @@ public class HospitalEnterprise extends javax.swing.JPanel {
         PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
         container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);     
+        layout.previous(container);   
+         //DB4OUtil.dB4OUtil.storeSystem(system);
+            
      
     }//GEN-LAST:event_returnPanelMousePressed
 

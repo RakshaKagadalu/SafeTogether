@@ -52,42 +52,42 @@ public class MainJFrame extends javax.swing.JFrame {
        
          
          
-         //Creation of test data for adding Doctors to Sys Admin tables
-          Doctor doc = new Doctor("Raksha","Cardio","Boston Public","raksha","pass","1111111111");
-            system.getUserAccDir().addAccount(doc);
-            system.getDoctorDir().addNewDoc(doc);
-            
-              Doctor doc2 = new Doctor("Krishna","Neuro","CityView Hospital","krishna","pass","1911111111");
-            system.getUserAccDir().addAccount(doc2);
-            system.getDoctorDir().addNewDoc(doc2);
-            
-              Doctor doc3 = new Doctor("Arjun","Ortho","Roxbury Hospital","arjun","pass","1011111111");
-            system.getUserAccDir().addAccount(doc3);
-            system.getDoctorDir().addNewDoc(doc3);
-            
-         //Creation of test data for adding Pandemic Ceters to Sys Admin tables   
-          PandemicCenter pCenter = new PandemicCenter("Cabot","Boston","cabot","pass","3333333333");
-              system.getUserAccDir().addAccount(pCenter);
-            system.getPandemicCenterDir().addPandemicCenter(pCenter);
-            
-        //Creation of test data for adding BloodBanks to Sys Admin tables       
-         BloodWork bBank = new BloodWork("Red Cross","Boston","redcross","pass","2222222222");
-              system.getUserAccDir().addAccount(bBank);
-            system.getBloodBankDir().addBloodWork(bBank);
-            
-             //Creation of test data for adding pharmacies to Sys Admin tables       
-         Pharma pharma = new Pharma("CVS","Boston","cvs","pass","2222222222");
-              system.getUserAccDir().addAccount(pharma);
-            system.getPharmaDir().addToPharma(pharma);
-            
-            //creating test data for user
-            User user1 = new User("Rambo", "kr", "abc@gmail.com", "2222222222", "rambo", "rambo", "boston");
-            system.getUserAccDir().addAccount(user1);
-            system.getUserDir().addUser(user1);
-            
-             User user2 = new User("Bo", "kr", "abc@gmail.com", "2222222222", "bo", "bo", "boston");
-            system.getUserAccDir().addAccount(user2);
-            system.getUserDir().addUser(user2);
+//         //Creation of test data for adding Doctors to Sys Admin tables
+//          Doctor doc = new Doctor("Raksha","Cardio","Boston Public","raksha","pass","1111111111");
+//            system.getUserAccDir().addAccount(doc);
+//            system.getDoctorDir().addNewDoc(doc);
+//            
+//              Doctor doc2 = new Doctor("Krishna","Neuro","CityView Hospital","krishna","pass","1911111111");
+//            system.getUserAccDir().addAccount(doc2);
+//            system.getDoctorDir().addNewDoc(doc2);
+//            
+//              Doctor doc3 = new Doctor("Arjun","Ortho","Roxbury Hospital","arjun","pass","1011111111");
+//            system.getUserAccDir().addAccount(doc3);
+//            system.getDoctorDir().addNewDoc(doc3);
+//            
+//         //Creation of test data for adding Pandemic Ceters to Sys Admin tables   
+//          PandemicCenter pCenter = new PandemicCenter("Cabot","Boston","cabot","pass","3333333333");
+//              system.getUserAccDir().addAccount(pCenter);
+//            system.getPandemicCenterDir().addPandemicCenter(pCenter);
+//            
+//        //Creation of test data for adding BloodBanks to Sys Admin tables       
+//         BloodWork bBank = new BloodWork("Red Cross","Boston","redcross","pass","2222222222");
+//              system.getUserAccDir().addAccount(bBank);
+//            system.getBloodBankDir().addBloodWork(bBank);
+//            
+//             //Creation of test data for adding pharmacies to Sys Admin tables       
+//         Pharma pharma = new Pharma("CVS","Boston","cvs","pass","2222222222");
+//              system.getUserAccDir().addAccount(pharma);
+//            system.getPharmaDir().addToPharma(pharma);
+//            
+//            //creating test data for user
+//            User user1 = new User("Rambo", "kr", "abc@gmail.com", "2222222222", "rambo", "rambo", "boston");
+//            system.getUserAccDir().addAccount(user1);
+//            system.getUserDir().addUser(user1);
+//            
+//             User user2 = new User("Bo", "kr", "abc@gmail.com", "2222222222", "bo", "bo", "boston");
+//            system.getUserAccDir().addAccount(user2);
+//            system.getUserDir().addUser(user2);
             //System.out.println(system.getUserAccDir().getUserAccList());
     }
     
