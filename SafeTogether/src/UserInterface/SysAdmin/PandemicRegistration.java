@@ -23,11 +23,11 @@ public class PandemicRegistration extends javax.swing.JPanel {
     /**
      * Creates new form PandemicRegistration
      */
-     EcoSystem system;
+    EcoSystem system;
     JPanel rightSidePanel;
     public PandemicRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
-         this.system = system;
+        this.system = system;
         this.rightSidePanel = rightSidePanel;
         this.setSize(1160, 750);
             displayTable();
@@ -212,8 +212,8 @@ public class PandemicRegistration extends javax.swing.JPanel {
             userNameTextField6.setText("");
             userNameTextField7.setText("");
            
-        
-        
+       
+   
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -269,15 +269,14 @@ public class PandemicRegistration extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else{
+     
+        
         userNameTextField4.setText(table.getValueAt(selectedRow,0).toString());
         userNameTextField3.setText(table.getValueAt(selectedRow,1).toString());
         userNameTextField5.setText(table.getValueAt(selectedRow,2).toString());
         userNameTextField6.setText(table.getValueAt(selectedRow,3).toString());
         userNameTextField7.setText(table.getValueAt(selectedRow,4).toString());
-       
-        
-          }
-        
+        }
         
     }//GEN-LAST:event_jTable1MouseClicked
 
