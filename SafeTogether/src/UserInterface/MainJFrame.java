@@ -40,8 +40,8 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setSize(1920, 1080);
         this.setResizable(false);
          system = dB4OUtil.retrieveSystem();
-         setSystemAdmin();
-         //setAdminPage();
+//         setSystemAdmin();
+         setAdminPage();
          
          
         
