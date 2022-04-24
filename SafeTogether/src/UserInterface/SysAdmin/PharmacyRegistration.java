@@ -117,7 +117,7 @@ public class PharmacyRegistration extends javax.swing.JPanel {
 
         locationLabel.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
         locationLabel.setText("75");
-        jPanel2.add(locationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 80, 90));
+        jPanel2.add(locationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 90));
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 30)); // NOI18N
         jLabel6.setText("Locations");
@@ -258,8 +258,8 @@ public class PharmacyRegistration extends javax.swing.JPanel {
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
-        jLabel3.setText("108");
-        jPanel8.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 120, 90));
+        jLabel3.setText("11");
+        jPanel8.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 70, 90));
 
         pharmaLabel.setFont(new java.awt.Font("Lucida Grande", 1, 30)); // NOI18N
         pharmaLabel.setText("Pharmacies");
@@ -350,6 +350,7 @@ public class PharmacyRegistration extends javax.swing.JPanel {
             }
         }
         displayTable();
+        populateDashBoard();
             }}else
         {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");

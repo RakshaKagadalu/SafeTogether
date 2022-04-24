@@ -80,7 +80,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="90" y="10" width="80" height="90"/>
+                  <AbsoluteConstraints x="100" y="10" width="80" height="90"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -493,11 +493,11 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="SF Pro Display" size="64" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="108"/>
+                <Property name="text" type="java.lang.String" value="11"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="80" y="10" width="120" height="90"/>
+                  <AbsoluteConstraints x="110" y="10" width="70" height="90"/>
                 </Constraint>
               </Constraints>
             </Component>
