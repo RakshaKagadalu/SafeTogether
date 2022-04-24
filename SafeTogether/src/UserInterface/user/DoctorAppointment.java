@@ -310,7 +310,7 @@ DoctorDisplay();
                     list.add(appDate);
                     list.add(timeCombo.getSelectedItem().toString());                    
                     a.put(name, list);
-                    //DB4OUtil.dB4OUtil.storeSystem(system);
+                    DB4OUtil.dB4OUtil.storeSystem(system);
                      
                     //code to send email
                     {

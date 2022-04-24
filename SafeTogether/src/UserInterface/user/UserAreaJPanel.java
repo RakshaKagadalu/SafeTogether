@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import static java.time.Clock.system;
-import static java.time.InstantSource.system;
+//import static java.time.InstantSource.system;
 import java.util.Date;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -365,10 +365,10 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         testing.setBackground(new Color(255,255,255));
     bookAppointment.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
-        BloodDonations pcr=new BloodDonations (system, container);
-        DoctorAppointment pcr=new DoctorAppointment (system, container,userAcc);
+        //BloodDonations pcr=new BloodDonations (system, container);
+        DoctorAppointment pr=new DoctorAppointment (system, container,userAcc);
 
-        rightSidePanel.add(pcr);
+        rightSidePanel.add(pr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
     

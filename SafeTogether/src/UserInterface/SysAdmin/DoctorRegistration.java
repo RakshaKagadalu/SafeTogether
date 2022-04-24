@@ -4,10 +4,12 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.DatabaseUtil.DB4OUtil;
 import Business.Doctor.Doctor;
 import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -21,13 +23,18 @@ public class DoctorRegistration extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel rightSidePanel;
-     //Doctor per;
+       ArrayList<String> hospitals = new ArrayList<String>();
+    ArrayList<String> specializations = new ArrayList<String>();
+    int hospitalCount = 0;
+    int specializationCount = 0;
+    
     public DoctorRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
         this.system = system;
         this.rightSidePanel = rightSidePanel;
         this.setSize(1160, 750);
         displayTable();
+         populateDashBoard();
     }
 
     /**
@@ -42,7 +49,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        hosCount = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -69,7 +76,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         userNameTextField8 = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        splCount = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -89,9 +96,9 @@ public class DoctorRegistration extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
-        jLabel5.setText("75");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 80, 90));
+        hosCount.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
+        hosCount.setText("75");
+        jPanel2.add(hosCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 80, 90));
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 30)); // NOI18N
         jLabel6.setText("Hospitals");
@@ -249,9 +256,9 @@ public class DoctorRegistration extends javax.swing.JPanel {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
-        jLabel3.setText("108");
-        jPanel8.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 120, 90));
+        splCount.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
+        splCount.setText("108");
+        jPanel8.add(splCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 120, 90));
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 30)); // NOI18N
         jLabel4.setText("Specializations");
@@ -297,6 +304,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
             userNameTextField6.setText("");
             userNameTextField7.setText("");
             userNameTextField8.setText("");
+            // DB4OUtil.dB4OUtil.storeSystem(system);
             
 //            Person per = personDir.addPerson();
 //            per.setName(name);
@@ -506,6 +514,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel hosCount;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -521,9 +530,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -535,6 +542,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel splCount;
     private javax.swing.JTextField userNameTextField3;
     private javax.swing.JTextField userNameTextField4;
     private javax.swing.JTextField userNameTextField5;
@@ -557,10 +565,27 @@ public class DoctorRegistration extends javax.swing.JPanel {
                     row[3] = doc.getUserId();
                     row[4] = doc.getAccPassword();
                     row[5] = doc.getPhoneNum();
+                    hospitals.add(doc.getHospital());
+                    specializations.add(doc.getSpecialization());
 
                     model.addRow(row);
                 
             }
+        
+    }
+    
+     private void populateDashBoard() {
+        // Print the count of the location
+        // Converting it to hash set
+        HashSet<String> uniqueHospital = new HashSet<String>(hospitals);
+        HashSet<String> uniqueSpecialization = new HashSet<String>(specializations);
+        
+        // get the count of hash sets
+        hospitalCount = uniqueHospital.size();
+        specializationCount = uniqueSpecialization.size();
+        
+        hosCount.setText(Integer.toString(hospitalCount));
+        splCount.setText(Integer.toString(specializationCount));
         
     }
     }
