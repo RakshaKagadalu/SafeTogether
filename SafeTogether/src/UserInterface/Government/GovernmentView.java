@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.Pharmacy;
+package UserInterface.Government;
 
 /**
  *
  * @author shrikrishnajoisa
  */
-public class PharmacyMainFrame extends javax.swing.JPanel {
+public class GovernmentView extends javax.swing.JPanel {
 
     /**
-     * Creates new form PharmacyMainFrame
+     * Creates new form GovernmentView
      */
-    public PharmacyMainFrame() {
+    public GovernmentView() {
         initComponents();
     }
 
@@ -27,26 +27,26 @@ public class PharmacyMainFrame extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        goBack = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        goBack2 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         medicinePortal = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         orderPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         vacPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
         timeLabel = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         rightSidePanel = new javax.swing.JPanel();
 
@@ -57,32 +57,32 @@ public class PharmacyMainFrame extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1040, 190, 30));
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1040, 190, 30));
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
-        goBack.setBackground(new java.awt.Color(255, 255, 255));
-        goBack.setPreferredSize(new java.awt.Dimension(100, 48));
-        goBack.addMouseListener(new java.awt.event.MouseAdapter() {
+        goBack2.setBackground(new java.awt.Color(255, 255, 255));
+        goBack2.setPreferredSize(new java.awt.Dimension(100, 48));
+        goBack2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                goBackMousePressed(evt);
+                goBack2MousePressed(evt);
             }
         });
-        goBack.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        goBack2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-logout-24.png"))); // NOI18N
-        goBack.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-logout-24.png"))); // NOI18N
+        goBack2.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
-        jLabel22.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel22.setText("Return");
-        goBack.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        jLabel26.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(115, 120, 128));
+        jLabel26.setText("Return");
+        goBack2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
+        jPanel6.add(goBack2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
         medicinePortal.setBackground(new java.awt.Color(255, 255, 255));
         medicinePortal.setPreferredSize(new java.awt.Dimension(100, 48));
@@ -98,10 +98,10 @@ public class PharmacyMainFrame extends javax.swing.JPanel {
 
         jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel9.setText("Vaccination Trends");
+        jLabel9.setText("Medicine Portal");
         medicinePortal.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(medicinePortal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 290, 60));
+        jPanel6.add(medicinePortal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 290, 60));
 
         orderPanel.setBackground(new java.awt.Color(255, 255, 255));
         orderPanel.setPreferredSize(new java.awt.Dimension(100, 48));
@@ -112,15 +112,15 @@ public class PharmacyMainFrame extends javax.swing.JPanel {
         });
         orderPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-coronavirus-24.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-delivery-24.png"))); // NOI18N
         orderPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
-        jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel7.setText("Covid 19 Trends");
-        orderPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(115, 120, 128));
+        jLabel10.setText("Order Portal");
+        orderPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 60));
+        jPanel6.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 60));
 
         vacPanel.setBackground(new java.awt.Color(255, 255, 255));
         vacPanel.setPreferredSize(new java.awt.Dimension(100, 48));
@@ -134,35 +134,35 @@ public class PharmacyMainFrame extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-vaccination-24.png"))); // NOI18N
         vacPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
-        jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel6.setText("Vaccination Request");
-        vacPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        jLabel11.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(115, 120, 128));
+        jLabel11.setText("Vaccination Portal");
+        vacPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(vacPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
+        jPanel6.add(vacPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
+        jPanel6.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 90));
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 90));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 288, 1080));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 288, 1080));
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         timeLabel.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         timeLabel.setText("3:45 PM");
-        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
+        jPanel8.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
-        jLabel10.setText("Pharmaceuticals");
-        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        jLabel12.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
+        jLabel12.setText("Trends");
+        jPanel8.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         jLabel1.setForeground(new java.awt.Color(152, 151, 151));
-        jLabel1.setText("Manage everything related to Pharmaceutical Enterprises");
-        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        jLabel1.setText("View all the trends related to the pandemic");
+        jPanel8.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1630, 90));
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1630, 90));
 
         rightSidePanel.setBackground(new java.awt.Color(250, 249, 251));
         rightSidePanel.setLayout(new java.awt.CardLayout());
@@ -172,43 +172,46 @@ public class PharmacyMainFrame extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
+    private void goBack2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBack2MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_goBackMousePressed
-
-    private void vacPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vacPanelMousePressed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_vacPanelMousePressed
-
-    private void orderPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPanelMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_orderPanelMousePressed
+    }//GEN-LAST:event_goBack2MousePressed
 
     private void medicinePortalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicinePortalMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_medicinePortalMousePressed
 
+    private void orderPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPanelMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_orderPanelMousePressed
+
+    private void vacPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vacPanelMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vacPanelMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel goBack;
+    private javax.swing.JPanel goBack1;
+    private javax.swing.JPanel goBack2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -219,7 +222,11 @@ public class PharmacyMainFrame extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel medicinePortal;
     private javax.swing.JPanel orderPanel;

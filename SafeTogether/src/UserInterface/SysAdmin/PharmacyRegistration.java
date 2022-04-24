@@ -97,7 +97,6 @@ public class PharmacyRegistration extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         pharmaLabel = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
@@ -117,7 +116,7 @@ public class PharmacyRegistration extends javax.swing.JPanel {
 
         locationLabel.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
         locationLabel.setText("75");
-        jPanel2.add(locationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 80, 90));
+        jPanel2.add(locationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 90));
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 30)); // NOI18N
         jLabel6.setText("Locations");
@@ -258,16 +257,12 @@ public class PharmacyRegistration extends javax.swing.JPanel {
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
-        jLabel3.setText("108");
-        jPanel8.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 120, 90));
+        jLabel3.setText("11");
+        jPanel8.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 70, 90));
 
         pharmaLabel.setFont(new java.awt.Font("Lucida Grande", 1, 30)); // NOI18N
         pharmaLabel.setText("Pharmacies");
         jPanel8.add(pharmaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
-
-        jLabel18.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(152, 151, 151));
-        jPanel8.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(152, 151, 151));
@@ -350,6 +345,7 @@ public class PharmacyRegistration extends javax.swing.JPanel {
             }
         }
         displayTable();
+        populateDashBoard();
             }}else
         {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
@@ -429,7 +425,6 @@ public class PharmacyRegistration extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
