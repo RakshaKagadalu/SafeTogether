@@ -9,6 +9,7 @@ import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
 import Business.PandemicCenter.PandemicCenter;
 import Business.PandemicCenter.PandemicCenter_Dir;
+import Utility.MapCoordinates;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel rightSidePanel;
+    private MapCoordinates locationCoordinates;
     public PandemicRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
         this.system = system;
@@ -230,6 +232,11 @@ public class PandemicRegistration extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void populateLongituteLatitude(MapCoordinates locationCoordinates) {
+        this.locationCoordinates = locationCoordinates;
+        userNameTextField3.setText(locationCoordinates.getLatitudeCoordinate() + ", " + locationCoordinates.getLongitudeCoordinate());
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         

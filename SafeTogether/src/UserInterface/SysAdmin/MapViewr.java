@@ -12,6 +12,7 @@ import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
 import com.teamdev.jxbrowser.view.swing.BrowserView;
 import java.awt.Component;
 import java.awt.CardLayout;
+import java.util.Arrays;
 //import java.awt.event.WindowAdapter;
 //import java.awt.event.WindowEvent;
 //import javax.swing.JFrame;
@@ -36,9 +37,9 @@ public class MapViewr extends javax.swing.JPanel {
     Browser browser;
     public MapViewr(JPanel userProcessContainer) {
         initComponents();
-        this.setSize(1920, 1080);
-  //locationPoint = new LocationPoint();
-        
+        this.setSize(1080, 756);
+        locationPoint = new MapCoordinates();
+        this.userProcessContainer = userProcessContainer;
         EngineOptions options =
                 EngineOptions.newBuilder(HARDWARE_ACCELERATED).licenseKey("1BNDHFSC1G2HE4F9XRJJFQ2YTJU7NQLOVUMD0I8ERIS91V4X8YW7HI9ILGATUEM2BAB27E").build();
         Engine engine = Engine.newInstance(options);
@@ -117,11 +118,18 @@ public class MapViewr extends javax.swing.JPanel {
             if (browser.url()!= null) {
 
                 System.out.println(browser.url());
-                String[] a = browser.url().split("!3d", 0);
-                String[] b = a[1].split("!4d");
-                System.out.println("Lat" + b[0] + "  " + "Lon" + b[1]);
-                double lat = Double.parseDouble(b[0]);
-                double lon = Double.parseDouble(b[1]);
+                String browserUrl = browser.url();
+                String[] tesArr1 = browserUrl.split("/@", 0);
+                String splitString = tesArr1[1];
+                String[] testArr2 = splitString.split(",", 0);
+                String a = testArr2[0];
+                String b = testArr2[1];
+                
+                System.out.println(Arrays.toString(testArr2));
+                double lat = Double.parseDouble(a);
+                double lon = Double.parseDouble(b);
+                System.out.println(lat);
+                System.out.println(lon);
                 locationPoint.setLatitudeCoordinate(lat);
                 locationPoint.setLongitudeCoordinate(lon);
             }
@@ -129,10 +137,12 @@ public class MapViewr extends javax.swing.JPanel {
 //
             userProcessContainer.remove(this);
             Component[] componentArray = userProcessContainer.getComponents();
-//            if (userProcessContainer.getComponent(componentArray.length - 1) instanceof EmergencyManageOrganizationJPanel) {
-//                EmergencyManageOrganizationJPanel orgManagement = (EmergencyManageOrganizationJPanel) userProcessContainer.getComponent(componentArray.length - 1);
-//                orgManagement.populateLongituteLatitude(locationPoint);
-//            }else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof IncidentManagerManageOrganizationJPanel) {
+            System.out.println("userProcessContainer.getComponent(componentArray.length - 1) = " + userProcessContainer.getComponent(componentArray.length - 1));
+            if (userProcessContainer.getComponent(componentArray.length - 1) instanceof HospitalEnterprise) {
+                PandemicRegistration orgManagement = (PandemicRegistration) userProcessContainer.getComponent(componentArray.length - 1);
+                orgManagement.populateLongituteLatitude(locationPoint);
+            }
+//            else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof IncidentManagerManageOrganizationJPanel) {
 //                IncidentManagerManageOrganizationJPanel orgManagement = (IncidentManagerManageOrganizationJPanel) userProcessContainer.getComponent(componentArray.length - 1);
 //                orgManagement.populateLongituteLatitude(locationPoint);
 //            }else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof VoluntaryOperatingUnitManageOrganizationsJPanel) {
@@ -156,14 +166,16 @@ public class MapViewr extends javax.swing.JPanel {
 //            }else if(userProcessContainer.getComponent(componentArray.length - 1) instanceof CompanyAdminManageSceneJPanel){
 //                CompanyAdminManageSceneJPanel reportingComponent = (CompanyAdminManageSceneJPanel) userProcessContainer.getComponent(componentArray.length - 1);
 //                reportingComponent.populateLongituteLatitude(locationPoint);
-//            }else{
+//            }
+            else{
                 System.out.println("ELSE LOCATION " + componentArray.length);
                 System.out.println("ELSE CONTAINER " + userProcessContainer.toString());
-//            }
+            }
 
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.previous(userProcessContainer);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Set Position first");
         }
     }//GEN-LAST:event_setLocationBtnActionPerformed
