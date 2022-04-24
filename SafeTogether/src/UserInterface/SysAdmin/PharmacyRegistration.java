@@ -97,7 +97,6 @@ public class PharmacyRegistration extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         pharmaLabel = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
@@ -265,10 +264,6 @@ public class PharmacyRegistration extends javax.swing.JPanel {
         pharmaLabel.setText("Pharmacies");
         jPanel8.add(pharmaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
-        jLabel18.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(152, 151, 151));
-        jPanel8.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
-
         jLabel17.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(152, 151, 151));
         jLabel17.setText("Total number of pharmacies that");
@@ -430,7 +425,6 @@ public class PharmacyRegistration extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
