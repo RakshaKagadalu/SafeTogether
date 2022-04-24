@@ -375,7 +375,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-         MapViewr oLJP = new MapViewr(rightSidePanel);
+        MapViewr oLJP = new MapViewr(rightSidePanel);
         rightSidePanel.add("MapViewr", oLJP);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);

@@ -4,16 +4,20 @@
  */
 package UserInterface.SysAdmin;
 
+import Utility.MapCoordinates;
 import com.teamdev.jxbrowser.browser.Browser;
 import com.teamdev.jxbrowser.engine.Engine;
 import com.teamdev.jxbrowser.engine.EngineOptions;
 import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
 import com.teamdev.jxbrowser.view.swing.BrowserView;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
+import java.awt.Component;
+import java.awt.CardLayout;
+//import java.awt.event.WindowAdapter;
+//import java.awt.event.WindowEvent;
+//import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+//import javax.swing.SwingUtilities;
 
 
 
@@ -28,11 +32,11 @@ public class MapViewr extends javax.swing.JPanel {
      */   //Browser browser;
      
       JPanel userProcessContainer;
-      //LocationPoint locationPoint;
+      MapCoordinates locationPoint;
     Browser browser;
     public MapViewr(JPanel userProcessContainer) {
         initComponents();
-        this.setSize(1060, 750);
+        this.setSize(1920, 1080);
   //locationPoint = new LocationPoint();
         
         EngineOptions options =
@@ -53,48 +57,123 @@ public class MapViewr extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Mappanel = new javax.swing.JPanel();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
+        setLocationBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         mapCanvas = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jPanel1.setBackground(new java.awt.Color(244, 242, 227));
+        jPanel1.setForeground(new java.awt.Color(25, 56, 82));
+
+        setLocationBtn.setBackground(new java.awt.Color(255, 255, 255));
+        setLocationBtn.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        setLocationBtn.setForeground(new java.awt.Color(25, 56, 82));
+        setLocationBtn.setText("Set Location");
+        setLocationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setLocationBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(404, 404, 404)
+                .addComponent(setLocationBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(setLocationBtn))
+                .addGap(14, 14, 14))
+        );
+
+        jSplitPane1.setTopComponent(jPanel1);
+
+        mapCanvas.setBackground(new java.awt.Color(255, 255, 255));
         mapCanvas.setLayout(new java.awt.CardLayout());
+        jSplitPane1.setRightComponent(mapCanvas);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 68, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout MappanelLayout = new javax.swing.GroupLayout(Mappanel);
-        Mappanel.setLayout(MappanelLayout);
-        MappanelLayout.setHorizontalGroup(
-            MappanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mapCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        MappanelLayout.setVerticalGroup(
-            MappanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MappanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mapCanvas, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        add(Mappanel, java.awt.BorderLayout.CENTER);
+        add(jSplitPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void setLocationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setLocationBtnActionPerformed
+//        // TODO add your handling code here:
+        try {
+//
+            if (browser.url()!= null) {
+
+                System.out.println(browser.url());
+                String[] a = browser.url().split("!3d", 0);
+                String[] b = a[1].split("!4d");
+                System.out.println("Lat" + b[0] + "  " + "Lon" + b[1]);
+                double lat = Double.parseDouble(b[0]);
+                double lon = Double.parseDouble(b[1]);
+                locationPoint.setLatitudeCoordinate(lat);
+                locationPoint.setLongitudeCoordinate(lon);
+            }
+            System.out.println("Lat" + locationPoint.getLatitudeCoordinate() + locationPoint.getLongitudeCoordinate());
+//
+            userProcessContainer.remove(this);
+            Component[] componentArray = userProcessContainer.getComponents();
+//            if (userProcessContainer.getComponent(componentArray.length - 1) instanceof EmergencyManageOrganizationJPanel) {
+//                EmergencyManageOrganizationJPanel orgManagement = (EmergencyManageOrganizationJPanel) userProcessContainer.getComponent(componentArray.length - 1);
+//                orgManagement.populateLongituteLatitude(locationPoint);
+//            }else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof IncidentManagerManageOrganizationJPanel) {
+//                IncidentManagerManageOrganizationJPanel orgManagement = (IncidentManagerManageOrganizationJPanel) userProcessContainer.getComponent(componentArray.length - 1);
+//                orgManagement.populateLongituteLatitude(locationPoint);
+//            }else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof VoluntaryOperatingUnitManageOrganizationsJPanel) {
+//                VoluntaryOperatingUnitManageOrganizationsJPanel orgManagement = (VoluntaryOperatingUnitManageOrganizationsJPanel) userProcessContainer.getComponent(componentArray.length - 1);
+//                orgManagement.populateLongituteLatitude(locationPoint);
+//            }else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof UserRegistrationJPanel) {
+//                UserRegistrationJPanel orgManagement = (UserRegistrationJPanel) userProcessContainer.getComponent(componentArray.length - 1);
+//                orgManagement.populateLongituteLatitude(locationPoint);
+//            }else if(userProcessContainer.getComponent(componentArray.length - 1) instanceof ReportingAdminManageSceneJPanel){
+//                ReportingAdminManageSceneJPanel reportingComponent = (ReportingAdminManageSceneJPanel) userProcessContainer.getComponent(componentArray.length - 1);
+//                reportingComponent.populateLongituteLatitude(locationPoint);
+//            }else if(userProcessContainer.getComponent(componentArray.length - 1) instanceof IndividualAdminManageSceneJPanel){
+//                IndividualAdminManageSceneJPanel reportingComponent = (IndividualAdminManageSceneJPanel) userProcessContainer.getComponent(componentArray.length - 1);
+//                reportingComponent.populateLongituteLatitude(locationPoint);
+//            }else if(userProcessContainer.getComponent(componentArray.length - 1) instanceof HospitalAdminManageSceneJPanel){
+//                HospitalAdminManageSceneJPanel reportingComponent = (HospitalAdminManageSceneJPanel) userProcessContainer.getComponent(componentArray.length - 1);
+//                reportingComponent.populateLongituteLatitude(locationPoint);
+//            }else if(userProcessContainer.getComponent(componentArray.length - 1) instanceof NGOAdminManageSceneJPanel){
+//                NGOAdminManageSceneJPanel reportingComponent = (NGOAdminManageSceneJPanel) userProcessContainer.getComponent(componentArray.length - 1);
+//                reportingComponent.populateLongituteLatitude(locationPoint);
+//            }else if(userProcessContainer.getComponent(componentArray.length - 1) instanceof CompanyAdminManageSceneJPanel){
+//                CompanyAdminManageSceneJPanel reportingComponent = (CompanyAdminManageSceneJPanel) userProcessContainer.getComponent(componentArray.length - 1);
+//                reportingComponent.populateLongituteLatitude(locationPoint);
+//            }else{
+                System.out.println("ELSE LOCATION " + componentArray.length);
+                System.out.println("ELSE CONTAINER " + userProcessContainer.toString());
+//            }
+
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.previous(userProcessContainer);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Set Position first");
+        }
+    }//GEN-LAST:event_setLocationBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Mappanel;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel mapCanvas;
+    private javax.swing.JButton setLocationBtn;
     // End of variables declaration//GEN-END:variables
 }
