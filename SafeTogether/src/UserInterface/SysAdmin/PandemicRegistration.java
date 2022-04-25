@@ -9,6 +9,7 @@ import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
 import Business.PandemicCenter.PandemicCenter;
 import Business.PandemicCenter.PandemicCenter_Dir;
+import Utility.MapCoordinates;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -26,12 +27,16 @@ public class PandemicRegistration extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel rightSidePanel;
+    MapCoordinates locationPoint;
+    
+    JPanel testPanel = new JPanel();
+ 
     public PandemicRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
         this.system = system;
         this.rightSidePanel = rightSidePanel;
         this.setSize(1160, 750);
-            displayTable();
+        displayTable();
     }
 
     /**
@@ -54,7 +59,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        userNameTextField3 = new javax.swing.JTextField();
+        locationInputField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         userNameTextField4 = new javax.swing.JTextField();
         userNameTextField5 = new javax.swing.JTextField();
@@ -67,7 +72,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(250, 249, 251));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -153,8 +158,8 @@ public class PandemicRegistration extends javax.swing.JPanel {
         jLabel7.setText("Name");
         jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 220, -1));
 
-        userNameTextField3.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(userNameTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, 40));
+        locationInputField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(locationInputField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, 40));
 
         jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(73, 84, 90));
@@ -198,17 +203,17 @@ public class PandemicRegistration extends javax.swing.JPanel {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 140, 39));
+        jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 150, 39));
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 740));
+        add(jPanel1, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          String name = (userNameTextField4.getText());
-            String location = (userNameTextField3.getText());
+            String location = (locationInputField.getText());
             String phoneNum = (userNameTextField7.getText());
             String userId = (userNameTextField5.getText());
             String pwd = (userNameTextField6.getText());
@@ -219,7 +224,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
          //  System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
             displayTable();
             
-            userNameTextField3.setText("");
+            locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
@@ -258,7 +263,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
             }
 
                 c.setName(userNameTextField4.getText());
-                c.setLocation(userNameTextField3.getText());
+                c.setLocation(locationInputField.getText());
                 c.setUserId(userNameTextField5.getText());
                 c.setPassword(userNameTextField6.getText());
                 c.setPhoneNumber(userNameTextField7.getText());
@@ -285,7 +290,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
      
         
         userNameTextField4.setText(table.getValueAt(selectedRow,0).toString());
-        userNameTextField3.setText(table.getValueAt(selectedRow,1).toString());
+        locationInputField.setText(table.getValueAt(selectedRow,1).toString());
         userNameTextField5.setText(table.getValueAt(selectedRow,2).toString());
         userNameTextField6.setText(table.getValueAt(selectedRow,3).toString());
         userNameTextField7.setText(table.getValueAt(selectedRow,4).toString());
@@ -319,7 +324,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
             }
         }
         displayTable();
-        userNameTextField3.setText("");
+        locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
@@ -374,11 +379,10 @@ public class PandemicRegistration extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        
-        MapViewr oLJP = new MapViewr(rightSidePanel);
-        rightSidePanel.add("MapViewr", oLJP);
-        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
-        layout.next(rightSidePanel);
+        MapViewr oLJP = new MapViewr(testPanel);
+        testPanel.add("MapViewr", oLJP);
+        CardLayout layout = (CardLayout) testPanel.getLayout();
+        layout.next(testPanel);
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
@@ -399,13 +403,19 @@ public class PandemicRegistration extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField userNameTextField3;
+    private javax.swing.JTextField locationInputField;
     private javax.swing.JTextField userNameTextField4;
     private javax.swing.JTextField userNameTextField5;
     private javax.swing.JTextField userNameTextField6;
     private javax.swing.JTextField userNameTextField7;
     // End of variables declaration//GEN-END:variables
-  private void displayTable() {
+  
+    public void populateLongituteLatitude(MapCoordinates locationPoint) {
+        this.locationPoint = locationPoint;
+        locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());
+    }
+    
+    private void displayTable() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         PandemicCenter_Dir docDir = system.getPandemicCenterDir();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
