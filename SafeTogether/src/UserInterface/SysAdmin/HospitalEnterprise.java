@@ -7,6 +7,7 @@ package UserInterface.SysAdmin;
 import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
+import Utility.MapCoordinates;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class HospitalEnterprise extends javax.swing.JPanel {
     EcoSystem system;
     JPanel container;
     Timer timer;
+    MapCoordinates locationPoint;
     
     private void Time() {
                 ActionListener actionListener = new ActionListener() {
@@ -364,13 +366,17 @@ public class HospitalEnterprise extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
     }
+    
+    public void populateLongituteLatitude(MapCoordinates locationPoint) {
+        this.locationPoint = locationPoint;
+    }
 
     private void managePandemicCenter() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     doctorAssociationPanel.setBackground(new Color(255,255,255));
     PandemicTestCentreJPanel.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
-        PandemicRegistration pcr=new PandemicRegistration (system, container);
+        PandemicRegistration pcr=new PandemicRegistration (system, rightSidePanel, locationPoint);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
