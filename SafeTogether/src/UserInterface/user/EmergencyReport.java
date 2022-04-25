@@ -4,17 +4,27 @@
  */
 package UserInterface.user;
 
+import Business.EcoSystem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class EmergencyReport extends javax.swing.JPanel {
 
+    EcoSystem system;
+    JPanel rightSidePanel;
     /**
-     * Creates new form EmergencyReport
+     * Creates new form BloodDonations
+     * @param system
+     * @param rightSidePanel
      */
-    public EmergencyReport() {
+    public EmergencyReport(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
+        this.system = system;
+        this.rightSidePanel = rightSidePanel;
+        this.setSize(1160, 750);
     }
 
     /**
