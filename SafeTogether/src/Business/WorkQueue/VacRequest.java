@@ -10,7 +10,7 @@ package Business.WorkQueue;
  */
 public class VacRequest {
     
-//    int id;
+    int vacId;
     String userId;
     String disease;
     String first_name;
@@ -109,6 +109,14 @@ public class VacRequest {
 
     public void setPharmacy(String Pharmacy) {
         this.Pharmacy = Pharmacy;
+    }
+
+    public int getVacId() {
+        return vacId;
+    }
+
+    public void setVacId(int vacId) {
+        this.vacId = vacId;
     }
     
 }

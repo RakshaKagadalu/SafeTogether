@@ -4,6 +4,7 @@
  */
 package UserInterface;
 
+import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.userR.User;
 import Utility.Notification;
@@ -21,7 +22,7 @@ public class UserRegister extends javax.swing.JPanel {
      */
          EcoSystem ecosystem;
     JPanel workArea;
-    
+     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
 
     public UserRegister(JPanel workArea,EcoSystem system) {
         initComponents();
@@ -198,6 +199,7 @@ public class UserRegister extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
+        
            UserLogin wa=new UserLogin(workArea,ecosystem);
         workArea.add("UserLogin",wa);
         CardLayout layout = (CardLayout) workArea.getLayout();
@@ -228,7 +230,7 @@ public class UserRegister extends javax.swing.JPanel {
             ecosystem.getUserAccDir().addAccount(customer);
             ecosystem.getUserDir().addUser(customer);
             sendmail();
-            sendSMS(); // costly keep it commented 
+            //sendSMS(); // costly keep it commented 
             userNameTextField.setText("");
             emailTextField.setText("");
             firstNameTextField.setText("");
@@ -236,7 +238,7 @@ public class UserRegister extends javax.swing.JPanel {
             lastNameTextField.setText("");
             passwordTextField.setText("");
             locationTextField.setText("");
-            
+              dB4OUtil.storeSystem(ecosystem);
             JOptionPane.showMessageDialog(null, "User Account Created!!");
             
             

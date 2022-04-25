@@ -5,7 +5,15 @@
 package UserInterface.user;
 
 import Business.EcoSystem;
+
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.Req_Emergency;
+import Business.WorkQueue.Req_EmergencyDir;
+import Business.userR.User;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,11 +28,20 @@ public class EmergencyReport extends javax.swing.JPanel {
      * @param system
      * @param rightSidePanel
      */
-    public EmergencyReport(EcoSystem system, JPanel rightSidePanel) {
+
+    JPanel container;
+    EcoSystem system;
+   UserAcc userAcc;
+    public EmergencyReport(JPanel container,EcoSystem system,UserAcc userAcc) {
         initComponents();
-        this.system = system;
-        this.rightSidePanel = rightSidePanel;
-        this.setSize(1160, 750);
+         this.container=container;
+        this.system=system;
+        this.userAcc=userAcc;
+        User a=(User)userAcc;
+        firstNameField.setText(a.getFirstName());
+        lastNameField.setText(a.getLastName());
+        displayTable();
+
     }
 
     /**
@@ -39,7 +56,7 @@ public class EmergencyReport extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEmergency = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         bookButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -56,7 +73,7 @@ public class EmergencyReport extends javax.swing.JPanel {
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
 
-        jPanel1.setBackground(new java.awt.Color(240, 240, 241));
+        jPanel1.setBackground(new java.awt.Color(250, 249, 251));
         jPanel1.setPreferredSize(new java.awt.Dimension(1160, 750));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -64,12 +81,12 @@ public class EmergencyReport extends javax.swing.JPanel {
         jLabel1.setText("Report Emergency");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmergency.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "Location", "User ID", "Password", "Phone Number"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -80,7 +97,7 @@ public class EmergencyReport extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEmergency);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 580, 630));
 
@@ -102,6 +119,11 @@ public class EmergencyReport extends javax.swing.JPanel {
         cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Close");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         jPanel7.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 580, 200, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
@@ -129,6 +151,7 @@ public class EmergencyReport extends javax.swing.JPanel {
         jLabel9.setText("Emergency");
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 220, -1));
 
+        emergencyBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ambulance", "Fire", "Police" }));
         jPanel7.add(emergencyBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 40));
 
         lastNameLabel1.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
@@ -159,7 +182,18 @@ public class EmergencyReport extends javax.swing.JPanel {
 
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
         // TODO add your handling code here:
+       reportEmergency();
+
+        
     }//GEN-LAST:event_bookButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        
+        cancelEmergency();
+        
+        
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -174,10 +208,102 @@ public class EmergencyReport extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField lastNameField;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JLabel lastNameLabel1;
     private javax.swing.JTextField locationField;
+    private javax.swing.JTable tblEmergency;
     // End of variables declaration//GEN-END:variables
+
+    private void displayTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     Req_EmergencyDir red=system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            Req_Emergency o=ol.get(i);
+            if(userAcc.getUserName().matches(o.getUserId()))
+            {
+                DefaultTableModel t2 = (DefaultTableModel) tblEmergency.getModel();
+                String s1=String.valueOf(o.getId());    
+                String s[]={s1,o.getEmergency(),o.getLocation(),o.getStatus(),o.getResponse()};
+                t2.addRow(s);
+            }
+        }
+    
+    
+    
+    
+    }
+
+    private void reportEmergency() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     if(!locationField.getText().isEmpty())
+        {
+            Req_Emergency re=new Req_Emergency();
+        User a=(User)userAcc;
+        int x = 1 + (int) (Math.random() * 100);
+        re.setId(x);
+        re.setName(a.getFirstName());
+        re.setUserId(a.getUserId());
+        re.setEmergency(emergencyBox.getSelectedItem().toString());
+        re.setLocation(locationField.getText());
+        re.setStatus("In Progress");
+        re.setResponse("No Response");
+            Req_EmergencyDir red=system.getEmergencyReqDir();
+        red.addEmergencyUser(re);
+        tblEmergency.setModel(new DefaultTableModel(null,new String[]{"ID","Emergency","Location","Status","Response"}));
+        displayTable();
+                    JOptionPane.showMessageDialog(null, "Reported Emergency Successfully!!!");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Enter the location for Emergency Services!");
+        }}
+
+    private void cancelEmergency() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    DefaultTableModel t2 = (DefaultTableModel) tblEmergency.getModel();
+        int selectedRow=tblEmergency.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        Req_EmergencyDir red= system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            Req_Emergency o=ol.get(i);
+            if(s==o.getId())
+            {
+                if(o.getStatus().matches("In Progress"))
+                {
+                o.setStatus("Closed");
+                JOptionPane.showMessageDialog(null, "Case Closed");
+              
+            }
+                else if(o.getStatus().matches("Closed")){
+                    JOptionPane.showMessageDialog(null, "Your Emergency Case is Closed successfully!!");
+                }   
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Reported as false Alarm!!");
+            }
+            }
+            
+        }
+        tblEmergency.setModel(new DefaultTableModel(null,new String[]{"ID","Emergency","Location","Status","Response"}));
+       displayTable();
+        }
+        else
+        {
+       JOptionPane.showMessageDialog(null, "Select A Row!!");
+
+        }
+    
+    
+    
+    
+    }
 }
