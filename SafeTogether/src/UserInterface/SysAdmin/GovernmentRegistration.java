@@ -70,7 +70,7 @@ public class GovernmentRegistration extends javax.swing.JPanel {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
-        jLabel1.setText("Dashboard");
+        jLabel1.setText("Manage Appointments");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));

@@ -34,7 +34,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
         this.rightSidePanel = rightSidePanel;
         this.setSize(1160, 750);
         displayTable();
-         populateDashBoard();
+        populateDashBoard();
     }
 
     /**
@@ -97,7 +97,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         hosCount.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
-        hosCount.setText("75");
+        hosCount.setText("10");
         jPanel2.add(hosCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 80, 90));
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 30)); // NOI18N
@@ -257,8 +257,8 @@ public class DoctorRegistration extends javax.swing.JPanel {
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         splCount.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
-        splCount.setText("108");
-        jPanel8.add(splCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 120, 90));
+        splCount.setText("10");
+        jPanel8.add(splCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 80, 90));
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 30)); // NOI18N
         jLabel4.setText("Specializations");
@@ -287,8 +287,8 @@ public class DoctorRegistration extends javax.swing.JPanel {
         // TODO add your handling code here:
         
           String name = (userNameTextField4.getText());
-            String hospital = (userNameTextField3.getText());
-            String specialization = (userNameTextField5.getText());
+           String hospital = (userNameTextField3.getText());
+           String specialization = (userNameTextField5.getText());
             String userId = (userNameTextField6.getText());
             String pwd = (userNameTextField7.getText());
             String phoneNum = (userNameTextField8.getText());
@@ -297,6 +297,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
             system.getDoctorDir().addNewDoc(doc);
            //System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
             displayTable();
+            populateDashBoard();
             
               userNameTextField3.setText("");
             userNameTextField4.setText("");
@@ -368,6 +369,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
             }
         }
           displayTable();
+          
             
               userNameTextField3.setText("");
             userNameTextField4.setText("");

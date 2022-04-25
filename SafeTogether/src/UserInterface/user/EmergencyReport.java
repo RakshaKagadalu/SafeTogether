@@ -5,6 +5,7 @@
 package UserInterface.user;
 
 import Business.EcoSystem;
+
 import Business.UserAcc.UserAcc;
 import Business.WorkQueue.Req_Emergency;
 import Business.WorkQueue.Req_EmergencyDir;
@@ -20,9 +21,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class EmergencyReport extends javax.swing.JPanel {
 
+    EcoSystem system;
+    JPanel rightSidePanel;
     /**
-     * Creates new form EmergencyReport
+     * Creates new form BloodDonations
+     * @param system
+     * @param rightSidePanel
      */
+
     JPanel container;
     EcoSystem system;
    UserAcc userAcc;
@@ -35,6 +41,7 @@ public class EmergencyReport extends javax.swing.JPanel {
         firstNameField.setText(a.getFirstName());
         lastNameField.setText(a.getLastName());
         displayTable();
+
     }
 
     /**

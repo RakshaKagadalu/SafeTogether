@@ -5,6 +5,7 @@
 package UserInterface.user;
 
 import Business.EcoSystem;
+
 import Business.UserAcc.UserAcc;
 import Business.WorkQueue.Req_Medicine;
 import Business.WorkQueue.Req_MedicineDir;
@@ -15,15 +16,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class MedicineReport extends javax.swing.JPanel {
 
+    EcoSystem system;
+    JPanel rightSidePanel;
     /**
-     * Creates new form MedicineReport
+     * Creates new form BloodDonations
+     * @param system
+     * @param rightSidePanel
      */
+
      EcoSystem system;
     JPanel rightSidePanel;
     UserAcc userAcc;
@@ -33,7 +40,9 @@ public class MedicineReport extends javax.swing.JPanel {
         this.system=system;
         this.userAcc=userAcc;
       displayTable();
+
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

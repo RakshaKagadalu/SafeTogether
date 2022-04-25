@@ -164,6 +164,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cancel"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="310" y="580" width="140" height="39"/>
@@ -233,6 +236,9 @@
                   <Font name="SF Pro Text" size="14" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstNameFieldActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="20" y="110" width="420" height="40"/>
@@ -303,7 +309,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="dateBox">
+            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="20" y="350" width="420" height="40"/>
@@ -313,7 +319,7 @@
             <Component class="javax.swing.JComboBox" name="timeBox">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="12">
+                  <StringArray count="10">
                     <StringItem index="0" value="09:00 - 10:00"/>
                     <StringItem index="1" value="10:00 - 11:00"/>
                     <StringItem index="2" value="11:00 - 12:00"/>
@@ -324,8 +330,6 @@
                     <StringItem index="7" value="16:00 - 17:00"/>
                     <StringItem index="8" value="17:00 - 18:00"/>
                     <StringItem index="9" value="19:00 - 20:00"/>
-                    <StringItem index="10" value=" "/>
-                    <StringItem index="11" value=" "/>
                   </StringArray>
                 </Property>
               </Properties>

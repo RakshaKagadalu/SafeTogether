@@ -314,14 +314,18 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
     private void medicineMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicineMousePressed
         // TODO add your handling code here:
+
         PharmacyOrder();
+
     }//GEN-LAST:event_medicineMousePressed
 
     private void emergencyReportMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emergencyReportMousePressed
         // TODO add your handling code here:
+
         displayEmergencyScreen();
         
         
+
     }//GEN-LAST:event_emergencyReportMousePressed
 
 
@@ -421,7 +425,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         testing.setBackground(new Color(255,255,255));
         bookAppointment.setBackground(new Color(255,255,255));
       
-        BloodDonations pcr = new BloodDonations(system, container);
+        BloodDonations pcr = new BloodDonations(system, container, userAcc);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
@@ -455,8 +459,9 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         vaccination.setBackground(new Color(255,255,255));
         testing.setBackground(new Color(255,255,255));
         bookAppointment.setBackground(new Color(255,255,255));
-      
+
         MedicineReport pcr = new MedicineReport(container, system, userAcc);
+
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
