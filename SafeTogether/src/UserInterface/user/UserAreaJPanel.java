@@ -6,14 +6,12 @@ package UserInterface.user;
 
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
-import UserInterface.SysAdmin.PandemicRegistration;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import static java.time.Clock.system;
 //import static java.time.InstantSource.system;
 import java.util.Date;
 import javax.swing.JPanel;
@@ -248,7 +246,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel6.setText("Book Appointment");
+        jLabel6.setText("Find A Doctor");
         bookAppointment.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel3.add(bookAppointment, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 290, 60));
@@ -278,7 +276,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
         rightSidePanel.setBackground(new java.awt.Color(250, 249, 251));
         rightSidePanel.setLayout(new java.awt.CardLayout());
-        jPanel2.add(rightSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 1300, 750));
+        jPanel2.add(rightSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 1300, 910));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
