@@ -153,7 +153,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
         jLabel17.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel17.setText("Emergency Report");
+        jLabel17.setText("Emergency ");
         emergencyReport.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel3.add(emergencyReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 290, 60));
@@ -172,7 +172,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
         jLabel15.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel15.setText("Medicine");
+        jLabel15.setText("Parmacy");
         medicine.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel3.add(medicine, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 290, 60));
@@ -316,7 +316,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
     private void medicineMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicineMousePressed
         // TODO add your handling code here:
-        
+        PharmacyOrder();
     }//GEN-LAST:event_medicineMousePressed
 
     private void emergencyReportMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emergencyReportMousePressed
@@ -429,22 +429,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         layout.next(rightSidePanel);
     
     }
-    
-    private void OrderMedicine() {
-        
-        emergencyReport.setBackground(new Color(255,255,255));
-        medicine.setBackground(new Color(213,230,249));
-        bloodDonation.setBackground(new Color(255,255,255));
-        vaccination.setBackground(new Color(255,255,255));
-        testing.setBackground(new Color(255,255,255));
-        bookAppointment.setBackground(new Color(255,255,255));
-      
-        BloodDonations pcr = new BloodDonations(system, container);
-        rightSidePanel.add(pcr);
-        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
-        layout.next(rightSidePanel);
-    
-    }
+   
 
     private void displayEmergencyScreen() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -457,6 +442,23 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         bookAppointment.setBackground(new Color(255,255,255));
       
         EmergencyReport pcr = new EmergencyReport(container,system,userAcc);
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    
+    }
+
+    private void PharmacyOrder() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    emergencyReport.setBackground(new Color(255,255,255));
+        medicine.setBackground(new Color(213,230,249));
+        bloodDonation.setBackground(new Color(255,255,255));
+        vaccination.setBackground(new Color(255,255,255));
+        testing.setBackground(new Color(255,255,255));
+        bookAppointment.setBackground(new Color(255,255,255));
+      
+        MedicineReport pcr = new MedicineReport(container, system, userAcc);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);

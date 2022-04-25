@@ -303,12 +303,14 @@ public class TestRegistration extends javax.swing.JPanel {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
 
-        cancelRegistration();
+        viewResult();
 
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
         // TODO add your handling code here:
+        
+          cancelRegistration();
     }//GEN-LAST:event_cancelButton1ActionPerformed
 
 
@@ -412,6 +414,7 @@ public class TestRegistration extends javax.swing.JPanel {
                     if(o.getStatus().matches("Appoinment Booked"))
                     {
                         o.setStatus("Cancled");
+                         JOptionPane.showMessageDialog(null,"Your Appointment is cancelled successfully!!");
                     }
                     else
                     {
@@ -425,7 +428,7 @@ public class TestRegistration extends javax.swing.JPanel {
         }
         else
         {
-            JOptionPane.showMessageDialog(null,"Select a row!!");
+            JOptionPane.showMessageDialog(null,"Please Select an appointment to cancel!!");
         }
     
     }
@@ -435,7 +438,7 @@ public class TestRegistration extends javax.swing.JPanel {
      OutbreakTracerDir c = system.getOutbreakStatusDir();
         ArrayList<OutbreakTracer> ol=c.getOutbreakLog();
         int u=ol.size();
-        System.out.println(u);
+     
         for(int i=0;i<u;i++)
         {
             OutbreakTracer o=ol.get(i);
@@ -449,6 +452,48 @@ public class TestRegistration extends javax.swing.JPanel {
                 t2.addRow(s);
             }
         }
+    
+    
+    
+    }
+
+    private void viewResult() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+            int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+          
+           OutbreakTracerDir c = system.getOutbreakStatusDir();
+        ArrayList<OutbreakTracer> ol=c.getOutbreakLog();
+            int u=ol.size();
+           
+            for(int i=0;i<u;i++)
+            {
+                OutbreakTracer o=ol.get(i);
+                if(s==o.getId())
+                {
+                    if(o.getResult().matches("Positive"))
+                    {
+                        JOptionPane.showMessageDialog(null,"Result : "+o.getResult());
+                    }
+                    else if(o.getResult().matches("Negative"))
+                    {
+                        JOptionPane.showMessageDialog(null,"Result : "+o.getResult());
+                    }
+                    else
+                    {
+                         JOptionPane.showMessageDialog(null,"Results not Available!!");  
+                    }
+                }
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");
+        }
+    
     
     
     
