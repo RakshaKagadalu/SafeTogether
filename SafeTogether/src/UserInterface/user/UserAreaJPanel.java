@@ -6,14 +6,12 @@ package UserInterface.user;
 
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
-import UserInterface.SysAdmin.PandemicRegistration;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import static java.time.Clock.system;
 //import static java.time.InstantSource.system;
 import java.util.Date;
 import javax.swing.JPanel;
@@ -312,11 +310,12 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
     private void medicineMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicineMousePressed
         // TODO add your handling code here:
-        
+        OrderMedicine();
     }//GEN-LAST:event_medicineMousePressed
 
     private void emergencyReportMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emergencyReportMousePressed
         // TODO add your handling code here:
+        ReportEmergency();
     }//GEN-LAST:event_emergencyReportMousePressed
 
 
@@ -416,7 +415,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         testing.setBackground(new Color(255,255,255));
         bookAppointment.setBackground(new Color(255,255,255));
       
-        BloodDonations pcr = new BloodDonations(system, container);
+        BloodDonations pcr = new BloodDonations(system, container, userAcc);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
@@ -432,7 +431,23 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         testing.setBackground(new Color(255,255,255));
         bookAppointment.setBackground(new Color(255,255,255));
       
-        BloodDonations pcr = new BloodDonations(system, container);
+        MedicineReport pcr = new MedicineReport(system, container);
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    }
+    
+    private void ReportEmergency() {
+        
+        emergencyReport.setBackground(new Color(213,230,249));
+        medicine.setBackground(new Color(255,255,255));
+        bloodDonation.setBackground(new Color(255,255,255));
+        vaccination.setBackground(new Color(255,255,255));
+        testing.setBackground(new Color(255,255,255));
+        bookAppointment.setBackground(new Color(255,255,255));
+      
+        EmergencyReport pcr = new EmergencyReport(system, container);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
