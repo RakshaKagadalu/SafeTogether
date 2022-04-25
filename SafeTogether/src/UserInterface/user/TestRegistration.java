@@ -5,7 +5,24 @@
 package UserInterface.user;
 
 import Business.EcoSystem;
+import Business.PandemicCenter.PandemicCenter;
+import Business.PandemicCenter.PandemicCenter_Dir;
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.OutbreakTracer;
+import Business.WorkQueue.OutbreakTracerDir;
+import Business.userR.User;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Properties;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,11 +35,26 @@ public class TestRegistration extends javax.swing.JPanel {
      */
      EcoSystem system;
     JPanel rightSidePanel;
-    public TestRegistration(EcoSystem system, JPanel rightSidePanel) {
+    UserAcc userAcc;
+    public TestRegistration(EcoSystem system, JPanel rightSidePanel,UserAcc userAcc) {
         initComponents();
          this.system = system;
         this.rightSidePanel = rightSidePanel;
+         this.userAcc=userAcc;
         this.setSize(1160, 750);
+           User a =(User)(userAcc);
+       firstNameInputBox.setText(a.getFirstName());
+        emailTextInput.setText(a.getEmail());
+        PandemicCenter_Dir cd= system.getPandemicCenterDir();
+        ArrayList<PandemicCenter> ol=cd.getPandemicdirectory();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            PandemicCenter o=ol.get(i);
+            comboCenter.addItem(o.getName());
+            
+        }
+        displayCenter();
     }
 
     /**
@@ -41,16 +73,15 @@ public class TestRegistration extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        lastDisease = new javax.swing.JComboBox<>();
         jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
+        symptoms = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jComboBox5 = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
+        positive = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         firstNameInputBox = new javax.swing.JTextField();
-        secondNameInputBox = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         timeBox = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -60,11 +91,15 @@ public class TestRegistration extends javax.swing.JPanel {
         emailTextInput = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         temperatureInput = new javax.swing.JTextField();
+        comboCenter = new javax.swing.JComboBox<>();
+        registerButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        cancelButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
 
-        jPanel1.setBackground(new java.awt.Color(240, 240, 241));
+        jPanel1.setBackground(new java.awt.Color(250, 249, 251));
         jPanel1.setPreferredSize(new java.awt.Dimension(1160, 750));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -95,16 +130,16 @@ public class TestRegistration extends javax.swing.JPanel {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 22, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jLabel3.setText("Have you been tested for COVID 19 in the last 14 Days?");
+        jLabel3.setText("Have you been tested for outbreak in the last 14 Days?");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 71, -1, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No", "Maybe" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        lastDisease.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No", "Maybe" }));
+        lastDisease.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                lastDiseaseActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 68, -1, -1));
+        jPanel2.add(lastDisease, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 68, -1, -1));
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No", "Maybe" }));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
@@ -114,9 +149,9 @@ public class TestRegistration extends javax.swing.JPanel {
         });
         jPanel2.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 113, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jLabel10.setText("Have you had any COVID 19 Symptoms?");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 117, -1, -1));
+        symptoms.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        symptoms.setText("Have you had any outbreak Symptoms?");
+        jPanel2.add(symptoms, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 117, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
         jLabel11.setText("in the past 14 days?");
@@ -130,9 +165,9 @@ public class TestRegistration extends javax.swing.JPanel {
         });
         jPanel2.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jLabel12.setText("Have you received any COVID 19 positive test");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+        positive.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        positive.setText("Have you received any  positive test result");
+        jPanel2.add(positive, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 520, 350));
 
@@ -152,12 +187,9 @@ public class TestRegistration extends javax.swing.JPanel {
         });
         jPanel3.add(firstNameInputBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 220, 40));
 
-        secondNameInputBox.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel3.add(secondNameInputBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 230, 40));
-
         jLabel5.setFont(new java.awt.Font("SF Pro Text", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel5.setText("Last Name");
+        jLabel5.setText("Test Center");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, -1, -1));
 
         timeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "19:00 - 20:00", " ", " " }));
@@ -192,20 +224,57 @@ public class TestRegistration extends javax.swing.JPanel {
         temperatureInput.setBackground(new java.awt.Color(248, 248, 249));
         jPanel3.add(temperatureInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 230, 38));
 
+        jPanel3.add(comboCenter, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 220, 40));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 520, 350));
+
+        registerButton.setBackground(new java.awt.Color(10, 132, 255));
+        registerButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        registerButton.setForeground(new java.awt.Color(255, 255, 255));
+        registerButton.setText("Book Appointment");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 700, 220, 39));
+
+        cancelButton.setBackground(new java.awt.Color(138, 189, 188));
+        cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(255, 255, 255));
+        cancelButton.setText("View Result");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 700, 200, 39));
+
+        cancelButton1.setBackground(new java.awt.Color(255, 55, 95));
+        cancelButton1.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        cancelButton1.setForeground(new java.awt.Color(255, 255, 255));
+        cancelButton1.setText("Cancel Appointment");
+        cancelButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cancelButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 700, 200, 39));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1148, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,10 +282,10 @@ public class TestRegistration extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_firstNameInputBoxActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void lastDiseaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastDiseaseActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_lastDiseaseActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // TODO add your handling code here:
@@ -226,18 +295,34 @@ public class TestRegistration extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        // TODO add your handling code here:
+        testRegistration();
+    }//GEN-LAST:event_registerButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+
+        cancelRegistration();
+
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton cancelButton1;
+    private javax.swing.JComboBox<String> comboCenter;
     private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JTextField emailTextInput;
     private javax.swing.JTextField firstNameInputBox;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -251,8 +336,121 @@ public class TestRegistration extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField secondNameInputBox;
+    private javax.swing.JComboBox<String> lastDisease;
+    private javax.swing.JLabel positive;
+    private javax.swing.JButton registerButton;
+    private javax.swing.JLabel symptoms;
     private javax.swing.JTextField temperatureInput;
     private javax.swing.JComboBox<String> timeBox;
     // End of variables declaration//GEN-END:variables
+
+    private void testRegistration() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     if(dateChooser.getDate()!=null)
+        {
+            OutbreakTracer c1 =new OutbreakTracer();
+            int x = 1 + (int) (Math.random() * 100);
+            c1.setId(x);
+            c1.setFirstName(firstNameInputBox.getText());
+            c1.setTestCenter(comboCenter.getSelectedItem().toString());
+            c1.setTemp(temperatureInput.getText());
+            c1.setContact(lastDisease.getSelectedItem().toString());
+            c1.setSymptoms(jComboBox4.getSelectedItem().toString());
+            c1.setPositive(jComboBox5.getSelectedItem().toString());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String d1 = sdf.format(dateChooser.getDate());
+            c1.setStatus("Appoinment Booked");
+            c1.setResult("NA");
+            User a=(User)(userAcc);
+          
+            c1.setUserName(a.getFirstName());
+            c1.setUserId(a.getUserId());
+            
+            c1.setAppDate(d1);
+            c1.setAppTime(timeBox.getSelectedItem().toString());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime d2 = LocalDateTime.now();
+            System.out.println(dtf.format(d2));
+            if(d1.compareTo(d2.toString()) >= 0) {
+                OutbreakTracerDir cdd= system.getOutbreakStatusDir();
+                cdd.addrequest(c1);
+                jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Status","Center","Temperature","Date","Time","Result"}));
+                displayCenter();
+                 JOptionPane.showMessageDialog(null, "Your Appointment Booked successfully!!");
+        
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Please book a future date !!");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Please select A Date!!");
+        }
+    
+    }
+
+    private void cancelRegistration() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+     DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+            int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+            System.out.println("id"+s);
+            OutbreakTracerDir cdd = system.getOutbreakStatusDir();
+            ArrayList<OutbreakTracer> ol=cdd.getOutbreakLog();
+            int u=ol.size();
+            User bb=(User)(userAcc);
+            for(int i=0;i<u;i++)
+            {
+                OutbreakTracer o=ol.get(i);
+                if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+                {
+                    if(o.getStatus().matches("Appoinment Booked"))
+                    {
+                        o.setStatus("Cancled");
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"wrong move!!");
+                    }
+
+                }
+            }
+            jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Status","Center","Temparature","Date","Time","Result"}));
+            displayCenter();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a row!!");
+        }
+    
+    }
+
+    private void displayCenter() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     OutbreakTracerDir c = system.getOutbreakStatusDir();
+        ArrayList<OutbreakTracer> ol=c.getOutbreakLog();
+        int u=ol.size();
+        System.out.println(u);
+        for(int i=0;i<u;i++)
+        {
+            OutbreakTracer o=ol.get(i);
+            
+          
+            if(userAcc.getUserName().matches(o.getUserId()))
+            {
+                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+                String s1=String.valueOf(o.getId());    
+                String s[]={s1,o.getStatus(),o.getTestCenter(),o.getTemp(), o.getAppDate(),o.getAppTime(),o.getResult()};
+                t2.addRow(s);
+            }
+        }
+    
+    
+    
+    }
 }

@@ -228,7 +228,7 @@ public class UserRegister extends javax.swing.JPanel {
             ecosystem.getUserAccDir().addAccount(customer);
             ecosystem.getUserDir().addUser(customer);
             sendmail();
-            sendSMS(); // costly keep it commented 
+            //sendSMS(); // costly keep it commented 
             userNameTextField.setText("");
             emailTextField.setText("");
             firstNameTextField.setText("");

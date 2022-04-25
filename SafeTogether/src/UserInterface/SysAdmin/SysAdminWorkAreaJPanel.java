@@ -299,7 +299,7 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
        container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
-        DB4OUtil.dB4OUtil.storeSystem(ecosystem);
+        //DB4OUtil.dB4OUtil.storeSystem(ecosystem);
        //        container.remove(this);
 //        Component[] componentArray = container.getComponents();
 //        Component component = componentArray[componentArray.length - 1];

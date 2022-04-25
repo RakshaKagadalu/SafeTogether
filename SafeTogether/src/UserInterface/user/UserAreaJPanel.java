@@ -287,6 +287,10 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+        
     }//GEN-LAST:event_goBackMousePressed
 
     private void bookAppointmentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMousePressed
@@ -317,6 +321,9 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
     private void emergencyReportMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emergencyReportMousePressed
         // TODO add your handling code here:
+        displayEmergencyScreen();
+        
+        
     }//GEN-LAST:event_emergencyReportMousePressed
 
 
@@ -385,7 +392,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         testing.setBackground(new Color(255,255,255));
     vaccination.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
-        VaccinationAppointments pcr=new VaccinationAppointments (system, container);
+        VaccinationAppointments pcr=new VaccinationAppointments (system, container,userAcc);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
@@ -401,7 +408,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         bookAppointment.setBackground(new Color(255,255,255));
     testing.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
-        TestRegistration pcr=new TestRegistration (system, container);
+        TestRegistration pcr=new TestRegistration (system, container,userAcc);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
@@ -436,6 +443,24 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
+    
+    }
+
+    private void displayEmergencyScreen() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+     emergencyReport.setBackground(new Color(213,230,249));
+        medicine.setBackground(new Color(255,255,255));
+        bloodDonation.setBackground(new Color(255,255,255));
+        vaccination.setBackground(new Color(255,255,255));
+        testing.setBackground(new Color(255,255,255));
+        bookAppointment.setBackground(new Color(255,255,255));
+      
+        EmergencyReport pcr = new EmergencyReport(container,system,userAcc);
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
     
     }
 }

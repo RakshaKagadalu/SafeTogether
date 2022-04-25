@@ -12,6 +12,8 @@ import Business.WorkQueue.DoctorsAppointment;
 import Business.WorkQueue.DoctorsAppointment_Dir;
 import Business.WorkQueue.SearchApp;
 import Business.userR.User;
+import UserInterface.SysAdmin.MapViewr;
+import Utility.Notification;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -269,7 +271,14 @@ DoctorDisplay();
     
     
     }
-
+ public  void sendmail()
+    {   
+        Notification notification = new Notification();
+        String toEmail = "aedproject22@gmail.com";
+        String emailSubject = "Doctor Appointment confirmation";
+        String emailContent = "Successfully booked your doctor appointment!!"; 
+        notification.sendMail(toEmail, emailSubject, emailContent);
+    }
     private void bookDocAppointment() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
    
@@ -310,39 +319,10 @@ DoctorDisplay();
                     list.add(appDate);
                     list.add(timeCombo.getSelectedItem().toString());                    
                     a.put(name, list);
-                    DB4OUtil.dB4OUtil.storeSystem(system);
+                    //DB4OUtil.dB4OUtil.storeSystem(system);
                      
                     //code to send email
-                    {
-        String ToEmail = user.getEmail();
-        String myAccountEmail = "aedproject22@gmail.com";
-        String password = "aedproject123";
-       
-        
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth","true");
-        properties.put("mail.smtp.starttls.enable","true");
-        properties.put("mail.smtp.host","smtp.gmail.com");
-        properties.put("mail.smtp.port","587");
-        
-        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication(){
-                return new PasswordAuthentication(myAccountEmail, password);
-            }
-            
-        });
-        try{
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(myAccountEmail));
-            message.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(ToEmail));
-            message.setSubject("Appointment Booked!!");
-            message.setText("Doctor : "+name+"\n"+"Hospital : "+verifyName+"\n"+"Date : "+appDate+"\n"+"Time : "+timeCombo.getSelectedItem().toString());
-            javax.mail.Transport.send(message);
-        }catch(MessagingException ex){
-            System.out.println(""+ex);
-        }
-        
-        }
+                  // sendmail();
                     //end of code
                     JOptionPane.showMessageDialog(null,"Your Appointment request is successfull!!");
 
@@ -406,9 +386,11 @@ DoctorDisplay();
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     
     DocAppointmentStatus docApp=new DocAppointmentStatus(rightSidePanel,system,userAcc);
-        container.add(docApp);
+        container.add("DocAppointmentStatus",docApp);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.next(container); 
+        
+        
     
     }
 }

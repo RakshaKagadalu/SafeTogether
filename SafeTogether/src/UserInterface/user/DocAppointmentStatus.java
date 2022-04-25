@@ -31,7 +31,7 @@ public class DocAppointmentStatus extends javax.swing.JPanel {
         this.rightSidePanel = rightSidePanel;
         this.userAcc=userAcc;
         this.setSize(1160, 750);
-        //displayAppointmentStatus();
+        displayAppointmentStatus();
     }
 
     /**
@@ -48,11 +48,9 @@ public class DocAppointmentStatus extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(1160, 750));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel1.setText("Your Appointment Status :");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,7 +65,25 @@ public class DocAppointmentStatus extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 141, -1, 195));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel1))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addGap(78, 78, 78)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -90,7 +106,7 @@ public class DocAppointmentStatus extends javax.swing.JPanel {
         for(int i=0;i<u;i++)
         {
             DoctorsAppointment o=ol.get(i);
-            Doctor d=(Doctor)userAcc;
+            //Doctor d=(Doctor)userAcc;
             System.out.println("o.getDoctor_name()");
              System.out.println("d.getFirstname()");
             if(o.getUserId().matches(userAcc.getUserName()))
