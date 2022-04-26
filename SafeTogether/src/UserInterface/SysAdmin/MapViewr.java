@@ -64,9 +64,11 @@ public class MapViewr extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         mapCanvas = new javax.swing.JPanel();
 
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(1160, 750));
 
         jPanel1.setBackground(new java.awt.Color(244, 242, 227));
         jPanel1.setForeground(new java.awt.Color(25, 56, 82));
@@ -90,7 +92,7 @@ public class MapViewr extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(404, 404, 404)
                 .addComponent(setLocationBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(736, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +110,7 @@ public class MapViewr extends javax.swing.JPanel {
         mapCanvas.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(mapCanvas);
 
-        add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1013, 672));
+        add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 980));
     }// </editor-fold>//GEN-END:initComponents
 
     private void setLocationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setLocationBtnActionPerformed
@@ -130,8 +132,8 @@ public class MapViewr extends javax.swing.JPanel {
             userProcessContainer.remove(this);
 
             Component[] componentArray = userProcessContainer.getComponents();
-            System.out.println(userProcessContainer.getComponent(componentArray.length - 1) + "component");
-            if (userProcessContainer.getComponent(componentArray.length - 1) instanceof HospitalEnterprise) {
+            System.out.println(userProcessContainer.getComponent(componentArray.length-1) + "component");
+            if (userProcessContainer.getComponent(componentArray.length - 1) instanceof PandemicRegistration) {
                 PandemicRegistration orgManagement = (PandemicRegistration) userProcessContainer.getComponent(componentArray.length - 1);
                 orgManagement.populateLongituteLatitude(locationPoint);
             } else {

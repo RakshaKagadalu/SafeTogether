@@ -26,15 +26,15 @@ public class PandemicRegistration extends javax.swing.JPanel {
      * Creates new form PandemicRegistration
      */
     EcoSystem system;
-    JPanel rightSidePanel;
     MapCoordinates locationPoint;
-    
-    JPanel testPanel = new JPanel();
+    JPanel panel;
  
-    public PandemicRegistration(EcoSystem system, JPanel rightSidePanel) {
+    public PandemicRegistration(EcoSystem system, JPanel rightSidePanel, MapCoordinates locationPoint) {
         initComponents();
         this.system = system;
-        this.rightSidePanel = rightSidePanel;
+        this.panel = rightSidePanel;
+        this.locationPoint = locationPoint;
+        System.out.println(rightSidePanel);
         this.setSize(1160, 750);
         displayTable();
     }
@@ -48,6 +48,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -73,6 +74,9 @@ public class PandemicRegistration extends javax.swing.JPanel {
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
         setLayout(new java.awt.CardLayout());
+
+        jPanel2.setPreferredSize(new java.awt.Dimension(1160, 750));
+        jPanel2.setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(250, 249, 251));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -207,7 +211,9 @@ public class PandemicRegistration extends javax.swing.JPanel {
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
-        add(jPanel1, "card2");
+        jPanel2.add(jPanel1, "card2");
+
+        add(jPanel2, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -281,7 +287,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-          DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
           if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -377,12 +383,19 @@ public class PandemicRegistration extends javax.swing.JPanel {
 //        
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    public void populateLongituteLatitude(MapCoordinates locationPoint) {
+        this.locationPoint = locationPoint;
+        locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());
+
+        
+    }
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        MapViewr oLJP = new MapViewr(testPanel);
-        testPanel.add("MapViewr", oLJP);
-        CardLayout layout = (CardLayout) testPanel.getLayout();
-        layout.next(testPanel);
+        MapViewr oLJP = new MapViewr(panel);
+        panel.add("MapViewr", oLJP);
+        CardLayout layout = (CardLayout) panel.getLayout();
+        layout.next(panel);
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
@@ -399,6 +412,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
@@ -409,11 +423,6 @@ public class PandemicRegistration extends javax.swing.JPanel {
     private javax.swing.JTextField userNameTextField6;
     private javax.swing.JTextField userNameTextField7;
     // End of variables declaration//GEN-END:variables
-  
-    public void populateLongituteLatitude(MapCoordinates locationPoint) {
-        this.locationPoint = locationPoint;
-        locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());
-    }
     
     private void displayTable() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
