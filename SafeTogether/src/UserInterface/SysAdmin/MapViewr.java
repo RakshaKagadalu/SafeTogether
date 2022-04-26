@@ -31,13 +31,14 @@ public class MapViewr extends javax.swing.JPanel {
      * Creates new form MapViewr
      */   //Browser browser;
      
-      JPanel userProcessContainer;
-      MapCoordinates locationPoint;
+    JPanel userProcessContainer;
+    MapCoordinates locationPoint;
     Browser browser;
     public MapViewr(JPanel userProcessContainer) {
         initComponents();
         this.setSize(1920, 1080);
-  //locationPoint = new LocationPoint();
+        this.userProcessContainer = userProcessContainer;
+        locationPoint = new MapCoordinates();
         
         EngineOptions options =
                 EngineOptions.newBuilder(HARDWARE_ACCELERATED).licenseKey("1BNDHFSC1G2HE4F9XRJJFQ2YTJU7NQLOVUMD0I8ERIS91V4X8YW7HI9ILGATUEM2BAB27E").build();
@@ -63,7 +64,7 @@ public class MapViewr extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         mapCanvas = new javax.swing.JPanel();
 
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -107,7 +108,7 @@ public class MapViewr extends javax.swing.JPanel {
         mapCanvas.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(mapCanvas);
 
-        add(jSplitPane1, java.awt.BorderLayout.CENTER);
+        add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1013, 672));
     }// </editor-fold>//GEN-END:initComponents
 
     private void setLocationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setLocationBtnActionPerformed
@@ -126,9 +127,18 @@ public class MapViewr extends javax.swing.JPanel {
                 locationPoint.setLongitudeCoordinate(lon);
             }
             System.out.println("Lat" + locationPoint.getLatitudeCoordinate() + locationPoint.getLongitudeCoordinate());
-//
             userProcessContainer.remove(this);
+
             Component[] componentArray = userProcessContainer.getComponents();
+            System.out.println(userProcessContainer.getComponent(componentArray.length - 1) + "component");
+            if (userProcessContainer.getComponent(componentArray.length - 1) instanceof HospitalEnterprise) {
+                PandemicRegistration orgManagement = (PandemicRegistration) userProcessContainer.getComponent(componentArray.length - 1);
+                orgManagement.populateLongituteLatitude(locationPoint);
+            } else {
+                                System.out.println("ELSE LOCATION " + componentArray.length);
+                System.out.println("ELSE CONTAINER " + userProcessContainer.toString());
+            }
+
 //            if (userProcessContainer.getComponent(componentArray.length - 1) instanceof EmergencyManageOrganizationJPanel) {
 //                EmergencyManageOrganizationJPanel orgManagement = (EmergencyManageOrganizationJPanel) userProcessContainer.getComponent(componentArray.length - 1);
 //                orgManagement.populateLongituteLatitude(locationPoint);
@@ -157,8 +167,8 @@ public class MapViewr extends javax.swing.JPanel {
 //                CompanyAdminManageSceneJPanel reportingComponent = (CompanyAdminManageSceneJPanel) userProcessContainer.getComponent(componentArray.length - 1);
 //                reportingComponent.populateLongituteLatitude(locationPoint);
 //            }else{
-                System.out.println("ELSE LOCATION " + componentArray.length);
-                System.out.println("ELSE CONTAINER " + userProcessContainer.toString());
+//                System.out.println("ELSE LOCATION " + componentArray.length);
+//                System.out.println("ELSE CONTAINER " + userProcessContainer.toString());
 //            }
 
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
