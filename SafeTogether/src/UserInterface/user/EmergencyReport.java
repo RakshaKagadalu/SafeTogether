@@ -30,7 +30,6 @@ public class EmergencyReport extends javax.swing.JPanel {
      */
 
     JPanel container;
-    EcoSystem system;
    UserAcc userAcc;
     public EmergencyReport(JPanel container,EcoSystem system,UserAcc userAcc) {
         initComponents();

@@ -31,8 +31,6 @@ public class MedicineReport extends javax.swing.JPanel {
      * @param rightSidePanel
      */
 
-     EcoSystem system;
-    JPanel rightSidePanel;
     UserAcc userAcc;
     public MedicineReport(JPanel rightSidePanel,EcoSystem system,UserAcc userAcc) {
         initComponents();
