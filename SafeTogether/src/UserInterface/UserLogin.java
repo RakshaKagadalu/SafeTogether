@@ -11,6 +11,7 @@ import Business.UserAcc.UserAcc;
 import Business.UserAcc.UserAccDir;
 import Business.userR.User;
 import Business.userR.User_Directory;
+import UserInterface.Doctor.DoctorView;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import UserInterface.user.UserAreaJPanel;
 import java.awt.CardLayout;
@@ -440,19 +441,19 @@ public class UserLogin extends javax.swing.JPanel {
 
     private void viewDocScreen() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    
-//     Doctorframe ur=new Doctorframe(container,system,userAccount);
-//        container.add(ur);
-//        CardLayout layout = (CardLayout) container.getLayout();
-//        layout.next(container); 
-//    
+    
+     DoctorView docview=new DoctorView(workArea,userAcc,system);
+        workArea.add(docview);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea); 
+    
     
     }
 
     private void displayUserPanel() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    UserAreaJPanel ur=new UserAreaJPanel(workArea,userAcc,system);
-        workArea.add(ur);
+    UserAreaJPanel userView=new UserAreaJPanel(workArea,userAcc,system);
+        workArea.add(userView);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea); 
     

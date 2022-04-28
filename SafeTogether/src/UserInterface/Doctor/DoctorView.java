@@ -4,6 +4,12 @@
  */
 package UserInterface.Doctor;
 
+import Business.DatabaseUtil.DB4OUtil;
+import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +19,16 @@ public class DoctorView extends javax.swing.JPanel {
     /**
      * Creates new form DoctorView
      */
-    public DoctorView() {
+      private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
+  private DB4OUtil dB4OUtil = DB4OUtil.getInstance();  
+    public DoctorView( JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
         initComponents();
+        this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+        
     }
 
     /**
@@ -104,7 +118,7 @@ public class DoctorView extends javax.swing.JPanel {
 
         jLabel25.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel25.setText("Pandemic Centre");
+        jLabel25.setText("Blood Requests");
         jPanel18.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
         jPanel16.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 290, 60));
@@ -118,7 +132,7 @@ public class DoctorView extends javax.swing.JPanel {
 
         jLabel27.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel27.setText("Doctors Association");
+        jLabel27.setText("Patient Appointments");
         jPanel19.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
         jPanel16.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
@@ -133,8 +147,8 @@ public class DoctorView extends javax.swing.JPanel {
         jPanel20.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 30, -1, -1));
 
         jLabel29.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
-        jLabel29.setText("Hospitals");
-        jPanel20.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jLabel29.setText("Doctor Dashboard ");
+        jPanel20.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jLabel30.setForeground(new java.awt.Color(73, 84, 90));
         jLabel30.setText("Manage everything related to hospital enterprises");
@@ -283,6 +297,10 @@ public class DoctorView extends javax.swing.JPanel {
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
+             container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBackMousePressed
 
     private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
@@ -300,17 +318,7 @@ public class DoctorView extends javax.swing.JPanel {
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -328,11 +336,6 @@ public class DoctorView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
@@ -345,12 +348,7 @@ public class DoctorView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JLabel timeLabel;
