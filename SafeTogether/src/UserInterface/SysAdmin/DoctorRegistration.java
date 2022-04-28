@@ -258,7 +258,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
 
         splCount.setFont(new java.awt.Font("SF Pro Display", 1, 64)); // NOI18N
         splCount.setText("10");
-        jPanel8.add(splCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 80, 90));
+        jPanel8.add(splCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 80, 90));
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 30)); // NOI18N
         jLabel4.setText("Specializations");

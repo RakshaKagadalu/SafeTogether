@@ -118,7 +118,6 @@ public class MapViewr extends javax.swing.JPanel {
         try {
 //
             if (browser.url()!= null) {
-
                 System.out.println(browser.url());
                 String[] a = browser.url().split("!3d", 0);
                 String[] b = a[1].split("!4d");
@@ -140,7 +139,7 @@ public class MapViewr extends javax.swing.JPanel {
                                 System.out.println("ELSE LOCATION " + componentArray.length);
                 System.out.println("ELSE CONTAINER " + userProcessContainer.toString());
             }
-
+                        
 //            if (userProcessContainer.getComponent(componentArray.length - 1) instanceof EmergencyManageOrganizationJPanel) {
 //                EmergencyManageOrganizationJPanel orgManagement = (EmergencyManageOrganizationJPanel) userProcessContainer.getComponent(componentArray.length - 1);
 //                orgManagement.populateLongituteLatitude(locationPoint);
@@ -178,6 +177,7 @@ public class MapViewr extends javax.swing.JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Set Position first");
         }
+               
     }//GEN-LAST:event_setLocationBtnActionPerformed
 
 
