@@ -16,6 +16,8 @@ import Business.Laboratory.BloodWork;
 import Business.Laboratory.BloodWorkDirectory;
 import Business.PandemicCenter.PandemicCenter;
 import Business.PandemicCenter.PandemicCenter_Dir;
+import Utility.MapCoordinates;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,11 +30,13 @@ public class BloodRegistration extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel rightSidePanel;
+    MapCoordinates locationPoint;
 
-    public BloodRegistration(EcoSystem system, JPanel rightSidePanel) {
+    public BloodRegistration(EcoSystem system, JPanel rightSidePanel, MapCoordinates locationPoint) {
         initComponents();
         this.system = system;
         this.rightSidePanel = rightSidePanel;
+        this.locationPoint = locationPoint;
         this.setSize(1160, 750);
         displayTable();
     }
@@ -57,8 +61,6 @@ public class BloodRegistration extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        userNameTextField3 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         userNameTextField4 = new javax.swing.JTextField();
         userNameTextField5 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -66,6 +68,9 @@ public class BloodRegistration extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         userNameTextField7 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        locationInputField = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -156,14 +161,6 @@ public class BloodRegistration extends javax.swing.JPanel {
         jLabel7.setText("Name");
         jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 220, -1));
 
-        userNameTextField3.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(userNameTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 420, 40));
-
-        jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel8.setText("Location");
-        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
-
         userNameTextField4.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
         jPanel7.add(userNameTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 420, 40));
 
@@ -191,6 +188,26 @@ public class BloodRegistration extends javax.swing.JPanel {
         userNameTextField7.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
         jPanel7.add(userNameTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 420, 40));
 
+        jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(73, 84, 90));
+        jLabel8.setText("Location");
+        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
+
+        locationInputField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(locationInputField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, 40));
+
+        jButton4.setBackground(new java.awt.Color(255, 55, 95));
+        jButton4.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Search");
+        jButton4.setBorder(null);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 150, 39));
+
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 740));
@@ -199,7 +216,7 @@ public class BloodRegistration extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
            String name = (userNameTextField4.getText());
-            String location = (userNameTextField3.getText());
+            String location = (locationInputField.getText());
             String pwd = (userNameTextField6.getText());
             String userId = (userNameTextField5.getText());
             String phoneNum = (userNameTextField7.getText());
@@ -210,7 +227,7 @@ public class BloodRegistration extends javax.swing.JPanel {
            //System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
             displayTable();
             
-              userNameTextField3.setText("");
+            locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
@@ -247,7 +264,7 @@ public class BloodRegistration extends javax.swing.JPanel {
             }
 
                       doc.setUserNames(userNameTextField4.getText());
-                        doc.setUserLocation(userNameTextField3.getText());
+                        doc.setUserLocation(locationInputField.getText());
                         doc.setUserPhone(userNameTextField7.getText());
                         doc.setUserId(userNameTextField5.getText());
                         doc.setPassword(userNameTextField6.getText());
@@ -260,7 +277,7 @@ public class BloodRegistration extends javax.swing.JPanel {
         }
           displayTable();
             
-              userNameTextField3.setText("");
+            locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
@@ -299,7 +316,7 @@ public class BloodRegistration extends javax.swing.JPanel {
            
         }
           displayTable();
-          userNameTextField3.setText("");
+          locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
@@ -323,7 +340,7 @@ public class BloodRegistration extends javax.swing.JPanel {
             return;
         } else{
         userNameTextField4.setText(table.getValueAt(selectedRow,0).toString());
-        userNameTextField3.setText(table.getValueAt(selectedRow,1).toString());
+        locationInputField.setText(table.getValueAt(selectedRow,1).toString());
         userNameTextField5.setText(table.getValueAt(selectedRow,2).toString());
         userNameTextField6.setText(table.getValueAt(selectedRow,3).toString());
         userNameTextField7.setText(table.getValueAt(selectedRow,4).toString());
@@ -332,11 +349,26 @@ public class BloodRegistration extends javax.swing.JPanel {
           }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    public void populateLongituteLatitude(MapCoordinates locationPoint) {
+        this.locationPoint = locationPoint;
+        locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());   
+    }
+    
+    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        MapViewr oLJP = new MapViewr(rightSidePanel);
+        rightSidePanel.add("MapViewr", oLJP);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -349,7 +381,7 @@ public class BloodRegistration extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField userNameTextField3;
+    private javax.swing.JTextField locationInputField;
     private javax.swing.JTextField userNameTextField4;
     private javax.swing.JTextField userNameTextField5;
     private javax.swing.JTextField userNameTextField6;

@@ -5,6 +5,7 @@
 package UserInterface.SysAdmin;
 
 import Business.EcoSystem;
+import Utility.MapCoordinates;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ public class PharmaEnterprises extends javax.swing.JPanel {
     private final JPanel container;
     private final EcoSystem system;
     Timer timer;
+    MapCoordinates locationPoint;
     
     private void Time() {
         ActionListener actionListener = new ActionListener() {
@@ -319,11 +321,10 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     doctorAssociationPanel.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
-        PharmacyRegistration pcr=new PharmacyRegistration (system, container);
+        PharmacyRegistration pcr=new PharmacyRegistration (system, rightSidePanel, locationPoint);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-    
     
     }
 }
