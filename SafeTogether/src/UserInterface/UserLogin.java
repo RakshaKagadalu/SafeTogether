@@ -7,10 +7,13 @@ package UserInterface;
 import Business.Doctor.Doctor;
 import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
+import Business.EmergencyPolice.Police;
+import Business.EmergencyPolice.PoliceDir;
 import Business.UserAcc.UserAcc;
 import Business.UserAcc.UserAccDir;
 import Business.userR.User;
 import Business.userR.User_Directory;
+import UserInterface.Police.PoliceMain;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import UserInterface.user.UserAreaJPanel;
 import java.awt.CardLayout;
@@ -178,25 +181,26 @@ public class UserLogin extends javax.swing.JPanel {
              else if(userRole.equals("Business.Roles.UserR"))
             {
              displayUserPanel();
-//                User_Directory cd=system.getUserDir();
-//                ArrayList<User> c=cd.getUsers();
-//                int size=c.size();
-//                System.out.println("size:"+c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                User c1=c.get(i);
-//                if(userAcc.getUserName().matches(c1.getUserId()))
-//                {
-//                    System.out.print("inside user role method");
-//               displayUserPanel();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
+            } else if(userRole.equals("Business.Roles.Police_Officer")){
+                PoliceDir pd = system.getPoliceDir();
+                ArrayList<Police> pds = pd.getPoliceList();
+                int size = pds.size();
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                Police c1= pds.get(i);
+                //System.out.println(userAcc.getUserName());
+                //System.out.println(c1.getUserId());                
+                if(userAcc.getUserName().matches(c1.getUserName()))
+                {
+                    policeDashboard();
+                    count+=1;
+                }       
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
             }
 //            else if(userRole.equals("Business.Role.AdminRole"))
 //            {
@@ -436,6 +440,13 @@ public class UserLogin extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     
+    }
+    
+    private void policeDashboard() {
+        PoliceMain pol = new PoliceMain(workArea,userAcc,system);
+        workArea.add(pol);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
     }
 
     private void viewDocScreen() {
