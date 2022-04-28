@@ -161,7 +161,7 @@ public class GovernmentEnterprise extends javax.swing.JPanel {
 
         timeLabel.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         timeLabel.setText("3:45 PM");
-        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
+        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 20, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel10.setText("Centre for Disease Control");
