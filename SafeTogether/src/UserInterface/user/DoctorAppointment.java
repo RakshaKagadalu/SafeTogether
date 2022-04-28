@@ -4,7 +4,6 @@
  */
 package UserInterface.user;
 
-import Business.DatabaseUtil.DB4OUtil;
 import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
@@ -12,19 +11,13 @@ import Business.WorkQueue.DoctorsAppointment;
 import Business.WorkQueue.DoctorsAppointment_Dir;
 import Business.WorkQueue.SearchApp;
 import Business.userR.User;
-import java.awt.CardLayout;
+import Utility.Notification;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -196,7 +189,8 @@ DoctorDisplay();
 
     private void bookAppointment1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment1ActionPerformed
         // TODO add your handling code here:
-        viewAppointmentStatus();
+       // viewAppointmentStatus();
+       displayAppointmentStatus();
     }//GEN-LAST:event_bookAppointment1ActionPerformed
 
     private void bookAppointment2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment2ActionPerformed
@@ -252,7 +246,7 @@ DoctorDisplay();
          ArrayList<Doctor> doclist=system.getDoctorDir().getDoc();
         int s=doclist.size();
         
-        tblDocAvail.setModel(new DefaultTableModel(null,new String[]{"Name","Hospital","Spealization","Phone Number","status"}));
+        tblDocAvail.setModel(new DefaultTableModel(null,new String[]{"Name","Hospital","Spealization","Phone Number"}));
         for(int i=0;i<s;i++)
         {
             Doctor doc=doclist.get(i);
@@ -269,7 +263,14 @@ DoctorDisplay();
     
     
     }
-
+ public  void sendmail()
+    {   
+        Notification notification = new Notification();
+        String toEmail = "aedproject22@gmail.com";
+        String emailSubject = "Doctor Appointment confirmation";
+        String emailContent = "Successfully booked your doctor appointment!!"; 
+        notification.sendMail(toEmail, emailSubject, emailContent);
+    }
     private void bookDocAppointment() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
    
@@ -310,39 +311,10 @@ DoctorDisplay();
                     list.add(appDate);
                     list.add(timeCombo.getSelectedItem().toString());                    
                     a.put(name, list);
-                    DB4OUtil.dB4OUtil.storeSystem(system);
+                    //DB4OUtil.dB4OUtil.storeSystem(system);
                      
                     //code to send email
-                    {
-        String ToEmail = user.getEmail();
-        String myAccountEmail = "aedproject22@gmail.com";
-        String password = "aedproject123";
-       
-        
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth","true");
-        properties.put("mail.smtp.starttls.enable","true");
-        properties.put("mail.smtp.host","smtp.gmail.com");
-        properties.put("mail.smtp.port","587");
-        
-        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication(){
-                return new PasswordAuthentication(myAccountEmail, password);
-            }
-            
-        });
-        try{
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(myAccountEmail));
-            message.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(ToEmail));
-            message.setSubject("Appointment Booked!!");
-            message.setText("Doctor : "+name+"\n"+"Hospital : "+verifyName+"\n"+"Date : "+appDate+"\n"+"Time : "+timeCombo.getSelectedItem().toString());
-            javax.mail.Transport.send(message);
-        }catch(MessagingException ex){
-            System.out.println(""+ex);
-        }
-        
-        }
+                  // sendmail();
                     //end of code
                     JOptionPane.showMessageDialog(null,"Your Appointment request is successfull!!");
 
@@ -402,13 +374,40 @@ DoctorDisplay();
     
     }
 
-    private void viewAppointmentStatus() {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    private void viewAppointmentStatus() {
+//        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    
+//    DocAppointmentStatus docApp=new DocAppointmentStatus(rightSidePanel,system,userAcc);
+//        container.add("DocAppointmentStatus",docApp);
+//        CardLayout layout = (CardLayout) container.getLayout();
+//        layout.next(container); 
+//        
+//        
+//    
+//    }
     
-    DocAppointmentStatus docApp=new DocAppointmentStatus(rightSidePanel,system,userAcc);
-        container.add(docApp);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.next(container); 
     
-    }
+    private void displayAppointmentStatus() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    
+        DoctorsAppointment_Dir docDir=system.getDocAppDir();
+        ArrayList<DoctorsAppointment> ol=docDir.getAppointments();
+        int u=ol.size();
+        System.out.println(u);
+         
+             tblDocAvail.setModel(new DefaultTableModel(null,new String[]{"AppID","Name","Date","Time","status"}));
+        for(int i=0;i<u;i++)
+        {
+            DoctorsAppointment o=ol.get(i);
+           
+            if(o.getUserId().matches(userAcc.getUserName()))
+            {
+            
+                DefaultTableModel t2 = (DefaultTableModel) tblDocAvail.getModel();
+                String s1=String.valueOf(o.getId());
+                String s[]={s1,o.getDoctorsName(),o.getDate(),o.getTime(),o.getStatus()};
+                t2.addRow(s);
+            }
+        }}
 }

@@ -20,12 +20,20 @@ public class DonateBlood {
     String status;
     String blood_bankName;
     String appoinmentTime;
-      String userId;
+    int Id;
+    String userId;
     String appoinmentDate;
     String firstName;
     String lastName;
     String bloodGroup;
-    
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
 
     public String getUserId() {
         return userId;
@@ -34,6 +42,8 @@ public class DonateBlood {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    
 
     public String getAppoinmentDate() {
         return appoinmentDate;

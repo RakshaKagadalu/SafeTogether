@@ -30,27 +30,24 @@ public class MainJFrame extends javax.swing.JFrame {
      */
 
     // set the default size of the main frame
+//     private EcoSystem system;
+//    public static DB4OUtil dB4OUtil = DB4OUtil.getInstance();
      private EcoSystem system;
-    public static DB4OUtil dB4OUtil = DB4OUtil.getInstance();
-    
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     
     
     
     public MainJFrame() {
         initComponents();
+          system = dB4OUtil.retrieveSystem();
         this.setSize(1920, 1080);
         this.setResizable(false);
-         system = dB4OUtil.retrieveSystem();
+       // system = dB4OUtil.retrieveSystem();
 
          //setSystemAdmin();
 
 
          setAdminPage();
-         
-         
-        
-       
-         
          
 //         //Creation of test data for adding Doctors to Sys Admin tables
 //          Doctor doc = new Doctor("Raksha","Cardio","Boston Public","raksha","pass","1111111111");
@@ -88,7 +85,13 @@ public class MainJFrame extends javax.swing.JFrame {
 //             User user2 = new User("Bo", "kr", "abc@gmail.com", "2222222222", "bo", "bo", "boston");
 //            system.getUserAccDir().addAccount(user2);
 //            system.getUserDir().addUser(user2);
-            //System.out.println(system.getUserAccDir().getUserAccList());
+//            System.out.println(system.getUserAccDir().getUserAccList());
+//         
+//        
+       
+         
+         
+        
     }
     
 

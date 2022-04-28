@@ -4,6 +4,9 @@
  */
 package Business.WorkQueue;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author raksh
@@ -14,6 +17,8 @@ public class Req_Medicine {
     int id;
     String patientId;
     String status;
+    Map<String,String> medOrderlist=new HashMap<String,String>();
+    Map<String,String> medCostlist=new HashMap<String,String>();
     String DoctorName;
 
     public String getPharmaName() {
@@ -42,6 +47,22 @@ public class Req_Medicine {
 
     public String getStatus() {
         return status;
+    }
+
+    public Map<String, String> getMedOrderlist() {
+        return medOrderlist;
+    }
+
+    public void setMedOrderlist(Map<String, String> medOrderlist) {
+        this.medOrderlist = medOrderlist;
+    }
+
+    public Map<String, String> getMedCostlist() {
+        return medCostlist;
+    }
+
+    public void setMedCostlist(Map<String, String> medCostlist) {
+        this.medCostlist = medCostlist;
     }
 
     public void setStatus(String status) {

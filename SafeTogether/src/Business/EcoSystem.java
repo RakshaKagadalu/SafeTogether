@@ -34,8 +34,11 @@ public class EcoSystem extends Organization {
             business=new EcoSystem();
         }
         return business;
+        
     }
-    
+      public static void setInstance(EcoSystem system) {	
+        business = system;	
+    }
     
     private EcoSystem(){
         super(null);
