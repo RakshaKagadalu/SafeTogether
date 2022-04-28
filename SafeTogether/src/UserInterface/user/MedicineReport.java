@@ -4,18 +4,43 @@
  */
 package UserInterface.user;
 
+import Business.EcoSystem;
+
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.Req_Medicine;
+import Business.WorkQueue.Req_MedicineDir;
+import Business.userR.User;
+import java.util.ArrayList;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class MedicineReport extends javax.swing.JPanel {
 
+    EcoSystem system;
+    JPanel rightSidePanel;
     /**
-     * Creates new form MedicineReport
+     * Creates new form BloodDonations
+     * @param system
+     * @param rightSidePanel
      */
-    public MedicineReport() {
+
+    UserAcc userAcc;
+    public MedicineReport(JPanel rightSidePanel,EcoSystem system,UserAcc userAcc) {
         initComponents();
+         this.rightSidePanel=rightSidePanel;
+        this.system=system;
+        this.userAcc=userAcc;
+      displayTable();
+
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,11 +53,21 @@ public class MedicineReport extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPharma = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextMedicine = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtCost = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        bookButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
 
-        jPanel1.setBackground(new java.awt.Color(240, 240, 241));
+        jPanel1.setBackground(new java.awt.Color(250, 249, 251));
         jPanel1.setPreferredSize(new java.awt.Dimension(1160, 750));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -40,11 +75,83 @@ public class MedicineReport extends javax.swing.JPanel {
         jLabel1.setText("Report Medicine");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
+
+        tblPharma.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Doctor Name", "Pharmacy", "Status"
+            }
+        ));
+        tblPharma.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPharmaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblPharma);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, 540));
+
+        jTextMedicine.setColumns(20);
+        jTextMedicine.setRows(5);
+        jTextMedicine.setPreferredSize(new java.awt.Dimension(200, 100));
+        jScrollPane2.setViewportView(jTextMedicine);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, 320, 140));
+
+        txtCost.setColumns(20);
+        txtCost.setRows(5);
+        txtCost.setPreferredSize(new java.awt.Dimension(200, 100));
+        jScrollPane3.setViewportView(txtCost);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 410, 320, 150));
+
+        jLabel2.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setText("Total Cost :");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, 180, -1));
+
+        jLabel3.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("List of all Medicines :");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 180, -1));
+
+        bookButton.setBackground(new java.awt.Color(10, 132, 255));
+        bookButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        bookButton.setForeground(new java.awt.Color(255, 255, 255));
+        bookButton.setText("Collect the Order");
+        bookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 620, 210, 39));
+
+        cancelButton.setBackground(new java.awt.Color(255, 55, 95));
+        cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(255, 255, 255));
+        cancelButton.setText("Cancel the Order");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 620, 200, 39));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1136, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -52,9 +159,182 @@ public class MedicineReport extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblPharmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPharmaMouseClicked
+        // TODO add your handling code here:
+        txtCost.setText("");
+        jTextMedicine.setText("");
+
+        DefaultTableModel t2 = (DefaultTableModel) tblPharma.getModel();
+        int selectedRow=tblPharma.getSelectedRow();
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+        Req_MedicineDir dire= system.getMedicineReqDir();
+        ArrayList<Req_Medicine> order=dire.getMedReqDir();
+        int u=order.size();
+        for(int i=0;i<u;i++)
+        {
+            Req_Medicine o=order.get(i);
+            if(s==o.getId())
+            {
+                Map<String,String> f=o.getMedOrderlist();
+                int count =0;
+                for (String key: f.keySet()) {
+                    jTextMedicine.append("Item "+ count+ " : "+key+" Quantity : "+f.get(key)+"\n");
+                    count++;
+
+                }
+                Map<String,String> f1=o.getMedCostlist();
+                int a=0;
+                for (String key: f1.keySet()) {
+                    System.out.println(Integer.parseInt(f1.get(key)));
+                    a=a+(Integer.parseInt(f1.get(key)));
+                    System.out.println("a"+a);
+
+                }
+                txtCost.append(String.valueOf(a));
+
+            }
+        }
+    }//GEN-LAST:event_tblPharmaMouseClicked
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+        // TODO add your handling code here:
+        orderCollection();
+
+    }//GEN-LAST:event_bookButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+
+        cancelEmergency();
+
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bookButton;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextMedicine;
+    private javax.swing.JTable tblPharma;
+    private javax.swing.JTextArea txtCost;
     // End of variables declaration//GEN-END:variables
+
+    private void displayTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+        Req_MedicineDir dire=system.getMedicineReqDir();
+        ArrayList<Req_Medicine> order=dire.getMedReqDir();
+        int u=order.size();
+        User r=(User)userAcc;
+        for(int i=0;i<u;i++)
+        {
+            Req_Medicine o=order.get(i);
+            if(o.getPatientId().matches(r.getUserId()))
+            {
+                DefaultTableModel t2 = (DefaultTableModel) tblPharma.getModel();
+                String s1=String.valueOf(o.getId());
+                
+                
+                String s[]={s1,o.getDoctorName(),o.getPharmaName(),o.getStatus()};
+                t2.addRow(s);
+            
+            
+            }
+        }
+    
+    
+    }
+
+    private void orderCollection() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   DefaultTableModel  t2 = (DefaultTableModel) tblPharma.getModel();
+        int selectedRow=tblPharma.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+       Req_MedicineDir dire=system.getMedicineReqDir();
+        ArrayList<Req_Medicine> order=dire.getMedReqDir();
+        int u=order.size();
+        
+        for(int i=0;i<u;i++)
+        {
+            Req_Medicine o=order.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().matches("Ready for pickup"))
+                {
+                o.setStatus("Order Recieved");
+                }
+                else
+                {
+                 JOptionPane.showMessageDialog(null,"Wrong Move!!");  
+
+                }
+            }
+        }
+           tblPharma.setModel(new DefaultTableModel(null,new String[]{"ID","Doctor Name","Pharmacy","Status"}));
+        displayTable();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");  
+        }
+    
+    
+    
+    }
+
+    private void cancelEmergency() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+    DefaultTableModel  t2 = (DefaultTableModel) tblPharma.getModel();
+        int selectedRow=tblPharma.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+         Req_MedicineDir dire=system.getMedicineReqDir();
+        ArrayList<Req_Medicine> order=dire.getMedReqDir();
+        
+        int u=order.size();
+        
+        for(int i=0;i<u;i++)
+        {
+            Req_Medicine o=order.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(!o.getStatus().matches("Order Recieved"))
+                {
+                o.setStatus("Canceled");
+                }
+                else
+                {
+                 JOptionPane.showMessageDialog(null,"Wrong Move!!");  
+
+                }
+                
+            }
+        }
+           tblPharma.setModel(new DefaultTableModel(null,new String[]{"ID","Doctor Name","Pharmacy","Status"}));
+        displayTable();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");  
+        }
+    
+    }
 }

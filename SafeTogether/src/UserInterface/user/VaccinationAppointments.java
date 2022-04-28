@@ -5,7 +5,16 @@
 package UserInterface.user;
 
 import Business.EcoSystem;
+import Business.Roles.UserR;
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.VacRequest;
+import Business.WorkQueue.VacRequest_Dir;
+import Business.userR.User;
+import Utility.Notification;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,13 +27,31 @@ public class VaccinationAppointments extends javax.swing.JPanel {
      */
      EcoSystem system;
     JPanel rightSidePanel;
-    public VaccinationAppointments(EcoSystem system, JPanel rightSidePanel) {
+    UserAcc userAcc;
+    public VaccinationAppointments(EcoSystem system, JPanel rightSidePanel, UserAcc userAcc) {
         initComponents();
          this.system = system;
         this.rightSidePanel = rightSidePanel;
+         this.userAcc=userAcc;
         this.setSize(1160, 750);
+          covidNo.setActionCommand("Yes");
+        diabetesNo.setActionCommand("Yes");
+        medicationNo.setActionCommand("Yes");
+        bloodNo.setActionCommand("Yes");
+        covidYes.setActionCommand("No");
+        diabetesYes.setActionCommand("No");
+        medicationYes.setActionCommand("No");
+        bloodYes.setActionCommand("No");
+         displaytable();
     }
-
+  public  void sendmail()
+    {   
+        Notification notification = new Notification();
+        String toEmail = "aedproject22@gmail.com";
+        String emailSubject = "Vaccination Registration Status!!";
+        String emailContent = "You have successfully registered for vaccination drive, please wait for 24hrs to have more details. "; 
+        notification.sendMail(toEmail, emailSubject, emailContent);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,10 +61,14 @@ public class VaccinationAppointments extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        covidButtons = new javax.swing.ButtonGroup();
+        diabetesButton = new javax.swing.ButtonGroup();
+        allergiesButton = new javax.swing.ButtonGroup();
+        bloodThinButton = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblVacReg = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         registerButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -59,7 +90,7 @@ public class VaccinationAppointments extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1160, 750));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(240, 240, 241));
+        jPanel1.setBackground(new java.awt.Color(250, 249, 251));
         jPanel1.setPreferredSize(new java.awt.Dimension(1160, 750));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -67,25 +98,17 @@ public class VaccinationAppointments extends javax.swing.JPanel {
         jLabel1.setText("Vaccination Appointments");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblVacReg.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "Location", "User ID", "Password", "Phone Number"
+                "VacID", "Date", "Time", "Vaccination", "Status", "Vaccination Center"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
+        ));
+        jScrollPane1.setViewportView(tblVacReg);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 580, 630));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 630, 230));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -105,6 +128,11 @@ public class VaccinationAppointments extends javax.swing.JPanel {
         cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         jPanel7.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 580, 200, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
@@ -118,83 +146,105 @@ public class VaccinationAppointments extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel8.setText("Do you have diabetes");
+        jLabel8.setText("Do you have diabetes ?");
         jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
 
         jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel9.setText("Are you under any medication?");
+        jLabel9.setText("Do you have any allergies?");
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 310, -1));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel10.setText("Is your blood thinner?");
-        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 220, -1));
+        jLabel10.setText("Are you taking blood thinner medicines?");
+        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 350, -1));
 
         covidYes.setBackground(new java.awt.Color(255, 255, 255));
+        covidButtons.add(covidYes);
         covidYes.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         covidYes.setForeground(new java.awt.Color(204, 204, 204));
         covidYes.setText("Yes");
         jPanel7.add(covidYes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
 
         covidNo.setBackground(new java.awt.Color(255, 255, 255));
+        covidButtons.add(covidNo);
         covidNo.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         covidNo.setForeground(new java.awt.Color(204, 204, 204));
         covidNo.setText("No");
         jPanel7.add(covidNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, -1, -1));
 
         diabetesYes.setBackground(new java.awt.Color(255, 255, 255));
+        diabetesButton.add(diabetesYes);
         diabetesYes.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         diabetesYes.setForeground(new java.awt.Color(204, 204, 204));
         diabetesYes.setText("Yes");
         jPanel7.add(diabetesYes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
 
         diabetesNo.setBackground(new java.awt.Color(255, 255, 255));
+        diabetesButton.add(diabetesNo);
         diabetesNo.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         diabetesNo.setForeground(new java.awt.Color(204, 204, 204));
         diabetesNo.setText("No");
         jPanel7.add(diabetesNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, -1, -1));
 
         medicationYes.setBackground(new java.awt.Color(255, 255, 255));
+        allergiesButton.add(medicationYes);
         medicationYes.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         medicationYes.setForeground(new java.awt.Color(204, 204, 204));
         medicationYes.setText("Yes");
         jPanel7.add(medicationYes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, -1, -1));
 
         medicationNo.setBackground(new java.awt.Color(255, 255, 255));
+        allergiesButton.add(medicationNo);
         medicationNo.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         medicationNo.setForeground(new java.awt.Color(204, 204, 204));
         medicationNo.setText("No");
         jPanel7.add(medicationNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, -1, -1));
 
         bloodYes.setBackground(new java.awt.Color(255, 255, 255));
+        bloodThinButton.add(bloodYes);
         bloodYes.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         bloodYes.setForeground(new java.awt.Color(204, 204, 204));
         bloodYes.setText("Yes");
         jPanel7.add(bloodYes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, -1, -1));
 
         bloodNo.setBackground(new java.awt.Color(255, 255, 255));
+        bloodThinButton.add(bloodNo);
         bloodNo.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         bloodNo.setForeground(new java.awt.Color(204, 204, 204));
         bloodNo.setText("No");
         jPanel7.add(bloodNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, -1, -1));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 470, 630));
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, 470, 630));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 750));
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
+        vaccineRegistration();
     }//GEN-LAST:event_registerButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        
+        cancelRegistration();
+        
+        
+        
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup allergiesButton;
     private javax.swing.JRadioButton bloodNo;
+    private javax.swing.ButtonGroup bloodThinButton;
     private javax.swing.JRadioButton bloodYes;
     private javax.swing.JButton cancelButton;
+    private javax.swing.ButtonGroup covidButtons;
     private javax.swing.JRadioButton covidNo;
     private javax.swing.JRadioButton covidYes;
+    private javax.swing.ButtonGroup diabetesButton;
     private javax.swing.JRadioButton diabetesNo;
     private javax.swing.JRadioButton diabetesYes;
     private javax.swing.JLabel jLabel1;
@@ -206,9 +256,132 @@ public class VaccinationAppointments extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JRadioButton medicationNo;
     private javax.swing.JRadioButton medicationYes;
     private javax.swing.JButton registerButton;
+    private javax.swing.JTable tblVacReg;
     // End of variables declaration//GEN-END:variables
+
+    private void displaytable() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    VacRequest_Dir vrd= system.getVaccReqDir();
+         ArrayList<VacRequest> ol=vrd.getRequests();
+        int u=ol.size();
+        
+        for(int i=0;i<u;i++)
+        {
+            VacRequest o=ol.get(i);
+           
+            if(userAcc.getUserName().matches(o.getUserId()))
+            {
+                DefaultTableModel t2 = (DefaultTableModel) tblVacReg.getModel();
+                String s1=String.valueOf(o.getVacId());    
+                String s[]={s1,o.getDate(),o.getTime(),o.getVaccination(),o.getStatus(),o.getPharmacy()};
+                t2.addRow(s);
+            }
+        }
+    
+    
+    
+    
+    
+    }
+
+    private void vaccineRegistration() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     VacRequest_Dir vrd= system.getVaccReqDir();
+        ArrayList<VacRequest> ol=vrd.getRequests();
+        int u=ol.size();
+        
+        boolean status=true;
+        for(int i=0;i<u;i++)
+        {
+            VacRequest o=ol.get(i);
+            if(userAcc.getUserName().matches(o.getUserId()))
+            {
+                if(o.getStatus().equals("In progress")||o.getStatus().equals("Done")||o.getStatus().equals("Approved"))
+                {
+                    status=false;
+                    JOptionPane.showMessageDialog(null,"Status : "+o.getStatus());
+                }
+                
+            }
+            
+            
+        }
+        if(status==true)
+        {
+            if((covidYes.isSelected()||covidNo.isSelected())&&(diabetesNo.isSelected()||diabetesYes.isSelected())&&(medicationNo.isSelected()||medicationYes.isSelected())&&(bloodNo.isSelected()||bloodYes.isSelected())){
+                int x = 1 + (int) (Math.random() * 100);
+                        VacRequest vr= new VacRequest();
+                        vr.setVacId(x);
+                        vr.setDisease(covidButtons.getSelection().getActionCommand());
+                        vr.setDiabetes(diabetesButton.getSelection().getActionCommand());
+                        vr.setMedication(allergiesButton.getSelection().getActionCommand());
+                        vr.setBloodThinner(bloodThinButton.getSelection().getActionCommand());
+                        vr.setStatus("In progress");
+                        vr.setPharmacy("NA");
+                        vr.setVaccination("NA");
+                        vr.setDate("NA");
+                        vr.setTime("NA");
+                        User u1=(User)(userAcc);
+                        vr.setFirst_name(u1.getFirstName());
+                        vr.setUserId(u1.getUserId());
+                        vrd.addRequest(vr);
+                         JOptionPane.showMessageDialog(null, "Sucessfully Registered!!");
+                        // sendmail();
+                        tblVacReg.setModel(new DefaultTableModel(null,new String[]{"VacID","Date","Time","Vaccination","Status","Vaccine Center"}));
+                        displaytable();
+                
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Please answer all the questions");
+            }
+        }
+    
+    //DB4OUtil.dB4OUtil.storeSystem(ecosystem);
+    }
+
+    private void cancelRegistration() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      DefaultTableModel  t2 = (DefaultTableModel) tblVacReg.getModel();
+        int selectedRow=tblVacReg.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+     
+        VacRequest_Dir vrd=system.getVaccReqDir();
+        ArrayList<VacRequest> ol=vrd.getRequests();
+        int u=ol.size();
+       // User bb=(User)(userAcc);
+        for(int i=0;i<u;i++)
+        {
+            VacRequest o=ol.get(i);
+            if(s==o.getVacId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().equals("Cancel")||o.getStatus().equals("Done")||o.getStatus().equals("Approved"))
+                {
+                     JOptionPane.showMessageDialog(null,"wrong move!!");
+                }
+                else
+                        {
+                            
+                            o.setStatus("Cancel");
+                        }
+               
+            }
+            }
+       tblVacReg.setModel(new DefaultTableModel(null,new String[]{"VacID","Date","Time","Vaccination","Status","Vaccine Center"}));
+                        displaytable();
+    }                                        
+else
+        {
+            JOptionPane.showMessageDialog(null,"Please select a vaccine registeration to delete!!");
+        }
+    
+    
+    
+    
+    }
 }

@@ -4,8 +4,31 @@
  */
 package UserInterface.user;
 
+import Business.DatabaseUtil.DB4OUtil;
+import Business.Doctor.Doctor;
 import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.DoctorsAppointment;
+import Business.WorkQueue.DoctorsAppointment_Dir;
+import Business.WorkQueue.DonateBlood;
+import Business.WorkQueue.DonateBlood_Dir;
+import Business.WorkQueue.SearchApp;
+import Business.userR.User;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,15 +38,21 @@ public class BloodDonations extends javax.swing.JPanel {
 
     EcoSystem system;
     JPanel rightSidePanel;
+    UserAcc userAccount;
     /**
      * Creates new form BloodDonations
      * @param system
      * @param rightSidePanel
      */
-    public BloodDonations(EcoSystem system, JPanel rightSidePanel) {
+    public BloodDonations(EcoSystem system, JPanel rightSidePanel, UserAcc userAccount) {
         initComponents();
         this.system = system;
         this.rightSidePanel = rightSidePanel;
+        this.userAccount = userAccount;
+        User a =(User)(userAccount);
+        firstNameField.setText(a.getFirstName());
+        lastNameField.setText(a.getLastName());
+        setDonationCenterList();
         this.setSize(1160, 750);
     }
     
@@ -53,7 +82,7 @@ public class BloodDonations extends javax.swing.JPanel {
         appointmentLabel = new javax.swing.JLabel();
         appointmentTimeLabel = new javax.swing.JLabel();
         bloodBox = new javax.swing.JComboBox<>();
-        dateBox = new com.toedter.calendar.JDateChooser();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         timeBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(250, 249, 251));
@@ -116,6 +145,11 @@ public class BloodDonations extends javax.swing.JPanel {
         cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         jPanel7.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 140, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
@@ -136,6 +170,11 @@ public class BloodDonations extends javax.swing.JPanel {
         jPanel7.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
 
         firstNameField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        firstNameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstNameFieldActionPerformed(evt);
+            }
+        });
         jPanel7.add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 420, 40));
 
         jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
@@ -154,9 +193,9 @@ public class BloodDonations extends javax.swing.JPanel {
         jPanel7.add(appointmentTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 220, -1));
 
         jPanel7.add(bloodBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 40));
-        jPanel7.add(dateBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 420, 40));
+        jPanel7.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 420, 40));
 
-        timeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "19:00 - 20:00", " ", " " }));
+        timeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "19:00 - 20:00" }));
         jPanel7.add(timeBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 420, 40));
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
@@ -173,13 +212,166 @@ public class BloodDonations extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void setDonationCenterList() {
+        ArrayList<DonateBlood> d=system.getDonateBloodDir().getDonors();
+        int s=d.size();
+        ArrayList<String> spe =new ArrayList<>();
+        for(int i=0;i<s;i++)
+        {
+            DonateBlood d1=d.get(i);
+            if(!spe.contains(d1.getBlood_bankName()))
+            {
+                spe.add(d1.getBlood_bankName());
+            }
+            
+        }
+        for(int i=0;i<spe.size();i++)
+        {
+            bloodBox.addItem(spe.get(i));
+        }
+    }
+    
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
         // TODO add your handling code here:
+        bloodDonationAppointment();
     }//GEN-LAST:event_bookButtonActionPerformed
 
+    private void bloodDonationAppointment() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+           if(jDateChooser1.getDate()!=null)
+            {
+            DonateBlood db=new DonateBlood();
+            int x = 1 + (int) (Math.random() * 100);
+            db.setId(x);
+            db.setFirstName(firstNameField.getText());
+            db.setBlood_bankName(bloodBox.getSelectedItem().toString());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String d1 = sdf.format(jDateChooser1.getDate());
+            db.setStatus("Appoinment Booked");
+            User a=(User)(userAccount);
+            db.setUserId(a.getUserId());
+            db.setAppoinmentDate(d1);            
+            db.setAppoinmentTime(timeBox.getSelectedItem().toString());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+            LocalDateTime d2 = LocalDateTime.now();  
+            System.out.println(dtf.format(d2));
+            if(d1.compareTo(d2.toString()) >= 0) {
+                DonateBlood_Dir dbd= system.getDonateBloodDir();    
+                dbd.addrequest(db);
+                jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Center","Status","Date","Time"}));
+                populate_table();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Appointment Available from Tomorrow");
+            }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Pick A Date!!");
+            }
+    
+    }
+    
+    
+    public void populate_table()
+    {
+        DonateBlood_Dir red= system.getDonateBloodDir();
+        ArrayList<DonateBlood> ol = red.getDonors();
+        int u=ol.size();
+        System.out.println(u);
+        for(int i=0;i<u;i++)
+        {
+            DonateBlood o=ol.get(i);
+            System.out.println(userAccount.getUserName());
+            System.out.println(o.getUserId());
+            if(userAccount.getUserName().matches(o.getUserId()))
+            {
+                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+                String s1=String.valueOf(o.getId());    
+                String s[]={s1,o.getBlood_bankName(),o.getStatus(),o.getAppoinmentDate(),o.getAppoinmentTime()};
+                t2.addRow(s);
+            }
+        }
+        
+    }
+    
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+        DonateBlood_Dir red= system.getDonateBloodDir();
+        ArrayList<DonateBlood> ol=red.getDonors();
+        int u=ol.size();
+        User bb=(User)(userAccount);
+        for(int i=0;i<u;i++)
+        {
+            DonateBlood o=ol.get(i);
+            if(s==o.getId())
+            {
+                if(o.getStatus().matches("Done"))
+                {
+                JOptionPane.showMessageDialog(null,"WBC :"+o.getWBC()+" "+"RBC :"+o.getRBC()+" "+"Cholesterol :"+o.getCholesterol()+" "+"Platelets :"+o.getPlatelets());
+                }
+                else
+                {
+                  JOptionPane.showMessageDialog(null,"Results not Available!!");  
+                }
+            }
+        }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");
+        }
     }//GEN-LAST:event_viewButtonActionPerformed
+
+    private void firstNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstNameFieldActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+        DonateBlood_Dir red= system.getDonateBloodDir();
+        ArrayList<DonateBlood> ol=red.getDonors();
+        int u=ol.size();
+        User bb=(User)(userAccount);
+        for(int i=0;i<u;i++)
+        {
+            DonateBlood o=ol.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().matches("Appoinment Booked"))
+                {
+                     o.setStatus("Cancled");
+                }
+                else
+                        {
+                            JOptionPane.showMessageDialog(null,"wrong move!!");
+                        }
+               
+            }
+            }
+        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Center","Status","Date","Time"}));
+        populate_table();
+    }                                        
+else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");
+        }
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -188,9 +380,9 @@ public class BloodDonations extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> bloodBox;
     private javax.swing.JButton bookButton;
     private javax.swing.JButton cancelButton;
-    private com.toedter.calendar.JDateChooser dateBox;
     private javax.swing.JTextField firstNameField;
     private javax.swing.JLabel firstNameLabel;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
