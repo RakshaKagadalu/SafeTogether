@@ -4,19 +4,40 @@
  */
 package UserInterface.Fire;
 
+import Business.EcoSystem;
+import Business.EmergencyFire.Fire;
+//import Business.EmergencyFire.Fire;
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.Req_Emergency;
+import Business.WorkQueue.Req_EmergencyDir;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class FireDisplay extends javax.swing.JPanel {
 
+   
+
+    
+     private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
     /**
      * Creates new form FireDisplay
      */
-    public FireDisplay() {
+    public FireDisplay(EcoSystem ecosystem, JPanel userProcessContainer, UserAcc userAcc) {
+        this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
         initComponents();
+        populate_table();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,17 +139,167 @@ public class FireDisplay extends javax.swing.JPanel {
 
     private void bookButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton2ActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+        Req_EmergencyDir red=system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
+        Fire a=(Fire)userAcc;
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            Req_Emergency o=ol.get(i);
+            if(s==o.getId())
+            {
+                if(o.getStatus().matches("Closed"))
+                {
+                    JOptionPane.showMessageDialog(null, "Emergency Closed");
+                }
+                else if(o.getStatus().matches("False Alarm"))
+                {
+                    JOptionPane.showMessageDialog(null, "Emergency is a false Alaram");
+                }
+                else if(o.getResponse().matches("No Response"))
+                {
+                    JOptionPane.showMessageDialog(null, "respond to emergency");
+                }
+                else
+                {
+                    o.setStatus("False Alarm");
+                }
+                
+                
+
+            }
+
+        }
+        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Emergency","Location","Status","Response"}));
+        populate_table();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Select A Row!!");
+        }
     }//GEN-LAST:event_bookButton2ActionPerformed
 
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+        Req_EmergencyDir red=system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            Req_Emergency o=ol.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().matches("Closed"))
+                {
+                    JOptionPane.showMessageDialog(null, "Emergency Closed");
+                }
+                else if(o.getStatus().matches("False Alaram"))
+                {
+                    JOptionPane.showMessageDialog(null, "Emergency is a false Alaram");
+                }
+                else if(o.getResponse().matches("No Response"))
+                {
+                    JOptionPane.showMessageDialog(null, "respond to emergency");
+                }
+                else
+                {
+                    o.setStatus("Closed");
+                }
+
+            }
+
+        }
+        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Emergency","Location","Status","Response"}));
+        populate_table();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Select A Row!!");
+        }
     }//GEN-LAST:event_bookButtonActionPerformed
 
     private void bookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton1ActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {       
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+        Req_EmergencyDir red=system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
+        int u=ol.size();
+        Fire a=(Fire)userAcc;
+        for(int i=0;i<u;i++)
+        {
+            Req_Emergency o=ol.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().matches("Closed"))
+                {
+                    JOptionPane.showMessageDialog(null, "Emergency Closed");
+                }
+                else if(o.getStatus().matches("False Alaram"))
+                {
+                    JOptionPane.showMessageDialog(null, "Emergency is a false Alaram");
+                }
+                else if(o.getResponse().matches("No Response"))
+                {
+                    o.setResponse(a.getNameFireman()+" "+"Responded");
+                }
+                else
+                {
+                   JOptionPane.showMessageDialog(null, "Already Responded!!"); 
+                }
+                
+
+            }
+
+        }
+        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Emergency","Location","Status","Response"}));
+        populate_table();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Select A Row!!");
+        }
     }//GEN-LAST:event_bookButton1ActionPerformed
 
-
+     public void populate_table()
+    {
+        Req_EmergencyDir red=system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
+        int u=ol.size();
+        System.out.println(u);
+        for(int i=0;i<u;i++)
+        {
+            Req_Emergency o=ol.get(i);
+            if(o.getEmergency().matches("Fire"))
+            {
+            
+                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+                String s1=String.valueOf(o.getId());
+                
+                
+                String s[]={s1,o.getName(),o.getEmergency(),o.getLocation(),o.getStatus(),o.getResponse()};
+                t2.addRow(s);
+            
+            }
+            
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookButton;
     private javax.swing.JButton bookButton1;

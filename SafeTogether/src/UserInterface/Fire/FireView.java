@@ -4,17 +4,34 @@
  */
 package UserInterface.Fire;
 
+import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import UserInterface.Police.PoliceDisplay;
+import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class FireView extends javax.swing.JPanel {
-
+    
+    
+    private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
     /**
      * Creates new form FireView
+     * @param userProcessContainer
+     * @param userAcc
+     * @param ecosystem
      */
-    public FireView() {
+    public FireView(JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
         initComponents();
+        this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
     }
 
     /**
@@ -36,16 +53,15 @@ public class FireView extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        fireDepartmentPanel = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        timeLabel1 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        rightSidePanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -92,52 +108,50 @@ public class FireView extends javax.swing.JPanel {
         jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1040, 190, 30));
         jPanel9.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel11.setPreferredSize(new java.awt.Dimension(100, 48));
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 90));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-doctor-male-skin-type-3-48.png"))); // NOI18N
-        jPanel11.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 60));
+        fireDepartmentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        fireDepartmentPanel.setPreferredSize(new java.awt.Dimension(100, 48));
+        fireDepartmentPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fireDepartmentPanelMousePressed(evt);
+            }
+        });
+        fireDepartmentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel15.setText("Pandemic Centre");
-        jPanel11.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-medical-expenses-insurance-24.png"))); // NOI18N
+        fireDepartmentPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
-        jPanel9.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 290, 60));
+        jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(115, 120, 128));
+        jLabel9.setText("Fire Department");
+        fireDepartmentPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel12.setPreferredSize(new java.awt.Dimension(100, 48));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-doctor-male-skin-type-3-48.png"))); // NOI18N
-        jPanel12.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 60));
-
-        jLabel17.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel17.setText("Doctors Association");
-        jPanel12.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
-
-        jPanel9.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
+        jPanel9.add(fireDepartmentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
 
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 288, 1080));
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel18.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
-        jLabel18.setText("3:45 PM");
-        jPanel13.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 30, -1, -1));
+        timeLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
+        timeLabel1.setText("3:45 PM");
+        jPanel14.add(timeLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
 
-        jLabel19.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
-        jLabel19.setText("Hospitals");
-        jPanel13.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jLabel23.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
+        jLabel23.setText("Fire");
+        jPanel14.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        jLabel20.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel20.setText("Manage everything related to hospital enterprises");
-        jPanel13.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        jLabel4.setForeground(new java.awt.Color(152, 151, 151));
+        jLabel4.setText("Manage everything related to Pharmaceutical Enterprises");
+        jPanel14.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        jPanel8.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1630, 100));
+        jPanel8.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1630, 90));
+
+        rightSidePanel.setBackground(new java.awt.Color(250, 249, 251));
+        rightSidePanel.setLayout(new java.awt.CardLayout());
+        jPanel8.add(rightSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 1160, 750));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -267,33 +281,47 @@ public class FireView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorAssociationPanelMousePressed
 
+    private void fireDepartmentPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fireDepartmentPanelMousePressed
+        // TODO add your handling code here:
+        checkEmergency();
+    }//GEN-LAST:event_fireDepartmentPanelMousePressed
+
+    private void checkEmergency() {
+        
+        fireDepartmentPanel.setBackground(new Color(213,230,249));
+
+        FireDisplay pr=new FireDisplay (system, container,userAcc);
+
+        rightSidePanel.add(pr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel doctorAssociationPanel;
+    private javax.swing.JPanel fireDepartmentPanel;
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -304,6 +332,8 @@ public class FireView extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
+    private javax.swing.JLabel timeLabel1;
     // End of variables declaration//GEN-END:variables
 }
