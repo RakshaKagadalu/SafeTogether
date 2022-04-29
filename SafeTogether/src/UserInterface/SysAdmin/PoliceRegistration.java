@@ -70,6 +70,8 @@ public class PoliceRegistration extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         locationInputField = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        addressInput = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -153,7 +155,7 @@ public class PoliceRegistration extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel2.setText("Enter Details");
-        jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 300, 50));
+        jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 300, 50));
 
         jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(73, 84, 90));
@@ -164,28 +166,28 @@ public class PoliceRegistration extends javax.swing.JPanel {
         jPanel7.add(firstNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 420, 40));
 
         userIdTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(userIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 40));
+        jPanel7.add(userIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 420, 40));
 
         jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(73, 84, 90));
         jLabel9.setText("User ID");
-        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 220, -1));
+        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 220, -1));
 
         passwordTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 420, 40));
+        jPanel7.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 420, 40));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(73, 84, 90));
         jLabel10.setText("Password");
-        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 220, -1));
+        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 220, -1));
 
         jLabel11.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(73, 84, 90));
         jLabel11.setText("Phone Number");
-        jPanel7.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 220, -1));
+        jPanel7.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 220, -1));
 
         phoneTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 420, 40));
+        jPanel7.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 420, 40));
 
         jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(73, 84, 90));
@@ -206,6 +208,14 @@ public class PoliceRegistration extends javax.swing.JPanel {
             }
         });
         jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 150, 39));
+
+        jLabel12.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(73, 84, 90));
+        jLabel12.setText("Address");
+        jPanel7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 220, -1));
+
+        addressInput.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(addressInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 40));
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
@@ -380,11 +390,13 @@ public class PoliceRegistration extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DelBtn;
     private javax.swing.JButton addBtn;
+    private javax.swing.JTextField addressInput;
     private javax.swing.JTextField firstNameTxt;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

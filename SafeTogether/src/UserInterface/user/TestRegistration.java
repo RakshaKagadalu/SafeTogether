@@ -11,6 +11,9 @@ import Business.UserAcc.UserAcc;
 import Business.WorkQueue.OutbreakTracer;
 import Business.WorkQueue.OutbreakTracerDir;
 import Business.userR.User;
+import UserInterface.SysAdmin.MapViewerTwo;
+import UserInterface.SysAdmin.MapViewr;
+import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -343,6 +346,16 @@ public class TestRegistration extends javax.swing.JPanel {
 
     private void showInMap() {
         System.out.println(locationCordinate);
+        String [] parts = locationCordinate.split(",");
+        String lattitude = parts[0].replaceAll("\\s","");
+        String longitude = parts[1].replaceAll("\\s","");
+        
+        MapViewerTwo oLJP = new MapViewerTwo(rightSidePanel, lattitude, longitude);
+        rightSidePanel.add("MapViewr", oLJP);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+        
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
