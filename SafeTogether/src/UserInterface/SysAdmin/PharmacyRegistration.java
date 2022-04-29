@@ -5,8 +5,8 @@
 package UserInterface.SysAdmin;
 
 import Business.EcoSystem;
-import Business.Laboratory.BloodWork;
-import Business.Laboratory.BloodWorkDirectory;
+import Business.BloodBank.BloodWork;
+import Business.BloodBank.BloodWorkDirectory;
 import Business.PandemicCenter.PandemicCenter;
 import Business.PandemicCenter.PandemicCenter_Dir;
 import Business.Pharma.Pharma;

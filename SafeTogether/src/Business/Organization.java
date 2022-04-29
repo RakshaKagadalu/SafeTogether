@@ -8,7 +8,7 @@ import Business.CDC.CDCDirectory;
 import Business.Doctor.DoctorDir;
 import Business.EmergencyAmbulance.AmbulanceDir;
 import Business.EmergencyFire.FireDir;
-import Business.Laboratory.BloodWorkDirectory;
+import Business.BloodBank.BloodWorkDirectory;
 import Business.PandemicCenter.PandemicCenter_Dir;
 import Business.Pharma.PharmaDirectory;
 import Business.Roles.Roles;
@@ -324,8 +324,10 @@ abstract class Organization{
     public Req_MedicineDir getMedicineReqDir() {
           if(medicineReqDir==null)
         {
+            
             medicineReqDir = new Req_MedicineDir();        
         }
+          System.out.println("medre dir"+medicineReqDir);
         return medicineReqDir;
     }
 

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author arjunbirju
  */
 public class VacRequest_Dir {
-    ArrayList<VacRequest> requests = new ArrayList<>();
+    ArrayList<VacRequest> requests = new ArrayList<VacRequest>();
 
     public ArrayList<VacRequest> getRequests() {
         return requests;

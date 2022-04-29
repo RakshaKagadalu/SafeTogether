@@ -103,24 +103,24 @@ public class MedicineReport extends javax.swing.JPanel {
         jTextMedicine.setPreferredSize(new java.awt.Dimension(200, 100));
         jScrollPane2.setViewportView(jTextMedicine);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, 320, 140));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 440, 140));
 
         txtCost.setColumns(20);
         txtCost.setRows(5);
         txtCost.setPreferredSize(new java.awt.Dimension(200, 100));
         jScrollPane3.setViewportView(txtCost);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 410, 320, 150));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 380, 440, 150));
 
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Total Cost :");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, 180, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 340, 180, -1));
 
         jLabel3.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("List of all Medicines :");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 180, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 270, -1));
 
         bookButton.setBackground(new java.awt.Color(10, 132, 255));
         bookButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
@@ -131,7 +131,7 @@ public class MedicineReport extends javax.swing.JPanel {
                 bookButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 620, 210, 39));
+        jPanel1.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 630, 210, 39));
 
         cancelButton.setBackground(new java.awt.Color(255, 55, 95));
         cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
@@ -142,7 +142,7 @@ public class MedicineReport extends javax.swing.JPanel {
                 cancelButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 620, 200, 39));
+        jPanel1.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 630, 200, 39));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -150,7 +150,7 @@ public class MedicineReport extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1136, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1148, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -177,7 +177,7 @@ public class MedicineReport extends javax.swing.JPanel {
             if(s==o.getId())
             {
                 Map<String,String> f=o.getMedOrderlist();
-                int count =0;
+                int count =1;
                 for (String key: f.keySet()) {
                     jTextMedicine.append("Item "+ count+ " : "+key+" Quantity : "+f.get(key)+"\n");
                     count++;
@@ -211,7 +211,7 @@ public class MedicineReport extends javax.swing.JPanel {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
 
-        cancelEmergency();
+        cancelOrder();
 
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -297,7 +297,7 @@ public class MedicineReport extends javax.swing.JPanel {
     
     }
 
-    private void cancelEmergency() {
+    private void cancelOrder() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
    
     DefaultTableModel  t2 = (DefaultTableModel) tblPharma.getModel();
@@ -318,7 +318,7 @@ public class MedicineReport extends javax.swing.JPanel {
             {
                 if(!o.getStatus().matches("Order Recieved"))
                 {
-                o.setStatus("Canceled");
+                o.setStatus("Cancelled");
                 }
                 else
                 {

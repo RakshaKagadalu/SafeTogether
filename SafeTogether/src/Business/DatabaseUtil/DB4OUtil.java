@@ -63,8 +63,10 @@ public class DB4OUtil {
     
     public EcoSystem retrieveSystem(){
         ObjectContainer conn = createConnection();
-       ObjectSet<EcoSystem> systems = conn.query(EcoSystem.class); // Change to the object you want to save
+          
+      ObjectSet<EcoSystem> systems = conn.query(EcoSystem.class); // Change to the object you want to save
         EcoSystem system;
+//        system = SystemConfig.SysConfigure();  
         if (systems.size() == 0){
             system = SystemConfig.SysConfigure();  // If there's no System in the record, create a new one
         }

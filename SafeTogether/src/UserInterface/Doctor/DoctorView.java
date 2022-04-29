@@ -4,6 +4,14 @@
  */
 package UserInterface.Doctor;
 
+import Business.DatabaseUtil.DB4OUtil;
+import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import UserInterface.user.MedicineReport;
+import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +21,16 @@ public class DoctorView extends javax.swing.JPanel {
     /**
      * Creates new form DoctorView
      */
-    public DoctorView() {
+      private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
+  private DB4OUtil dB4OUtil = DB4OUtil.getInstance();  
+    public DoctorView( JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
         initComponents();
+        this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+        
     }
 
     /**
@@ -28,16 +44,16 @@ public class DoctorView extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        Appointments = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         goBack = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        doctorAssociationPanel1 = new javax.swing.JPanel();
+        appointments = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        doctorAssociationPanel = new javax.swing.JPanel();
+        requestBlood = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -46,6 +62,7 @@ public class DoctorView extends javax.swing.JPanel {
         timeLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        rightSidePanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1920, 1080));
@@ -56,13 +73,13 @@ public class DoctorView extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(245, 245, 245));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Appointments.setBackground(new java.awt.Color(255, 255, 255));
+        Appointments.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1040, 190, 30));
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        Appointments.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1040, 190, 30));
+        Appointments.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
         goBack.setBackground(new java.awt.Color(255, 255, 255));
         goBack.setPreferredSize(new java.awt.Dimension(100, 48));
@@ -81,51 +98,51 @@ public class DoctorView extends javax.swing.JPanel {
         jLabel32.setText("Return");
         goBack.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel4.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
+        Appointments.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
-        doctorAssociationPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        doctorAssociationPanel1.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorAssociationPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        appointments.setBackground(new java.awt.Color(255, 255, 255));
+        appointments.setPreferredSize(new java.awt.Dimension(100, 48));
+        appointments.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorAssociationPanel1MousePressed(evt);
+                appointmentsMousePressed(evt);
             }
         });
-        doctorAssociationPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        appointments.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-city-buildings-24.png"))); // NOI18N
-        doctorAssociationPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        appointments.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(115, 120, 128));
         jLabel7.setText("Manage Appointments");
-        doctorAssociationPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        appointments.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel4.add(doctorAssociationPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 60));
+        Appointments.add(appointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 60));
 
-        doctorAssociationPanel.setBackground(new java.awt.Color(255, 255, 255));
-        doctorAssociationPanel.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorAssociationPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        requestBlood.setBackground(new java.awt.Color(255, 255, 255));
+        requestBlood.setPreferredSize(new java.awt.Dimension(100, 48));
+        requestBlood.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorAssociationPanelMousePressed(evt);
+                requestBloodMousePressed(evt);
             }
         });
-        doctorAssociationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        requestBlood.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-drop-of-blood-24.png"))); // NOI18N
-        doctorAssociationPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        requestBlood.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
         jLabel6.setText("Request Blood");
-        doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        requestBlood.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel4.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 290, 60));
-        jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
+        Appointments.add(requestBlood, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 290, 60));
+        Appointments.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 90));
+        Appointments.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 90));
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 288, 1080));
+        jPanel3.add(Appointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 288, 1080));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -135,7 +152,7 @@ public class DoctorView extends javax.swing.JPanel {
         jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
-        jLabel10.setText("Manage Doctors");
+        jLabel10.setText("Doctors Dashboard");
         jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         jLabel1.setForeground(new java.awt.Color(152, 151, 151));
@@ -143,6 +160,10 @@ public class DoctorView extends javax.swing.JPanel {
         jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1630, 90));
+
+        rightSidePanel.setBackground(new java.awt.Color(250, 249, 251));
+        rightSidePanel.setLayout(new java.awt.CardLayout());
+        jPanel3.add(rightSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 1300, 910));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -179,20 +200,26 @@ public class DoctorView extends javax.swing.JPanel {
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
+             container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBackMousePressed
 
-    private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
+    private void requestBloodMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestBloodMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorAssociationPanelMousePressed
+        requestBlood();
+    }//GEN-LAST:event_requestBloodMousePressed
 
-    private void doctorAssociationPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanel1MousePressed
+    private void appointmentsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorAssociationPanel1MousePressed
+        appointments();
+    }//GEN-LAST:event_appointmentsMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel doctorAssociationPanel;
-    private javax.swing.JPanel doctorAssociationPanel1;
+    private javax.swing.JPanel Appointments;
+    private javax.swing.JPanel appointments;
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -206,10 +233,40 @@ public class DoctorView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel requestBlood;
+    private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void requestBlood() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     appointments.setBackground(new Color(255,255,255));
+        requestBlood.setBackground(new Color(213,230,249));
+        
+
+        RequestBlood pcr = new RequestBlood(container, system, userAcc);
+
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    }
+
+    private void appointments() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+     requestBlood.setBackground(new Color(255,255,255));
+        appointments.setBackground(new Color(213,230,249));
+        
+
+        ManageDoc pcr = new ManageDoc(rightSidePanel, system, userAcc);
+
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    }
 }

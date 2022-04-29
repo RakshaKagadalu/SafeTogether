@@ -10,8 +10,10 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+*Databank.db4o
 
 .DS_Store
+*Databank.db4o
 
 # Package Files #
 *.jar
