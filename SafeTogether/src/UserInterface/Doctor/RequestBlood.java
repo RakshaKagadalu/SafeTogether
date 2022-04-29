@@ -4,6 +4,18 @@
  */
 package UserInterface.Doctor;
 
+import Business.BloodBank.BloodWork;
+import Business.BloodBank.BloodWorkDirectory;
+import Business.Doctor.Doctor;
+import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.Req_Blood;
+import Business.WorkQueue.Req_BloodDir;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +25,27 @@ public class RequestBlood extends javax.swing.JPanel {
     /**
      * Creates new form RequestBloodFrame
      */
-    public RequestBlood() {
+    private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
+    public RequestBlood(JPanel userProcessContainer,EcoSystem ecosystem, UserAcc userAcc) {
         initComponents();
+         this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+          displayTable();
+        BloodWorkDirectory bd=ecosystem.getBloodBankDir();
+        Doctor d=(Doctor)(userAcc);
+        firstNameTxt.setText(d.getFirstName());
+        
+        ArrayList<BloodWork> ol=bd.getBloodWorkList();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            BloodWork o=ol.get(i);
+            bloodbank.addItem(o.getUserNames());
+            
+        }
     }
 
     /**
@@ -26,36 +57,34 @@ public class RequestBlood extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        request = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jPanel9 = new javax.swing.JPanel();
+        units = new javax.swing.JPanel();
         addbtn = new javax.swing.JButton();
-        deleteBtn = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        lastNameTxt = new javax.swing.JTextField();
+        firstNameTxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        userIdTxt = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        phoneTxt = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        unit = new javax.swing.JTextField();
+        bloodGroup = new javax.swing.JComboBox<>();
+        bloodbank = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1920, 1080));
 
-        jPanel1.setBackground(new java.awt.Color(250, 249, 251));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1920, 750));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        request.setBackground(new java.awt.Color(250, 249, 251));
+        request.setPreferredSize(new java.awt.Dimension(1920, 750));
+        request.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel1.setText("Request Blood");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
+        request.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,11 +94,11 @@ public class RequestBlood extends javax.swing.JPanel {
 
             },
             new String [] {
-                "First Name", "Last Name", "User ID", "Password", "Phone Number"
+                "Name", "User ID", "Password", "Phone Number"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -85,10 +114,10 @@ public class RequestBlood extends javax.swing.JPanel {
 
         jPanel8.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 630));
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 580, 630));
+        request.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 580, 630));
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        units.setBackground(new java.awt.Color(255, 255, 255));
+        units.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addbtn.setBackground(new java.awt.Color(10, 132, 255));
         addbtn.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
@@ -99,78 +128,80 @@ public class RequestBlood extends javax.swing.JPanel {
                 addbtnActionPerformed(evt);
             }
         });
-        jPanel9.add(addbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 200, 39));
+        units.add(addbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 200, 39));
 
-        deleteBtn.setBackground(new java.awt.Color(255, 55, 95));
-        deleteBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
-        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBtn.setText("Cancel Request");
-        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+        cancel.setBackground(new java.awt.Color(255, 55, 95));
+        cancel.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        cancel.setForeground(new java.awt.Color(255, 255, 255));
+        cancel.setText("Cancel Request");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtnActionPerformed(evt);
+                cancelActionPerformed(evt);
             }
         });
-        jPanel9.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 580, 190, 39));
+        units.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 580, 190, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel2.setText("Enter Details");
-        jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 300, 50));
+        units.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 300, 50));
 
         jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(73, 84, 90));
         jLabel7.setText("Blood Group");
-        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, -1));
+        units.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, -1));
 
-        lastNameTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel9.add(lastNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 420, 40));
+        firstNameTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        units.add(firstNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 420, 40));
 
         jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel8.setText("First Name");
-        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 220, -1));
-
-        userIdTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel9.add(userIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 420, 40));
-
-        jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel9.setText("Last Name");
-        jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 220, -1));
+        jLabel8.setText("Doctor Name");
+        units.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 220, -1));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(73, 84, 90));
         jLabel10.setText("Center");
-        jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 220, -1));
+        units.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 220, -1));
 
         jLabel11.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(73, 84, 90));
         jLabel11.setText("Units (oz)");
-        jPanel9.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 220, -1));
+        units.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 220, -1));
 
-        phoneTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel9.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 420, 40));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        unit.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        unit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                unitActionPerformed(evt);
             }
         });
-        jPanel9.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 420, 40));
+        unit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                unitKeyPressed(evt);
+            }
+        });
+        units.add(unit, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 420, 40));
 
-        jPanel9.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 420, 40));
+        bloodGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" }));
+        bloodGroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bloodGroupActionPerformed(evt);
+            }
+        });
+        units.add(bloodGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 420, 40));
 
-        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
+        units.add(bloodbank, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 420, 40));
+
+        request.add(units, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
+            .addComponent(request, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(request, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -180,36 +211,133 @@ public class RequestBlood extends javax.swing.JPanel {
 
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
         // TODO add your handling code here:
+        if( unit.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        }
+      
+        Req_Blood rb=new Req_Blood();
+        int x = 1 + (int) (Math.random() * 100);
+        rb.setId(x);
+        rb.setFirstName(firstNameTxt.getText());
+        rb.setBloodType(bloodGroup.getSelectedItem().toString());
+        rb.setBloodBankName(bloodbank.getSelectedItem().toString());
+        rb.setUnits(Integer.parseInt(unit.getText()));
+        rb.setStatus("In Progress");
+        Req_BloodDir rbd=system.getReqBloodDir();
+        Doctor d=(Doctor)(userAcc);
+        rb.setDoctorId(userAcc.getUserName());
+        rbd.addUserReq(rb);
+   
+         JOptionPane.showMessageDialog(null, "Blood Unit Requested Successfully!!");
+        jTable3.setModel(new DefaultTableModel(null,new String[]{"ID","Center","Status","Blood Type","Units requested"}));
+        displayTable();
+        
+        
+        
     }//GEN-LAST:event_addbtnActionPerformed
 
-    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_deleteBtnActionPerformed
+        
+         DefaultTableModel  t2 = (DefaultTableModel) jTable3.getModel();
+        int selectedRow=jTable3.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+        Req_BloodDir rbd=system.getReqBloodDir();
+        ArrayList<Req_Blood> ol=rbd.getBloodReqDir();
+        int u=ol.size();
+        
+        for(int i=0;i<u;i++)
+        {
+            Req_Blood o=ol.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().matches("In Progress"))
+                {
+                    o.setStatus("Cancled");
+                }
+                else
+                {
+                     JOptionPane.showMessageDialog(null,"Wrong Move!!");
+                }
+                }
+        }
+           jTable3.setModel(new DefaultTableModel(null,new String[]{"ID","Center","Status","Blood Type","Units requested"}));
+      displayTable();     
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");  
+        }
+    }//GEN-LAST:event_cancelActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void bloodGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloodGroupActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_bloodGroupActionPerformed
+
+    private void unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_unitActionPerformed
+
+    private void unitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_unitKeyPressed
+        // TODO add your handling code here:
+         char c=evt.getKeyChar();
+        if(Character.isLetter(c))
+        {
+            unit.setEditable(false);
+            JOptionPane.showMessageDialog(null, "enter number");
+        }
+        else
+        {
+            unit.setEditable(true);
+        }
+    }//GEN-LAST:event_unitKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addbtn;
-    private javax.swing.JButton deleteBtn;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> bloodGroup;
+    private javax.swing.JComboBox<String> bloodbank;
+    private javax.swing.JButton cancel;
+    private javax.swing.JTextField firstNameTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField lastNameTxt;
-    private javax.swing.JTextField phoneTxt;
-    private javax.swing.JTextField userIdTxt;
+    private javax.swing.JPanel request;
+    private javax.swing.JTextField unit;
+    private javax.swing.JPanel units;
     // End of variables declaration//GEN-END:variables
+
+    private void displayTable() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    {
+        Req_BloodDir rbd= system.getReqBloodDir();
+        ArrayList<Req_Blood> ol=rbd.getBloodReqDir();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            Req_Blood o=ol.get(i);          
+            if(userAcc.getUserName().matches(o.getDoctorId()))
+            {
+                DefaultTableModel t2 = (DefaultTableModel) jTable3.getModel();
+                String s1=String.valueOf(o.getId());    
+                String s[]={s1,o.getBloodBankName(),o.getStatus(),o.getBloodType(),Integer.toString(o.getUnits())};
+                t2.addRow(s);
+            }
+        }
+        
+    }
+    
+    
+    }
 }

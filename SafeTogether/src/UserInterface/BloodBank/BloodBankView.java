@@ -4,6 +4,14 @@
  */
 package UserInterface.BloodBank;
 
+import Business.DatabaseUtil.DB4OUtil;
+import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import UserInterface.Doctor.RequestBlood;
+import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +21,15 @@ public class BloodBankView extends javax.swing.JPanel {
     /**
      * Creates new form BloodBankView
      */
-    public BloodBankView() {
+     private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
+  private DB4OUtil dB4OUtil = DB4OUtil.getInstance();  
+    public BloodBankView(JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
         initComponents();
+          this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
     }
 
     /**
@@ -33,13 +48,13 @@ public class BloodBankView extends javax.swing.JPanel {
         goBack = new javax.swing.JPanel();
         jLabel51 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
-        doctorAssociationPanel2 = new javax.swing.JPanel();
+        manageStock = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        doctorAssociationPanel1 = new javax.swing.JPanel();
+        docRequest = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        doctorAssociationPanel = new javax.swing.JPanel();
+        appointments = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -48,6 +63,7 @@ public class BloodBankView extends javax.swing.JPanel {
         timeLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        rightSidePanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1920, 1080));
@@ -82,62 +98,62 @@ public class BloodBankView extends javax.swing.JPanel {
 
         jPanel3.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
-        doctorAssociationPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        doctorAssociationPanel2.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorAssociationPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        manageStock.setBackground(new java.awt.Color(255, 255, 255));
+        manageStock.setPreferredSize(new java.awt.Dimension(100, 48));
+        manageStock.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorAssociationPanel2MousePressed(evt);
+                manageStockMousePressed(evt);
             }
         });
-        doctorAssociationPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        manageStock.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-drop-of-blood-24.png"))); // NOI18N
-        doctorAssociationPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        manageStock.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(115, 120, 128));
         jLabel9.setText("Manage Stock");
-        doctorAssociationPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        manageStock.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel3.add(doctorAssociationPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 290, 60));
+        jPanel3.add(manageStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 290, 60));
 
-        doctorAssociationPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        doctorAssociationPanel1.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorAssociationPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        docRequest.setBackground(new java.awt.Color(255, 255, 255));
+        docRequest.setPreferredSize(new java.awt.Dimension(100, 48));
+        docRequest.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorAssociationPanel1MousePressed(evt);
+                docRequestMousePressed(evt);
             }
         });
-        doctorAssociationPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        docRequest.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-drop-of-blood-24.png"))); // NOI18N
-        doctorAssociationPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        docRequest.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(115, 120, 128));
         jLabel7.setText("Doctor Request");
-        doctorAssociationPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        docRequest.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel3.add(doctorAssociationPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 290, 60));
+        jPanel3.add(docRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 290, 60));
 
-        doctorAssociationPanel.setBackground(new java.awt.Color(255, 255, 255));
-        doctorAssociationPanel.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorAssociationPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        appointments.setBackground(new java.awt.Color(255, 255, 255));
+        appointments.setPreferredSize(new java.awt.Dimension(100, 48));
+        appointments.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorAssociationPanelMousePressed(evt);
+                appointmentsMousePressed(evt);
             }
         });
-        doctorAssociationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        appointments.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-drop-of-blood-24.png"))); // NOI18N
-        doctorAssociationPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        appointments.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
         jLabel6.setText("Manage Appointment");
-        doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        appointments.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel3.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 290, 60));
+        jPanel3.add(appointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 290, 60));
         jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
@@ -158,11 +174,17 @@ public class BloodBankView extends javax.swing.JPanel {
         jLabel1.setText("Manage everything related to Pharmaceutical Enterprises");
         jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
+        rightSidePanel.setBackground(new java.awt.Color(250, 249, 251));
+        rightSidePanel.setLayout(new java.awt.CardLayout());
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1920, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(290, 290, 290)
+                .addComponent(rightSidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(330, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -173,7 +195,10 @@ public class BloodBankView extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(88, Short.MAX_VALUE)
+                .addComponent(rightSidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -197,72 +222,38 @@ public class BloodBankView extends javax.swing.JPanel {
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
+          container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBackMousePressed
 
-    private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
+    private void appointmentsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorAssociationPanelMousePressed
+     manageApp();
+    }//GEN-LAST:event_appointmentsMousePressed
 
-    private void doctorAssociationPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanel1MousePressed
+    private void docRequestMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docRequestMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorAssociationPanel1MousePressed
+        docReqShow();
+    }//GEN-LAST:event_docRequestMousePressed
 
-    private void doctorAssociationPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanel2MousePressed
+    private void manageStockMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageStockMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorAssociationPanel2MousePressed
+        manageStockShow();
+    }//GEN-LAST:event_manageStockMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel doctorAssociationPanel;
-    private javax.swing.JPanel doctorAssociationPanel1;
-    private javax.swing.JPanel doctorAssociationPanel2;
+    private javax.swing.JPanel appointments;
+    private javax.swing.JPanel docRequest;
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
@@ -270,46 +261,57 @@ public class BloodBankView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel26;
-    private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
-    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel30;
-    private javax.swing.JPanel jPanel31;
-    private javax.swing.JPanel jPanel32;
-    private javax.swing.JPanel jPanel33;
-    private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
-    private javax.swing.JSeparator jSeparator11;
-    private javax.swing.JSeparator jSeparator12;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JPanel manageStock;
+    private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void manageApp() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        docRequest.setBackground(new Color(255,255,255));
+        manageStock.setBackground(new Color(255,255,255));
+        appointments.setBackground(new Color(213,230,249));
+        
+       UserAppJPanel pcr = new UserAppJPanel(container, system, userAcc);
+
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    }
+
+    private void docReqShow() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+        appointments.setBackground(new Color(255,255,255));
+        manageStock.setBackground(new Color(255,255,255));
+        docRequest.setBackground(new Color(213,230,249));
+        
+       DocRequest pcr = new DocRequest(container, system, userAcc);
+
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    }
+
+    private void manageStockShow() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+      appointments.setBackground(new Color(255,255,255));
+        docRequest.setBackground(new Color(255,255,255));
+        manageStock.setBackground(new Color(213,230,249));
+        
+       BloodStock pcr = new BloodStock(container, system, userAcc);
+
+        rightSidePanel.add(pcr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    
+    
+    }
 }

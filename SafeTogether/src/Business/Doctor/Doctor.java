@@ -20,7 +20,7 @@ public class Doctor extends UserAcc {
     String phoneNum;
     String hospital;
 
-    public Doctor( String firstName, String specialization, String hospital,String userId, String accPassword,String phoneNum) {
+    public Doctor( String firstName,  String hospital,String specialization,String userId, String accPassword,String phoneNum) {
         setUserName(userId);
         setPwd(accPassword);
         setRole(new DoctorRole());

@@ -4,14 +4,20 @@
  */
 package UserInterface;
 
+import Business.BloodBank.BloodWork;
+import Business.BloodBank.BloodWorkDirectory;
 import Business.Doctor.Doctor;
 import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
+import Business.Pharma.Pharma;
+import Business.Pharma.PharmaDirectory;
 import Business.UserAcc.UserAcc;
 import Business.UserAcc.UserAccDir;
 import Business.userR.User;
 import Business.userR.User_Directory;
+import UserInterface.BloodBank.BloodBankView;
 import UserInterface.Doctor.DoctorView;
+import UserInterface.Pharmacy.PharmacyMainFrame;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import UserInterface.user.UserAreaJPanel;
 import java.awt.CardLayout;
@@ -178,26 +184,70 @@ public class UserLogin extends javax.swing.JPanel {
             }
              else if(userRole.equals("Business.Roles.UserR"))
             {
-             displayUserPanel();
-//                User_Directory cd=system.getUserDir();
-//                ArrayList<User> c=cd.getUsers();
-//                int size=c.size();
-//                System.out.println("size:"+c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                User c1=c.get(i);
-//                if(userAcc.getUserName().matches(c1.getUserId()))
-//                {
-//                    System.out.print("inside user role method");
-//               displayUserPanel();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
+            // displayUserPanel();
+                User_Directory cd=system.getUserDir();
+                ArrayList<User> c=cd.getUsers();
+                int size=c.size();
+                System.out.println("size:"+c.size());
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                User c1=c.get(i);
+                if(userAcc.getUserName().matches(c1.getUserId()))
+                {
+                   // System.out.print("inside user role method");
+               displayUserPanel();
+                count+=1;
+                }            
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
+            }
+             
+            else if(userRole.equals("Business.Roles.Admin_Pharmacy"))
+            {
+                PharmaDirectory cd=system.getPharmaDir();
+                ArrayList<Pharma> c=cd.getPharmaArrayList();
+                int size=c.size();
+             
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                Pharma c1=c.get(i);
+                if(userAcc.getUserName().matches(c1.getUserName()))
+                {
+                   // System.out.print("inside pharma role method");
+                displayPharmacy();
+                count+=1;
+                }            
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
+            }
+            else if(userRole.equals("Business.Roles.Admin_BloodBank"))
+            {
+                BloodWorkDirectory cd=system.getBloodBankDir();
+                ArrayList<BloodWork> c=cd.getBloodWorkList();
+                int size=c.size();
+               
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                BloodWork c1=c.get(i);
+                if(userAcc.getUserName().matches(c1.getUserId()))
+                {
+                displaybloodbank();
+                count+=1;
+                }            
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
             }
 //            else if(userRole.equals("Business.Role.AdminRole"))
 //            {
@@ -286,28 +336,6 @@ public class UserLogin extends javax.swing.JPanel {
 //                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
 //                }
 //            }
-//            else if(userRole.equals("Business.Role.PharmacyAdmin"))
-//            {
-//                Pharmacy_directory cd=system.getPharmacy_directory();
-//                ArrayList<Pharmacy> c=cd.getA();
-//                int size=c.size();
-//                System.out.println(c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                Pharmacy c1=c.get(i);
-//                if(userAcc.getUsername().matches(c1.getUserid()))
-//                {
-//                callpharmacy();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
-//            }
-//           
 //         
 //            else if(userRole.equals("Business.Role.governmantOfficial"))
 //            {
@@ -453,6 +481,27 @@ public class UserLogin extends javax.swing.JPanel {
     private void displayUserPanel() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     UserAreaJPanel userView=new UserAreaJPanel(workArea,userAcc,system);
+        workArea.add(userView);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea); 
+    
+    
+    }
+
+    private void displayPharmacy() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+       PharmacyMainFrame userView=new PharmacyMainFrame(workArea,userAcc,system);
+        workArea.add(userView);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea); 
+    
+    
+    }
+
+    private void displaybloodbank() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        BloodBankView userView=new BloodBankView(workArea,userAcc,system);
         workArea.add(userView);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea); 

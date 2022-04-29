@@ -177,7 +177,7 @@ public class MedicineReport extends javax.swing.JPanel {
             if(s==o.getId())
             {
                 Map<String,String> f=o.getMedOrderlist();
-                int count =0;
+                int count =1;
                 for (String key: f.keySet()) {
                     jTextMedicine.append("Item "+ count+ " : "+key+" Quantity : "+f.get(key)+"\n");
                     count++;
@@ -211,7 +211,7 @@ public class MedicineReport extends javax.swing.JPanel {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
 
-        cancelEmergency();
+        cancelOrder();
 
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -297,7 +297,7 @@ public class MedicineReport extends javax.swing.JPanel {
     
     }
 
-    private void cancelEmergency() {
+    private void cancelOrder() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
    
     DefaultTableModel  t2 = (DefaultTableModel) tblPharma.getModel();
@@ -318,7 +318,7 @@ public class MedicineReport extends javax.swing.JPanel {
             {
                 if(!o.getStatus().matches("Order Recieved"))
                 {
-                o.setStatus("Canceled");
+                o.setStatus("Cancelled");
                 }
                 else
                 {

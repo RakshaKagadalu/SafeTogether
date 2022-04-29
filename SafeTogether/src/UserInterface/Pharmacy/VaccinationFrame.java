@@ -4,6 +4,17 @@
  */
 package UserInterface.Pharmacy;
 
+import Business.EcoSystem;
+import Business.Pharma.Pharma;
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.VacRequest_Dir;
+import Business.WorkQueue.VacRequest;
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +24,15 @@ public class VaccinationFrame extends javax.swing.JPanel {
     /**
      * Creates new form VaccinationFrame
      */
-    public VaccinationFrame() {
+         private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
+    public VaccinationFrame(EcoSystem ecosystem,JPanel userProcessContainer, UserAcc userAcc) {
         initComponents();
+         this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+        displayTable();
     }
 
     /**
@@ -26,81 +44,106 @@ public class VaccinationFrame extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        btnComplete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
-        setPreferredSize(new java.awt.Dimension(1160, 750));
+        setPreferredSize(new java.awt.Dimension(0, 0));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(250, 249, 251));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1160, 750));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setBackground(new java.awt.Color(10, 132, 255));
-        jButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Done");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 620, 140, 39));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Name", "Status", "Vaccination", "Date", "Time"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane3.setViewportView(jTable2);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
-        );
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 605, 105));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 124, -1, -1));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        btnComplete.setText("Mark as complete");
+        btnComplete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompleteActionPerformed(evt);
+            }
+        });
+        add(btnComplete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 230, 60));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
+        // TODO add your handling code here:
+       markCompleteVac(); 
+     
+    }//GEN-LAST:event_btnCompleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton btnComplete;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
+    private void displayTable() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   VacRequest_Dir  red=system.getVaccReqDir();
+        ArrayList<VacRequest> ol=red.getRequests();
+        int u=ol.size();
+        System.out.println(u);
+        
+        for(int i=0;i<u;i++)
+        {
+                         
+
+            VacRequest o=ol.get(i);
+            // o.setStatus("Approved");
+            Pharma ph1=(Pharma)(userAcc);
+            
+           
+            if((o.getPharmacy().matches(ph1.getPharmaName()) && (o.getStatus().matches("Approved")==true||o.getStatus().matches("Done")))==true)
+            {
+                DefaultTableModel t2 = (DefaultTableModel) jTable2.getModel();
+                String s1=String.valueOf(o.getVacId());
+                
+                
+                String s[]={s1,o.getFirst_name(),o.getStatus(),o.getVaccination(),o.getDate(),o.getTime()};
+                t2.addRow(s);
+            }
+            
+        }
+    
+    
+    }
+
+    private void markCompleteVac() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+         DefaultTableModel  t2 = (DefaultTableModel) jTable2.getModel();
+        int selectedRow=jTable2.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+        VacRequest_Dir  red=system.getVaccReqDir();
+        ArrayList<VacRequest> ol=red.getRequests();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            VacRequest o=ol.get(i);
+            if(s==o.getVacId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                
+                     o.setStatus("Done");
+                
+            }
+        }
+        jTable2.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Status","Vaccination","Date","Time"}));
+        displayTable();
+    
+        }else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row");
+        }}
 }
