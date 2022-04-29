@@ -284,6 +284,7 @@ public class PoliceDisplay extends javax.swing.JPanel {
         System.out.println(u);
         for(int i=0;i<u;i++)
         {
+            System.out.println("Shouldnt be here if u is 0");
             Req_Emergency o=ol.get(i);
             if(o.getEmergency().matches("Police"))
             {

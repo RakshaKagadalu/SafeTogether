@@ -7,6 +7,7 @@ package UserInterface;
 import Business.DatabaseUtil.DB4OUtil;
 import Business.Doctor.Doctor;
 import Business.EcoSystem;
+import Business.EmergencyAmbulance.Ambulance;
 import Business.EmergencyFire.Fire;
 import Business.EmergencyPolice.Police;
 import Business.Laboratory.BloodWork;
@@ -94,10 +95,14 @@ public class MainJFrame extends javax.swing.JFrame {
             system.getPoliceDir().addNewPolice(pol);
             system.getUserAccDir().addAccount(pol);
             
-            Fire fire = new Fire("fire1", "fire123", "Boston", "FPD", "1234567890");
+            Fire fire = new Fire("f1", "f123", "Boston", "FPD", "1234567890");
             system.getFireDir().addNewFire(fire);
             system.getUserAccDir().addAccount(fire);
-         
+            
+            
+            Ambulance ambu = new Ambulance("amb1", "a123", "boston", "driver1","9999999980");
+            system.getAmbulanceDir().addNewAmbulance(ambu);
+            system.getUserAccDir().addAccount(ambu);
          
         
     }
