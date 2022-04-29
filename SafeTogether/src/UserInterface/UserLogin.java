@@ -4,6 +4,8 @@
  */
 package UserInterface;
 
+import Business.CDC.CDC;
+import Business.CDC.CDCDirectory;
 import Business.Doctor.Doctor;
 import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
@@ -19,6 +21,7 @@ import Business.userR.User;
 import Business.userR.User_Directory;
 import UserInterface.Ambulance.AmbulanceView;
 import UserInterface.Fire.FireView;
+import UserInterface.Government.GovernmentView;
 import UserInterface.Police.PoliceMain;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import UserInterface.user.UserAreaJPanel;
@@ -259,7 +262,31 @@ public class UserLogin extends javax.swing.JPanel {
                 {
                   JOptionPane.showMessageDialog(null, "Invalid credentials");  
                 }
-            } 
+            } else if(userRole.equals("Business.Roles.Officer_CDC")){
+                CDCDirectory pd = system.getcDCDir();
+                ArrayList<CDC> pds = pd.getCdcList();
+                int size = pds.size();
+                System.out.println("username"+ userAcc.getUserName());
+                System.out.println("size"+ size);
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                CDC c1= pds.get(i);
+                //System.out.println(userAcc.getUserName());
+                //System.out.println(c1.getUserId());   
+                
+                System.out.println("c1"+ c1.getUserName());
+                if(userAcc.getUserName().matches(c1.getUserName()))
+                {
+                    govtDashboard();
+                    count+=1;
+                }       
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
+            }
             else
             {
                 System.out.println(userAcc.getRole());
@@ -335,6 +362,13 @@ public class UserLogin extends javax.swing.JPanel {
 //        layout.next(container); 
 //    
     
+    }
+    
+    private void govtDashboard() {
+        GovernmentView pol = new GovernmentView(workArea,userAcc,system);
+        workArea.add(pol);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
     }
 
     private void displayUserPanel() {
