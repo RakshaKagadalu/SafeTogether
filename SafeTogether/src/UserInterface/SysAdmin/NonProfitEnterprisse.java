@@ -5,6 +5,7 @@
 package UserInterface.SysAdmin;
 
 import Business.EcoSystem;
+import Utility.MapCoordinates;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -27,6 +28,7 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
     private final JPanel container;
     private final EcoSystem system;
     Timer timer;
+    MapCoordinates locationPoint;
     
     private void Time() {
                 ActionListener actionListener = new ActionListener() {
@@ -160,7 +162,7 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
 
         timeLabel.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         timeLabel.setText("3:45 PM");
-        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
+        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 20, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel10.setText("Non-Profits");
@@ -318,7 +320,7 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
      doctorAssociationPanel.setBackground(new Color(213,230,249));
          //PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
-        BloodRegistration br=new BloodRegistration (system, container);
+        BloodRegistration br=new BloodRegistration (system, rightSidePanel, locationPoint);
         rightSidePanel.add(br);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);

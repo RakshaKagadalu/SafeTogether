@@ -5,6 +5,7 @@
 package UserInterface.SysAdmin;
 
 import Business.EcoSystem;
+import Utility.MapCoordinates;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,7 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
      */
     private final EcoSystem system;
     private final JPanel container;
+    MapCoordinates locationPoint;
     
     Timer timer;
     
@@ -205,7 +207,7 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
 
         timeLabel.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         timeLabel.setText("3:45 PM");
-        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
+        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 20, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel10.setText("Emergency");
@@ -340,7 +342,7 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
         ambulancePanel.setBackground(new Color(255,255,255));
         policePanel.setBackground(new Color(213,230,249));
         fireDeptPanel.setBackground(new Color(255,255,255));
-        PoliceRegistration amb =new PoliceRegistration(system,container);
+        PoliceRegistration amb =new PoliceRegistration(system,rightSidePanel, locationPoint);
         rightSidePanel.add(amb);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
@@ -354,7 +356,7 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
         ambulancePanel.setBackground(new Color(255,255,255));
         policePanel.setBackground(new Color(255,255,255));
         fireDeptPanel.setBackground(new Color(213,230,249));
-        FireDepartmentRegistration amb =new FireDepartmentRegistration(system,container);
+        FireDepartmentRegistration amb =new FireDepartmentRegistration(system,rightSidePanel, locationPoint);
         rightSidePanel.add(amb);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);

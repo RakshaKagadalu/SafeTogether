@@ -8,6 +8,10 @@ import Business.DatabaseUtil.DB4OUtil;
 import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.BloodBank.BloodWork;
+import Business.EmergencyAmbulance.Ambulance;
+import Business.EmergencyFire.Fire;
+import Business.EmergencyPolice.Police;
+
 import Business.PandemicCenter.PandemicCenter;
 import Business.Pharma.Pharma;
 import Business.userR.User;
@@ -88,8 +92,18 @@ public class MainJFrame extends javax.swing.JFrame {
 //            System.out.println(system.getUserAccDir().getUserAccList());
 //         
 //        
-       
-         
+            Police pol = new Police("police1", "pol123", "Boston", "NUPD","9999999991");
+            system.getPoliceDir().addNewPolice(pol);
+            system.getUserAccDir().addAccount(pol);
+            
+            Fire fire = new Fire("f1", "f123", "Boston", "FPD", "1234567890");
+            system.getFireDir().addNewFire(fire);
+            system.getUserAccDir().addAccount(fire);
+            
+            
+            Ambulance ambu = new Ambulance("amb1", "a123", "boston", "driver1","9999999980");
+            system.getAmbulanceDir().addNewAmbulance(ambu);
+            system.getUserAccDir().addAccount(ambu);
          
         
     }

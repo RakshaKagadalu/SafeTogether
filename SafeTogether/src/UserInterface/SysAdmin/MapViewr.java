@@ -135,7 +135,20 @@ public class MapViewr extends javax.swing.JPanel {
             if (userProcessContainer.getComponent(componentArray.length - 1) instanceof PandemicRegistration) {
                 PandemicRegistration orgManagement = (PandemicRegistration) userProcessContainer.getComponent(componentArray.length - 1);
                 orgManagement.populateLongituteLatitude(locationPoint);
-            } else {
+            } else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof PharmacyRegistration) {
+                PharmacyRegistration pharmaRegistration = (PharmacyRegistration) userProcessContainer.getComponent(componentArray.length -1);
+                pharmaRegistration.populateLongituteLatitude(locationPoint);
+            } else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof PoliceRegistration) {
+                PoliceRegistration policeRegistration = (PoliceRegistration) userProcessContainer.getComponent(componentArray.length -1);
+                policeRegistration.populateLongituteLatitude(locationPoint);
+            }else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof FireDepartmentRegistration) {
+                FireDepartmentRegistration fireDept = (FireDepartmentRegistration) userProcessContainer.getComponent(componentArray.length -1);
+                fireDept.populateLongituteLatitude(locationPoint);
+            }else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof BloodRegistration) {
+                BloodRegistration fireDept = (BloodRegistration) userProcessContainer.getComponent(componentArray.length -1);
+                fireDept.populateLongituteLatitude(locationPoint);
+            }
+            else {
                                 System.out.println("ELSE LOCATION " + componentArray.length);
                 System.out.println("ELSE CONTAINER " + userProcessContainer.toString());
             }
