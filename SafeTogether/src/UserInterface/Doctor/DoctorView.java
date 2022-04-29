@@ -27,25 +27,6 @@ public class DoctorView extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jSeparator7 = new javax.swing.JSeparator();
-        jSeparator8 = new javax.swing.JSeparator();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jPanel19 = new javax.swing.JPanel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jPanel20 = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -71,87 +52,6 @@ public class DoctorView extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(250, 249, 251));
         jPanel2.setPreferredSize(new java.awt.Dimension(1920, 1080));
-
-        jPanel14.setPreferredSize(new java.awt.Dimension(1920, 1080));
-
-        jPanel15.setBackground(new java.awt.Color(245, 245, 245));
-        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel16.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1020, -1, -1));
-        jPanel16.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1020, 290, -1));
-
-        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel21.setFont(new java.awt.Font("SF Pro", 0, 18)); // NOI18N
-        jLabel21.setText("Return");
-        jPanel17.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 120, 30));
-
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/noun-exit-1365146.png"))); // NOI18N
-        jPanel17.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
-
-        jPanel16.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1040, 190, 30));
-        jPanel16.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
-
-        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel18.setPreferredSize(new java.awt.Dimension(100, 48));
-        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-doctor-male-skin-type-3-48.png"))); // NOI18N
-        jPanel18.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 60));
-
-        jLabel25.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel25.setText("Pandemic Centre");
-        jPanel18.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
-
-        jPanel16.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 290, 60));
-
-        jPanel19.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel19.setPreferredSize(new java.awt.Dimension(100, 48));
-        jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-doctor-male-skin-type-3-48.png"))); // NOI18N
-        jPanel19.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 60));
-
-        jLabel27.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel27.setText("Doctors Association");
-        jPanel19.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
-
-        jPanel16.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
-
-        jPanel15.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 288, 1080));
-
-        jPanel20.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel28.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
-        jLabel28.setText("3:45 PM");
-        jPanel20.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 30, -1, -1));
-
-        jLabel29.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
-        jLabel29.setText("Hospitals");
-        jPanel20.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
-
-        jLabel30.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel30.setText("Manage everything related to hospital enterprises");
-        jPanel20.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
-
-        jPanel15.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1630, 100));
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
 
         jPanel3.setBackground(new java.awt.Color(245, 245, 245));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -252,9 +152,7 @@ public class DoctorView extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -263,9 +161,7 @@ public class DoctorView extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -300,59 +196,20 @@ public class DoctorView extends javax.swing.JPanel {
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 }
