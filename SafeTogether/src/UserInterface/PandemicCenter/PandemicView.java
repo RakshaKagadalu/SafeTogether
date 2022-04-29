@@ -2,19 +2,42 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.CovidCenter;
+package UserInterface.PandemicCenter;
+
+import Business.EcoSystem;
+import Business.PandemicCenter.PandemicCenter;
+import Business.PandemicCenter.PandemicCenter_Dir;
+import Business.UserAcc.UserAcc;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import Business.DatabaseUtil.DB4OUtil;
 
 /**
  *
  * @author shrikrishnajoisa
  */
-public class CovidView extends javax.swing.JPanel {
+public class PandemicView extends javax.swing.JPanel {
 
+    private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
+    private DB4OUtil dB4OUtil;
     /**
-     * Creates new form CovidView
+     * Creates new form PandemicView
+     * @param userProcessContainer
+     * @param userAcc
+     * @param ecosystem
      */
-    public CovidView() {
+    public PandemicView(JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
         initComponents();
+        this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+        this.dB4OUtil = DB4OUtil.getInstance();
+//        Time();
     }
 
     /**
@@ -34,7 +57,7 @@ public class CovidView extends javax.swing.JPanel {
         goBack = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        doctorAssociationPanel = new javax.swing.JPanel();
+        pandemicInfoPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -43,6 +66,7 @@ public class CovidView extends javax.swing.JPanel {
         timeLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        rightSidePanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1920, 1080));
@@ -80,24 +104,24 @@ public class CovidView extends javax.swing.JPanel {
 
         jPanel3.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
-        doctorAssociationPanel.setBackground(new java.awt.Color(255, 255, 255));
-        doctorAssociationPanel.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorAssociationPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        pandemicInfoPanel.setBackground(new java.awt.Color(255, 255, 255));
+        pandemicInfoPanel.setPreferredSize(new java.awt.Dimension(100, 48));
+        pandemicInfoPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorAssociationPanelMousePressed(evt);
+                pandemicInfoPanelMousePressed(evt);
             }
         });
-        doctorAssociationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pandemicInfoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-coronavirus-24.png"))); // NOI18N
-        doctorAssociationPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        pandemicInfoPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel6.setText("Covid Information");
-        doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        jLabel6.setText("Pandemic Information");
+        pandemicInfoPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel3.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 290, 60));
+        jPanel3.add(pandemicInfoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 290, 60));
         jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
@@ -121,6 +145,10 @@ public class CovidView extends javax.swing.JPanel {
         jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1630, 90));
+
+        rightSidePanel.setBackground(new java.awt.Color(250, 249, 251));
+        rightSidePanel.setLayout(new java.awt.CardLayout());
+        jPanel2.add(rightSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 1160, 750));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,17 +183,28 @@ public class CovidView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
+    private void pandemicInfoPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pandemicInfoPanelMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorAssociationPanelMousePressed
+        displayPandemicView();
+    }//GEN-LAST:event_pandemicInfoPanelMousePressed
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBackMousePressed
 
+    private void displayPandemicView() {
+        pandemicInfoPanel.setBackground(new Color(213,230,249));
+        PandemicDisplay pr =  new PandemicDisplay(container,userAcc,system);
+        rightSidePanel.add(pr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel doctorAssociationPanel;
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -181,6 +220,8 @@ public class CovidView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel pandemicInfoPanel;
+    private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 }
