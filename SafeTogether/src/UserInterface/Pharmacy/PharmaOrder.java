@@ -4,6 +4,18 @@
  */
 package UserInterface.Pharmacy;
 
+import Business.EcoSystem;
+import Business.Pharma.Pharma;
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.Req_Medicine;
+import Business.WorkQueue.Req_MedicineDir;
+import Business.userR.User;
+import java.util.ArrayList;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +25,15 @@ public class PharmaOrder extends javax.swing.JPanel {
     /**
      * Creates new form PharmaOrder
      */
-    public PharmaOrder() {
+     private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
+    public PharmaOrder(EcoSystem system,JPanel userProcessContainer, UserAcc userAcc) {
         initComponents();
+         this.system = system;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+        displayTable();
     }
 
     /**
@@ -52,15 +71,17 @@ public class PharmaOrder extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Patient Name", "Doctor Name", "Order Status"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -101,7 +122,7 @@ public class PharmaOrder extends javax.swing.JPanel {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,7 +153,7 @@ public class PharmaOrder extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -143,26 +164,26 @@ public class PharmaOrder extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(10, 132, 255));
         jButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add");
+        jButton1.setText("Update status");
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 640, 140, 39));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 670, 200, 39));
 
         jButton4.setBackground(new java.awt.Color(255, 55, 95));
         jButton4.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Delete");
+        jButton4.setText("Reset");
         jButton4.setBorder(null);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 640, 140, 39));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 670, 180, 39));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -178,12 +199,121 @@ public class PharmaOrder extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+  DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+       Req_MedicineDir dire=system.getMedicineReqDir();
+        ArrayList<Req_Medicine> order=dire.getMedReqDir();
+        
+        int u=order.size();
+        
+        for(int i=0;i<u;i++)
+        {
+            Req_Medicine o=order.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().matches("Order Placed"))
+                {
+                o.setStatus("Ready for pickup");
+                }
+                else
+                {
+                 JOptionPane.showMessageDialog(null,"Order Cancelled");  
 
+                }
+            }
+        }
+           jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Patient Name","Doctor Name","Status"}));
+        displayTable();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");  
+        }
+       // DB4OUtil.dB4OUtil.storeSystem(ecosystem);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+         DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+       Req_MedicineDir dire=system.getMedicineReqDir();
+        ArrayList<Req_Medicine> order=dire.getMedReqDir();
+        
+        int u=order.size();
+        
+        for(int i=0;i<u;i++)
+        {
+            Req_Medicine o=order.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().matches("Ready for pickup"))
+                {
+                o.setStatus("Order Placed");
+                }
+                else
+                {
+                 JOptionPane.showMessageDialog(null,"Order Cancelled");  
+
+                }
+            }
+        }
+           jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Patient Name","Doctor Name","Status"}));
+        displayTable();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");  
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        
+        
+           jTextArea2.setText("");
+                jTextArea1.setText("");
+
+        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+        Req_MedicineDir dire=system.getMedicineReqDir();
+        ArrayList<Req_Medicine> order=dire.getMedReqDir();
+        
+        int u=order.size();
+        for(int i=0;i<u;i++)
+        {
+            Req_Medicine o=order.get(i);
+            if(s==o.getId())
+            {
+                Map<String,String> f=o.getMedOrderlist();
+                int count =1;
+                for (String key: f.keySet()) {
+                    jTextArea1.append("Item "+ count+ " : "+key+" Quantity : "+f.get(key)+"\n");
+                    count++;
+                   
+            }
+                Map<String,String> f1=o.getMedCostlist();
+                int a=0;
+                for (String key: f1.keySet()) {
+                     System.out.println(Integer.parseInt(f1.get(key)));
+                     a=a+(Integer.parseInt(f1.get(key)));
+                     System.out.println("a"+a);
+                   
+            }
+                jTextArea2.append(String.valueOf(a));
+                
+            }
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
    
 
@@ -203,4 +333,32 @@ public class PharmaOrder extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
+
+    private void displayTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+          
+       // System.out.print("im inside display table "+system);
+        Req_MedicineDir dire=system.getMedicineReqDir();
+        ArrayList<Req_Medicine> order=dire.getMedReqDir();
+    
+        int u=order.size();
+        Pharma r=(Pharma)userAcc;
+        for(int i=0;i<u;i++)
+        {
+            Req_Medicine o=order.get(i);
+            if(r.getPharmaName().matches(o.getPharmaName()))
+            {
+                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+                String s1=String.valueOf(o.getId());
+                
+                
+                String s[]={s1,o.getPatientId(),o.getDoctorName(),o.getStatus()};
+                t2.addRow(s);
+            
+            
+            }
+        }
+    
+    
+    }
 }

@@ -12,6 +12,7 @@
 .mtj.tmp/
 
 .DS_Store
+*Databank.db4o
 
 # Package Files #
 *.jar
