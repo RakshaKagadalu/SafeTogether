@@ -4,13 +4,25 @@
  */
 package UserInterface;
 
+import Business.CDC.CDC;
+import Business.CDC.CDCDirectory;
 import Business.Doctor.Doctor;
 import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
+import Business.EmergencyAmbulance.Ambulance;
+import Business.EmergencyAmbulance.AmbulanceDir;
+import Business.EmergencyPolice.Police;
+import Business.EmergencyPolice.PoliceDir;
+import Business.EmergencyFire.Fire;
+import Business.EmergencyFire.FireDir;
 import Business.UserAcc.UserAcc;
 import Business.UserAcc.UserAccDir;
 import Business.userR.User;
 import Business.userR.User_Directory;
+import UserInterface.Ambulance.AmbulanceView;
+import UserInterface.Fire.FireView;
+import UserInterface.Government.GovernmentView;
+import UserInterface.Police.PoliceMain;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import UserInterface.user.UserAreaJPanel;
 import java.awt.CardLayout;
@@ -178,221 +190,103 @@ public class UserLogin extends javax.swing.JPanel {
              else if(userRole.equals("Business.Roles.UserR"))
             {
              displayUserPanel();
-//                User_Directory cd=system.getUserDir();
-//                ArrayList<User> c=cd.getUsers();
-//                int size=c.size();
-//                System.out.println("size:"+c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                User c1=c.get(i);
-//                if(userAcc.getUserName().matches(c1.getUserId()))
-//                {
-//                    System.out.print("inside user role method");
-//               displayUserPanel();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
+            } else if(userRole.equals("Business.Roles.Police_Officer")){
+                PoliceDir pd = system.getPoliceDir();
+                ArrayList<Police> pds = pd.getPoliceList();
+                System.out.println("username"+ userAcc.getUserName());
+                
+                int size = pds.size();
+                System.out.println("size"+ size);
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                Police c1= pds.get(i);
+                //System.out.println(userAcc.getUserName());
+                //System.out.println(c1.getUserId());            
+                System.out.println("c1"+ c1.getUserName());
+                if(userAcc.getUserName().matches(c1.getUserName()))
+                {
+                    policeDashboard();
+                    count+=1;
+                }       
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
+            } else if(userRole.equals("Business.Roles.Fire_man")){
+                FireDir pd = system.getFireDir();
+                ArrayList<Fire> pds = pd.getFireEngines();
+                int size = pds.size();
+                System.out.println("username"+ userAcc.getUserName());
+                System.out.println("size"+ size);
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                Fire c1= pds.get(i);
+                //System.out.println(userAcc.getUserName());
+                //System.out.println(c1.getUserId());   
+                
+                System.out.println("c1"+ c1.getUserName());
+                if(userAcc.getUserName().matches(c1.getUserName()))
+                {
+                    fireDashboard();
+                    count+=1;
+                }       
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
+            } else if(userRole.equals("Business.Roles.Driver_Ambulance")){
+                AmbulanceDir pd = system.getAmbulanceDir();
+                ArrayList<Ambulance> pds = pd.getAmbulances();
+                int size = pds.size();
+                System.out.println("username"+ userAcc.getUserName());
+                System.out.println("size"+ size);
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                Ambulance c1= pds.get(i);
+                //System.out.println(userAcc.getUserName());
+                //System.out.println(c1.getUserId());   
+                
+                System.out.println("c1"+ c1.getUserName());
+                if(userAcc.getUserName().matches(c1.getUserName()))
+                {
+                    ambulanceDashboard();
+                    count+=1;
+                }       
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
+            } else if(userRole.equals("Business.Roles.Officer_CDC")){
+                CDCDirectory pd = system.getcDCDir();
+                ArrayList<CDC> pds = pd.getCdcList();
+                int size = pds.size();
+                System.out.println("username"+ userAcc.getUserName());
+                System.out.println("size"+ size);
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                CDC c1= pds.get(i);
+                //System.out.println(userAcc.getUserName());
+                //System.out.println(c1.getUserId());   
+                
+                System.out.println("c1"+ c1.getUserName());
+                if(userAcc.getUserName().matches(c1.getUserName()))
+                {
+                    govtDashboard();
+                    count+=1;
+                }       
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
             }
-//            else if(userRole.equals("Business.Role.AdminRole"))
-//            {
-//                
-//                RestaurantDirectory cd=system.getRestaurantDirectory();
-//                ArrayList<Restaurant> c=cd.getRestaurantList();
-//                int size=c.size();
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                Restaurant c1=c.get(i);
-//                if(userAcc.getUsername().matches(c1.getUsername()))
-//                {
-//                callAdminWorkAreaJPanel();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
-//            }
-//            else if(userRole.equals("Business.Role.UserRole"))
-//            {
-//                User_directory cd=system.getUserdirectory();
-//                ArrayList<User> c=cd.getUser();
-//                int size=c.size();
-//                System.out.println(c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                User c1=c.get(i);
-//                if(userAcc.getUsername().matches(c1.getUser_id()))
-//                {
-//                calluser();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
-//            }
-//            else if(userRole.equals("Business.Role.DoctorRole"))
-//            {
-//                Doctor_Directory cd=system.getDoctordirectory();
-//                ArrayList<Doctor> c=cd.getA();
-//                int size=c.size();
-//                System.out.println(c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                Doctor c1=c.get(i);
-//                System.out.println(userAcc.getUsername());
-//                System.out.println(c1.getUserid());                
-//                if(userAcc.getUsername().matches(c1.getUsername()))
-//                {
-//                    
-//                calldoctor();
-//                count+=1;
-//                }       
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
-//            }
-//            else if(userRole.equals("Business.Role.bloodbankadminrole"))
-//            {
-//                bloodbank_directory cd=system.getBloodbankdirectory();
-//                ArrayList<BloodBank> c=cd.getA();
-//                int size=c.size();
-//                System.out.println(c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                BloodBank c1=c.get(i);
-//                if(userAcc.getUsername().matches(c1.getUserid()))
-//                {
-//                callbloodbank();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
-//            }
-//            else if(userRole.equals("Business.Role.PharmacyAdmin"))
-//            {
-//                Pharmacy_directory cd=system.getPharmacy_directory();
-//                ArrayList<Pharmacy> c=cd.getA();
-//                int size=c.size();
-//                System.out.println(c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                Pharmacy c1=c.get(i);
-//                if(userAcc.getUsername().matches(c1.getUserid()))
-//                {
-//                callpharmacy();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
-//            }
-//           
-//         
-//            else if(userRole.equals("Business.Role.governmantOfficial"))
-//            {
-//                governmentoffical_directory cd=system.getGovdirectory();
-//                ArrayList<governmentofficial> c=cd.getA();
-//                int size=c.size();
-//                System.out.println(c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                governmentofficial c1=c.get(i);
-//                if(userAcc.getUsername().matches(c1.getUser_id()))
-//                {
-//                callgov();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
-//            }
-//            else if(userRole.equals("Business.Role.AmbulanceDriver"))
-//            {
-//                ambulance_directory cd=system.getAmbulancedirectory();
-//                ArrayList<Ambulance> c=cd.getA();
-//                int size=c.size();
-//                System.out.println(c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                Ambulance c1=c.get(i);
-//                if(userAcc.getUsername().matches(c1.getUser_id()))
-//                {
-//                callambulance();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
-//            }
-//            else if(userRole.equals("Business.Role.covidtestingadmin"))
-//            {
-//                covidcenter_directory cd=system.getCd();
-//                ArrayList<covidcenter> c=cd.getA();
-//                int size=c.size();
-//                System.out.println(c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                covidcenter c1=c.get(i);
-//                if(userAcc.getUsername().matches(c1.getUserid()))
-//                {
-//                callambulance1();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
-//            }
-//            else if(userRole.equals("Business.Role.Vaccination_admin"))
-//            {
-//                vaccination_org_directory cd=system.getVacc_org();
-//                ArrayList<vaccination_org> c=cd.getA();
-//                int size=c.size();
-//                System.out.println(c.size());
-//                int count=0;
-//                for(int i=0;i<size;i++)
-//                {
-//                vaccination_org c1=c.get(i);
-//                if(userAcc.getUsername().matches(c1.getUserid()))
-//                {
-//                vaccination();
-//                count+=1;
-//                }            
-//                }
-//                if(count==0)
-//                {
-//                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
-//                }
-//            }
-//            
             else
             {
                 System.out.println(userAcc.getRole());
@@ -437,6 +331,27 @@ public class UserLogin extends javax.swing.JPanel {
         layout.next(workArea);
     
     }
+    
+    private void policeDashboard() {
+        PoliceMain pol = new PoliceMain(workArea,userAcc,system);
+        workArea.add(pol);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }
+    
+    private void fireDashboard() {
+        FireView pol = new FireView(workArea,userAcc,system);
+        workArea.add(pol);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }
+    
+    private void ambulanceDashboard() {
+        AmbulanceView pol = new AmbulanceView(workArea,userAcc,system);
+        workArea.add(pol);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }
 
     private void viewDocScreen() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -447,6 +362,13 @@ public class UserLogin extends javax.swing.JPanel {
 //        layout.next(container); 
 //    
     
+    }
+    
+    private void govtDashboard() {
+        GovernmentView pol = new GovernmentView(workArea,userAcc,system);
+        workArea.add(pol);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
     }
 
     private void displayUserPanel() {
