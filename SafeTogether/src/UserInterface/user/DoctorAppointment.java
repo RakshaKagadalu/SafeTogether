@@ -72,7 +72,7 @@ public class DoctorAppointment extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1160, 750));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        container.setBackground(new java.awt.Color(240, 240, 241));
+        container.setBackground(new java.awt.Color(250, 249, 251));
         container.setPreferredSize(new java.awt.Dimension(1160, 750));
         container.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -81,17 +81,22 @@ public class DoctorAppointment extends javax.swing.JPanel {
         container.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("SF Pro Text", 0, 16)); // NOI18N
         jLabel2.setText("Date");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 102, -1));
 
         jLabel3.setFont(new java.awt.Font("SF Pro Text", 0, 16)); // NOI18N
         jLabel3.setText("Time");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 6, 86, -1));
 
         timeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00" }));
+        jPanel2.add(timeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 38, 231, 36));
 
         jLabel4.setFont(new java.awt.Font("SF Pro Text", 0, 16)); // NOI18N
         jLabel4.setText("Specialization");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 6, -1, -1));
 
         specializationCombo.setPreferredSize(new java.awt.Dimension(140, 30));
         specializationCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -99,49 +104,10 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 specializationComboActionPerformed(evt);
             }
         });
+        jPanel2.add(specializationCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 38, 235, 36));
+        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 281, 36));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(specializationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(119, 119, 119)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-                        .addGap(363, 363, 363)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(timeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(specializationCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(timeCombo))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 1090, 80));
+        container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 1090, 90));
 
         bookAppointment1.setBackground(new java.awt.Color(10, 132, 255));
         bookAppointment1.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
@@ -166,7 +132,7 @@ public class DoctorAppointment extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblDocAvail);
 
-        container.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 900, 210));
+        container.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 1090, 250));
 
         bookAppointment2.setBackground(new java.awt.Color(10, 132, 255));
         bookAppointment2.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
