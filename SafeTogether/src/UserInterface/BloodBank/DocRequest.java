@@ -62,10 +62,7 @@ public class DocRequest extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Name", "Location", "Status", "Response"
@@ -281,7 +278,7 @@ public class DocRequest extends javax.swing.JPanel {
             {
                 if(o.getStatus().matches("In Progress"))
                 {
-                    o.setStatus("Cancled");
+                    o.setStatus("Cancelled");
                 }
                 else
                 {
