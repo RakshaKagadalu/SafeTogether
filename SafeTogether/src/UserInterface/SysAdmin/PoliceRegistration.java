@@ -7,6 +7,8 @@ package UserInterface.SysAdmin;
 import Business.EcoSystem;
 import Business.EmergencyPolice.Police;
 import Business.EmergencyPolice.PoliceDir;
+import Utility.MapCoordinates;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,10 +30,12 @@ public class PoliceRegistration extends javax.swing.JPanel {
     EcoSystem system;
     JPanel rightSidePanel;
     Police amb;
-    public PoliceRegistration(EcoSystem system, JPanel rightSidePanel) {
+    MapCoordinates locationPoint;
+    public PoliceRegistration(EcoSystem system, JPanel rightSidePanel, MapCoordinates locationPoint ) {
         initComponents();
         this.system = system;
         this.rightSidePanel = rightSidePanel;
+        this.locationPoint = locationPoint;
         this.setSize(1160, 750);
         populateTable();
 //        displayTable();
@@ -56,8 +60,6 @@ public class PoliceRegistration extends javax.swing.JPanel {
         DelBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        locationTxt = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         firstNameTxt = new javax.swing.JTextField();
         userIdTxt = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -65,6 +67,9 @@ public class PoliceRegistration extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         phoneTxt = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        locationInputField = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -155,14 +160,6 @@ public class PoliceRegistration extends javax.swing.JPanel {
         jLabel7.setText("Name");
         jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 220, -1));
 
-        locationTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(locationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 420, 40));
-
-        jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel8.setText("Location");
-        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
-
         firstNameTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
         jPanel7.add(firstNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 420, 40));
 
@@ -190,6 +187,26 @@ public class PoliceRegistration extends javax.swing.JPanel {
         phoneTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
         jPanel7.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 420, 40));
 
+        jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(73, 84, 90));
+        jLabel8.setText("Location");
+        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
+
+        locationInputField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(locationInputField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, 40));
+
+        jButton4.setBackground(new java.awt.Color(255, 55, 95));
+        jButton4.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Search");
+        jButton4.setBorder(null);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 150, 39));
+
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 740));
@@ -197,7 +214,7 @@ public class PoliceRegistration extends javax.swing.JPanel {
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-        if( firstNameTxt.getText().isEmpty()||locationTxt.getText().isEmpty()|| userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty())
+        if( firstNameTxt.getText().isEmpty()||locationInputField.getText().isEmpty()|| userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
             return;
@@ -211,7 +228,7 @@ public class PoliceRegistration extends javax.swing.JPanel {
                 return;
             }
 
-            Police customer = new Police(userIdTxt.getText(),passwordTxt.getText(),locationTxt.getText(),firstNameTxt.getText(),phoneTxt.getText() );
+            Police customer = new Police(userIdTxt.getText(),passwordTxt.getText(),locationInputField.getText(),firstNameTxt.getText(),phoneTxt.getText() );
             system.getUserAccountDirectory().addAccount(customer);
             system.getPoliceDir().addNewPolice(customer);
             populateTable();
@@ -219,7 +236,7 @@ public class PoliceRegistration extends javax.swing.JPanel {
             phoneTxt.setText("");
             userIdTxt.setText("");
             passwordTxt.setText("");
-            locationTxt.setText("");
+            locationInputField.setText("");
         }else{
             JOptionPane.showMessageDialog(null, "Username " + userIdTxt.getText() + " already exists !!!, Please try a new one");
         }
@@ -270,7 +287,7 @@ public class PoliceRegistration extends javax.swing.JPanel {
                         }
 
                         c.setNamePolice(firstNameTxt.getText());
-                        c.setPoliceLocation(locationTxt.getText());
+                        c.setPoliceLocation(locationInputField.getText());
                         c.setPhNum(phoneTxt.getText());
                         c.setUser_Id(userIdTxt.getText());
                         c.setPwd(passwordTxt.getText());
@@ -296,7 +313,7 @@ public class PoliceRegistration extends javax.swing.JPanel {
             return;
         } else{
             firstNameTxt.setText(table.getValueAt(selectedRow,0).toString());
-            locationTxt.setText(table.getValueAt(selectedRow,1).toString());
+            locationInputField.setText(table.getValueAt(selectedRow,1).toString());
             userIdTxt.setText(table.getValueAt(selectedRow,2).toString());
             passwordTxt.setText(table.getValueAt(selectedRow,3).toString());
             phoneTxt.setText(table.getValueAt(selectedRow,4).toString());
@@ -331,7 +348,7 @@ public class PoliceRegistration extends javax.swing.JPanel {
             }
             populateTable();
             firstNameTxt.setText("");
-            locationTxt.setText("");
+            locationInputField.setText("");
             phoneTxt.setText("");
             userIdTxt.setText("");
             passwordTxt.setText("");
@@ -343,11 +360,28 @@ public class PoliceRegistration extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_DelBtnActionPerformed
 
+    
+    public void populateLongituteLatitude(MapCoordinates locationPoint) {
+        this.locationPoint = locationPoint;
+        locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());   
+    }
+    
+    
+    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        MapViewr oLJP = new MapViewr(rightSidePanel);
+        rightSidePanel.add("MapViewr", oLJP);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DelBtn;
     private javax.swing.JButton addBtn;
     private javax.swing.JTextField firstNameTxt;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -360,7 +394,7 @@ public class PoliceRegistration extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField locationTxt;
+    private javax.swing.JTextField locationInputField;
     private javax.swing.JTextField passwordTxt;
     private javax.swing.JTextField phoneTxt;
     private javax.swing.JButton updateBtn;
