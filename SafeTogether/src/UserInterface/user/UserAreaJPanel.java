@@ -4,6 +4,7 @@
  */
 package UserInterface.user;
 
+import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
 import java.awt.CardLayout;
@@ -29,7 +30,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
     private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-     
+  private DB4OUtil dB4OUtil = DB4OUtil.getInstance();    
     Timer timer;
     
     private void Time() {
@@ -288,7 +289,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
-        
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBackMousePressed
 
     private void bookAppointmentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMousePressed

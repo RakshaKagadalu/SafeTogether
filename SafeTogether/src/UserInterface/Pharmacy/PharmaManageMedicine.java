@@ -4,6 +4,14 @@
  */
 package UserInterface.Pharmacy;
 
+import Business.EcoSystem;
+import Business.Pharma.Pharma;
+import Business.UserAcc.UserAcc;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author shrikrishnajoisa
@@ -13,8 +21,20 @@ public class PharmaManageMedicine extends javax.swing.JPanel {
     /**
      * Creates new form PharmaManageMedicine
      */
-    public PharmaManageMedicine() {
+         private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
+     Map<String,String> medicines;
+    public PharmaManageMedicine(EcoSystem system,JPanel userProcessContainer, UserAcc userAcc) {
         initComponents();
+        this.system = system;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+          Pharma p=(Pharma)userAcc;
+        medicines=p.getMedicines();
+      
+        displayTable();
+       
     }
 
    
@@ -32,13 +52,13 @@ public class PharmaManageMedicine extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        userNameTextField1 = new javax.swing.JTextField();
+        tblMed = new javax.swing.JTable();
+        medName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        userNameTextField2 = new javax.swing.JTextField();
+        medCost = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        delMed = new javax.swing.JButton();
+        addMed = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -50,60 +70,65 @@ public class PharmaManageMedicine extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Medicine Name", "Price ($)"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblMed);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 450));
 
-        userNameTextField1.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel2.add(userNameTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 220, 48));
+        medName.setBackground(new java.awt.Color(248, 248, 249));
+        jPanel2.add(medName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 220, 48));
 
         jLabel5.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(73, 84, 90));
         jLabel5.setText("Name");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 200, -1));
 
-        userNameTextField2.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel2.add(userNameTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, 220, 48));
+        medCost.setBackground(new java.awt.Color(248, 248, 249));
+        medCost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                medCostKeyPressed(evt);
+            }
+        });
+        jPanel2.add(medCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, 220, 48));
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel6.setText("Cost");
+        jLabel6.setText("Cost ($)");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, 240, -1));
 
-        jButton4.setBackground(new java.awt.Color(255, 55, 95));
-        jButton4.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Delete");
-        jButton4.setBorder(null);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        delMed.setBackground(new java.awt.Color(255, 55, 95));
+        delMed.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        delMed.setForeground(new java.awt.Color(255, 255, 255));
+        delMed.setText("Delete");
+        delMed.setBorder(null);
+        delMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                delMedActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 520, 140, 39));
+        jPanel2.add(delMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 520, 140, 39));
 
-        jButton1.setBackground(new java.awt.Color(10, 132, 255));
-        jButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addMed.setBackground(new java.awt.Color(10, 132, 255));
+        addMed.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        addMed.setForeground(new java.awt.Color(255, 255, 255));
+        addMed.setText("Add");
+        addMed.setBorder(null);
+        addMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addMedActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, 140, 39));
+        jPanel2.add(addMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, 140, 39));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 820, 580));
 
@@ -111,7 +136,7 @@ public class PharmaManageMedicine extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1195, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,28 +146,87 @@ public class PharmaManageMedicine extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void delMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delMedActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+           DefaultTableModel t2 = (DefaultTableModel) tblMed.getModel();
+        int selectedRow=tblMed.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        String key=t2.getValueAt(selectedRow, 0).toString();
+        medicines.remove(key);
+        displayTable();
+         JOptionPane.showMessageDialog(null, "Deleted Medicine Successfully!");
+       // DB4OUtil.dB4OUtil.storeSystem(ecosystem);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Select a row!!");
+        }
+    }//GEN-LAST:event_delMedActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMedActionPerformed
         // TODO add your handling code here:
+           if(medName.getText().isEmpty()||medCost.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "All fields are mandatory!!");
         
+        }
+        else
+        {
+            String a=medName.getText();
+        String b=medCost.getText();
+        medicines.put(a, b);
+        displayTable();
+        JOptionPane.showMessageDialog(null, "Added Medicine Successfully!");
+        }
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addMedActionPerformed
+
+    private void medCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_medCostKeyPressed
+        // TODO add your handling code here:
+            char c=evt.getKeyChar();
+        if(Character.isLetter(c))
+        {
+            medCost.setEditable(false);
+            JOptionPane.showMessageDialog(null, "enter number");
+        }
+        else
+        {
+            medCost.setEditable(true);
+        }
+    }//GEN-LAST:event_medCostKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton addMed;
+    private javax.swing.JButton delMed;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField userNameTextField1;
-    private javax.swing.JTextField userNameTextField2;
+    private javax.swing.JTextField medCost;
+    private javax.swing.JTextField medName;
+    private javax.swing.JTable tblMed;
     // End of variables declaration//GEN-END:variables
+
+    private void displayTable() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+     DefaultTableModel model = (DefaultTableModel) tblMed.getModel();
+        
+
+        model.setRowCount(0);
+        for (String key: medicines.keySet()) {
+                    Object[] row = new Object[5];
+                    row[0] = key;
+                    row[1] =  medicines.get(key);
+                    
+
+                    model.addRow(row);
+                
+            }
+    
+    }
 }

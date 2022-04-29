@@ -4,17 +4,29 @@
  */
 package UserInterface.BloodBank;
 
+import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
  */
+
 public class BloodStock extends javax.swing.JPanel {
 
     /**
      * Creates new form BloodStock
      */
-    public BloodStock() {
+     private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
+    public BloodStock(JPanel userProcessContainer,EcoSystem system, UserAcc userAcc) {
         initComponents();
+           this.system = system;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+        displayTable();
     }
 
     /**
@@ -246,4 +258,8 @@ public class BloodStock extends javax.swing.JPanel {
     private javax.swing.JButton signUpButton1;
     private javax.swing.JTextField userNameTextField;
     // End of variables declaration//GEN-END:variables
+
+    private void displayTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

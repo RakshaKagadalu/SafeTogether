@@ -65,6 +65,8 @@ public class DoctorAppointment extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDocAvail = new javax.swing.JTable();
         bookAppointment2 = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
+        cancel1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -118,7 +120,7 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 bookAppointment1ActionPerformed(evt);
             }
         });
-        container.add(bookAppointment1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 470, 230, 50));
+        container.add(bookAppointment1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 650, 230, 50));
 
         tblDocAvail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,7 +145,33 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 bookAppointment2ActionPerformed(evt);
             }
         });
-        container.add(bookAppointment2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 470, 230, 50));
+        container.add(bookAppointment2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, 230, 50));
+
+        cancel.setBackground(new java.awt.Color(10, 132, 255));
+        cancel.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        cancel.setForeground(new java.awt.Color(255, 255, 255));
+        cancel.setText("Cancel Appointment");
+        cancel.setBorder(null);
+        cancel.setFocusPainted(false);
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
+        container.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 550, 230, 50));
+
+        cancel1.setBackground(new java.awt.Color(10, 132, 255));
+        cancel1.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        cancel1.setForeground(new java.awt.Color(255, 255, 255));
+        cancel1.setText("Find Doctor");
+        cancel1.setBorder(null);
+        cancel1.setFocusPainted(false);
+        cancel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancel1ActionPerformed(evt);
+            }
+        });
+        container.add(cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 650, 230, 50));
 
         add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1139, 1073));
     }// </editor-fold>//GEN-END:initComponents
@@ -161,14 +189,27 @@ DoctorDisplay();
 
     private void bookAppointment2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment2ActionPerformed
         // TODO add your handling code here:
-        
+       
         bookDocAppointment();
     }//GEN-LAST:event_bookAppointment2ActionPerformed
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        // TODO add your handling code here:
+        
+        cancelAppoint();
+    }//GEN-LAST:event_cancelActionPerformed
+
+    private void cancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel1ActionPerformed
+        // TODO add your handling code here:
+        DoctorDisplay();
+    }//GEN-LAST:event_cancel1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookAppointment1;
     private javax.swing.JButton bookAppointment2;
+    private javax.swing.JButton cancel;
+    private javax.swing.JButton cancel1;
     private javax.swing.JPanel container;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
@@ -265,7 +306,8 @@ DoctorDisplay();
                     doc.setLastName(verifyName);
                     doc.setDate(appDate);
                     doc.setStatus("Appointment Booked");
-                    doc.setTime(date);
+                    doc.setTime(timeCombo.getSelectedItem().toString());
+                    //System.out.print(doc.getTime());
                     User user=(User)(userAcc);
                     doc.setUserId(user.getUserId());
                     doc.setUserName(user.getFirstName());
@@ -360,7 +402,7 @@ DoctorDisplay();
         DoctorsAppointment_Dir docDir=system.getDocAppDir();
         ArrayList<DoctorsAppointment> ol=docDir.getAppointments();
         int u=ol.size();
-        System.out.println(u);
+        
          
              tblDocAvail.setModel(new DefaultTableModel(null,new String[]{"AppID","Name","Date","Time","status"}));
         for(int i=0;i<u;i++)
@@ -376,4 +418,49 @@ DoctorDisplay();
                 t2.addRow(s);
             }
         }}
+
+    private void cancelAppoint() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      DefaultTableModel  t2 = (DefaultTableModel) tblDocAvail.getModel();
+        int selectedRow=tblDocAvail.getSelectedRow();
+        if(selectedRow>=0)
+        {       
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+ 
+    
+         DoctorsAppointment_Dir docDir=system.getDocAppDir();
+        ArrayList<DoctorsAppointment> ol=docDir.getAppointments();
+        int u=ol.size();
+        User a=(User)userAcc;
+        for(int i=0;i<u;i++)
+        {
+            DoctorsAppointment o=ol.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                System.out.println(o.getStatus());
+                if(o.getStatus().matches("Appointment Booked"))
+                {
+                    o.setStatus("Cancelled");
+                    verify(o.getDoctorsName(),o.getDate(),o.getTime());
+                    
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Wrong Move!!");
+                }
+                
+
+            }
+
+        }
+        tblDocAvail.setModel(new DefaultTableModel(null,new String[]{"ID","Doctor Name","Hospital","Status","Date","Time"}));
+        displayAppointmentStatus();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Select an appointment to cancel!!");
+        }
+    
+    
+    }
 }

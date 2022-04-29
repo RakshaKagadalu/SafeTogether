@@ -4,17 +4,39 @@
  */
 package UserInterface.Doctor;
 
+import Business.Doctor.Doctor;
+import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.DoctorsAppointment;
+import Business.WorkQueue.DoctorsAppointment_Dir;
+import Business.WorkQueue.SearchApp;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author shrikrishnajoisa
  */
+
 public class ManageDoc extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageDoc
      */
-    public ManageDoc() {
+     private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
+    public ManageDoc(JPanel userProcessContainer,EcoSystem ecosystem, UserAcc userAcc) {
         initComponents();
+        this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+        displayTable();
     }
 
     /**
@@ -29,9 +51,9 @@ public class ManageDoc extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        bookButton1 = new javax.swing.JButton();
-        bookButton = new javax.swing.JButton();
-        bookButton2 = new javax.swing.JButton();
+        consultation = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
+        prescribe = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(250, 249, 251));
@@ -43,13 +65,10 @@ public class ManageDoc extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Id", "Name", "Location", "Status", "Response"
+                "Id", "Name", "Status", "Date", "Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -64,75 +83,248 @@ public class ManageDoc extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 853, -1));
 
-        bookButton1.setBackground(new java.awt.Color(10, 132, 255));
-        bookButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton1.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton1.setText("Consult");
-        bookButton1.addActionListener(new java.awt.event.ActionListener() {
+        consultation.setBackground(new java.awt.Color(10, 132, 255));
+        consultation.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        consultation.setForeground(new java.awt.Color(255, 255, 255));
+        consultation.setText("Consult");
+        consultation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButton1ActionPerformed(evt);
+                consultationActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
+        jPanel1.add(consultation, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
 
-        bookButton.setBackground(new java.awt.Color(255, 69, 58));
-        bookButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton.setText("Cancel");
-        bookButton.addActionListener(new java.awt.event.ActionListener() {
+        cancel.setBackground(new java.awt.Color(255, 69, 58));
+        cancel.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        cancel.setForeground(new java.awt.Color(255, 255, 255));
+        cancel.setText("Cancel");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
+                cancelActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 590, 180, 50));
+        jPanel1.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 590, 180, 50));
 
-        bookButton2.setBackground(new java.awt.Color(255, 55, 95));
-        bookButton2.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton2.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton2.setText("Prescription");
-        bookButton2.addActionListener(new java.awt.event.ActionListener() {
+        prescribe.setBackground(new java.awt.Color(255, 55, 95));
+        prescribe.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        prescribe.setForeground(new java.awt.Color(255, 255, 255));
+        prescribe.setText("Prescription");
+        prescribe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButton2ActionPerformed(evt);
+                prescribeActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 180, 50));
+        jPanel1.add(prescribe, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 180, 50));
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
-        jLabel1.setText("Manage Opp");
+        jLabel1.setText("Appointments");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1003, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton1ActionPerformed
+    private void consultationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bookButton1ActionPerformed
+       consultation();
+       
+    }//GEN-LAST:event_consultationActionPerformed
 
-    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bookButtonActionPerformed
+        cancelAppoint();
+        
+    }//GEN-LAST:event_cancelActionPerformed
 
-    private void bookButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton2ActionPerformed
+    private void prescribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prescribeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bookButton2ActionPerformed
+         DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        
+         DoctorsAppointment_Dir dad=system.getDocAppDir();
+        ArrayList<DoctorsAppointment> ol=dad.getAppointments();
+        
+        int u=ol.size();
+        
+        for(int i=0;i<u;i++)
+        {
+            DoctorsAppointment o=ol.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().matches("Consultation Done"))
+                {
+                    
+                PharmacyDoctor ur=new PharmacyDoctor(container,system,userAcc,o.getUserId());
+                
+                container.add(ur);
+                CardLayout layout = (CardLayout) container.getLayout();
+                layout.next(container);
+                
+            }
+                else
+                {
+                     JOptionPane.showMessageDialog(null,"Wrong Move!!");
+                }
+            }
+        }
+           jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Status","Date","Time"}));
+        displayTable();     
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");  
+        }
+    }//GEN-LAST:event_prescribeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookButton;
-    private javax.swing.JButton bookButton1;
-    private javax.swing.JButton bookButton2;
+    private javax.swing.JButton cancel;
+    private javax.swing.JButton consultation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton prescribe;
     // End of variables declaration//GEN-END:variables
-}
+
+    private void displayTable() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DoctorsAppointment_Dir dad=system.getDocAppDir();
+        ArrayList<DoctorsAppointment> ol=dad.getAppointments();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            DoctorsAppointment o=ol.get(i);
+            Doctor d=(Doctor)userAcc;
+            if(o.getDoctorsName().matches(d.getFirstName()))
+            {
+            
+                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+                String s1=String.valueOf(o.getId());
+                
+                
+                String s[]={s1,o.getUserName(),o.getStatus(),o.getDate(),o.getTime()};
+                t2.addRow(s);
+            }
+            
+            
+        }
+    
+    
+    
+    }
+
+    private void consultation() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+       DoctorsAppointment_Dir dad=system.getDocAppDir();
+        ArrayList<DoctorsAppointment> ol=dad.getAppointments();
+        int u=ol.size();
+        
+        for(int i=0;i<u;i++)
+        {
+            DoctorsAppointment o=ol.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().matches("Appointment Booked"))
+                {
+                o.setStatus("Consultation Done");
+                 JOptionPane.showMessageDialog(null, "Processed!!");
+                }
+                else
+                {
+                                JOptionPane.showMessageDialog(null,"Wrong move!!");  
+
+                }
+            }
+        }
+           jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Status","Date","Time"}));
+        displayTable();     
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");  
+        }
+    
+    
+    }
+
+    private void cancelAppoint() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+          DoctorsAppointment_Dir dad=system.getDocAppDir();
+        ArrayList<DoctorsAppointment> ol=dad.getAppointments();
+        
+        int u=ol.size();
+        
+        for(int i=0;i<u;i++)
+        {
+            DoctorsAppointment o=ol.get(i);
+            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().matches("Appointment Booked"))
+                {
+                o.setStatus("Cancelled");
+                Verify(o.getDoctorsName(),o.getDate(),o.getTime());
+                 JOptionPane.showMessageDialog(null,"Appointment Cancelled");  
+                }
+                else
+                {
+                                JOptionPane.showMessageDialog(null,"Invalid request! please contact the sysadmin.");  
+
+                }
+            }
+        }
+           jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Status","Date","Time"}));
+        displayTable();     
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row!!");  
+        }
+    
+    }
+
+    private void Verify(String s,String d1,String date) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      boolean rand=false;
+        SearchApp check= system.getCheckApplication();
+        Map<String,List<String>> a=check.getSearchByName();
+        for (Map.Entry mapElement : a.entrySet()) {
+            if(mapElement.getKey().toString().matches(s))
+            {
+                List<String>a1=(List)mapElement.getValue();
+                String s1=a1.get(0);
+                String s2=a1.get(1);
+                if(s1.matches(d1))
+                {
+                    if(s2.matches(date))
+                    {
+                        a.remove(s);
+                    }
+                }
+            }
+           
+        }
+    
+    }}

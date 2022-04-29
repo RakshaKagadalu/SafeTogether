@@ -159,7 +159,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="0" y="250" width="290" height="60"/>
+                  <AbsoluteConstraints x="0" y="210" width="290" height="60"/>
                 </Constraint>
               </Constraints>
 
@@ -187,7 +187,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="80" green="78" red="73" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Vaccination Trends"/>
+                    <Property name="text" type="java.lang.String" value="Manage Medicines"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -211,7 +211,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="0" y="190" width="290" height="60"/>
+                  <AbsoluteConstraints x="0" y="140" width="290" height="60"/>
                 </Constraint>
               </Constraints>
 
@@ -239,7 +239,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="80" green="78" red="73" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Covid 19 Trends"/>
+                    <Property name="text" type="java.lang.String" value="Manage Orders"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -263,7 +263,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="0" y="130" width="290" height="60"/>
+                  <AbsoluteConstraints x="0" y="280" width="290" height="60"/>
                 </Constraint>
               </Constraints>
 
@@ -291,7 +291,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="80" green="78" red="73" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Vaccination Request"/>
+                    <Property name="text" type="java.lang.String" value="Vaccination Requests"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -356,7 +356,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="SF Pro Display" size="36" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Pharmaceuticals"/>
+                <Property name="text" type="java.lang.String" value="Pharma Dashboard"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

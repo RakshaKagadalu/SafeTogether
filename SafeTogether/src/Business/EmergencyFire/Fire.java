@@ -4,7 +4,8 @@
  */
 package Business.EmergencyFire;
 
-import Business.Roles.Police_Officer;
+import Business.Roles.Fire_Man;
+//import Business.Roles.Police_Officer;
 import Business.UserAcc.UserAcc;
 
 /**
@@ -26,7 +27,7 @@ public class Fire extends UserAcc {
         this.phNum = phNum;
         setUserName(user_Id);
         setPwd(pwd);
-        setRole(new Police_Officer());
+        setRole(new Fire_Man());
     }
     
 

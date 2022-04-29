@@ -4,18 +4,33 @@
  */
 package UserInterface.Government;
 
+import Business.EcoSystem;
+import Business.UserAcc.UserAcc;
+import javax.swing.JPanel;
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class GovernmentView extends javax.swing.JPanel {
 
+    private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
     /**
-     * Creates new form GovernmentView
+     * Creates new form PoliceMain
+     * @param userProcessContainer
+     * @param userAcc
+     * @param ecosystem
      */
-    public GovernmentView() {
+    public GovernmentView(JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
         initComponents();
+        this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+//        Time();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

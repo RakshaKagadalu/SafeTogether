@@ -13,6 +13,7 @@
 *Databank.db4o
 
 .DS_Store
+*Databank.db4o
 
 # Package Files #
 *.jar
