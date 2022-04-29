@@ -24,7 +24,7 @@ public class PandemicCenter extends UserAcc {
     public PandemicCenter( String name,String location,String userId, String password, String phoneNumber) {
         setUserName(userId);
         setPwd(password);
-      setRole(new Admin_PandemicTestCenter());
+        setRole(new Admin_PandemicTestCenter());
         this.userId = userId;
         this.password = password;
         this.location = location;

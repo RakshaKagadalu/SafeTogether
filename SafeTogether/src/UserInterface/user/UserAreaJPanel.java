@@ -132,7 +132,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
         jLabel22.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel22.setText("Return");
+        jLabel22.setText("Sign Out");
         goBack.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel3.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
@@ -262,14 +262,14 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
         timeLabel.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         timeLabel.setText("3:45 PM");
-        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, -1, -1));
+        jPanel6.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 20, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel10.setText("User Requests");
         jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         jLabel1.setForeground(new java.awt.Color(152, 151, 151));
-        jLabel1.setText("Manage everything related to hospital enterprises");
+        jLabel1.setText("Find everything that are related to the user queries");
         jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1630, 90));
@@ -387,37 +387,35 @@ public class UserAreaJPanel extends javax.swing.JPanel {
     private void vaccinationStatus() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     
-    emergencyReport.setBackground(new Color(255,255,255));
+        emergencyReport.setBackground(new Color(255,255,255));
         medicine.setBackground(new Color(255,255,255));
          bloodDonation.setBackground(new Color(255,255,255));
          bookAppointment.setBackground(new Color(255,255,255));
         testing.setBackground(new Color(255,255,255));
-    vaccination.setBackground(new Color(213,230,249));
+        vaccination.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
         VaccinationAppointments pcr=new VaccinationAppointments (system, container,userAcc);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-    
     }
 
     private void PandemicTest() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-     emergencyReport.setBackground(new Color(255,255,255));
+        emergencyReport.setBackground(new Color(255,255,255));
         medicine.setBackground(new Color(255,255,255));
          bloodDonation.setBackground(new Color(255,255,255));
          vaccination.setBackground(new Color(255,255,255));
         bookAppointment.setBackground(new Color(255,255,255));
-    testing.setBackground(new Color(213,230,249));
+        testing.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
-        TestRegistration pcr=new TestRegistration (system, container,userAcc);
+        TestRegistration pcr=new TestRegistration (system, rightSidePanel,userAcc);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
     }
     
     private void BloodDonation() {
-        
         emergencyReport.setBackground(new Color(255,255,255));
         medicine.setBackground(new Color(255,255,255));
         bloodDonation.setBackground(new Color(213,230,249));

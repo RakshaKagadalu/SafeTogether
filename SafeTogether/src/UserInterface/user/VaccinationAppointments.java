@@ -108,7 +108,7 @@ public class VaccinationAppointments extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblVacReg);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 630, 230));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 630, 620));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -122,7 +122,7 @@ public class VaccinationAppointments extends javax.swing.JPanel {
                 registerButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 220, 39));
+        jPanel7.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 190, 39));
 
         cancelButton.setBackground(new java.awt.Color(255, 55, 95));
         cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
@@ -133,7 +133,7 @@ public class VaccinationAppointments extends javax.swing.JPanel {
                 cancelButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 580, 200, 39));
+        jPanel7.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 580, 210, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel2.setText("Questionnaires");
@@ -215,7 +215,7 @@ public class VaccinationAppointments extends javax.swing.JPanel {
         bloodNo.setText("No");
         jPanel7.add(bloodNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, -1, -1));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, 470, 630));
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, 450, 630));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 750));
     }// </editor-fold>//GEN-END:initComponents
