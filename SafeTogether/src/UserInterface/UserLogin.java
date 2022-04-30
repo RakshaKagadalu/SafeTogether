@@ -129,7 +129,6 @@ public class UserLogin extends javax.swing.JPanel {
         jLabel7.setText("Login with your data that you entered during your registration to ");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        signUpButton.setBackground(new java.awt.Color(255, 255, 255));
         signUpButton.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
         signUpButton.setForeground(new java.awt.Color(235, 97, 91));
         signUpButton.setText("Register");
@@ -142,7 +141,6 @@ public class UserLogin extends javax.swing.JPanel {
         jPanel1.add(signUpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 450, 50));
 
         passwordTextField.setBackground(new java.awt.Color(248, 248, 249));
-        passwordTextField.setPreferredSize(new java.awt.Dimension(7, 20));
         jPanel1.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 450, 50));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 530, 520));

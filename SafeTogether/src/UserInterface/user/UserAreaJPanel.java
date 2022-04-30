@@ -453,7 +453,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
 
     private void PharmacyOrder() {
        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    emergencyReport.setBackground(new Color(255,255,255));
+        emergencyReport.setBackground(new Color(255,255,255));
         medicine.setBackground(new Color(213,230,249));
         bloodDonation.setBackground(new Color(255,255,255));
         vaccination.setBackground(new Color(255,255,255));
