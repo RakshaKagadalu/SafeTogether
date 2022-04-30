@@ -6,28 +6,15 @@ package UserInterface.user;
 
 import Business.BloodBank.BloodWork;
 import Business.BloodBank.BloodWorkDirectory;
-import Business.DatabaseUtil.DB4OUtil;
-import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
-import Business.WorkQueue.DoctorsAppointment;
-import Business.WorkQueue.DoctorsAppointment_Dir;
 import Business.WorkQueue.DonateBlood;
 import Business.WorkQueue.DonateBlood_Dir;
-import Business.WorkQueue.SearchApp;
 import Business.userR.User;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -41,8 +28,10 @@ public class BloodDonations extends javax.swing.JPanel {
     EcoSystem system;
     JPanel rightSidePanel;
     UserAcc userAccount;
+
     /**
      * Creates new form BloodDonations
+     *
      * @param system
      * @param rightSidePanel
      */
@@ -52,14 +41,14 @@ public class BloodDonations extends javax.swing.JPanel {
         this.rightSidePanel = rightSidePanel;
         this.userAccount = userAccount;
         this.setSize(1160, 750);
-        User a =(User)(userAccount);
-        firstNameField.setText(a.getFirstName());
-        lastNameField.setText(a.getLastName());
+        User u = (User) (userAccount);
+        firstNameField.setText(u.getFirstName());
+        lastNameField.setText(u.getLastName());
         setDonationCenterList();
-        
-         displayTable();
+
+        displayTable();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -208,22 +197,17 @@ public class BloodDonations extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
     public void setDonationCenterList() {
-         BloodWorkDirectory bd= system.getBloodBankDir();
-        ArrayList<BloodWork> ol=bd.getBloodWorkList();
-        int u=ol.size();
-        for(int i=0;i<u;i++)
-        {
-            BloodWork o=ol.get(i);
-            bloodBox.addItem(o.getUserNames());
+        BloodWorkDirectory bw = system.getBloodBankDir();
+        ArrayList<BloodWork> bloodList = bw.getBloodWorkList();
+        int l = bloodList.size();
+        for (int i = 0; i < l; i++) {
+            BloodWork blood = bloodList.get(i);
+            bloodBox.addItem(blood.getUserNames());
         }
-        
-        
-        
-       
+
     }
-    
+
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
         // TODO add your handling code here:
         bloodDonationAppointment();
@@ -231,78 +215,41 @@ public class BloodDonations extends javax.swing.JPanel {
 
     private void bloodDonationAppointment() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-   
-           if(jDateChooser1.getDate()!=null)
-            {
-            DonateBlood db=new DonateBlood();
-            int x = 1 + (int) (Math.random() * 100);
-            db.setId(x);
-            db.setFirstName(firstNameField.getText());
-            db.setBlood_bankName(bloodBox.getSelectedItem().toString());
+
+        if (jDateChooser1.getDate() != null) {
+            DonateBlood donate = new DonateBlood();
+            int z = 1 + (int) (Math.random() * 100);
+            donate.setId(z);
+            donate.setFirstName(firstNameField.getText());
+            donate.setBlood_bankName(bloodBox.getSelectedItem().toString());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String d1 = sdf.format(jDateChooser1.getDate());
-            db.setStatus("Appoinment Booked");
-            User a=(User)(userAccount);
-            db.setUserId(a.getUserId());
-            db.setAppoinmentDate(d1);            
-            db.setAppoinmentTime(timeBox.getSelectedItem().toString());
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
-            LocalDateTime d2 = LocalDateTime.now();  
-            System.out.println(dtf.format(d2));
-            if(d1.compareTo(d2.toString()) >= 0) {
-                DonateBlood_Dir dbd= system.getDonateBloodDir();    
-                dbd.addrequest(db);
-                jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Center","Status","Date","Time"}));
+            String date1 = sdf.format(jDateChooser1.getDate());
+            donate.setStatus("Appoinment Booked");
+            User u = (User) (userAccount);
+            donate.setUserId(u.getUserId());
+            donate.setAppoinmentDate(date1);
+            donate.setAppoinmentTime(timeBox.getSelectedItem().toString());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime date2 = LocalDateTime.now();
+
+            if (date1.compareTo(date2.toString()) >= 0) {
+                DonateBlood_Dir bloodDir = system.getDonateBloodDir();
+                bloodDir.addrequest(donate);
+                jTable1.setModel(new DefaultTableModel(null, new String[]{"ID", "Center", "Status", "Date", "Time"}));
                 displayTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Appointment Available from Tomorrow");
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"Appointment Available from Tomorrow");
-            }
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"Pick A Date!!");
-            }
-    
+        } else {
+            JOptionPane.showMessageDialog(null, "Pick A Date!!");
+        }
+
     }
-    
-    
-   
-    
+
+
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-       DonateBlood_Dir red= system.getDonateBloodDir();
-        ArrayList<DonateBlood> ol=red.getDonors();
-        
-        int u=ol.size();
-        User bb=(User)(userAccount);
-        for(int i=0;i<u;i++)
-        {
-            DonateBlood o=ol.get(i);
-            if(s==o.getId())
-            {
-                if(o.getStatus().matches("Blood Collected"))
-                {
-                JOptionPane.showMessageDialog(null,"WBC :"+o.getWBC()+" "+"RBC :"+o.getRBC()+" "+"Cholesterol :"+o.getCholesterol()+" "+"Platelets :"+o.getPlatelets());
-                }
-                else
-                {
-                  JOptionPane.showMessageDialog(null,"Results not Available!!");  
-                }
-            }
-        }
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Select a Row!!");
-        }
+   viewButton();
     }//GEN-LAST:event_viewButtonActionPerformed
 
     private void firstNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameFieldActionPerformed
@@ -311,40 +258,7 @@ public class BloodDonations extends javax.swing.JPanel {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-     DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-         DonateBlood_Dir red= system.getDonateBloodDir();
-        ArrayList<DonateBlood> ol=red.getDonors();
-        
-        int u=ol.size();
-        User bb=(User)(userAccount);
-        for(int i=0;i<u;i++)
-        {
-            DonateBlood o=ol.get(i);
-            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
-            {
-                if(o.getStatus().matches("Appoinment Booked"))
-                {
-                     o.setStatus("Cancelled");
-                }
-                else
-                        {
-                            JOptionPane.showMessageDialog(null,"wrong move!!");
-                        }
-               
-            }
-            }
-        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Center","Status","Date","Time"}));
-        displayTable();
-        }
-        else{
-             JOptionPane.showMessageDialog(null,"Select a Row!!");
-        }
-        
+     cancelButton();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
 
@@ -371,25 +285,83 @@ public class BloodDonations extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void displayTable() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-     jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Center","Status","Date","Time"}));
-     DonateBlood_Dir red= system.getDonateBloodDir();
-        ArrayList<DonateBlood> ol=red.getDonors();
-      int u=ol.size();
-        System.out.println(u);
-        for(int i=0;i<u;i++)
-        {
-            DonateBlood o=ol.get(i);
-            System.out.println(userAccount.getUserName());
-            System.out.println(o.getUserId());
-            if(userAccount.getUserName().matches(o.getUserId()))
-            {
-                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
-                String s1=String.valueOf(o.getId());    
-                String s[]={s1,o.getBlood_bankName(),o.getStatus(),o.getAppoinmentDate(),o.getAppoinmentTime()};
-                t2.addRow(s);
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        jTable1.setModel(new DefaultTableModel(null, new String[]{"ID", "Center", "Status", "Date", "Time"}));
+        DonateBlood_Dir donateBloodDir = system.getDonateBloodDir();
+        ArrayList<DonateBlood> donorList = donateBloodDir.getDonors();
+        int l = donorList.size();
+
+        for (int i = 0; i < l; i++) {
+            DonateBlood donate = donorList.get(i);
+
+            if (userAccount.getUserName().matches(donate.getUserId())) {
+                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+                String r1 = String.valueOf(donate.getId());
+                String r2[] = {r1, donate.getBlood_bankName(), donate.getStatus(), donate.getAppoinmentDate(), donate.getAppoinmentTime()};
+                table.addRow(r2);
             }
         }
+
+    }
+
+    private void cancelButton() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow >= 0) {
+            int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+
+            DonateBlood_Dir donateBloodDir = system.getDonateBloodDir();
+            ArrayList<DonateBlood> donateBloodList = donateBloodDir.getDonors();
+
+            int l = donateBloodList.size();
+            User u = (User) (userAccount);
+            for (int i = 0; i < l; i++) {
+                DonateBlood donate = donateBloodList.get(i);
+                if (sRow == donate.getId()) {
+                    if (donate.getStatus().matches("Appoinment Booked")) {
+                        donate.setStatus("Cancelled");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Incorrect Action!!");
+                    }
+
+                }
+            }
+            jTable1.setModel(new DefaultTableModel(null, new String[]{"ID", "Center", "Status", "Date", "Time"}));
+            displayTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a Row!!");
+        }
+
     
+    
+    
+    }
+
+    private void viewButton() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow >= 0) {
+            int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+
+            DonateBlood_Dir donateBloodDir = system.getDonateBloodDir();
+            ArrayList<DonateBlood> donorList = donateBloodDir.getDonors();
+
+            int l = donorList.size();
+            User u = (User) (userAccount);
+            for (int i = 0; i < l; i++) {
+                DonateBlood donate = donorList.get(i);
+                if (sRow == donate.getId()) {
+                    if (donate.getStatus().matches("Blood Collected")) {
+                        JOptionPane.showMessageDialog(null, "WBC :" + donate.getWBC() + " " + "RBC :" + donate.getRBC() + " " + "Cholesterol :" + donate.getCholesterol() + " " + "Platelets :" + donate.getPlatelets());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Results not Available Yet!!");
+                    }
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
     }
 }
