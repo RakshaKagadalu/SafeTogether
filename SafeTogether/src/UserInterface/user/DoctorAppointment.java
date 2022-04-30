@@ -120,7 +120,7 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 bookAppointment1ActionPerformed(evt);
             }
         });
-        container.add(bookAppointment1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 650, 230, 50));
+        container.add(bookAppointment1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 680, 230, 50));
 
         tblDocAvail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,7 +145,7 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 bookAppointment2ActionPerformed(evt);
             }
         });
-        container.add(bookAppointment2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, 230, 50));
+        container.add(bookAppointment2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 680, 230, 50));
 
         cancel.setBackground(new java.awt.Color(10, 132, 255));
         cancel.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
@@ -158,7 +158,7 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 cancelActionPerformed(evt);
             }
         });
-        container.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 550, 230, 50));
+        container.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 680, 230, 50));
 
         cancel1.setBackground(new java.awt.Color(10, 132, 255));
         cancel1.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
@@ -171,7 +171,7 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 cancel1ActionPerformed(evt);
             }
         });
-        container.add(cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 650, 230, 50));
+        container.add(cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 680, 230, 50));
 
         add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1139, 1073));
     }// </editor-fold>//GEN-END:initComponents

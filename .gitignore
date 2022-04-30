@@ -14,6 +14,8 @@
 
 .DS_Store
 *Databank.db4o
+project.properties
+*.db4o
 
 # Package Files #
 *.jar
