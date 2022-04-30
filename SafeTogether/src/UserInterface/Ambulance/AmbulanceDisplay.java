@@ -6,7 +6,6 @@ package UserInterface.Ambulance;
 
 import Business.EcoSystem;
 import Business.EmergencyAmbulance.Ambulance;
-import Business.EmergencyPolice.Police;
 import Business.UserAcc.UserAcc;
 import Business.WorkQueue.Req_Emergency;
 import Business.WorkQueue.Req_EmergencyDir;
@@ -136,36 +135,36 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
 
     private void bookButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton2ActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-        if(selectedRow>=0)
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+        if(selectedRow >= 0)
         {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-        Req_EmergencyDir red=system.getEmergencyReqDir();
-        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
+        int rowId = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+        
+        Req_EmergencyDir requestemergencyDir = system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> emergencies = requestemergencyDir.getEmergencyUserList();
         Ambulance a=(Ambulance)userAcc;
-        int u=ol.size();
-        for(int i=0;i<u;i++)
+        int size = emergencies.size();
+        for(int i=0;i<size;i++)
         {
-            Req_Emergency o=ol.get(i);
-            if(s==o.getId())
+            Req_Emergency emergency =  emergencies.get(i);
+            if( rowId ==emergency.getId())
             {
-                if(o.getStatus().matches("Closed"))
+                if(emergency.getStatus().matches("Closed"))
                 {
                     JOptionPane.showMessageDialog(null, "Emergency Closed");
                 }
-                else if(o.getStatus().matches("False Alarm"))
+                else if(emergency.getStatus().matches("False Alarm"))
                 {
                     JOptionPane.showMessageDialog(null, "Emergency is a false Alaram");
                 }
-                else if(o.getResponse().matches("No Response"))
+                else if(emergency.getResponse().matches("No Response"))
                 {
                     JOptionPane.showMessageDialog(null, "respond to emergency");
                 }
                 else
                 {
-                    o.setStatus("False Alarm");
+                    emergency.setStatus("False Alarm");
                 }
                 
                 
@@ -184,35 +183,35 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
 
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
         if(selectedRow>=0)
         {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-        Req_EmergencyDir red=system.getEmergencyReqDir();
-        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
-        int u=ol.size();
-        for(int i=0;i<u;i++)
+        int s=Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+        
+        Req_EmergencyDir requestemergencyDir=system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> emergencies = requestemergencyDir.getEmergencyUserList();
+        int size = emergencies.size();
+        for(int i=0;i<size;i++)
         {
-            Req_Emergency o=ol.get(i);
-            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            Req_Emergency emergency = emergencies.get(i);
+            if(s==emergency.getId()/*&&emergency.getStatus().matches("Deliver Man Assigned")*/)
             {
-                if(o.getStatus().matches("Closed"))
+                if(emergency.getStatus().matches("Closed"))
                 {
                     JOptionPane.showMessageDialog(null, "Emergency Closed");
                 }
-                else if(o.getStatus().matches("False Alaram"))
+                else if(emergency.getStatus().matches("False Alaram"))
                 {
                     JOptionPane.showMessageDialog(null, "Emergency is a false Alaram");
                 }
-                else if(o.getResponse().matches("No Response"))
+                else if(emergency.getResponse().matches("No Response"))
                 {
                     JOptionPane.showMessageDialog(null, "respond to emergency");
                 }
                 else
                 {
-                    o.setStatus("Closed");
+                    emergency.setStatus("Closed");
                 }
 
             }
@@ -229,32 +228,32 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
 
     private void bookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton1ActionPerformed
         // TODO add your handling code here:
-         DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
+         DefaultTableModel  table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
         if(selectedRow>=0)
         {       
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-        Req_EmergencyDir red=system.getEmergencyReqDir();
-        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
-        int u=ol.size();
+        int s=Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+        
+        Req_EmergencyDir requestemergencyDir=system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> emergencies = requestemergencyDir.getEmergencyUserList();
+        int size = emergencies.size();
         Ambulance a=(Ambulance)userAcc;
-        for(int i=0;i<u;i++)
+        for(int i=0;i<size;i++)
         {
-            Req_Emergency o=ol.get(i);
-            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            Req_Emergency emergency = emergencies.get(i);
+            if(s==emergency.getId()/*&&emergency.getStatus().matches("Deliver Man Assigned")*/)
             {
-                if(o.getStatus().matches("Closed"))
+                if(emergency.getStatus().matches("Closed"))
                 {
                     JOptionPane.showMessageDialog(null, "Emergency Closed");
                 }
-                else if(o.getStatus().matches("False Alaram"))
+                else if(emergency.getStatus().matches("False Alaram"))
                 {
                     JOptionPane.showMessageDialog(null, "Emergency is a false Alaram");
                 }
-                else if(o.getResponse().matches("No Response"))
+                else if(emergency.getResponse().matches("No Response"))
                 {
-                    o.setResponse(a.getNameDriver()+" "+"Responded");
+                    emergency.setResponse(a.getNameDriver()+" "+"Responded");
                 }
                 else
                 {
@@ -276,23 +275,23 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
 
     public void populate_table()
     {
-        Req_EmergencyDir red=system.getEmergencyReqDir();
-        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
-        int u=ol.size();
-        System.out.println(u);
-        for(int i=0;i<u;i++)
+        Req_EmergencyDir requestemergencyDir=system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> emergencies = requestemergencyDir.getEmergencyUserList();
+        int size = emergencies.size();
+        
+        for(int i=0;i<size;i++)
         {
-            System.out.println("Shouldnt be here if u is 0");
-            Req_Emergency o=ol.get(i);
-            if(o.getEmergency().matches("Ambulance"))
+            
+            Req_Emergency emergency = emergencies.get(i);
+            if(emergency.getEmergency().matches("Ambulance"))
             {
             
-                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
-                String s1=String.valueOf(o.getId());
+                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+                String s1=String.valueOf(emergency.getId());
                 
                 
-                String s[]={s1,o.getName(),o.getEmergency(),o.getLocation(),o.getStatus(),o.getResponse()};
-                t2.addRow(s);
+                String s[]={s1,emergency.getName(),emergency.getEmergency(),emergency.getLocation(),emergency.getStatus(),emergency.getResponse()};
+                table.addRow(s);
             
             }
             

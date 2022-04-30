@@ -152,25 +152,22 @@ public class PandemicDisplay extends javax.swing.JPanel {
 
     public void populate_table()
     {
-        OutbreakTracerDir c = system.getOutbreakStatusDir();
-        ArrayList<OutbreakTracer> ol=c.getOutbreakLog();
-        int u=ol.size();
-        System.out.println("size"+u);
-        for(int i=0;i<u;i++)
+        OutbreakTracerDir OTDir = system.getOutbreakStatusDir();
+        ArrayList<OutbreakTracer> OTLog= OTDir.getOutbreakLog();
+        int size = OTLog.size();
+        for(int i=0;i<size;i++)
         {
-            OutbreakTracer o=ol.get(i);
+            OutbreakTracer outBreak = OTLog.get(i);
             PandemicCenter bb=(PandemicCenter)(userAcc);
-            System.out.println(o.getTestCenter());
-            System.out.println(bb.getName());
-            if(o.getTestCenter().matches(bb.getName()))
+            if(outBreak.getTestCenter().matches(bb.getName()))
             {
             
-                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
-                String s1=String.valueOf(o.getId());
+                DefaultTableModel table2 = (DefaultTableModel) jTable1.getModel();
+                String s1=String.valueOf(outBreak.getId());
                 
                 
-                String s[]={s1,o.getStatus(),o.getUserName(),o.getTemp(),o.getContact(),o.getSymptoms(),o.getPositive(), o.getAppDate(),o.getResult()};
-                t2.addRow(s);
+                String s[]={s1,outBreak.getStatus(),outBreak.getUserName(),outBreak.getTemp(),outBreak.getContact(),outBreak.getSymptoms(),outBreak.getPositive(), outBreak.getAppDate(),outBreak.getResult()};
+                table2.addRow(s);
             
             }
          
@@ -181,27 +178,27 @@ public class PandemicDisplay extends javax.swing.JPanel {
     
     public void result()
       {   
-        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
+        DefaultTableModel table2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
           if(selectedRow>=0)
               {
 
-              int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-              System.out.println("id"+s);
-              OutbreakTracerDir red = system.getOutbreakStatusDir();
-              ArrayList<OutbreakTracer> ol=red.getOutbreakLog();
-              int u=ol.size();
-              for(int i=0;i<u;i++)
+              int rowId =Integer.parseInt(table2.getValueAt(selectedRow, 0).toString());
+             
+              OutbreakTracerDir OTDir = system.getOutbreakStatusDir();
+              ArrayList<OutbreakTracer> OTLog = OTDir.getOutbreakLog();
+              int size = OTLog.size();
+              for(int i=0;i<size;i++)
               {
-                  OutbreakTracer o=ol.get(i);
-                  if(s==o.getId())
+                  OutbreakTracer outBreak = OTLog.get(i);
+                  if(rowId== outBreak.getId())
                   {
-                      if(o.getResult().matches("NA"))
+                      if(outBreak.getResult().matches("NA"))
                       {
-                      if(o.getStatus().matches("Appoinment Booked"))
+                      if(outBreak.getStatus().matches("Appoinment Booked"))
                       {
-                          o.setResult(jComboBox1.getSelectedItem().toString());
-                          o.setStatus("Done");
+                          outBreak.setResult(jComboBox1.getSelectedItem().toString());
+                          outBreak.setStatus("Done");
                       }
                       else
                       {
@@ -222,7 +219,7 @@ public class PandemicDisplay extends javax.swing.JPanel {
               }
           else
           {
-
+              JOptionPane.showMessageDialog(null,"Row Not selected");
           }           
     }
 

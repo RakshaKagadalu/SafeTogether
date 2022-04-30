@@ -28,23 +28,23 @@ public class RequestBlood extends javax.swing.JPanel {
     private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-    public RequestBlood(JPanel userProcessContainer,EcoSystem ecosystem, UserAcc userAcc) {
+
+    public RequestBlood(JPanel userProcessContainer, EcoSystem ecosystem, UserAcc userAcc) {
         initComponents();
-         this.system = ecosystem;
+        this.system = ecosystem;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
-          displayTable();
-        BloodWorkDirectory bd=ecosystem.getBloodBankDir();
-        Doctor d=(Doctor)(userAcc);
-        firstNameTxt.setText(d.getFirstName());
-        
-        ArrayList<BloodWork> ol=bd.getBloodWorkList();
-        int u=ol.size();
-        for(int i=0;i<u;i++)
-        {
-            BloodWork o=ol.get(i);
-            bloodbank.addItem(o.getUserNames());
-            
+        displayTable();
+        BloodWorkDirectory bloowWorkDir = ecosystem.getBloodBankDir();
+        Doctor doc = (Doctor) (userAcc);
+        firstNameTxt.setText(doc.getFirstName());
+
+        ArrayList<BloodWork> bloodWorkList = bloowWorkDir.getBloodWorkList();
+        int l = bloodWorkList.size();
+        for (int i = 0; i < l; i++) {
+            BloodWork bloodWork = bloodWorkList.get(i);
+            bloodbank.addItem(bloodWork.getUserNames());
+
         }
     }
 
@@ -211,68 +211,15 @@ public class RequestBlood extends javax.swing.JPanel {
 
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
         // TODO add your handling code here:
-        if( unit.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
-            return;
-        }
-      
-        Req_Blood rb=new Req_Blood();
-        int x = 1 + (int) (Math.random() * 100);
-        rb.setId(x);
-        rb.setFirstName(firstNameTxt.getText());
-        rb.setBloodType(bloodGroup.getSelectedItem().toString());
-        rb.setBloodBankName(bloodbank.getSelectedItem().toString());
-        rb.setUnits(Integer.parseInt(unit.getText()));
-        rb.setStatus("In Progress");
-        Req_BloodDir rbd=system.getReqBloodDir();
-        Doctor d=(Doctor)(userAcc);
-        rb.setDoctorId(userAcc.getUserName());
-        rbd.addUserReq(rb);
-   
-         JOptionPane.showMessageDialog(null, "Blood Unit Requested Successfully!!");
-        jTable3.setModel(new DefaultTableModel(null,new String[]{"ID","Center","Status","Blood Type","Units requested"}));
-        displayTable();
-        
-        
-        
+        addBloodReq();
+
+
     }//GEN-LAST:event_addbtnActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
-        
-         DefaultTableModel  t2 = (DefaultTableModel) jTable3.getModel();
-        int selectedRow=jTable3.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-        Req_BloodDir rbd=system.getReqBloodDir();
-        ArrayList<Req_Blood> ol=rbd.getBloodReqDir();
-        int u=ol.size();
-        
-        for(int i=0;i<u;i++)
-        {
-            Req_Blood o=ol.get(i);
-            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
-            {
-                if(o.getStatus().matches("In Progress"))
-                {
-                    o.setStatus("Cancled");
-                }
-                else
-                {
-                     JOptionPane.showMessageDialog(null,"Wrong Move!!");
-                }
-                }
-        }
-           jTable3.setModel(new DefaultTableModel(null,new String[]{"ID","Center","Status","Blood Type","Units requested"}));
-      displayTable();     
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Select a Row!!");  
-        }
+
+        deleteBloodReq();
     }//GEN-LAST:event_cancelActionPerformed
 
     private void bloodGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloodGroupActionPerformed
@@ -285,14 +232,11 @@ public class RequestBlood extends javax.swing.JPanel {
 
     private void unitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_unitKeyPressed
         // TODO add your handling code here:
-         char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             unit.setEditable(false);
             JOptionPane.showMessageDialog(null, "enter number");
-        }
-        else
-        {
+        } else {
             unit.setEditable(true);
         }
     }//GEN-LAST:event_unitKeyPressed
@@ -319,25 +263,78 @@ public class RequestBlood extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void displayTable() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    {
-        Req_BloodDir rbd= system.getReqBloodDir();
-        ArrayList<Req_Blood> ol=rbd.getBloodReqDir();
-        int u=ol.size();
-        for(int i=0;i<u;i++)
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         {
-            Req_Blood o=ol.get(i);          
-            if(userAcc.getUserName().matches(o.getDoctorId()))
-            {
-                DefaultTableModel t2 = (DefaultTableModel) jTable3.getModel();
-                String s1=String.valueOf(o.getId());    
-                String s[]={s1,o.getBloodBankName(),o.getStatus(),o.getBloodType(),Integer.toString(o.getUnits())};
-                t2.addRow(s);
+            Req_BloodDir reBloodDir = system.getReqBloodDir();
+            ArrayList<Req_Blood> reqBloodList = reBloodDir.getBloodReqDir();
+            int l = reqBloodList.size();
+            for (int i = 0; i < l; i++) {
+                Req_Blood reqBlood = reqBloodList.get(i);
+                if (userAcc.getUserName().matches(reqBlood.getDoctorId())) {
+                    DefaultTableModel table = (DefaultTableModel) jTable3.getModel();
+                    String s1 = String.valueOf(reqBlood.getId());
+                    String s[] = {s1, reqBlood.getBloodBankName(), reqBlood.getStatus(), reqBlood.getBloodType(), Integer.toString(reqBlood.getUnits())};
+                    table.addRow(s);
+                }
             }
+
         }
-        
+
     }
-    
-    
+
+    private void addBloodReq() {
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        if (unit.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        }
+
+        Req_Blood reqBlood = new Req_Blood();
+        int z = 1 + (int) (Math.random() * 100);
+        reqBlood.setId(z);
+        reqBlood.setFirstName(firstNameTxt.getText());
+        reqBlood.setBloodType(bloodGroup.getSelectedItem().toString());
+        reqBlood.setBloodBankName(bloodbank.getSelectedItem().toString());
+        reqBlood.setUnits(Integer.parseInt(unit.getText()));
+        reqBlood.setStatus("In Progress");
+        Req_BloodDir reqBloodDir = system.getReqBloodDir();
+        Doctor doc = (Doctor) (userAcc);
+        reqBlood.setDoctorId(userAcc.getUserName());
+        reqBloodDir.addUserReq(reqBlood);
+
+        JOptionPane.showMessageDialog(null, "Blood Unit Requested Successfully!!");
+        jTable3.setModel(new DefaultTableModel(null, new String[]{"ID", "Center", "Status", "Blood Type", "Units requested"}));
+        displayTable();
+
+    }
+
+    private void deleteBloodReq() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DefaultTableModel table = (DefaultTableModel) jTable3.getModel();
+        int selectedRow = jTable3.getSelectedRow();
+        if (selectedRow >= 0) {
+            int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+            //System.out.println("id"+s);
+            Req_BloodDir reBloodDir = system.getReqBloodDir();
+            ArrayList<Req_Blood> reBloodList = reBloodDir.getBloodReqDir();
+            int l = reBloodList.size();
+
+            for (int i = 0; i < l; i++) {
+                Req_Blood reqBlood = reBloodList.get(i);
+                if (sRow == reqBlood.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/) {
+                    if (reqBlood.getStatus().matches("In Progress")) {
+                        reqBlood.setStatus("Cancelled");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Wrong Move!!");
+                    }
+                }
+            }
+            jTable3.setModel(new DefaultTableModel(null, new String[]{"ID", "Center", "Status", "Blood Type", "Units requested"}));
+            displayTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a Row!!");
+        }
+
     }
 }

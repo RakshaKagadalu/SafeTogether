@@ -24,12 +24,13 @@ public class VaccinationFrame extends javax.swing.JPanel {
     /**
      * Creates new form VaccinationFrame
      */
-         private UserAcc userAcc;
+    private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-    public VaccinationFrame(EcoSystem ecosystem,JPanel userProcessContainer, UserAcc userAcc) {
+
+    public VaccinationFrame(EcoSystem system, JPanel userProcessContainer, UserAcc userAcc) {
         initComponents();
-         this.system = ecosystem;
+        this.system = system;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
         displayTable();
@@ -75,8 +76,8 @@ public class VaccinationFrame extends javax.swing.JPanel {
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
-       markCompleteVac(); 
-     
+        markCompleteVac();
+
     }//GEN-LAST:event_btnCompleteActionPerformed
 
 
@@ -87,63 +88,53 @@ public class VaccinationFrame extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void displayTable() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-   VacRequest_Dir  red=system.getVaccReqDir();
-        ArrayList<VacRequest> ol=red.getRequests();
-        int u=ol.size();
-        System.out.println(u);
-        
-        for(int i=0;i<u;i++)
-        {
-                         
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        VacRequest_Dir vacReq = system.getVaccReqDir();
+        ArrayList<VacRequest> vacReqList = vacReq.getRequests();
+        int l = vacReqList.size();
 
-            VacRequest o=ol.get(i);
-            // o.setStatus("Approved");
-            Pharma ph1=(Pharma)(userAcc);
-            
-           
-            if((o.getPharmacy().matches(ph1.getPharmaName()) && (o.getStatus().matches("Approved")==true||o.getStatus().matches("Done")))==true)
-            {
-                DefaultTableModel t2 = (DefaultTableModel) jTable2.getModel();
-                String s1=String.valueOf(o.getVacId());
-                
-                
-                String s[]={s1,o.getFirst_name(),o.getStatus(),o.getVaccination(),o.getDate(),o.getTime()};
-                t2.addRow(s);
+        for (int i = 0; i < l; i++) {
+
+            VacRequest vaccineReq = vacReqList.get(i);
+
+            Pharma pharmacy = (Pharma) (userAcc);
+
+            if ((vaccineReq.getPharmacy().matches(pharmacy.getPharmaName()) && (vaccineReq.getStatus().matches("Approved") == true || vaccineReq.getStatus().matches("Done"))) == true) {
+                DefaultTableModel table = (DefaultTableModel) jTable2.getModel();
+                String r1 = String.valueOf(vaccineReq.getVacId());
+
+                String r2[] = {r1, vaccineReq.getFirst_name(), vaccineReq.getStatus(), vaccineReq.getVaccination(), vaccineReq.getDate(), vaccineReq.getTime()};
+                table.addRow(r2);
             }
-            
+
         }
-    
-    
+
     }
 
     private void markCompleteVac() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    
-         DefaultTableModel  t2 = (DefaultTableModel) jTable2.getModel();
-        int selectedRow=jTable2.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-        VacRequest_Dir  red=system.getVaccReqDir();
-        ArrayList<VacRequest> ol=red.getRequests();
-        int u=ol.size();
-        for(int i=0;i<u;i++)
-        {
-            VacRequest o=ol.get(i);
-            if(s==o.getVacId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
-            {
-                
-                     o.setStatus("Done");
-                
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        DefaultTableModel table = (DefaultTableModel) jTable2.getModel();
+        int selectedRow = jTable2.getSelectedRow();
+        if (selectedRow >= 0) {
+            int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+
+            VacRequest_Dir vacReqDir = system.getVaccReqDir();
+            ArrayList<VacRequest> vacReq = vacReqDir.getRequests();
+            int l = vacReq.size();
+            for (int i = 0; i < l; i++) {
+                VacRequest vaccinereq = vacReq.get(i);
+                if (sRow == vaccinereq.getVacId()) {
+
+                    vaccinereq.setStatus("Done");
+
+                }
             }
+            jTable2.setModel(new DefaultTableModel(null, new String[]{"ID", "Name", "Status", "Vaccination", "Date", "Time"}));
+            displayTable();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a Row");
         }
-        jTable2.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Status","Vaccination","Date","Time"}));
-        displayTable();
-    
-        }else
-        {
-            JOptionPane.showMessageDialog(null,"Select a Row");
-        }}
+    }
 }

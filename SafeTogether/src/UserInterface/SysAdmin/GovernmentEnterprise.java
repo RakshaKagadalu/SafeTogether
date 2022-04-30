@@ -4,6 +4,7 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -27,7 +28,7 @@ public class GovernmentEnterprise extends javax.swing.JPanel {
      */
     private final JPanel container;
     private final EcoSystem system;
-    
+     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     Timer timer;
     
     private void Time() {
@@ -270,6 +271,7 @@ public class GovernmentEnterprise extends javax.swing.JPanel {
         container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
+          dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBackMousePressed
 
     private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed

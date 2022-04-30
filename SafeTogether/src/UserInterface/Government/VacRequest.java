@@ -41,23 +41,23 @@ public class VacRequest extends javax.swing.JPanel {
         this.userAcc = userAcc;
 //        Time();
         populate_table();
-        PharmaDirectory bd= system.getPharmaDir();
-        ArrayList<Pharma> ol=bd.getPharmaArrayList();
-        int u=ol.size();
-        for(int i=0;i<u;i++)
+        PharmaDirectory pharmaDir = system.getPharmaDir();
+        ArrayList<Pharma> pharmaList = pharmaDir.getPharmaArrayList();
+        int size= pharmaList.size();
+        for(int i=0;i<size;i++)
         {
-            Pharma o=ol.get(i);
-            jComboBox1.addItem(o.getPharmaName());
+            Pharma pharma= pharmaList.get(i);
+            jComboBox1.addItem(pharma.getPharmaName());
         }
         
         
-        VacDirectory bd1= system.getVaccDir();
-        ArrayList<Vaccinations> ol1=bd1.getVaccinationList();
-        int u1=ol1.size();
-        for(int i=0;i<u1;i++)
+        VacDirectory vacDir = system.getVaccDir();
+        ArrayList<Vaccinations> vaccineList = vacDir.getVaccinationList();
+        int vacSize = vaccineList.size();
+        for(int i=0;i<vacSize;i++)
         {
-            Vaccinations o=ol1.get(i);
-            jComboBox2.addItem(o.getName());
+            Vaccinations vaccination = vaccineList.get(i);
+            jComboBox2.addItem(vaccination.getName());
         }
     }
 
@@ -155,6 +155,7 @@ public class VacRequest extends javax.swing.JPanel {
         });
         jPanel7.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 420, 40));
 
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vaccine 1", "Vaccine 2", "Vaccine 3" }));
         jPanel7.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 420, 40));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00" }));
@@ -211,23 +212,23 @@ public class VacRequest extends javax.swing.JPanel {
 
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
         if(selectedRow>=0)
         {
             if(jDateChooser1.getDate()!=null)
             {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        int s=Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
         System.out.println("id"+s);
-         VacRequest_Dir vrd= system.getVaccReqDir();
-        ArrayList<Business.WorkQueue.VacRequest> ol=vrd.getRequests();
-        int u=ol.size();
-        for(int i=0;i<u;i++)
+         VacRequest_Dir vacReqDir= system.getVaccReqDir();
+        ArrayList<Business.WorkQueue.VacRequest> vaccines =vacReqDir.getRequests();
+        int size = vaccines.size();
+        for(int i=0;i<size;i++)
         {
-            Business.WorkQueue.VacRequest o=ol.get(i);
-            if(s==o.getVacId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            Business.WorkQueue.VacRequest vaccine = vaccines.get(i);
+            if(s==vaccine.getVacId()/*&&vaccine.getStatus().matches("Deliver Man Assigned")*/)
             {
-                if(o.getStatus().equals("Cancel")||o.getStatus().equals("Done")||o.getStatus().equals("Approved"))
+                if(vaccine.getStatus().equals("Cancel")||vaccine.getStatus().equals("Done")||vaccine.getStatus().equals("Approved"))
                 {
                     JOptionPane.showMessageDialog(null,"wrong move");
                 }
@@ -238,12 +239,12 @@ public class VacRequest extends javax.swing.JPanel {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
                     LocalDateTime d2 = LocalDateTime.now();
                     if(d1.compareTo(d2.toString()) >= 0) {
-                    o.setPharmacy(jComboBox1.getSelectedItem().toString());
-                o.setVaccination(jComboBox2.getSelectedItem().toString());
+                    vaccine.setPharmacy(jComboBox1.getSelectedItem().toString());
+                vaccine.setVaccination(jComboBox2.getSelectedItem().toString());
                  
-                o.setDate(d1);
-                o.setTime(jComboBox3.getSelectedItem().toString());
-                o.setStatus("Approved");
+                vaccine.setDate(d1);
+                vaccine.setTime(jComboBox3.getSelectedItem().toString());
+                vaccine.setStatus("Approved");
                  JOptionPane.showMessageDialog(null, "Request Approved!!");
                     }
                     else
@@ -271,27 +272,27 @@ else
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
-         DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
         if(selectedRow>=0)
         {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-         VacRequest_Dir vrd= system.getVaccReqDir();
-        ArrayList<Business.WorkQueue.VacRequest> ol=vrd.getRequests();
-        int u=ol.size();
-        for(int i=0;i<u;i++)
+        int rowId =Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+        
+        VacRequest_Dir vacReqDir = system.getVaccReqDir();
+        ArrayList<Business.WorkQueue.VacRequest> requests= vacReqDir.getRequests();
+        int size = requests.size();
+        for(int i=0;i<size;i++)
         {
-            Business.WorkQueue.VacRequest o=ol.get(i);
-            if(s==o.getVacId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            Business.WorkQueue.VacRequest request = requests.get(i);
+            if(rowId == request.getVacId())
             {
-                if(o.getStatus().equals("Cancel")||o.getStatus().equals("Done"))
+                if(request.getStatus().equals("Cancel")||request.getStatus().equals("Done"))
                 {
-                    JOptionPane.showMessageDialog(null,"wrong move");
+                    JOptionPane.showMessageDialog(null,"Not Allowed");
                 }
                 else
                 {                
-                o.setStatus("Cancel");
+                   request.setStatus("Cancel");
                 }
                 
             }
@@ -317,17 +318,17 @@ else
 
     public void populate_table()
     {
-        VacRequest_Dir vrd= system.getVaccReqDir();
-        ArrayList<Business.WorkQueue.VacRequest> ol=vrd.getRequests();
-        int u=ol.size();
-        System.out.println(u);
-        for(int i=0;i<u;i++)
+        VacRequest_Dir vacReqDir= system.getVaccReqDir();
+        ArrayList<Business.WorkQueue.VacRequest> vaccines =vacReqDir.getRequests();
+        int size = vaccines.size();
+        
+        for(int i=0;i<size;i++)
         {
-            Business.WorkQueue.VacRequest o=ol.get(i);
-                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
-                String s1=String.valueOf(o.getVacId());    
-                String s[]={s1,o.getFirst_name(),o.getDisease(),o.getDiabetes(),o.getMedication(),o.getBloodThinner(),o.getStatus()};
-                t2.addRow(s);
+            Business.WorkQueue.VacRequest vaccine = vaccines.get(i);
+                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+                String s1=String.valueOf(vaccine.getVacId());    
+                String s[]={s1,vaccine.getFirst_name(),vaccine.getDisease(),vaccine.getDiabetes(),vaccine.getMedication(),vaccine.getBloodThinner(),vaccine.getStatus()};
+                table.addRow(s);
             
         }
         
