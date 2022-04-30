@@ -20,11 +20,12 @@ public class GovernmentView extends javax.swing.JPanel {
     private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-    private DB4OUtil dB4OUtil;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     /**
      * Creates new form PoliceMain
      * @param userProcessContainer
      * @param userAcc
+     * @param system
      * @param ecosystem
      */
     public GovernmentView(JPanel userProcessContainer, UserAcc userAcc,EcoSystem system) {
