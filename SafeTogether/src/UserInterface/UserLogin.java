@@ -240,7 +240,8 @@ public class UserLogin extends javax.swing.JPanel {
                 } 
               }           
              displayUserPanel();
-            } else if(userRole.equals("Business.Roles.Police_Officer")){
+            } }
+                else if(userRole.equals("Business.Roles.Police_Officer")){
                 PoliceDir pd = system.getPoliceDir();
                 ArrayList<Police> pds = pd.getPoliceList();
                 System.out.println("username"+ userAcc.getUserName());
@@ -279,9 +280,12 @@ public class UserLogin extends javax.swing.JPanel {
                 {
                 displaybloodbank();
                 count+=1;
-                } 
-                }
-            } else if(userRole.equals("Business.Roles.Fire_man")){
+
+                }            
+            } 
+            }
+            else if(userRole.equals("Business.Roles.Fire_man")){
+
                 FireDir pd = system.getFireDir();
                 ArrayList<Fire> pds = pd.getFireEngines();
                 int size = pds.size();
