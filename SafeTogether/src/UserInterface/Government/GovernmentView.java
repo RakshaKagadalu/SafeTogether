@@ -6,6 +6,8 @@ package UserInterface.Government;
 
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
+import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JPanel;
 
 /**
@@ -48,9 +50,6 @@ public class GovernmentView extends javax.swing.JPanel {
         goBack2 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        medicinePortal = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         orderPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -99,25 +98,6 @@ public class GovernmentView extends javax.swing.JPanel {
 
         jPanel6.add(goBack2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
-        medicinePortal.setBackground(new java.awt.Color(255, 255, 255));
-        medicinePortal.setPreferredSize(new java.awt.Dimension(100, 48));
-        medicinePortal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                medicinePortalMousePressed(evt);
-            }
-        });
-        medicinePortal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-supplement-bottle-24.png"))); // NOI18N
-        medicinePortal.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
-
-        jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel9.setText("Medicine Portal");
-        medicinePortal.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
-
-        jPanel6.add(medicinePortal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 290, 60));
-
         orderPanel.setBackground(new java.awt.Color(255, 255, 255));
         orderPanel.setPreferredSize(new java.awt.Dimension(100, 48));
         orderPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -132,7 +112,7 @@ public class GovernmentView extends javax.swing.JPanel {
 
         jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel10.setText("Order Portal");
+        jLabel10.setText("Statistics");
         orderPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel6.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 60));
@@ -199,18 +179,25 @@ public class GovernmentView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_goBack2MousePressed
 
-    private void medicinePortalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicinePortalMousePressed
+    private void vacPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vacPanelMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_medicinePortalMousePressed
+        sendToVacReqScreen();
+    }//GEN-LAST:event_vacPanelMousePressed
 
     private void orderPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPanelMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_orderPanelMousePressed
 
-    private void vacPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vacPanelMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vacPanelMousePressed
-
+    
+    public void sendToVacReqScreen(){
+        vacPanel.setBackground(new Color(213,230,249));
+        VacRequest pr=new VacRequest(container,userAcc, system);
+        rightSidePanel.add(pr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel goBack2;
@@ -224,14 +211,11 @@ public class GovernmentView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPanel medicinePortal;
     private javax.swing.JPanel orderPanel;
     private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
