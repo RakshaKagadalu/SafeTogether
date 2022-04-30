@@ -21,6 +21,8 @@ import Business.EmergencyPolice.Police;
 import Business.EmergencyPolice.PoliceDir;
 import Business.EmergencyFire.Fire;
 import Business.EmergencyFire.FireDir;
+import Business.PandemicCenter.PandemicCenter;
+import Business.PandemicCenter.PandemicCenter_Dir;
 import Business.UserAcc.UserAcc;
 import Business.UserAcc.UserAccDir;
 import Business.userR.User;
@@ -31,6 +33,7 @@ import UserInterface.Pharmacy.PharmacyMainFrame;
 import UserInterface.Ambulance.AmbulanceView;
 import UserInterface.Fire.FireView;
 import UserInterface.Government.GovernmentView;
+import UserInterface.PandemicCenter.PandemicView;
 import UserInterface.Police.PoliceMain;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import UserInterface.user.UserAreaJPanel;
@@ -219,8 +222,7 @@ public class UserLogin extends javax.swing.JPanel {
                   JOptionPane.showMessageDialog(null, "Invalid credentials");  
                 }
             }
-             
-            else if(userRole.equals("Business.Roles.Admin_Pharmacy"))
+             else if(userRole.equals("Business.Roles.Admin_Pharmacy"))
             {
                 PharmaDirectory cd=system.getPharmaDir();
                 ArrayList<Pharma> c=cd.getPharmaArrayList();
@@ -235,7 +237,8 @@ public class UserLogin extends javax.swing.JPanel {
                    // System.out.print("inside pharma role method");
                 displayPharmacy();
                 count+=1;
-                }            
+                } 
+              }           
              displayUserPanel();
             } }
                 else if(userRole.equals("Business.Roles.Police_Officer")){
@@ -277,10 +280,12 @@ public class UserLogin extends javax.swing.JPanel {
                 {
                 displaybloodbank();
                 count+=1;
+
                 }            
             } 
             }
             else if(userRole.equals("Business.Roles.Fire_man")){
+
                 FireDir pd = system.getFireDir();
                 ArrayList<Fire> pds = pd.getFireEngines();
                 int size = pds.size();
@@ -345,6 +350,30 @@ public class UserLogin extends javax.swing.JPanel {
                 if(userAcc.getUserName().matches(c1.getUserName()))
                 {
                     govtDashboard();
+                    count+=1;
+                }       
+                }
+                if(count==0)
+                {
+                  JOptionPane.showMessageDialog(null, "Invalid credentials");  
+                }
+            } else if(userRole.equals("Business.Roles.Admin_PandemicTestCenter")){
+                PandemicCenter_Dir pd = system.getPandemicCenterDir();
+                ArrayList<PandemicCenter> pds = pd.getPandemicdirectory();
+                int size = pds.size();
+                System.out.println("username"+ userAcc.getUserName());
+                System.out.println("size"+ size);
+                int count=0;
+                for(int i=0;i<size;i++)
+                {
+                PandemicCenter c1= pds.get(i);
+                //System.out.println(userAcc.getUserName());
+                //System.out.println(c1.getUserId());   
+                
+                System.out.println("c1"+ c1.getUserName());
+                if(userAcc.getUserName().matches(c1.getUserName()))
+                {
+                    pandemicCenter();
                     count+=1;
                 }       
                 }
@@ -432,6 +461,13 @@ public class UserLogin extends javax.swing.JPanel {
     
     private void govtDashboard() {
         GovernmentView pol = new GovernmentView(workArea,userAcc,system);
+        workArea.add(pol);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+    }
+    
+    private void pandemicCenter() {
+        PandemicView pol = new PandemicView(workArea,userAcc,system);
         workArea.add(pol);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);

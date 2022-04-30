@@ -10,6 +10,7 @@ import UserInterface.user.DoctorAppointment;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
+import Business.DatabaseUtil.DB4OUtil;
 
 /**
  *
@@ -20,6 +21,7 @@ public class PoliceMain extends javax.swing.JPanel {
     private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
+    private DB4OUtil dB4OUtil;
     /**
      * Creates new form PoliceMain
      * @param userProcessContainer
@@ -31,6 +33,7 @@ public class PoliceMain extends javax.swing.JPanel {
         this.system = ecosystem;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
+        this.dB4OUtil = DB4OUtil.getInstance();
 //        Time();
     }
 
@@ -265,6 +268,10 @@ public class PoliceMain extends javax.swing.JPanel {
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBackMousePressed
 
     private void policeDepartmentPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_policeDepartmentPanelMousePressed
