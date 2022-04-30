@@ -9,6 +9,7 @@ import Business.UserAcc.UserAcc;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
+import Business.DatabaseUtil.DB4OUtil;
 
 /**
  *
@@ -19,6 +20,7 @@ public class GovernmentView extends javax.swing.JPanel {
     private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
+    private DB4OUtil dB4OUtil;
     /**
      * Creates new form PoliceMain
      * @param userProcessContainer
@@ -30,6 +32,7 @@ public class GovernmentView extends javax.swing.JPanel {
         this.system = ecosystem;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
+        this.dB4OUtil = DB4OUtil.getInstance();
 //        Time();
     }
 
@@ -177,6 +180,10 @@ public class GovernmentView extends javax.swing.JPanel {
 
     private void goBack2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBack2MousePressed
         // TODO add your handling code here:
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBack2MousePressed
 
     private void vacPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vacPanelMousePressed
