@@ -7,7 +7,6 @@ package UserInterface;
 import Business.BloodBank.BloodWork;
 import Business.BloodBank.BloodWorkDirectory;
 
-import Business.EcoSystem;
 import Business.Pharma.Pharma;
 import Business.Pharma.PharmaDirectory;
 import Business.CDC.CDC;
@@ -24,7 +23,6 @@ import Business.EmergencyFire.FireDir;
 import Business.PandemicCenter.PandemicCenter;
 import Business.PandemicCenter.PandemicCenter_Dir;
 import Business.UserAcc.UserAcc;
-import Business.UserAcc.UserAccDir;
 import Business.userR.User;
 import Business.userR.User_Directory;
 import UserInterface.BloodBank.BloodBankView;
@@ -156,11 +154,11 @@ public class UserLogin extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        String uName = userNameTextField.getText();
-        char[] upwdCharArray = passwordTextField.getPassword();
-        String pwd = String.valueOf(upwdCharArray);
+        String userName = userNameTextField.getText();
+        char[] userpwdCharArray = passwordTextField.getPassword();
+        String pwd = String.valueOf(userpwdCharArray);
 
-        userAcc = system.getUserAccountDirectory().authenticateUser(uName, pwd);
+        userAcc = system.getUserAccountDirectory().authenticateUser(userName, pwd);
 
         // to check if the useraccount is null and display an error message
         if (userAcc == null) {
@@ -176,16 +174,15 @@ public class UserLogin extends javax.swing.JPanel {
                 showSysAdminWorkAreaJPanel();
 
             } else if (userRole.equals("Business.Roles.DoctorRole")) {
-                DoctorDir cd = system.getDoctorDir();
-                ArrayList<Doctor> doc = cd.getDoc();
+                DoctorDir docDir = system.getDoctorDir();
+                ArrayList<Doctor> doc = docDir.getDoc();
                 int size = doc.size();
-                // System.out.println(doc.size());
+
                 int count = 0;
                 for (int i = 0; i < size; i++) {
-                    Doctor c1 = doc.get(i);
-                    // System.out.println(userAcc.getUserName());
-                    // System.out.println(c1.getUserId());
-                    if (userAcc.getUserName().matches(c1.getUserName())) {
+                    Doctor d1 = doc.get(i);
+
+                    if (userAcc.getUserName().matches(d1.getUserName())) {
 
                         viewDocScreen();
                         count += 1;
@@ -195,16 +192,16 @@ public class UserLogin extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Invalid credentials");
                 }
             } else if (userRole.equals("Business.Roles.UserR")) {
-                // displayUserPanel();
-                User_Directory cd = system.getUserDir();
-                ArrayList<User> c = cd.getUsers();
-                int size = c.size();
-                System.out.println("size:" + c.size());
+
+                User_Directory userDir = system.getUserDir();
+                ArrayList<User> user = userDir.getUsers();
+                int size = user.size();
+
                 int count = 0;
                 for (int i = 0; i < size; i++) {
-                    User c1 = c.get(i);
-                    if (userAcc.getUserName().matches(c1.getUserId())) {
-                        // System.out.print("inside user role method");
+                    User u1 = user.get(i);
+                    if (userAcc.getUserName().matches(u1.getUserId())) {
+                        System.out.print("inside user role method");
                         displayUserPanel();
                         count += 1;
                     }
@@ -212,40 +209,34 @@ public class UserLogin extends javax.swing.JPanel {
                 if (count == 0) {
                     JOptionPane.showMessageDialog(null, "Invalid credentials");
                 }
-            }
-
-            else if (userRole.equals("Business.Roles.Admin_Pharmacy"))
-
-            {
-                PharmaDirectory cd = system.getPharmaDir();
-                ArrayList<Pharma> c = cd.getPharmaArrayList();
-                int size = c.size();
+            } else if (userRole.equals("Business.Roles.Admin_Pharmacy")) {
+                PharmaDirectory pharmaDir = system.getPharmaDir();
+                ArrayList<Pharma> pharma = pharmaDir.getPharmaArrayList();
+                int size = pharma.size();
 
                 int count = 0;
                 for (int i = 0; i < size; i++) {
-                    Pharma c1 = c.get(i);
-                    if (userAcc.getUserName().matches(c1.getUserName())) {
-                        // System.out.print("inside pharma role method");
+                    Pharma p1 = pharma.get(i);
+                    if (userAcc.getUserName().matches(p1.getUserName())) {
+                        System.out.print("inside pharma role method");
                         displayPharmacy();
                         count += 1;
 
                     }
                 }
-                displayUserPanel();
-            } else if (userRole.equals("Business.Roles.Police_Officer")) {
-                PoliceDir pd = system.getPoliceDir();
-                ArrayList<Police> pds = pd.getPoliceList();
-                System.out.println("username" + userAcc.getUserName());
 
-                int size = pds.size();
-                System.out.println("size" + size);
+            } else if (userRole.equals("Business.Roles.Police_Officer")) {
+                PoliceDir policeDir = system.getPoliceDir();
+                ArrayList<Police> policeList = policeDir.getPoliceList();
+
+                int size = policeList.size();
+
                 int count = 0;
                 for (int i = 0; i < size; i++) {
-                    Police c1 = pds.get(i);
-                    // System.out.println(userAcc.getUserName());
-                    // System.out.println(c1.getUserId());
-                    System.out.println("c1" + c1.getUserName());
-                    if (userAcc.getUserName().matches(c1.getUserName())) {
+                    Police p1 = policeList.get(i);
+
+                    if (userAcc.getUserName().matches(p1.getUserName())) {
+                        System.out.print("inside police role method");
                         policeDashboard();
                         count += 1;
                     }
@@ -253,17 +244,16 @@ public class UserLogin extends javax.swing.JPanel {
                 if (count == 0) {
                     JOptionPane.showMessageDialog(null, "Invalid credentials");
                 }
-            }
-
-            else if (userRole.equals("Business.Roles.Admin_BloodBank")) {
-                BloodWorkDirectory cd = system.getBloodBankDir();
-                ArrayList<BloodWork> c = cd.getBloodWorkList();
-                int size = c.size();
+            } else if (userRole.equals("Business.Roles.Admin_BloodBank")) {
+                BloodWorkDirectory bloodBankDir = system.getBloodBankDir();
+                ArrayList<BloodWork> bloodBankList = bloodBankDir.getBloodWorkList();
+                int size = bloodBankList.size();
 
                 int count = 0;
                 for (int i = 0; i < size; i++) {
-                    BloodWork c1 = c.get(i);
-                    if (userAcc.getUserName().matches(c1.getUserId())) {
+                    BloodWork bb1 = bloodBankList.get(i);
+                    if (userAcc.getUserName().matches(bb1.getUserId())) {
+                        System.out.print("inside blood Bank admin role method");
                         displaybloodbank();
                         count += 1;
 
@@ -271,19 +261,16 @@ public class UserLogin extends javax.swing.JPanel {
                 }
             } else if (userRole.equals("Business.Roles.Fire_man")) {
 
-                FireDir pd = system.getFireDir();
-                ArrayList<Fire> pds = pd.getFireEngines();
-                int size = pds.size();
-                System.out.println("username" + userAcc.getUserName());
-                System.out.println("size" + size);
+                FireDir fireDir = system.getFireDir();
+                ArrayList<Fire> fireDepList = fireDir.getFireEngines();
+                int size = fireDepList.size();
+
                 int count = 0;
                 for (int i = 0; i < size; i++) {
-                    Fire c1 = pds.get(i);
-                    // System.out.println(userAcc.getUserName());
-                    // System.out.println(c1.getUserId());
+                    Fire f1 = fireDepList.get(i);
 
-                    System.out.println("c1" + c1.getUserName());
-                    if (userAcc.getUserName().matches(c1.getUserName())) {
+                    if (userAcc.getUserName().matches(f1.getUserName())) {
+                        System.out.print("inside fire dept admin role method");
                         fireDashboard();
                         count += 1;
                     }
@@ -292,19 +279,16 @@ public class UserLogin extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Invalid credentials");
                 }
             } else if (userRole.equals("Business.Roles.Driver_Ambulance")) {
-                AmbulanceDir pd = system.getAmbulanceDir();
-                ArrayList<Ambulance> pds = pd.getAmbulances();
-                int size = pds.size();
-                System.out.println("username" + userAcc.getUserName());
-                System.out.println("size" + size);
+                AmbulanceDir ambulanceDir = system.getAmbulanceDir();
+                ArrayList<Ambulance> ambulanceList = ambulanceDir.getAmbulances();
+                int size = ambulanceList.size();
+
                 int count = 0;
                 for (int i = 0; i < size; i++) {
-                    Ambulance c1 = pds.get(i);
-                    // System.out.println(userAcc.getUserName());
-                    // System.out.println(c1.getUserId());
+                    Ambulance a1 = ambulanceList.get(i);
 
-                    System.out.println("c1" + c1.getUserName());
-                    if (userAcc.getUserName().matches(c1.getUserName())) {
+                    if (userAcc.getUserName().matches(a1.getUserName())) {
+                        System.out.print("inside ambulance dept admin role method");
                         ambulanceDashboard();
                         count += 1;
                     }
@@ -313,19 +297,16 @@ public class UserLogin extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Invalid credentials");
                 }
             } else if (userRole.equals("Business.Roles.Officer_CDC")) {
-                CDCDirectory pd = system.getcDCDir();
-                ArrayList<CDC> pds = pd.getCdcList();
-                int size = pds.size();
-                System.out.println("username" + userAcc.getUserName());
-                System.out.println("size" + size);
+                CDCDirectory govDir = system.getcDCDir();
+                ArrayList<CDC> govList = govDir.getCdcList();
+                int size = govList.size();
+
                 int count = 0;
                 for (int i = 0; i < size; i++) {
-                    CDC c1 = pds.get(i);
-                    // System.out.println(userAcc.getUserName());
-                    // System.out.println(c1.getUserId());
+                    CDC g1 = govList.get(i);
 
-                    System.out.println("c1" + c1.getUserName());
-                    if (userAcc.getUserName().matches(c1.getUserName())) {
+                    if (userAcc.getUserName().matches(g1.getUserName())) {
+                        System.out.print("inside gov dept admin role method");
                         govtDashboard();
                         count += 1;
                     }
@@ -334,19 +315,16 @@ public class UserLogin extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Invalid credentials");
                 }
             } else if (userRole.equals("Business.Roles.Admin_PandemicTestCenter")) {
-                PandemicCenter_Dir pd = system.getPandemicCenterDir();
-                ArrayList<PandemicCenter> pds = pd.getPandemicdirectory();
-                int size = pds.size();
-                System.out.println("username" + userAcc.getUserName());
-                System.out.println("size" + size);
+                PandemicCenter_Dir testCenterDir = system.getPandemicCenterDir();
+                ArrayList<PandemicCenter> centerList = testCenterDir.getPandemicdirectory();
+                int size = centerList.size();
+            
                 int count = 0;
                 for (int i = 0; i < size; i++) {
-                    PandemicCenter c1 = pds.get(i);
-                    // System.out.println(userAcc.getUserName());
-                    // System.out.println(c1.getUserId());
-
-                    System.out.println("c1" + c1.getUserName());
-                    if (userAcc.getUserName().matches(c1.getUserName())) {
+                    PandemicCenter t1 = centerList.get(i);
+                
+                    if (userAcc.getUserName().matches(t1.getUserName())) {
+                          System.out.print("inside test center admin role method");
                         pandemicCenter();
                         count += 1;
                     }
@@ -359,7 +337,7 @@ public class UserLogin extends javax.swing.JPanel {
             }
 
         }
-    }// GEN-LAST:event_loginButtonActionPerformed
+    }
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_signUpButtonActionPerformed
         // TODO add your handling code here:
@@ -369,7 +347,7 @@ public class UserLogin extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
 
-    }// GEN-LAST:event_signUpButtonActionPerformed
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -399,22 +377,22 @@ public class UserLogin extends javax.swing.JPanel {
     }
 
     private void policeDashboard() {
-        PoliceMain pol = new PoliceMain(workArea, userAcc, system);
-        workArea.add(pol);
+        PoliceMain police = new PoliceMain(workArea, userAcc, system);
+        workArea.add(police);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     }
 
     private void fireDashboard() {
-        FireView pol = new FireView(workArea, userAcc, system);
-        workArea.add(pol);
+        FireView fire = new FireView(workArea, userAcc, system);
+        workArea.add(fire);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     }
 
     private void ambulanceDashboard() {
-        AmbulanceView pol = new AmbulanceView(workArea, userAcc, system);
-        workArea.add(pol);
+        AmbulanceView ambulance = new AmbulanceView(workArea, userAcc, system);
+        workArea.add(ambulance);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     }
@@ -432,15 +410,16 @@ public class UserLogin extends javax.swing.JPanel {
     }
 
     private void govtDashboard() {
-        GovernmentView pol = new GovernmentView(workArea, userAcc, system);
-        workArea.add(pol);
+        //System.out.println("im inside card layout of gov");
+        GovernmentView gov = new GovernmentView(workArea, userAcc, system);
+        workArea.add(gov);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     }
 
     private void pandemicCenter() {
-        PandemicView pol = new PandemicView(workArea, userAcc, system);
-        workArea.add(pol);
+        PandemicView testcenter = new PandemicView(workArea, userAcc, system);
+        workArea.add(testcenter);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     }
@@ -461,8 +440,8 @@ public class UserLogin extends javax.swing.JPanel {
         // from
         // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
-        PharmacyMainFrame userView = new PharmacyMainFrame(workArea, userAcc, system);
-        workArea.add(userView);
+        PharmacyMainFrame pharma = new PharmacyMainFrame(workArea, userAcc, system);
+        workArea.add(pharma);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
 
@@ -472,8 +451,8 @@ public class UserLogin extends javax.swing.JPanel {
         // throw new UnsupportedOperationException("Not supported yet."); // Generated
         // from
         // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        BloodBankView userView = new BloodBankView(workArea, userAcc, system);
-        workArea.add(userView);
+        BloodBankView bloodBank = new BloodBankView(workArea, userAcc, system);
+        workArea.add(bloodBank);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
     }

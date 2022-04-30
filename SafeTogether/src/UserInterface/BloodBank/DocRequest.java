@@ -9,9 +9,7 @@ import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
 import Business.WorkQueue.Req_Blood;
 import Business.WorkQueue.Req_BloodDir;
-import Business.WorkQueue.SearchApp;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -140,47 +138,47 @@ public class DocRequest extends javax.swing.JPanel {
 
     private void displayTable() {
         // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        Req_BloodDir rbd = system.getReqBloodDir();
-        ArrayList<Req_Blood> ol = rbd.getBloodReqDir();
-        int u = ol.size();
+        Req_BloodDir reqBlood = system.getReqBloodDir();
+        ArrayList<Req_Blood> listReq = reqBlood.getBloodReqDir();
+        int s = listReq.size();
 
-        for (int i = 0; i < u; i++) {
-            Req_Blood o = ol.get(i);
-            BloodWork bb = (BloodWork) (userAcc);
+        for (int i = 0; i < s; i++) {
+            Req_Blood bloodReq = listReq.get(i);
+            BloodWork bw = (BloodWork) (userAcc);
 
-            if (o.getBloodBankName().matches(bb.getUserNames())) {
-                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
-                String s1 = String.valueOf(o.getId());
-                String s[] = {s1, o.getFirstName(), o.getStatus(), o.getBloodType(), Integer.toString(o.getUnits())};
-                t2.addRow(s);
+            if (bloodReq.getBloodBankName().matches(bw.getUserNames())) {
+                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+                String s1 = String.valueOf(bloodReq.getId());
+                String s2[] = {s1, bloodReq.getFirstName(), bloodReq.getStatus(), bloodReq.getBloodType(), Integer.toString(bloodReq.getUnits())};
+                table.addRow(s2);
             }
         }
     }
 
     private boolean Verify() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow = jTable1.getSelectedRow();
-        int s = Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
 
-        Req_BloodDir rbd = system.getReqBloodDir();
-        ArrayList<Req_Blood> ol = rbd.getBloodReqDir();
+        Req_BloodDir bloodReq = system.getReqBloodDir();
+        ArrayList<Req_Blood> listBlood = bloodReq.getBloodReqDir();
 
-        int u = ol.size();
+        int l = listBlood.size();
         boolean r = false;
-        BloodWork bb = (BloodWork) (userAcc);
-        for (int i = 0; i < u; i++) {
-            Req_Blood o = ol.get(i);
-            if (s == o.getId()) {
+        BloodWork bw = (BloodWork) (userAcc);
+        for (int i = 0; i < l; i++) {
+            Req_Blood reqBlood = listBlood.get(i);
+            if (sRow == reqBlood.getId()) {
 
-                String gj = o.getBloodType();
-                int a = o.getUnits();
+                String type = reqBlood.getBloodType();
+                int num = reqBlood.getUnits();
 
-                Map<String, Integer> stock = bb.getLabMap();
-                for (Map.Entry<String, Integer> set : stock.entrySet()) {
+                Map<String, Integer> inventory = bw.getLabMap();
+                for (Map.Entry<String, Integer> set : inventory.entrySet()) {
 
-                    if (set.getKey().equals(gj)) {
-                        if (set.getValue() > a) {
+                    if (set.getKey().equals(type)) {
+                        if (set.getValue() > num) {
 
                             r = true;
                             break;
@@ -193,23 +191,23 @@ public class DocRequest extends javax.swing.JPanel {
     }
 
     public void app() {
-        Req_BloodDir rbd = system.getReqBloodDir();
-        ArrayList<Req_Blood> ol = rbd.getBloodReqDir();
+        Req_BloodDir reqBlood = system.getReqBloodDir();
+        ArrayList<Req_Blood> ol = reqBlood.getBloodReqDir();
 
-        int u = ol.size();
-        BloodWork bb = (BloodWork) (userAcc);
-        for (int i = 0; i < u; i++) {
-            Req_Blood o = ol.get(i);
-            String gj = o.getBloodType();
-            int a = o.getUnits();
+        int l = ol.size();
+        BloodWork bw = (BloodWork) (userAcc);
+        for (int i = 0; i < l; i++) {
+            Req_Blood bloodReq = ol.get(i);
+            String type = bloodReq.getBloodType();
+            int unit = bloodReq.getUnits();
 
-            Map<String, Integer> stock = bb.getLabMap();
-            for (Map.Entry<String, Integer> set : stock.entrySet()) {
+            Map<String, Integer> inventory = bw.getLabMap();
+            for (Map.Entry<String, Integer> set : inventory.entrySet()) {
 
-                if (set.getKey().equals(gj)) {
-                    int a1 = set.getValue();
-                    int b = a1 - a;
-                    set.setValue(b);
+                if (set.getKey().equals(type)) {
+                    int newBlood = set.getValue();
+                    int total = newBlood - unit;
+                    set.setValue(total);
 
                 }
             }
@@ -218,28 +216,28 @@ public class DocRequest extends javax.swing.JPanel {
 
     private void AcceptReq() {
         // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow >= 0) {
-            int s = Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+            int srow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
 
-            Req_BloodDir rbd = system.getReqBloodDir();
-            ArrayList<Req_Blood> ol = rbd.getBloodReqDir();
+            Req_BloodDir bloodreq = system.getReqBloodDir();
+            ArrayList<Req_Blood> reqList = bloodreq.getBloodReqDir();
 
-            int u = ol.size();
-            BloodWork bb = (BloodWork) (userAcc);
+            int u = reqList.size();
+            BloodWork bw = (BloodWork) (userAcc);
             for (int i = 0; i < u; i++) {
-                Req_Blood o = ol.get(i);
-                if (s == o.getId()) {
-                    if (o.getStatus().matches("In Progress")) {
+                Req_Blood req = reqList.get(i);
+                if (srow == req.getId()) {
+                    if (req.getStatus().matches("In Progress")) {
                         boolean r = Verify();
                         if (r == false) {
-                            o.setStatus("Cancelled");
+                            req.setStatus("Cancelled");
                             JOptionPane.showMessageDialog(null, "Inadequate Inventory");
 
                         } else {
                             app();
-                            o.setStatus("Approved");
+                            req.setStatus("Approved");
                             JOptionPane.showMessageDialog(null, "Request Approved!!");
 
                         }
@@ -260,41 +258,31 @@ public class DocRequest extends javax.swing.JPanel {
 
     private void rejectReq() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-     DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-        Req_BloodDir rbd = system.getReqBloodDir();
-            ArrayList<Req_Blood> ol = rbd.getBloodReqDir();
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow >= 0) {
+            int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
 
-        int u=ol.size();
-        BloodWork bb = (BloodWork) (userAcc);
-        for(int i=0;i<u;i++)
-        {
-            Req_Blood o=ol.get(i);
-            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
-            {
-                if(o.getStatus().matches("In Progress"))
-                {
-                    o.setStatus("Cancelled");
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"Wrong Move!!");
+            Req_BloodDir reqBlood = system.getReqBloodDir();
+            ArrayList<Req_Blood> reqList = reqBlood.getBloodReqDir();
+
+            int u = reqList.size();
+            BloodWork bw = (BloodWork) (userAcc);
+            for (int i = 0; i < u; i++) {
+                Req_Blood req = reqList.get(i);
+                if (sRow == req.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/) {
+                    if (req.getStatus().matches("In Progress")) {
+                        req.setStatus("Cancelled");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Wrong Move!!");
+                    }
                 }
             }
+            jTable1.setModel(new DefaultTableModel(null, new String[]{"ID", "Name", "Status", "Blood Type", "Units requested"}));
+            displayTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a Row!!");
         }
-        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Status","Blood Type","Units requested"}));
-        displayTable();
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Select a Row!!");
-        }
-    
-    
-    
+
     }
 }

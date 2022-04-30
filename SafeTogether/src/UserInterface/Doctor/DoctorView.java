@@ -7,7 +7,6 @@ package UserInterface.Doctor;
 import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
-import UserInterface.user.MedicineReport;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -21,16 +20,17 @@ public class DoctorView extends javax.swing.JPanel {
     /**
      * Creates new form DoctorView
      */
-      private UserAcc userAcc;
+    private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-  private DB4OUtil dB4OUtil = DB4OUtil.getInstance();  
-    public DoctorView( JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+
+    public DoctorView(JPanel userProcessContainer, UserAcc userAcc, EcoSystem ecosystem) {
         initComponents();
         this.system = ecosystem;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
-        
+
     }
 
     /**
@@ -200,7 +200,7 @@ public class DoctorView extends javax.swing.JPanel {
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
-             container.remove(this);
+        container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
         dB4OUtil.storeSystem(system);
@@ -242,31 +242,29 @@ public class DoctorView extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void requestBlood() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-     appointments.setBackground(new Color(255,255,255));
-        requestBlood.setBackground(new Color(213,230,249));
-        
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        appointments.setBackground(new Color(255, 255, 255));
+        requestBlood.setBackground(new Color(213, 230, 249));
 
-        RequestBlood pcr = new RequestBlood(container, system, userAcc);
+        RequestBlood reqBlood = new RequestBlood(container, system, userAcc);
 
-        rightSidePanel.add(pcr);
+        rightSidePanel.add(reqBlood);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-    
+
     }
 
     private void appointments() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-   
-     requestBlood.setBackground(new Color(255,255,255));
-        appointments.setBackground(new Color(213,230,249));
-        
 
-        ManageDoc pcr = new ManageDoc(rightSidePanel, system, userAcc);
+        requestBlood.setBackground(new Color(255, 255, 255));
+        appointments.setBackground(new Color(213, 230, 249));
 
-        rightSidePanel.add(pcr);
+        ManageDoc manageApp = new ManageDoc(rightSidePanel, system, userAcc);
+
+        rightSidePanel.add(manageApp);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-    
+
     }
 }

@@ -155,6 +155,7 @@ public class VacRequest extends javax.swing.JPanel {
         });
         jPanel7.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 420, 40));
 
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vaccine 1", "Vaccine 2", "Vaccine 3" }));
         jPanel7.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 420, 40));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00" }));

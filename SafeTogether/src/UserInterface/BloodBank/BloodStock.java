@@ -18,21 +18,21 @@ import javax.swing.JPanel;
  *
  * @author shrikrishnajoisa
  */
-
 public class BloodStock extends javax.swing.JPanel {
 
     /**
      * Creates new form BloodStock
      */
-     private UserAcc userAcc;
+    private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-    public BloodStock(JPanel userProcessContainer,EcoSystem system, UserAcc userAcc) {
+
+    public BloodStock(JPanel userProcessContainer, EcoSystem system, UserAcc userAcc) {
         initComponents();
-           this.system = system;
+        this.system = system;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
-        
+
     }
 
     /**
@@ -220,117 +220,93 @@ public class BloodStock extends javax.swing.JPanel {
 
     private void txtApActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txtApActionPerformed
 
     private void txtApKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApKeyPressed
         // TODO add your handling code here:
-          char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             txtAp.setEditable(false);
             JOptionPane.showMessageDialog(null, "enter number");
-        }
-        else
-        {
+        } else {
             txtAp.setEditable(true);
         }
     }//GEN-LAST:event_txtApKeyPressed
 
     private void txtAmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmKeyPressed
         // TODO add your handling code here:
-            char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             txtAm.setEditable(false);
             JOptionPane.showMessageDialog(null, "enter number");
-        }
-        else
-        {
+        } else {
             txtAm.setEditable(true);
         }
     }//GEN-LAST:event_txtAmKeyPressed
 
     private void txtBpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBpKeyPressed
         // TODO add your handling code here:
-            char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             txtBp.setEditable(false);
             JOptionPane.showMessageDialog(null, "enter number");
-        }
-        else
-        {
+        } else {
             txtBp.setEditable(true);
         }
     }//GEN-LAST:event_txtBpKeyPressed
 
     private void txtbmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbmKeyPressed
         // TODO add your handling code here:
-            char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             txtbm.setEditable(false);
             JOptionPane.showMessageDialog(null, "enter number");
-        }
-        else
-        {
+        } else {
             txtbm.setEditable(true);
         }
     }//GEN-LAST:event_txtbmKeyPressed
 
     private void txtOpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOpKeyPressed
         // TODO add your handling code here:
-            char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             txtOp.setEditable(false);
             JOptionPane.showMessageDialog(null, "enter number");
-        }
-        else
-        {
+        } else {
             txtOp.setEditable(true);
         }
     }//GEN-LAST:event_txtOpKeyPressed
 
     private void txtOmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOmKeyPressed
         // TODO add your handling code here:
-            char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             txtOm.setEditable(false);
             JOptionPane.showMessageDialog(null, "enter number");
-        }
-        else
-        {
+        } else {
             txtOm.setEditable(true);
         }
     }//GEN-LAST:event_txtOmKeyPressed
 
     private void txtABpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtABpKeyPressed
         // TODO add your handling code here:
-            char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             txtBp.setEditable(false);
             JOptionPane.showMessageDialog(null, "enter number");
-        }
-        else
-        {
+        } else {
             txtBp.setEditable(true);
         }
     }//GEN-LAST:event_txtABpKeyPressed
 
     private void txtABmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtABmKeyPressed
         // TODO add your handling code here:
-            char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             txtABm.setEditable(false);
             JOptionPane.showMessageDialog(null, "enter number");
-        }
-        else
-        {
+        } else {
             txtABm.setEditable(true);
         }
     }//GEN-LAST:event_txtABmKeyPressed
@@ -361,38 +337,33 @@ public class BloodStock extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void updateStock() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-     if( txtAp.getText().isEmpty()||txtAm.getText().isEmpty()|| txtBp.getText().isEmpty() || txtbm.getText().isEmpty() || txtOp.getText().isEmpty()|| txtOm.getText().isEmpty() || txtABp.getText().isEmpty() || txtABm.getText().isEmpty())
-        {
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (txtAp.getText().isEmpty() || txtAm.getText().isEmpty() || txtBp.getText().isEmpty() || txtbm.getText().isEmpty() || txtOp.getText().isEmpty() || txtOm.getText().isEmpty() || txtABp.getText().isEmpty() || txtABm.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
             return;
         }
-        BloodWorkDirectory bbd= system.getBloodBankDir();
-        ArrayList<BloodWork> bb=bbd.getBloodWorkList();
-        int u=bb.size();
+        BloodWorkDirectory bwd = system.getBloodBankDir();
+        ArrayList<BloodWork> bw = bwd.getBloodWorkList();
+        int s = bw.size();
 
-        BloodWork d=(BloodWork)(userAcc);
-        for(int i=0;i<u;i++)
-        {
-            BloodWork o=bb.get(i);
-            if(o.getUserNames().matches(d.getUserNames())){            
-            
-            Map<String, Integer> stock = new HashMap<String, Integer>();
-            stock.put("A+", Integer.parseInt(txtAp.getText()));
-            stock.put("A-",Integer.parseInt(txtAm.getText()));
-            stock.put("B+",Integer.parseInt(txtBp.getText()));
-            stock.put("B-",Integer.parseInt(txtbm.getText()));
-            stock.put("O+",Integer.parseInt(txtOp.getText()));
-            stock.put("O-",Integer.parseInt(txtOm.getText()));
-            stock.put("AB+",Integer.parseInt(txtABp.getText()));
-            stock.put("AB-",Integer.parseInt(txtABm.getText()));
-            o.setLabMap(stock);
+        BloodWork b = (BloodWork) (userAcc);
+        for (int i = 0; i < s; i++) {
+            BloodWork o = bw.get(i);
+            if (o.getUserNames().matches(b.getUserNames())) {
+
+                Map<String, Integer> stock = new HashMap<String, Integer>();
+                stock.put("A+", Integer.parseInt(txtAp.getText()));
+                stock.put("A-", Integer.parseInt(txtAm.getText()));
+                stock.put("B+", Integer.parseInt(txtBp.getText()));
+                stock.put("B-", Integer.parseInt(txtbm.getText()));
+                stock.put("O+", Integer.parseInt(txtOp.getText()));
+                stock.put("O-", Integer.parseInt(txtOm.getText()));
+                stock.put("AB+", Integer.parseInt(txtABp.getText()));
+                stock.put("AB-", Integer.parseInt(txtABm.getText()));
+                o.setLabMap(stock);
             }
         }
-    
-    
-    
+
     }
 
-   
 }

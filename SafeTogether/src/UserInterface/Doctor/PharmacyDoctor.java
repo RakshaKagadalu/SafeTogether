@@ -12,7 +12,6 @@ import Business.Pharma.PharmaDirectory;
 import Business.UserAcc.UserAcc;
 import Business.WorkQueue.Req_Medicine;
 import Business.WorkQueue.Req_MedicineDir;
-import Business.userR.User;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -28,31 +27,30 @@ public class PharmacyDoctor extends javax.swing.JPanel {
     /**
      * Creates new form PharmacyDoctor
      */
-    
-     private final JPanel container;
+    private final JPanel container;
     private final EcoSystem system;
     private final UserAcc userAcc;
     private final String patientid;
-    
- private DB4OUtil dB4OUtil = DB4OUtil.getInstance(); 
-    public PharmacyDoctor(JPanel container,EcoSystem system,UserAcc userAcc,String userid) {
+
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+
+    public PharmacyDoctor(JPanel container, EcoSystem system, UserAcc userAcc, String userid) {
         initComponents();
-         this.container=container;
-        this.system=system;
-        this.userAcc=userAcc;
-        this.patientid=userid;
-        PharmaDirectory rd=system.getPharmaDir();
-        ArrayList<Pharma> list=rd.getPharmaArrayList();        
-        int s=list.size();
-      
-        for(int i=0;i<s;i++)
-        {
-           Pharma r=list.get(i);
-           String s1=r.getPharmaName();
-           jComboBox1.addItem(s1);
-           
+        this.container = container;
+        this.system = system;
+        this.userAcc = userAcc;
+        this.patientid = userid;
+        PharmaDirectory rd = system.getPharmaDir();
+        ArrayList<Pharma> list = rd.getPharmaArrayList();
+        int s = list.size();
+
+        for (int i = 0; i < s; i++) {
+            Pharma r = list.get(i);
+            String s1 = r.getPharmaName();
+            jComboBox1.addItem(s1);
+
         }
-       // displayTable();
+        // displayTable();
     }
 
     /**
@@ -171,23 +169,23 @@ public class PharmacyDoctor extends javax.swing.JPanel {
 
     private void bookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         placeOrder();
-        
+
     }//GEN-LAST:event_bookButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         displayMedicines();
-        
+
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void medListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medListMouseClicked
         // TODO add your handling code here:
         getQuantity();
-        
-        
+
+
     }//GEN-LAST:event_medListMouseClicked
 
     private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
@@ -210,104 +208,92 @@ public class PharmacyDoctor extends javax.swing.JPanel {
 
     private void placeOrder() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-      DefaultTableModel t = (DefaultTableModel) orderList.getModel();
-         if(t.getRowCount()!=0)
-         {
-             Req_Medicine m=new Req_Medicine();
-        int x = 1 + (int) (Math.random() * 100);
-        m.setId(x);
-        m.setPatientId(patientid);
-        Doctor u=(Doctor)(userAcc);
-        m.setDoctorName(u.getFirstName());
-        m.setPharmaName(jComboBox1.getSelectedItem().toString());
-        m.setStatus("Order Placed");
-        
-        Map<String,String> f=m.getMedOrderlist();
-        Map<String,String> f1=m.getMedCostlist();
-        int a=t.getRowCount();
-        for(int i=0;i<a;i++)
-        {
-            String one=t.getValueAt(i, 0).toString();
-            //System.out.println("this is one"+one);
-            String a1=t.getValueAt(i, 1).toString();
-            //System.out.println("this is a1"+a1);
-            String two=t.getValueAt(i, 2).toString();
-            //System.out.println("this is two"+two);
-            f.put(one, two);
-            int q=Integer.parseInt(a1);
-            int q1=Integer.parseInt(two);
-            int q3=q*q1;
-            f1.put(one,String.valueOf(q3));
-            
-            
+        DefaultTableModel table = (DefaultTableModel) orderList.getModel();
+        if (table.getRowCount() != 0) {
+            Req_Medicine reqMed = new Req_Medicine();
+            int r = 1 + (int) (Math.random() * 100);
+            reqMed.setId(r);
+            reqMed.setPatientId(patientid);
+            Doctor doc = (Doctor) (userAcc);
+            reqMed.setDoctorName(doc.getFirstName());
+            reqMed.setPharmaName(jComboBox1.getSelectedItem().toString());
+            reqMed.setStatus("Order Placed");
+
+            Map<String, String> med = reqMed.getMedOrderlist();
+            Map<String, String> price = reqMed.getMedCostlist();
+            int a = table.getRowCount();
+            for (int i = 0; i < a; i++) {
+                String s1 = table.getValueAt(i, 0).toString();
+                //System.out.println("this is one"+one);
+                String s2 = table.getValueAt(i, 1).toString();
+                //System.out.println("this is a1"+a1);
+                String s3 = table.getValueAt(i, 2).toString();
+                //System.out.println("this is two"+two);
+                med.put(s1, s3);
+                int a1 = Integer.parseInt(s2);
+                int a2 = Integer.parseInt(s3);
+                int a3 = a1 * a2;
+                price.put(s1, String.valueOf(a3));
+
+            }
+            Req_MedicineDir mdir = system.getMedicineReqDir();
+            ArrayList<Req_Medicine> orderList = mdir.getMedReqDir();
+            orderList.add(reqMed);
+            dB4OUtil.storeSystem(system);
+            JOptionPane.showMessageDialog(null, "Order placed");
+        } else {
+            JOptionPane.showMessageDialog(null, "Cart is empty!!");
         }
-        Req_MedicineDir dire=system.getMedicineReqDir();
-        ArrayList<Req_Medicine> order=dire.getMedReqDir();
-        order.add(m);
-        dB4OUtil.storeSystem(system);
-        JOptionPane.showMessageDialog(null, "Order placed");
-         }
-         else
-         {
-             JOptionPane.showMessageDialog(null, "Cart is empty!!");
-         }
-    
-    
+
     }
 
     private void getQuantity() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-      DefaultTableModel t = (DefaultTableModel) medList.getModel();
-        int t1=medList.getSelectedRow();
-     
-        String s=t.getValueAt(t1, 0).toString();
-        String s1=t.getValueAt(t1, 1).toString();
+        DefaultTableModel table = (DefaultTableModel) medList.getModel();
+        int sRow = medList.getSelectedRow();
+
+        String s1 = table.getValueAt(sRow, 0).toString();
+        String s2 = table.getValueAt(sRow, 1).toString();
         String response;
-        do{
+        do {
             response = JOptionPane.showInputDialog("Please provide Quantity");
-        }while(!response.matches("[0-9][0-9]"));   
-        
+        } while (!response.matches("[0-9][0-9]"));
+
         DefaultTableModel t2 = (DefaultTableModel) orderList.getModel();
-        t2.addRow(new Object[]{s,s1,response});
-        
-    
-    
+        t2.addRow(new Object[]{s1, s2, response});
+
     }
 
     private void displayMedicines() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-      medList.setModel(new DefaultTableModel(null,new String[]{"Name","Cost"}));
-        orderList.setModel(new DefaultTableModel(null,new String[]{"Name","Cost","Quantity"}));
-        PharmaDirectory rd=system.getPharmaDir();
-        ArrayList<Pharma> list=rd.getPharmaArrayList();
-        String s=jComboBox1.getSelectedItem().toString();
-       
-        int j=list.size();
- 
-        for(int i=0;i<j;i++)
-        {
-            Pharma r =list.get(i);
-            
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        medList.setModel(new DefaultTableModel(null, new String[]{"Name", "Cost"}));
+        orderList.setModel(new DefaultTableModel(null, new String[]{"Name", "Cost", "Quantity"}));
+        PharmaDirectory pharmaDir = system.getPharmaDir();
+        ArrayList<Pharma> list = pharmaDir.getPharmaArrayList();
+        String s = jComboBox1.getSelectedItem().toString();
 
-            if(s.matches(r.getPharmaName()))
-            {
-                System.out.println("is matched");
-                Map<String,String> abc=r.getMedicines();
-              
-                DefaultTableModel model2 = (DefaultTableModel) medList.getModel();    
-                for (String key: abc.keySet()) {
-               
-                String s1[]={key,abc.get(key)};
-                model2.addRow(s1);
-            }
+        int l = list.size();
+
+        for (int i = 0; i < l; i++) {
+            Pharma pharmacy = list.get(i);
+
+            if (s.matches(pharmacy.getPharmaName())) {
+
+                Map<String, String> abc = pharmacy.getMedicines();
+
+                DefaultTableModel model = (DefaultTableModel) medList.getModel();
+                for (String key : abc.keySet()) {
+
+                    String s1[] = {key, abc.get(key)};
+                    model.addRow(s1);
+                }
             }
         }
-    
-    
+
     }
 
-    private void displayTable() {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-   
-      }
+//    private void displayTable() {
+//        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//
+//    }
 }
