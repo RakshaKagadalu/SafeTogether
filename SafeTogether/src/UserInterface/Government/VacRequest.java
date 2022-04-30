@@ -38,7 +38,6 @@ public class VacRequest extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jComboBox3 = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -60,8 +59,7 @@ public class VacRequest extends javax.swing.JPanel {
         addbtn.setBackground(new java.awt.Color(10, 132, 255));
         addbtn.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
         addbtn.setForeground(new java.awt.Color(255, 255, 255));
-        addbtn.setText("Add");
-        addbtn.setBorder(null);
+        addbtn.setText("Approve Request");
         addbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addbtnActionPerformed(evt);
@@ -72,8 +70,7 @@ public class VacRequest extends javax.swing.JPanel {
         deleteBtn.setBackground(new java.awt.Color(255, 55, 95));
         deleteBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBtn.setText("Delete");
-        deleteBtn.setBorder(null);
+        deleteBtn.setText("Cancel Request");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -87,7 +84,7 @@ public class VacRequest extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel7.setText("First Name");
+        jLabel7.setText("Pharmacy");
         jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 220, -1));
 
         jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
@@ -113,7 +110,6 @@ public class VacRequest extends javax.swing.JPanel {
         jPanel7.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 420, 40));
 
         jPanel7.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 420, 40));
-        jPanel7.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 420, 40));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00" }));
         jPanel7.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 420, 40));
@@ -191,7 +187,6 @@ public class VacRequest extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

@@ -30,11 +30,11 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
      */
     JPanel container;
     EcoSystem ecosystem;
-     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    // private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
 
     public SysAdminWorkAreaJPanel(JPanel container,EcoSystem ecosystem) {
         initComponents();
-        ecosystem = dB4OUtil.retrieveSystem();
+       // ecosystem = dB4OUtil.retrieveSystem();
         this.setSize(1920, 1080);
         this.container=container;
         this.ecosystem=ecosystem;
@@ -301,7 +301,7 @@ public class SysAdminWorkAreaJPanel extends javax.swing.JPanel {
        container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
-          dB4OUtil.storeSystem(ecosystem);
+          //dB4OUtil.storeSystem(ecosystem);
         //DB4OUtil.dB4OUtil.storeSystem(ecosystem);
        //        container.remove(this);
 //        Component[] componentArray = container.getComponents();

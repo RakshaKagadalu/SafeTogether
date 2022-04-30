@@ -33,17 +33,19 @@ public class TestRegistration extends javax.swing.JPanel {
     /**
      * Creates new form TestRegistration
      */
-     EcoSystem system;
+    EcoSystem system;
     JPanel rightSidePanel;
     UserAcc userAcc;
+    String locationCordinate;
+    
     public TestRegistration(EcoSystem system, JPanel rightSidePanel,UserAcc userAcc) {
         initComponents();
-         this.system = system;
+        this.system = system;
         this.rightSidePanel = rightSidePanel;
-         this.userAcc=userAcc;
+        this.userAcc=userAcc;
         this.setSize(1160, 750);
-           User a =(User)(userAcc);
-       firstNameInputBox.setText(a.getFirstName());
+        User a =(User)(userAcc);
+        firstNameInputBox.setText(a.getFirstName());
         emailTextInput.setText(a.getEmail());
         PandemicCenter_Dir cd= system.getPandemicCenterDir();
         ArrayList<PandemicCenter> ol=cd.getPandemicdirectory();
@@ -52,7 +54,7 @@ public class TestRegistration extends javax.swing.JPanel {
         {
             PandemicCenter o=ol.get(i);
             comboCenter.addItem(o.getName());
-            
+            locationCordinate = o.getLocation();
         }
         displayCenter();
     }
@@ -95,6 +97,7 @@ public class TestRegistration extends javax.swing.JPanel {
         registerButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         cancelButton1 = new javax.swing.JButton();
+        cancelButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -224,6 +227,11 @@ public class TestRegistration extends javax.swing.JPanel {
         temperatureInput.setBackground(new java.awt.Color(248, 248, 249));
         jPanel3.add(temperatureInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 230, 38));
 
+        comboCenter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCenterActionPerformed(evt);
+            }
+        });
         jPanel3.add(comboCenter, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 220, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 520, 350));
@@ -237,7 +245,7 @@ public class TestRegistration extends javax.swing.JPanel {
                 registerButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 700, 220, 39));
+        jPanel1.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 700, 220, 39));
 
         cancelButton.setBackground(new java.awt.Color(138, 189, 188));
         cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
@@ -248,7 +256,7 @@ public class TestRegistration extends javax.swing.JPanel {
                 cancelButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 700, 200, 39));
+        jPanel1.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 700, 200, 39));
 
         cancelButton1.setBackground(new java.awt.Color(255, 55, 95));
         cancelButton1.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
@@ -259,7 +267,18 @@ public class TestRegistration extends javax.swing.JPanel {
                 cancelButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(cancelButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 700, 200, 39));
+        jPanel1.add(cancelButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 700, 200, 39));
+
+        cancelButton2.setBackground(new java.awt.Color(172, 142, 104));
+        cancelButton2.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        cancelButton2.setForeground(new java.awt.Color(255, 255, 255));
+        cancelButton2.setText("Available Centers");
+        cancelButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cancelButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 700, 200, 39));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -313,10 +332,23 @@ public class TestRegistration extends javax.swing.JPanel {
           cancelRegistration();
     }//GEN-LAST:event_cancelButton1ActionPerformed
 
+    private void cancelButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton2ActionPerformed
+        // TODO add your handling code here:
+        showInMap();
+    }//GEN-LAST:event_cancelButton2ActionPerformed
 
+    private void comboCenterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCenterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCenterActionPerformed
+
+    private void showInMap() {
+        System.out.println(locationCordinate);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton cancelButton1;
+    private javax.swing.JButton cancelButton2;
     private javax.swing.JComboBox<String> comboCenter;
     private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JTextField emailTextInput;
