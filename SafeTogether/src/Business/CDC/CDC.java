@@ -4,6 +4,7 @@
  */
 package Business.CDC;
 
+import Business.Roles.Officer_CDC;
 import Business.UserAcc.UserAcc;
 
 /**
@@ -17,6 +18,7 @@ public class CDC extends UserAcc{
     public CDC(String firstName, String secondName, String userID, String userPassword, String phoneNumber) {
         setUserName(userID);
         setPwd(userPassword);
+        setRole(new Officer_CDC());
         this.firstName = firstName;
         this.secondName = secondName;
         this.userID = userID;
