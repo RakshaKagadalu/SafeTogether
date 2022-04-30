@@ -4,18 +4,63 @@
  */
 package UserInterface.Government;
 
+import Business.EcoSystem;
+import Business.Pharma.Pharma;
+import Business.Pharma.PharmaDirectory;
+import Business.UserAcc.UserAcc;
+import Business.Vac.VacDirectory;
+import Business.Vac.Vaccinations;
+import Business.WorkQueue.VacRequest_Dir;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author shrikrishnajoisa
  */
 public class VacRequest extends javax.swing.JPanel {
 
+    private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
     /**
      * Creates new form VacRequest
+     * @param userProcessContainer
+     * @param userAcc
+     * @param ecosystem
      */
-    public VacRequest() {
+    public VacRequest(JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
         initComponents();
+        this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+//        Time();
+        populate_table();
+        PharmaDirectory bd= system.getPharmaDir();
+        ArrayList<Pharma> ol=bd.getPharmaArrayList();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            Pharma o=ol.get(i);
+            jComboBox1.addItem(o.getPharmaName());
+        }
+        
+        
+        VacDirectory bd1= system.getVaccDir();
+        ArrayList<Vaccinations> ol1=bd1.getVaccinationList();
+        int u1=ol1.size();
+        for(int i=0;i<u1;i++)
+        {
+            Vaccinations o=ol1.get(i);
+            jComboBox2.addItem(o.getName());
+        }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,6 +84,7 @@ public class VacRequest extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -113,6 +159,7 @@ public class VacRequest extends javax.swing.JPanel {
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00" }));
         jPanel7.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 420, 40));
+        jPanel7.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 400, 36));
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
@@ -164,11 +211,99 @@ public class VacRequest extends javax.swing.JPanel {
 
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
         // TODO add your handling code here:
-
+        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+            if(jDateChooser1.getDate()!=null)
+            {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+         VacRequest_Dir vrd= system.getVaccReqDir();
+        ArrayList<Business.WorkQueue.VacRequest> ol=vrd.getRequests();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            Business.WorkQueue.VacRequest o=ol.get(i);
+            if(s==o.getVacId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().equals("Cancel")||o.getStatus().equals("Done")||o.getStatus().equals("Approved"))
+                {
+                    JOptionPane.showMessageDialog(null,"wrong move");
+                }
+                else
+                {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String d1 = sdf.format(jDateChooser1.getDate());
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+                    LocalDateTime d2 = LocalDateTime.now();
+                    if(d1.compareTo(d2.toString()) >= 0) {
+                    o.setPharmacy(jComboBox1.getSelectedItem().toString());
+                o.setVaccination(jComboBox2.getSelectedItem().toString());
+                 
+                o.setDate(d1);
+                o.setTime(jComboBox3.getSelectedItem().toString());
+                o.setStatus("Approved");
+                 JOptionPane.showMessageDialog(null, "Request Approved!!");
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"Appointment Available from Tomorrow");
+                    }
+                }
+                
+            }
+        }
+        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Covid-19","Diabetese","Medication","Blood Thinner","Status"}));
+        populate_table();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Pick A date");
+            }
+        
+    }                                        
+else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row");
+        }
     }//GEN-LAST:event_addbtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
+         DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {
+        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+        System.out.println("id"+s);
+         VacRequest_Dir vrd= system.getVaccReqDir();
+        ArrayList<Business.WorkQueue.VacRequest> ol=vrd.getRequests();
+        int u=ol.size();
+        for(int i=0;i<u;i++)
+        {
+            Business.WorkQueue.VacRequest o=ol.get(i);
+            if(s==o.getVacId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
+            {
+                if(o.getStatus().equals("Cancel")||o.getStatus().equals("Done"))
+                {
+                    JOptionPane.showMessageDialog(null,"wrong move");
+                }
+                else
+                {                
+                o.setStatus("Cancel");
+                }
+                
+            }
+        }
+        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Covid-19","Diabetese","Medication","Blood Thinner","Status"}));
+        populate_table();
+        
+    }                                        
+else
+        {
+            JOptionPane.showMessageDialog(null,"Select a Row");
+        }
 
     }//GEN-LAST:event_deleteBtnActionPerformed
 
@@ -180,6 +315,23 @@ public class VacRequest extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    public void populate_table()
+    {
+        VacRequest_Dir vrd= system.getVaccReqDir();
+        ArrayList<Business.WorkQueue.VacRequest> ol=vrd.getRequests();
+        int u=ol.size();
+        System.out.println(u);
+        for(int i=0;i<u;i++)
+        {
+            Business.WorkQueue.VacRequest o=ol.get(i);
+                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+                String s1=String.valueOf(o.getVacId());    
+                String s[]={s1,o.getFirst_name(),o.getDisease(),o.getDiabetes(),o.getMedication(),o.getBloodThinner(),o.getStatus()};
+                t2.addRow(s);
+            
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addbtn;
@@ -187,6 +339,7 @@ public class VacRequest extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

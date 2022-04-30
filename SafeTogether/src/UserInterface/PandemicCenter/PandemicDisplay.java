@@ -2,19 +2,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.CovidCenter;
+package UserInterface.PandemicCenter;
+
+import Business.EcoSystem;
+import Business.PandemicCenter.PandemicCenter;
+import Business.PandemicCenter.PandemicCenter_Dir;
+import Business.UserAcc.UserAcc;
+import Business.WorkQueue.OutbreakTracer;
+import Business.WorkQueue.OutbreakTracerDir;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author shrikrishnajoisa
  */
-public class CovidDisplay extends javax.swing.JPanel {
+public class PandemicDisplay extends javax.swing.JPanel {
 
+    private UserAcc userAcc;
+    private EcoSystem system;
+    private JPanel container;
     /**
-     * Creates new form CovidDisplay
+     * Creates new form PandemicView
+     * @param userProcessContainer
+     * @param userAcc
+     * @param ecosystem
      */
-    public CovidDisplay() {
+    public PandemicDisplay(JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
         initComponents();
+        this.system = ecosystem;
+        this.container = userProcessContainer;
+        this.userAcc = userAcc;
+//        Time();
     }
 
     /**
@@ -47,10 +69,7 @@ public class CovidDisplay extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Name", "Location", "Status", "Response"
@@ -128,9 +147,88 @@ public class CovidDisplay extends javax.swing.JPanel {
 
     private void bookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton1ActionPerformed
         // TODO add your handling code here:
+        result();
     }//GEN-LAST:event_bookButton1ActionPerformed
 
+    public void populate_table()
+    {
+        OutbreakTracerDir c = system.getOutbreakStatusDir();
+        ArrayList<OutbreakTracer> ol=c.getOutbreakLog();
+        int u=ol.size();
+        System.out.println("size"+u);
+        for(int i=0;i<u;i++)
+        {
+            OutbreakTracer o=ol.get(i);
+            PandemicCenter bb=(PandemicCenter)(userAcc);
+            System.out.println(o.getTestCenter());
+            System.out.println(bb.getName());
+            if(o.getTestCenter().matches(bb.getName()))
+            {
+            
+                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+                String s1=String.valueOf(o.getId());
+                
+                
+                String s[]={s1,o.getStatus(),o.getUserName(),o.getTemp(),o.getContact(),o.getSymptoms(),o.getPositive(), o.getAppDate(),o.getResult()};
+                t2.addRow(s);
+            
+            }
+         
+            
+        }
+    }
 
+    
+    public void result()
+      {   
+        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+          if(selectedRow>=0)
+              {
+
+              int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
+              System.out.println("id"+s);
+              OutbreakTracerDir red = system.getOutbreakStatusDir();
+              ArrayList<OutbreakTracer> ol=red.getOutbreakLog();
+              int u=ol.size();
+              for(int i=0;i<u;i++)
+              {
+                  OutbreakTracer o=ol.get(i);
+                  if(s==o.getId())
+                  {
+                      if(o.getResult().matches("NA"))
+                      {
+                      if(o.getStatus().matches("Appoinment Booked"))
+                      {
+                          o.setResult(jComboBox1.getSelectedItem().toString());
+                          o.setStatus("Done");
+                      }
+                      else
+                      {
+                          JOptionPane.showMessageDialog(null,"Appoinment Canceled");
+                      }
+                      }
+
+
+                  }
+
+
+              }
+              jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Status","Name","Temperature","Contact","Symptoms","Postive","Date","Result"}));
+              populate_table();
+
+
+
+              }
+          else
+          {
+
+          }           
+    }
+
+  
+    
+    // OutbreakTracer
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookButton1;
     private javax.swing.JComboBox<String> jComboBox1;
