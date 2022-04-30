@@ -25,20 +25,22 @@ public class EmergencyReport extends javax.swing.JPanel {
     JPanel rightSidePanel;
     /**
      * Creates new form BloodDonations
+     *
      * @param system
      * @param rightSidePanel
      */
 
     JPanel container;
-   UserAcc userAcc;
-    public EmergencyReport(JPanel container,EcoSystem system,UserAcc userAcc) {
+    UserAcc userAcc;
+
+    public EmergencyReport(JPanel container, EcoSystem system, UserAcc userAcc) {
         initComponents();
-         this.container=container;
-        this.system=system;
-        this.userAcc=userAcc;
-        User a=(User)userAcc;
-        firstNameField.setText(a.getFirstName());
-        lastNameField.setText(a.getLastName());
+        this.container = container;
+        this.system = system;
+        this.userAcc = userAcc;
+        User u = (User) userAcc;
+        firstNameField.setText(u.getFirstName());
+        lastNameField.setText(u.getLastName());
         displayTable();
 
     }
@@ -181,17 +183,17 @@ public class EmergencyReport extends javax.swing.JPanel {
 
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
         // TODO add your handling code here:
-       reportEmergency();
+        reportEmergency();
 
-        
+
     }//GEN-LAST:event_bookButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        
+
         cancelEmergency();
-        
-        
+
+
     }//GEN-LAST:event_cancelButtonActionPerformed
 
 
@@ -216,93 +218,74 @@ public class EmergencyReport extends javax.swing.JPanel {
 
     private void displayTable() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-     Req_EmergencyDir red=system.getEmergencyReqDir();
-        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
-        int u=ol.size();
-        for(int i=0;i<u;i++)
-        {
-            Req_Emergency o=ol.get(i);
-            if(userAcc.getUserName().matches(o.getUserId()))
-            {
-                DefaultTableModel t2 = (DefaultTableModel) tblEmergency.getModel();
-                String s1=String.valueOf(o.getId());    
-                String s[]={s1,o.getEmergency(),o.getLocation(),o.getStatus(),o.getResponse()};
-                t2.addRow(s);
+        Req_EmergencyDir emerDir = system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> emergencyDir = emerDir.getEmergencyUserList();
+        int l = emergencyDir.size();
+        for (int i = 0; i < l; i++) {
+            Req_Emergency reqEmer = emergencyDir.get(i);
+            if (userAcc.getUserName().matches(reqEmer.getUserId())) {
+                DefaultTableModel table = (DefaultTableModel) tblEmergency.getModel();
+                String r1 = String.valueOf(reqEmer.getId());
+                String r2[] = {r1, reqEmer.getEmergency(), reqEmer.getLocation(), reqEmer.getStatus(), reqEmer.getResponse()};
+                table.addRow(r2);
             }
         }
-    
-    
-    
-    
+
     }
 
     private void reportEmergency() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-     if(!locationField.getText().isEmpty())
-        {
-            Req_Emergency re=new Req_Emergency();
-        User a=(User)userAcc;
-        int x = 1 + (int) (Math.random() * 100);
-        re.setId(x);
-        re.setName(a.getFirstName());
-        re.setUserId(a.getUserId());
-        re.setEmergency(emergencyBox.getSelectedItem().toString());
-        re.setLocation(locationField.getText());
-        re.setStatus("In Progress");
-        re.setResponse("No Response");
-            Req_EmergencyDir red=system.getEmergencyReqDir();
-        red.addEmergencyUser(re);
-        tblEmergency.setModel(new DefaultTableModel(null,new String[]{"ID","Emergency","Location","Status","Response"}));
-        displayTable();
-                    JOptionPane.showMessageDialog(null, "Reported Emergency Successfully!!!");
-        }
-        else
-        {
+        if (!locationField.getText().isEmpty()) {
+            Req_Emergency reqEmer = new Req_Emergency();
+            User u = (User) userAcc;
+            int z = 1 + (int) (Math.random() * 100);
+            reqEmer.setId(z);
+            reqEmer.setName(u.getFirstName());
+            reqEmer.setUserId(u.getUserId());
+            reqEmer.setEmergency(emergencyBox.getSelectedItem().toString());
+            reqEmer.setLocation(locationField.getText());
+            reqEmer.setStatus("In Progress");
+            reqEmer.setResponse("No Response");
+            Req_EmergencyDir emerDir = system.getEmergencyReqDir();
+            emerDir.addEmergencyUser(reqEmer);
+            tblEmergency.setModel(new DefaultTableModel(null, new String[]{"ID", "Emergency", "Location", "Status", "Response"}));
+            displayTable();
+            JOptionPane.showMessageDialog(null, "Reported Emergency Successfully!!!");
+        } else {
             JOptionPane.showMessageDialog(null, "Please Enter the location for Emergency Services!");
-        }}
+        }
+    }
 
     private void cancelEmergency() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    DefaultTableModel t2 = (DefaultTableModel) tblEmergency.getModel();
-        int selectedRow=tblEmergency.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        Req_EmergencyDir red= system.getEmergencyReqDir();
-        ArrayList<Req_Emergency> ol=red.getEmergencyUserList();
-        int u=ol.size();
-        for(int i=0;i<u;i++)
-        {
-            Req_Emergency o=ol.get(i);
-            if(s==o.getId())
-            {
-                if(o.getStatus().matches("In Progress"))
-                {
-                o.setStatus("Closed");
-                JOptionPane.showMessageDialog(null, "Case Closed");
-              
+        DefaultTableModel table = (DefaultTableModel) tblEmergency.getModel();
+        int selectedRow = tblEmergency.getSelectedRow();
+        if (selectedRow >= 0) {
+            int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+            Req_EmergencyDir emerDir = system.getEmergencyReqDir();
+            ArrayList<Req_Emergency> emerList = emerDir.getEmergencyUserList();
+            int l = emerList.size();
+            for (int i = 0; i < l; i++) {
+                Req_Emergency reqEmer = emerList.get(i);
+                if (sRow == reqEmer.getId()) {
+                    if (reqEmer.getStatus().matches("In Progress")) {
+                        reqEmer.setStatus("Closed");
+                        JOptionPane.showMessageDialog(null, "Case Closed");
+
+                    } else if (reqEmer.getStatus().matches("Closed")) {
+                        JOptionPane.showMessageDialog(null, "Your Emergency Case is Closed successfully!!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Reported as false Alarm!!");
+                    }
+                }
+
             }
-                else if(o.getStatus().matches("Closed")){
-                    JOptionPane.showMessageDialog(null, "Your Emergency Case is Closed successfully!!");
-                }   
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Reported as false Alarm!!");
-            }
-            }
-            
-        }
-        tblEmergency.setModel(new DefaultTableModel(null,new String[]{"ID","Emergency","Location","Status","Response"}));
-       displayTable();
-        }
-        else
-        {
-       JOptionPane.showMessageDialog(null, "Select A Row!!");
+            tblEmergency.setModel(new DefaultTableModel(null, new String[]{"ID", "Emergency", "Location", "Status", "Response"}));
+            displayTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Select A Row!!");
 
         }
-    
-    
-    
-    
+
     }
 }

@@ -32,15 +32,16 @@ public class DoctorAppointment extends javax.swing.JPanel {
      * Creates new form DoctorAppointment
      */
     UserAcc userAcc;
-      EcoSystem system;
+    EcoSystem system;
     JPanel rightSidePanel;
-    public DoctorAppointment(EcoSystem system, JPanel rightSidePanel,UserAcc userAcc) {
+
+    public DoctorAppointment(EcoSystem system, JPanel rightSidePanel, UserAcc userAcc) {
         initComponents();
-         this.system = system;
+        this.system = system;
         this.rightSidePanel = rightSidePanel;
-        this.userAcc=userAcc;
+        this.userAcc = userAcc;
         this.setSize(1160, 750);
-         specializationCombo();
+        specializationCombo();
     }
 
     /**
@@ -178,24 +179,24 @@ public class DoctorAppointment extends javax.swing.JPanel {
 
     private void specializationComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_specializationComboActionPerformed
         // TODO add your handling code here:
-DoctorDisplay();
+        DoctorDisplay();
     }//GEN-LAST:event_specializationComboActionPerformed
 
     private void bookAppointment1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment1ActionPerformed
         // TODO add your handling code here:
-       // viewAppointmentStatus();
-       displayAppointmentStatus();
+        // viewAppointmentStatus();
+        displayAppointmentStatus();
     }//GEN-LAST:event_bookAppointment1ActionPerformed
 
     private void bookAppointment2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment2ActionPerformed
         // TODO add your handling code here:
-       
+
         bookDocAppointment();
     }//GEN-LAST:event_bookAppointment2ActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
-        
+
         cancelAppoint();
     }//GEN-LAST:event_cancelActionPerformed
 
@@ -225,162 +226,133 @@ DoctorDisplay();
 
     private void specializationCombo() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    ArrayList<Doctor> d=system.getDoctorDir().getDoc();
-        int s=d.size();
-        ArrayList<String> spe =new ArrayList<String>();
-        for(int i=0;i<s;i++)
-        {
-            Doctor d1=d.get(i);
-            if(!spe.contains(d1.getSpecialization()))
-                    {
-                        System.out.println("specializations"+" "+d1.getSpecialization());
-                        spe.add(d1.getSpecialization());
-                    }
-            
+        ArrayList<Doctor> doc = system.getDoctorDir().getDoc();
+        int l = doc.size();
+        ArrayList<String> specialization = new ArrayList<String>();
+        for (int i = 0; i < l; i++) {
+            Doctor d1 = doc.get(i);
+            if (!specialization.contains(d1.getSpecialization())) {
+              
+                specialization.add(d1.getSpecialization());
+            }
+
         }
-        for(int i=0;i<spe.size();i++)
-        {
-            specializationCombo.addItem(spe.get(i));
+        for (int i = 0; i < specialization.size(); i++) {
+            specializationCombo.addItem(specialization.get(i));
         }
-    
-    
-    
+
     }
 
     private void DoctorDisplay() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    {
-        String specialSelect=specializationCombo.getSelectedItem().toString();
-         ArrayList<Doctor> doclist=system.getDoctorDir().getDoc();
-        int s=doclist.size();
-        
-        tblDocAvail.setModel(new DefaultTableModel(null,new String[]{"Name","Hospital","Spealization","Phone Number"}));
-        for(int i=0;i<s;i++)
         {
-            Doctor doc=doclist.get(i);
-            if(doc.getSpecialization().matches(specialSelect))
-            {
-                DefaultTableModel table = (DefaultTableModel) tblDocAvail.getModel();    
-                String content[]={doc.getFirstName(),doc.getSpecialization(),doc.getHospital(),doc.getPhoneNum()};
-                table.addRow(content);
+            String specialSelect = specializationCombo.getSelectedItem().toString();
+            ArrayList<Doctor> doclist = system.getDoctorDir().getDoc();
+            int l = doclist.size();
+
+            tblDocAvail.setModel(new DefaultTableModel(null, new String[]{"Name", "Hospital", "Spealization", "Phone Number"}));
+            for (int i = 0; i < l; i++) {
+                Doctor doc = doclist.get(i);
+                if (doc.getSpecialization().matches(specialSelect)) {
+                    DefaultTableModel table = (DefaultTableModel) tblDocAvail.getModel();
+                    String content[] = {doc.getFirstName(), doc.getSpecialization(), doc.getHospital(), doc.getPhoneNum()};
+                    table.addRow(content);
+                }
             }
         }
+
     }
-    
-    
-    
-    
-    }
- public  void sendmail()
-    {   
+
+    public void sendmail() {
         Notification notification = new Notification();
         String toEmail = "aedproject22@gmail.com";
         String emailSubject = "Doctor Appointment confirmation";
-        String emailContent = "Successfully booked your doctor appointment!!"; 
+        String emailContent = "Successfully booked your doctor appointment!!";
         notification.sendMail(toEmail, emailSubject, emailContent);
     }
+
     private void bookDocAppointment() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-   
-     DefaultTableModel model = (DefaultTableModel) tblDocAvail.getModel();
-        int selectedRow=tblDocAvail.getSelectedRow();
-        if(selectedRow>=0)
-        {
-            if(jDateChooser1.getDate()!=null)
-            {
+
+        DefaultTableModel model = (DefaultTableModel) tblDocAvail.getModel();
+        int selectedRow = tblDocAvail.getSelectedRow();
+        if (selectedRow >= 0) {
+            if (jDateChooser1.getDate() != null) {
                 int rand = 1 + (int) (Math.random() * 100);
-                boolean appoint=false;
+                boolean appoint = false;
                 SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd");
                 String appDate = sdate.format(jDateChooser1.getDate());
                 DateTimeFormatter datetf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDateTime date2 = LocalDateTime.now();
-                String name=(model.getValueAt(selectedRow, 0).toString());
-                String date=specializationCombo.getSelectedItem().toString();
-                if(appDate.compareTo(date2.toString()) >= 0) {
-                    appoint=verify(name,appDate,date);
-                    if(appoint==false)
-                    {
-                        DoctorsAppointment doc=new DoctorsAppointment();
-                    doc.setId(rand);                    
-                    doc.setDoctorsName(name);
-                    String verifyName=(model.getValueAt(selectedRow, 1).toString());
-                    doc.setLastName(verifyName);
-                    doc.setDate(appDate);
-                    doc.setStatus("Appointment Booked");
-                    doc.setTime(timeCombo.getSelectedItem().toString());
-                    //System.out.print(doc.getTime());
-                    User user=(User)(userAcc);
-                    doc.setUserId(user.getUserId());
-                    doc.setUserName(user.getFirstName());
-                    DoctorsAppointment_Dir docDir=system.getDocAppDir();
-                    docDir.addrequest(doc);
-                    SearchApp check= system.getCheckApplication();
-                    Map<String,List<String>> a=check.getSearchByName();
-                    List<String> list = new ArrayList<>();
-                    list.add(appDate);
-                    list.add(timeCombo.getSelectedItem().toString());                    
-                    a.put(name, list);
-                    //DB4OUtil.dB4OUtil.storeSystem(system);
-                     
-                    //code to send email
-                  // sendmail();
-                    //end of code
-                    JOptionPane.showMessageDialog(null,"Your Appointment request is successfull!!");
+                String name = (model.getValueAt(selectedRow, 0).toString());
+                String date = specializationCombo.getSelectedItem().toString();
+                if (appDate.compareTo(date2.toString()) >= 0) {
+                    appoint = verify(name, appDate, date);
+                    if (appoint == false) {
+                        DoctorsAppointment doc = new DoctorsAppointment();
+                        doc.setId(rand);
+                        doc.setDoctorsName(name);
+                        String verifyName = (model.getValueAt(selectedRow, 1).toString());
+                        doc.setLastName(verifyName);
+                        doc.setDate(appDate);
+                        doc.setStatus("Appointment Booked");
+                        doc.setTime(timeCombo.getSelectedItem().toString());
+                        //System.out.print(doc.getTime());
+                        User user = (User) (userAcc);
+                        doc.setUserId(user.getUserId());
+                        doc.setUserName(user.getFirstName());
+                        DoctorsAppointment_Dir docDir = system.getDocAppDir();
+                        docDir.addrequest(doc);
+                        SearchApp check = system.getCheckApplication();
+                        Map<String, List<String>> aList = check.getSearchByName();
+                        List<String> list = new ArrayList<>();
+                        list.add(appDate);
+                        list.add(timeCombo.getSelectedItem().toString());
+                        aList.put(name, list);
+                       
 
-                }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null,"Appointment slot not available!!");
+                        //code to send email
+                        // sendmail();
+                        //end of code
+                        JOptionPane.showMessageDialog(null, "Your Appointment request is successfull!!");
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Appointment slot not available!!");
                     }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please select any future date!");
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"Please select any future date!");
-                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Date is mandatory!!");
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"Date is mandatory!!");
-            }
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Doctor you want to book an appointment with!!");
         }
-    
-    
-    
-    
-    
-    
+
     }
 
     private boolean verify(String name, String date1, String date) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    
-     boolean rand=false;
-        SearchApp check= system.getCheckApplication();
-        Map<String,List<String>> appList=check.getSearchByName();
+
+        boolean rand = false;
+        SearchApp check = system.getCheckApplication();
+        Map<String, List<String>> appList = check.getSearchByName();
         for (Map.Entry mapElement : appList.entrySet()) {
-            if(mapElement.getKey().toString().matches(name))
-            {
-                List<String>appointmet=(List)mapElement.getValue();
-                String name1=appointmet.get(0);
-                String name2=appointmet.get(1);
-                if(name1.matches(date1))
-                {
-                    if(name2.matches(date))
-                    {
-                        rand=true;
+            if (mapElement.getKey().toString().matches(name)) {
+                List<String> appointmet = (List) mapElement.getValue();
+                String name1 = appointmet.get(0);
+                String name2 = appointmet.get(1);
+                if (name1.matches(date1)) {
+                    if (name2.matches(date)) {
+                        rand = true;
                         break;
                     }
                 }
             }
-           
+
         }
         return rand;
-    
-    
+
     }
 
 //    private void viewAppointmentStatus() {
@@ -394,74 +366,58 @@ DoctorDisplay();
 //        
 //    
 //    }
-    
-    
     private void displayAppointmentStatus() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    
-    
-        DoctorsAppointment_Dir docDir=system.getDocAppDir();
-        ArrayList<DoctorsAppointment> ol=docDir.getAppointments();
-        int u=ol.size();
-        
-         
-             tblDocAvail.setModel(new DefaultTableModel(null,new String[]{"AppID","Name","Date","Time","status"}));
-        for(int i=0;i<u;i++)
-        {
-            DoctorsAppointment o=ol.get(i);
-           
-            if(o.getUserId().matches(userAcc.getUserName()))
-            {
-            
-                DefaultTableModel t2 = (DefaultTableModel) tblDocAvail.getModel();
-                String s1=String.valueOf(o.getId());
-                String s[]={s1,o.getDoctorsName(),o.getDate(),o.getTime(),o.getStatus()};
-                t2.addRow(s);
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        DoctorsAppointment_Dir docDir = system.getDocAppDir();
+        ArrayList<DoctorsAppointment> docappList = docDir.getAppointments();
+        int l = docappList.size();
+
+        tblDocAvail.setModel(new DefaultTableModel(null, new String[]{"AppID", "Name", "Date", "Time", "status"}));
+        for (int i = 0; i < l; i++) {
+            DoctorsAppointment docApp = docappList.get(i);
+
+            if (docApp.getUserId().matches(userAcc.getUserName())) {
+
+                DefaultTableModel table = (DefaultTableModel) tblDocAvail.getModel();
+                String r1 = String.valueOf(docApp.getId());
+                String r2[] = {r1, docApp.getDoctorsName(), docApp.getDate(), docApp.getTime(), docApp.getStatus()};
+                table.addRow(r2);
             }
-        }}
+        }
+    }
 
     private void cancelAppoint() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-      DefaultTableModel  t2 = (DefaultTableModel) tblDocAvail.getModel();
-        int selectedRow=tblDocAvail.getSelectedRow();
-        if(selectedRow>=0)
-        {       
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
- 
-    
-         DoctorsAppointment_Dir docDir=system.getDocAppDir();
-        ArrayList<DoctorsAppointment> ol=docDir.getAppointments();
-        int u=ol.size();
-        User a=(User)userAcc;
-        for(int i=0;i<u;i++)
-        {
-            DoctorsAppointment o=ol.get(i);
-            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
-            {
-                System.out.println(o.getStatus());
-                if(o.getStatus().matches("Appointment Booked"))
-                {
-                    o.setStatus("Cancelled");
-                    verify(o.getDoctorsName(),o.getDate(),o.getTime());
-                    
+        DefaultTableModel table = (DefaultTableModel) tblDocAvail.getModel();
+        int selectedRow = tblDocAvail.getSelectedRow();
+        if (selectedRow >= 0) {
+            int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+
+            DoctorsAppointment_Dir docDir = system.getDocAppDir();
+            ArrayList<DoctorsAppointment> docAppList = docDir.getAppointments();
+            int l = docAppList.size();
+            User u = (User) userAcc;
+            for (int i = 0; i < l; i++) {
+                DoctorsAppointment docApp = docAppList.get(i);
+                if (sRow == docApp.getId()) {
+                 
+                    if (docApp.getStatus().matches("Appointment Booked")) {
+                        docApp.setStatus("Cancelled");
+                        verify(docApp.getDoctorsName(), docApp.getDate(), docApp.getTime());
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Wrong Move!!");
+                    }
+
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Wrong Move!!");
-                }
-                
 
             }
-
-        }
-        tblDocAvail.setModel(new DefaultTableModel(null,new String[]{"ID","Doctor Name","Hospital","Status","Date","Time"}));
-        displayAppointmentStatus();
-        }
-        else
-        {
+            tblDocAvail.setModel(new DefaultTableModel(null, new String[]{"ID", "Doctor Name", "Hospital", "Status", "Date", "Time"}));
+            displayAppointmentStatus();
+        } else {
             JOptionPane.showMessageDialog(null, "Select an appointment to cancel!!");
         }
-    
-    
+
     }
 }
