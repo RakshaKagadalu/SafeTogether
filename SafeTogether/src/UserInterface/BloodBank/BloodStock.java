@@ -4,8 +4,14 @@
  */
 package UserInterface.BloodBank;
 
+import Business.BloodBank.BloodWork;
+import Business.BloodBank.BloodWorkDirectory;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -26,7 +32,7 @@ public class BloodStock extends javax.swing.JPanel {
            this.system = system;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
-        displayTable();
+        
     }
 
     /**
@@ -43,30 +49,30 @@ public class BloodStock extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        userNameTextField = new javax.swing.JTextField();
+        txtAp = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        firstNameTextField = new javax.swing.JTextField();
+        txtBp = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        lastNameTextField = new javax.swing.JTextField();
+        txtbm = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        emailTextField = new javax.swing.JTextField();
+        txtABp = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        phoneTextField = new javax.swing.JTextField();
+        txtAm = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        passwordTextField = new javax.swing.JTextField();
-        loginButton = new javax.swing.JButton();
-        signUpButton = new javax.swing.JButton();
+        txtOm = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        emailTextField1 = new javax.swing.JTextField();
-        passwordTextField1 = new javax.swing.JTextField();
+        txtOp = new javax.swing.JTextField();
+        txtABm = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        signUpButton1 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(250, 249, 251));
         jPanel1.setPreferredSize(new java.awt.Dimension(1160, 750));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,157 +92,252 @@ public class BloodStock extends javax.swing.JPanel {
         jLabel4.setText("A+");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
 
-        userNameTextField.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel2.add(userNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 271, 48));
+        txtAp.setBackground(new java.awt.Color(248, 248, 249));
+        txtAp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtApActionPerformed(evt);
+            }
+        });
+        txtAp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApKeyPressed(evt);
+            }
+        });
+        jPanel2.add(txtAp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 271, 48));
 
         jLabel5.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(73, 84, 90));
         jLabel5.setText("B+");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
 
-        firstNameTextField.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel2.add(firstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 271, 48));
+        txtBp.setBackground(new java.awt.Color(248, 248, 249));
+        txtBp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBpKeyPressed(evt);
+            }
+        });
+        jPanel2.add(txtBp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 271, 48));
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(73, 84, 90));
         jLabel6.setText("B-");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, -1, -1));
 
-        lastNameTextField.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel2.add(lastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 271, 48));
+        txtbm.setBackground(new java.awt.Color(248, 248, 249));
+        txtbm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbmKeyPressed(evt);
+            }
+        });
+        jPanel2.add(txtbm, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 271, 48));
 
         jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(73, 84, 90));
         jLabel7.setText("AB+");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, -1, -1));
 
-        emailTextField.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel2.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 271, 48));
+        txtABp.setBackground(new java.awt.Color(248, 248, 249));
+        txtABp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtABpKeyPressed(evt);
+            }
+        });
+        jPanel2.add(txtABp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 271, 48));
 
         jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(73, 84, 90));
         jLabel9.setText("A-");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, -1, -1));
 
-        phoneTextField.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel2.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 271, 48));
+        txtAm.setBackground(new java.awt.Color(248, 248, 249));
+        txtAm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAmKeyPressed(evt);
+            }
+        });
+        jPanel2.add(txtAm, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 271, 48));
 
         jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(73, 84, 90));
         jLabel8.setText("O-");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 310, -1, -1));
 
-        passwordTextField.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel2.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 350, 271, 48));
-
-        loginButton.setBackground(new java.awt.Color(255, 255, 255));
-        loginButton.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
-        loginButton.setForeground(new java.awt.Color(235, 97, 91));
-        loginButton.setText("Login");
-        loginButton.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(235, 97, 91), null));
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
+        txtOm.setBackground(new java.awt.Color(248, 248, 249));
+        txtOm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtOmKeyPressed(evt);
             }
         });
-        jPanel2.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 670, 179, 56));
-
-        signUpButton.setBackground(new java.awt.Color(235, 97, 91));
-        signUpButton.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
-        signUpButton.setForeground(new java.awt.Color(255, 255, 255));
-        signUpButton.setText("Sign Up");
-        signUpButton.setBorder(null);
-        signUpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signUpButtonActionPerformed(evt);
-            }
-        });
-        jPanel2.add(signUpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 665, 179, 56));
+        jPanel2.add(txtOm, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 350, 271, 48));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(73, 84, 90));
         jLabel10.setText("O+");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
 
-        emailTextField1.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel2.add(emailTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 271, 48));
+        txtOp.setBackground(new java.awt.Color(248, 248, 249));
+        txtOp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtOpKeyPressed(evt);
+            }
+        });
+        jPanel2.add(txtOp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 271, 48));
 
-        passwordTextField1.setBackground(new java.awt.Color(248, 248, 249));
-        jPanel2.add(passwordTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, 271, 48));
+        txtABm.setBackground(new java.awt.Color(248, 248, 249));
+        txtABm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtABmKeyPressed(evt);
+            }
+        });
+        jPanel2.add(txtABm, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, 271, 48));
 
         jLabel11.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(73, 84, 90));
         jLabel11.setText("AB-");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(187, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 779, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(36, 36, 36))
-        );
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 779, 528));
 
-        signUpButton1.setBackground(new java.awt.Color(235, 97, 91));
-        signUpButton1.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
-        signUpButton1.setForeground(new java.awt.Color(255, 255, 255));
-        signUpButton1.setText("Add Blood");
-        signUpButton1.addActionListener(new java.awt.event.ActionListener() {
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 636));
+
+        btnAdd.setBackground(new java.awt.Color(235, 97, 91));
+        btnAdd.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd.setText("Add Stock");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signUpButton1ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 196, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(508, 508, 508)
-                .addComponent(signUpButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(signUpButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 25, Short.MAX_VALUE))
-        );
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 654, 179, 56));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        updateStock();
+        JOptionPane.showMessageDialog(null, "stock updated!!");
+    }//GEN-LAST:event_btnAddActionPerformed
 
-    }//GEN-LAST:event_signUpButtonActionPerformed
-
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+    private void txtApActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_loginButtonActionPerformed
+        
+    }//GEN-LAST:event_txtApActionPerformed
 
-    private void signUpButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButton1ActionPerformed
+    private void txtApKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApKeyPressed
         // TODO add your handling code here:
+          char c=evt.getKeyChar();
+        if(Character.isLetter(c))
+        {
+            txtAp.setEditable(false);
+            JOptionPane.showMessageDialog(null, "enter number");
+        }
+        else
+        {
+            txtAp.setEditable(true);
+        }
+    }//GEN-LAST:event_txtApKeyPressed
 
-    }//GEN-LAST:event_signUpButton1ActionPerformed
+    private void txtAmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmKeyPressed
+        // TODO add your handling code here:
+            char c=evt.getKeyChar();
+        if(Character.isLetter(c))
+        {
+            txtAm.setEditable(false);
+            JOptionPane.showMessageDialog(null, "enter number");
+        }
+        else
+        {
+            txtAm.setEditable(true);
+        }
+    }//GEN-LAST:event_txtAmKeyPressed
+
+    private void txtBpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBpKeyPressed
+        // TODO add your handling code here:
+            char c=evt.getKeyChar();
+        if(Character.isLetter(c))
+        {
+            txtBp.setEditable(false);
+            JOptionPane.showMessageDialog(null, "enter number");
+        }
+        else
+        {
+            txtBp.setEditable(true);
+        }
+    }//GEN-LAST:event_txtBpKeyPressed
+
+    private void txtbmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbmKeyPressed
+        // TODO add your handling code here:
+            char c=evt.getKeyChar();
+        if(Character.isLetter(c))
+        {
+            txtbm.setEditable(false);
+            JOptionPane.showMessageDialog(null, "enter number");
+        }
+        else
+        {
+            txtbm.setEditable(true);
+        }
+    }//GEN-LAST:event_txtbmKeyPressed
+
+    private void txtOpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOpKeyPressed
+        // TODO add your handling code here:
+            char c=evt.getKeyChar();
+        if(Character.isLetter(c))
+        {
+            txtOp.setEditable(false);
+            JOptionPane.showMessageDialog(null, "enter number");
+        }
+        else
+        {
+            txtOp.setEditable(true);
+        }
+    }//GEN-LAST:event_txtOpKeyPressed
+
+    private void txtOmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOmKeyPressed
+        // TODO add your handling code here:
+            char c=evt.getKeyChar();
+        if(Character.isLetter(c))
+        {
+            txtOm.setEditable(false);
+            JOptionPane.showMessageDialog(null, "enter number");
+        }
+        else
+        {
+            txtOm.setEditable(true);
+        }
+    }//GEN-LAST:event_txtOmKeyPressed
+
+    private void txtABpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtABpKeyPressed
+        // TODO add your handling code here:
+            char c=evt.getKeyChar();
+        if(Character.isLetter(c))
+        {
+            txtBp.setEditable(false);
+            JOptionPane.showMessageDialog(null, "enter number");
+        }
+        else
+        {
+            txtBp.setEditable(true);
+        }
+    }//GEN-LAST:event_txtABpKeyPressed
+
+    private void txtABmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtABmKeyPressed
+        // TODO add your handling code here:
+            char c=evt.getKeyChar();
+        if(Character.isLetter(c))
+        {
+            txtABm.setEditable(false);
+            JOptionPane.showMessageDialog(null, "enter number");
+        }
+        else
+        {
+            txtABm.setEditable(true);
+        }
+    }//GEN-LAST:event_txtABmKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField emailTextField;
-    private javax.swing.JTextField emailTextField1;
-    private javax.swing.JTextField firstNameTextField;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -249,17 +350,49 @@ public class BloodStock extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField lastNameTextField;
-    private javax.swing.JButton loginButton;
-    private javax.swing.JTextField passwordTextField;
-    private javax.swing.JTextField passwordTextField1;
-    private javax.swing.JTextField phoneTextField;
-    private javax.swing.JButton signUpButton;
-    private javax.swing.JButton signUpButton1;
-    private javax.swing.JTextField userNameTextField;
+    private javax.swing.JTextField txtABm;
+    private javax.swing.JTextField txtABp;
+    private javax.swing.JTextField txtAm;
+    private javax.swing.JTextField txtAp;
+    private javax.swing.JTextField txtBp;
+    private javax.swing.JTextField txtOm;
+    private javax.swing.JTextField txtOp;
+    private javax.swing.JTextField txtbm;
     // End of variables declaration//GEN-END:variables
 
-    private void displayTable() {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private void updateStock() {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     if( txtAp.getText().isEmpty()||txtAm.getText().isEmpty()|| txtBp.getText().isEmpty() || txtbm.getText().isEmpty() || txtOp.getText().isEmpty()|| txtOm.getText().isEmpty() || txtABp.getText().isEmpty() || txtABm.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        }
+        BloodWorkDirectory bbd= system.getBloodBankDir();
+        ArrayList<BloodWork> bb=bbd.getBloodWorkList();
+        int u=bb.size();
+
+        BloodWork d=(BloodWork)(userAcc);
+        for(int i=0;i<u;i++)
+        {
+            BloodWork o=bb.get(i);
+            if(o.getUserNames().matches(d.getUserNames())){            
+            
+            Map<String, Integer> stock = new HashMap<String, Integer>();
+            stock.put("A+", Integer.parseInt(txtAp.getText()));
+            stock.put("A-",Integer.parseInt(txtAm.getText()));
+            stock.put("B+",Integer.parseInt(txtBp.getText()));
+            stock.put("B-",Integer.parseInt(txtbm.getText()));
+            stock.put("O+",Integer.parseInt(txtOp.getText()));
+            stock.put("O-",Integer.parseInt(txtOm.getText()));
+            stock.put("AB+",Integer.parseInt(txtABp.getText()));
+            stock.put("AB-",Integer.parseInt(txtABm.getText()));
+            o.setLabMap(stock);
+            }
+        }
+    
+    
+    
     }
+
+   
 }

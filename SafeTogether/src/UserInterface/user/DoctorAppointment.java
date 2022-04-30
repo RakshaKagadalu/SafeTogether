@@ -233,6 +233,7 @@ DoctorDisplay();
             Doctor d1=d.get(i);
             if(!spe.contains(d1.getSpecialization()))
                     {
+                        System.out.println("specializations"+" "+d1.getSpecialization());
                         spe.add(d1.getSpecialization());
                     }
             

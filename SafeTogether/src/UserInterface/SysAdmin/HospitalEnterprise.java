@@ -32,7 +32,7 @@ public class HospitalEnterprise extends javax.swing.JPanel {
     JPanel container;
     Timer timer;
     MapCoordinates locationPoint;
-    
+    //   private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     private void Time() {
                 ActionListener actionListener = new ActionListener() {
             @Override
@@ -305,7 +305,8 @@ public class HospitalEnterprise extends javax.swing.JPanel {
         container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);   
-         //DB4OUtil.dB4OUtil.storeSystem(system);
+      //  dB4OUtil.storeSystem(system);
+         DB4OUtil.dB4OUtil.storeSystem(system);
             
      
     }//GEN-LAST:event_returnPanelMousePressed

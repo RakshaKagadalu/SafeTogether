@@ -34,7 +34,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
         this.system = system;
         this.panel = rightSidePanel;
         this.locationPoint = locationPoint;
-        System.out.println(rightSidePanel);
+        //System.out.println(rightSidePanel);
         this.setSize(1160, 750);
         displayTable();
     }
