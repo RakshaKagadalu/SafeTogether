@@ -355,7 +355,7 @@ public class TestRegistration extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
         
-        
+
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -497,8 +497,6 @@ public class TestRegistration extends javax.swing.JPanel {
                 t2.addRow(s);
             }
         }
-    
-    
     
     }
 

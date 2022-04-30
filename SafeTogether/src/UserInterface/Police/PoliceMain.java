@@ -131,7 +131,6 @@ public class PoliceMain extends javax.swing.JPanel {
         });
         policeDepartmentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-police-24 2.png"))); // NOI18N
         policeDepartmentPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
@@ -167,7 +166,7 @@ public class PoliceMain extends javax.swing.JPanel {
 
         rightSidePanel.setBackground(new java.awt.Color(250, 249, 251));
         rightSidePanel.setLayout(new java.awt.CardLayout());
-        jPanel2.add(rightSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 1160, 750));
+        jPanel2.add(rightSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 1400, 750));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
