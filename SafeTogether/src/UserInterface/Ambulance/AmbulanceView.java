@@ -4,6 +4,7 @@
  */
 package UserInterface.Ambulance;
 
+import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
 import UserInterface.Police.PoliceDisplay;
@@ -23,6 +24,7 @@ public class AmbulanceView extends javax.swing.JPanel {
     private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
+    private DB4OUtil dB4OUtil;
     /**
      * Creates new form PoliceMain
      * @param userProcessContainer
@@ -34,6 +36,7 @@ public class AmbulanceView extends javax.swing.JPanel {
         this.system = ecosystem;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
+        this.dB4OUtil = DB4OUtil.getInstance();
 //        Time();
     }
 
@@ -286,6 +289,10 @@ public class AmbulanceView extends javax.swing.JPanel {
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBackMousePressed
 
     private void ambulancePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ambulancePanelMousePressed
