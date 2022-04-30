@@ -222,7 +222,9 @@ public class UserLogin extends javax.swing.JPanel {
                   JOptionPane.showMessageDialog(null, "Invalid credentials");  
                 }
             }
+
              else if(userRole.equals("Business.Roles.Admin_Pharmacy"))
+
             {
                 PharmaDirectory cd=system.getPharmaDir();
                 ArrayList<Pharma> c=cd.getPharmaArrayList();
@@ -237,11 +239,15 @@ public class UserLogin extends javax.swing.JPanel {
                    // System.out.print("inside pharma role method");
                 displayPharmacy();
                 count+=1;
+
+          
+                
+                
+
                 } 
-              }           
+                }
              displayUserPanel();
-            } }
-                else if(userRole.equals("Business.Roles.Police_Officer")){
+            } else if(userRole.equals("Business.Roles.Police_Officer")){
                 PoliceDir pd = system.getPoliceDir();
                 ArrayList<Police> pds = pd.getPoliceList();
                 System.out.println("username"+ userAcc.getUserName());
@@ -266,6 +272,8 @@ public class UserLogin extends javax.swing.JPanel {
                   JOptionPane.showMessageDialog(null, "Invalid credentials");  
                 }
             }
+        
+       
             else if(userRole.equals("Business.Roles.Admin_BloodBank"))
             {
                 BloodWorkDirectory cd=system.getBloodBankDir();
@@ -486,7 +494,7 @@ public class UserLogin extends javax.swing.JPanel {
     private void displayPharmacy() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     
-       PharmacyMainFrame userView=new PharmacyMainFrame(workArea,userAcc,system);
+        PharmacyMainFrame userView=new PharmacyMainFrame(workArea,userAcc,system);
         workArea.add(userView);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea); 
@@ -500,7 +508,5 @@ public class UserLogin extends javax.swing.JPanel {
         workArea.add(userView);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea); 
-    
-    
     }
 }

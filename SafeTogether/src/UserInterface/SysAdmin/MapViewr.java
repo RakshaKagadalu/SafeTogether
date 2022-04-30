@@ -34,12 +34,12 @@ public class MapViewr extends javax.swing.JPanel {
     JPanel userProcessContainer;
     MapCoordinates locationPoint;
     Browser browser;
+
+   
     public MapViewr(JPanel userProcessContainer) {
         initComponents();
-        this.setSize(1920, 1080);
         this.userProcessContainer = userProcessContainer;
         locationPoint = new MapCoordinates();
-        
         EngineOptions options =
                 EngineOptions.newBuilder(HARDWARE_ACCELERATED).licenseKey("1BNDHFSC1G2HE4F9XRJJFQ2YTJU7NQLOVUMD0I8ERIS91V4X8YW7HI9ILGATUEM2BAB27E").build();
         Engine engine = Engine.newInstance(options);
@@ -70,12 +70,12 @@ public class MapViewr extends javax.swing.JPanel {
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setPreferredSize(new java.awt.Dimension(1160, 750));
 
-        jPanel1.setBackground(new java.awt.Color(244, 242, 227));
+        jPanel1.setBackground(new java.awt.Color(250, 249, 251));
         jPanel1.setForeground(new java.awt.Color(25, 56, 82));
 
-        setLocationBtn.setBackground(new java.awt.Color(255, 255, 255));
-        setLocationBtn.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        setLocationBtn.setForeground(new java.awt.Color(25, 56, 82));
+        setLocationBtn.setBackground(new java.awt.Color(153, 153, 255));
+        setLocationBtn.setFont(new java.awt.Font("SF Pro Text", 1, 12)); // NOI18N
+        setLocationBtn.setForeground(new java.awt.Color(255, 255, 255));
         setLocationBtn.setText("Set Location");
         setLocationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,18 +90,18 @@ public class MapViewr extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(404, 404, 404)
-                .addComponent(setLocationBtn)
-                .addContainerGap(736, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(setLocationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1057, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(setLocationBtn))
-                .addGap(14, 14, 14))
+                .addComponent(setLocationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(35, 35, 35))
         );
 
         jSplitPane1.setTopComponent(jPanel1);
