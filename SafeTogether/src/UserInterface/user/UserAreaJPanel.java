@@ -30,7 +30,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
     private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
- // private DB4OUtil dB4OUtil = DB4OUtil.getInstance();    
+  private DB4OUtil dB4OUtil = DB4OUtil.getInstance();    
     Timer timer;
     
     private void Time() {
@@ -289,8 +289,8 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
-       // dB4OUtil.storeSystem(system);
-         DB4OUtil.dB4OUtil.storeSystem(system);
+        dB4OUtil.storeSystem(system);
+         //DB4OUtil.dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBackMousePressed
 
     private void bookAppointmentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentMousePressed
