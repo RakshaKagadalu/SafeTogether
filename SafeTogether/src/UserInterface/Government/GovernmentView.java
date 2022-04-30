@@ -27,12 +27,12 @@ public class GovernmentView extends javax.swing.JPanel {
      * @param userAcc
      * @param ecosystem
      */
-    public GovernmentView(JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
+    public GovernmentView(JPanel userProcessContainer, UserAcc userAcc,EcoSystem system) {
         initComponents();
-        this.system = ecosystem;
+        this.system = system;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
-        this.dB4OUtil = DB4OUtil.getInstance();
+       
 //        Time();
     }
 

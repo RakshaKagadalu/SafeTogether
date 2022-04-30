@@ -23,12 +23,13 @@ public class UserAppJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserAppJPanel
      */
-     private UserAcc userAcc;
+    private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-    public UserAppJPanel(JPanel userProcessContainer,EcoSystem system, UserAcc userAcc) {
+
+    public UserAppJPanel(JPanel userProcessContainer, EcoSystem system, UserAcc userAcc) {
         initComponents();
-          this.system = system;
+        this.system = system;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
         displayTable();
@@ -221,71 +222,59 @@ public class UserAppJPanel extends javax.swing.JPanel {
 
     private void collectBloodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_collectBloodActionPerformed
         // TODO add your handling code here:
-collectBlood();
+        collectBlood();
     }//GEN-LAST:event_collectBloodActionPerformed
 
     private void cancelAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAppActionPerformed
         // TODO add your handling code here:
-canelBloodDonaApp();
+        canelBloodDonaApp();
     }//GEN-LAST:event_cancelAppActionPerformed
 
     private void bloodTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloodTypeActionPerformed
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_bloodTypeActionPerformed
 
     private void wbcTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wbcTxtKeyPressed
         // TODO add your handling code here:
-              char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             wbcTxt.setEditable(false);
             JOptionPane.showMessageDialog(null, "Please Enter a valid number");
-        }
-        else
-        {
+        } else {
             wbcTxt.setEditable(true);
         }
     }//GEN-LAST:event_wbcTxtKeyPressed
 
     private void rbcTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rbcTxtKeyPressed
         // TODO add your handling code here:
-                   char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             rbcTxt.setEditable(false);
             JOptionPane.showMessageDialog(null, "Please Enter a valid number");
-        }
-        else
-        {
+        } else {
             rbcTxt.setEditable(true);
         }
     }//GEN-LAST:event_rbcTxtKeyPressed
 
     private void cholestrolTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cholestrolTxtKeyPressed
         // TODO add your handling code here:
-                      char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             cholestrolTxt.setEditable(false);
             JOptionPane.showMessageDialog(null, "Please Enter a valid number");
-        }
-        else
-        {
+        } else {
             cholestrolTxt.setEditable(true);
         }
     }//GEN-LAST:event_cholestrolTxtKeyPressed
 
     private void platletTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_platletTxtKeyPressed
         // TODO add your handling code here:
-                      char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             platletTxt.setEditable(false);
             JOptionPane.showMessageDialog(null, "Please Enter a valid number");
-        }
-        else
-        {
+        } else {
             platletTxt.setEditable(true);
         }
     }//GEN-LAST:event_platletTxtKeyPressed
@@ -314,125 +303,103 @@ canelBloodDonaApp();
     // End of variables declaration//GEN-END:variables
 
     private void displayTable() {
-      //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-     tblAppDetails.setModel(new DefaultTableModel(null,new String[]{"ID","Center","Status","Date","Time"}));
-      DonateBlood_Dir red= system.getDonateBloodDir();
-        ArrayList<DonateBlood> ol=red.getDonors();
-        
-        int u=ol.size();
-        System.out.println("size"+u);
-        for(int i=0;i<u;i++)
-        {
-            DonateBlood o=ol.get(i);
-           BloodWork bb=(BloodWork)(userAcc);
-           
-            if(o.getBlood_bankName().matches(bb.getUserNames()))
-            {
-            
-                DefaultTableModel t2 = (DefaultTableModel) tblAppDetails.getModel();
-                String s1=String.valueOf(o.getId());
-                
-                
-                String s[]={s1,o.getFirstName(),o.getStatus(),o.getAppoinmentDate(),o.getAppoinmentTime()};
-                t2.addRow(s);
-            
+        //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        tblAppDetails.setModel(new DefaultTableModel(null, new String[]{"ID", "Center", "Status", "Date", "Time"}));
+        DonateBlood_Dir donateB = system.getDonateBloodDir();
+        ArrayList<DonateBlood> donList = donateB.getDonors();
+
+        int l = donList.size();
+        //System.out.println("size"+u);
+        for (int i = 0; i < l; i++) {
+            DonateBlood bloodDonor = donList.get(i);
+            BloodWork bw = (BloodWork) (userAcc);
+
+            if (bloodDonor.getBlood_bankName().matches(bw.getUserNames())) {
+
+                DefaultTableModel table = (DefaultTableModel) tblAppDetails.getModel();
+                String s1 = String.valueOf(bloodDonor.getId());
+
+                String s2[] = {s1, bloodDonor.getFirstName(), bloodDonor.getStatus(), bloodDonor.getAppoinmentDate(), bloodDonor.getAppoinmentTime()};
+                table.addRow(s2);
+
             }
-            
+
         }
-    
-    
+
     }
 
     private void collectBlood() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-      if(wbcTxt.getText().isEmpty()||rbcTxt.getText().isEmpty()||cholestrolTxt.getText().isEmpty()||platletTxt.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null,"Enter all the value!!");
-        }
-        else{
-        DefaultTableModel  t2 = (DefaultTableModel) tblAppDetails.getModel();
-        int selectedRow=tblAppDetails.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        
-        DonateBlood_Dir red= system.getDonateBloodDir();
-        ArrayList<DonateBlood> ol=red.getDonors();
-        int u=ol.size();
-            BloodWork bb=(BloodWork)(userAcc);
-        for(int i=0;i<u;i++)
-        {
-            DonateBlood o=ol.get(i);
-            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
-            {
-                if(o.getStatus().matches("Appoinment Booked"))
-                {
-                o.setStatus("Blood Collected");
-                o.setBloodGroup(bloodType.getSelectedItem().toString());
-                o.setRBC(Integer.parseInt(rbcTxt.getText()));
-                o.setWBC(Integer.parseInt(wbcTxt.getText()));
-                o.setCholesterol(Integer.parseInt(cholestrolTxt.getText()));
-                o.setPlatelets(Integer.parseInt(platletTxt.getText()));
-                 JOptionPane.showMessageDialog(null, "Successfully added blood donation details!!");
-               rbcTxt.setText(" ");
-               wbcTxt.setText(" ");
-               platletTxt.setText(" ");
-               cholestrolTxt.setText(" ");
-                
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (wbcTxt.getText().isEmpty() || rbcTxt.getText().isEmpty() || cholestrolTxt.getText().isEmpty() || platletTxt.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please Enter all the value!!");
+        } else {
+            DefaultTableModel table = (DefaultTableModel) tblAppDetails.getModel();
+            int selectedRow = tblAppDetails.getSelectedRow();
+            if (selectedRow >= 0) {
+                int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+
+                DonateBlood_Dir donateDir = system.getDonateBloodDir();
+                ArrayList<DonateBlood> listDonate = donateDir.getDonors();
+                int l = listDonate.size();
+                BloodWork bw = (BloodWork) (userAcc);
+                for (int i = 0; i < l; i++) {
+                    DonateBlood bloodDonate = listDonate.get(i);
+                    if (sRow == bloodDonate.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/) {
+                        if (bloodDonate.getStatus().matches("Appoinment Booked")) {
+                            bloodDonate.setStatus("Blood Collected");
+                            bloodDonate.setBloodGroup(bloodType.getSelectedItem().toString());
+                            bloodDonate.setRBC(Integer.parseInt(rbcTxt.getText()));
+                            bloodDonate.setWBC(Integer.parseInt(wbcTxt.getText()));
+                            bloodDonate.setCholesterol(Integer.parseInt(cholestrolTxt.getText()));
+                            bloodDonate.setPlatelets(Integer.parseInt(platletTxt.getText()));
+                            JOptionPane.showMessageDialog(null, "Successfully added blood donation details!!");
+                            rbcTxt.setText(" ");
+                            wbcTxt.setText(" ");
+                            platletTxt.setText(" ");
+                            cholestrolTxt.setText(" ");
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Incorrect Action!!");
+                        }
+                    }
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"Incorrect Action!!");
-                }
+                tblAppDetails.setModel(new DefaultTableModel(null, new String[]{"ID", "Name", "Status", "Date", "Time"}));
+                displayTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Please Select a Row!!");
             }
-            }
-        tblAppDetails.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Status","Date","Time"}));
-        displayTable();
         }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Select a Row!!");
-        }
-        }
-    
+
     }
 
     private void canelBloodDonaApp() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-   
-     DefaultTableModel  t2 = (DefaultTableModel) tblAppDetails.getModel();
-        int selectedRow=tblAppDetails.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-       
-         DonateBlood_Dir red= system.getDonateBloodDir();
-        ArrayList<DonateBlood> ol=red.getDonors();
-        int u=ol.size();
-        BloodWork bb=(BloodWork)(userAcc);
-        for(int i=0;i<u;i++)
-        {
-            DonateBlood o=ol.get(i);
-            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
-            {
-                if(o.getStatus().matches("Appoinment Booked"))
-                {
-                     o.setStatus("Cancelled");
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        DefaultTableModel table = (DefaultTableModel) tblAppDetails.getModel();
+        int selectedRow = tblAppDetails.getSelectedRow();
+        if (selectedRow >= 0) {
+            int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+
+            DonateBlood_Dir donateBlood = system.getDonateBloodDir();
+            ArrayList<DonateBlood> donateList = donateBlood.getDonors();
+            int l = donateList.size();
+            BloodWork bw = (BloodWork) (userAcc);
+            for (int i = 0; i < l; i++) {
+                DonateBlood dBlood = donateList.get(i);
+                if (sRow == dBlood.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/) {
+                    if (dBlood.getStatus().matches("Appoinment Booked")) {
+                        dBlood.setStatus("Cancelled");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Incorrect action!!");
+                    }
+
                 }
-                else
-                        {
-                            JOptionPane.showMessageDialog(null,"wrong move!!");
-                        }
-               
             }
-            }
-        tblAppDetails.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Status","Date","Time"}));
-        displayTable();
+            tblAppDetails.setModel(new DefaultTableModel(null, new String[]{"ID", "Name", "Status", "Date", "Time"}));
+            displayTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Select a Row!!");
-        }
-    
+
     }
 }

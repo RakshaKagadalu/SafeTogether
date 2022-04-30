@@ -8,17 +8,9 @@ package UserInterface.Pharmacy;
  *
  * @author shrikrishnajoisa
  */
-
-
 import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
-import javax.swing.JPanel;
-
-import Business.EcoSystem;
-import Business.Pharma.Pharma;
-import Business.UserAcc.UserAcc;
-import UserInterface.user.DoctorAppointment;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -28,16 +20,17 @@ public class PharmacyMainFrame extends javax.swing.JPanel {
     /**
      * Creates new form PharmacyMainFrame
      */
-     private UserAcc userAcc;
+    private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-  private DB4OUtil dB4OUtil = DB4OUtil.getInstance(); 
-    public PharmacyMainFrame( JPanel container, UserAcc userAcc,EcoSystem system) {
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+
+    public PharmacyMainFrame(JPanel container, UserAcc userAcc, EcoSystem system) {
         initComponents();
-          this.system = system;
+        this.system = system;
         this.container = container;
         this.userAcc = userAcc;
-      
+
     }
 
     /**
@@ -209,7 +202,7 @@ public class PharmacyMainFrame extends javax.swing.JPanel {
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
-         container.remove(this);
+        container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
         dB4OUtil.storeSystem(system);
@@ -217,7 +210,7 @@ public class PharmacyMainFrame extends javax.swing.JPanel {
 
     private void vacPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vacPanelMousePressed
         // TODO add your handling code here:
-displayVaccineReq();
+        displayVaccineReq();
     }//GEN-LAST:event_vacPanelMousePressed
 
     private void orderPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPanelMousePressed
@@ -227,7 +220,7 @@ displayVaccineReq();
 
     private void medicinePortalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicinePortalMousePressed
         // TODO add your handling code here:
-       dispalayStocks();
+        dispalayStocks();
     }//GEN-LAST:event_medicinePortalMousePressed
 
 
@@ -258,44 +251,42 @@ displayVaccineReq();
     // End of variables declaration//GEN-END:variables
 
     private void displayVaccineReq() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-      medicinePortal.setBackground(new Color(255,255,255));
-        orderPanel.setBackground(new Color(255,255,255));
-    vacPanel.setBackground(new Color(213,230,249));
-    
-        VaccinationFrame pr=new VaccinationFrame (system, rightSidePanel,userAcc);
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        medicinePortal.setBackground(new Color(255, 255, 255));
+        orderPanel.setBackground(new Color(255, 255, 255));
+        vacPanel.setBackground(new Color(213, 230, 249));
 
-        rightSidePanel.add(pr);
+        VaccinationFrame vacDisplay = new VaccinationFrame(system, rightSidePanel, userAcc);
+
+        rightSidePanel.add(vacDisplay);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-    
+
     }
 
     private void displayOrders() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-          medicinePortal.setBackground(new Color(255,255,255));
-        orderPanel.setBackground(new Color(213,230,249));
-    vacPanel.setBackground(new Color(255,255,255));
-    
-       
-PharmaOrder pr=new PharmaOrder (system, rightSidePanel,userAcc);
-        rightSidePanel.add(pr);
+        medicinePortal.setBackground(new Color(255, 255, 255));
+        orderPanel.setBackground(new Color(213, 230, 249));
+        vacPanel.setBackground(new Color(255, 255, 255));
+
+        PharmaOrder pharmaDisplay = new PharmaOrder(system, rightSidePanel, userAcc);
+        rightSidePanel.add(pharmaDisplay);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
     }
 
     private void dispalayStocks() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-      medicinePortal.setBackground(new Color(213,230,249));
-        orderPanel.setBackground(new Color(255,255,255));
-    vacPanel.setBackground(new Color(255,255,255));
-    
-         PharmaManageMedicine pr=new PharmaManageMedicine (system, rightSidePanel,userAcc);
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        medicinePortal.setBackground(new Color(213, 230, 249));
+        orderPanel.setBackground(new Color(255, 255, 255));
+        vacPanel.setBackground(new Color(255, 255, 255));
 
-        rightSidePanel.add(pr);
+        PharmaManageMedicine medDisplay = new PharmaManageMedicine(system, rightSidePanel, userAcc);
+
+        rightSidePanel.add(medDisplay);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
     }
-    
-    
+
 }

@@ -21,13 +21,14 @@ public class BloodBankView extends javax.swing.JPanel {
     /**
      * Creates new form BloodBankView
      */
-     private UserAcc userAcc;
+    private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-  private DB4OUtil dB4OUtil = DB4OUtil.getInstance();  
-    public BloodBankView(JPanel userProcessContainer, UserAcc userAcc,EcoSystem ecosystem) {
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+
+    public BloodBankView(JPanel userProcessContainer, UserAcc userAcc, EcoSystem ecosystem) {
         initComponents();
-          this.system = ecosystem;
+        this.system = ecosystem;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
     }
@@ -222,7 +223,7 @@ public class BloodBankView extends javax.swing.JPanel {
 
     private void goBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackMousePressed
         // TODO add your handling code here:
-          container.remove(this);
+        container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
         dB4OUtil.storeSystem(system);
@@ -230,7 +231,7 @@ public class BloodBankView extends javax.swing.JPanel {
 
     private void appointmentsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsMousePressed
         // TODO add your handling code here:
-     manageApp();
+        manageApp();
     }//GEN-LAST:event_appointmentsMousePressed
 
     private void docRequestMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docRequestMousePressed
@@ -272,46 +273,45 @@ public class BloodBankView extends javax.swing.JPanel {
 
     private void manageApp() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        docRequest.setBackground(new Color(255,255,255));
-        manageStock.setBackground(new Color(255,255,255));
-        appointments.setBackground(new Color(213,230,249));
-        
-       UserAppJPanel pcr = new UserAppJPanel(container, system, userAcc);
+        docRequest.setBackground(new Color(255, 255, 255));
+        manageStock.setBackground(new Color(255, 255, 255));
+        appointments.setBackground(new Color(213, 230, 249));
 
-        rightSidePanel.add(pcr);
+        UserAppJPanel userApp = new UserAppJPanel(container, system, userAcc);
+
+        rightSidePanel.add(userApp);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-    
+
     }
 
     private void docReqShow() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-   
-        appointments.setBackground(new Color(255,255,255));
-        manageStock.setBackground(new Color(255,255,255));
-        docRequest.setBackground(new Color(213,230,249));
-        
-       DocRequest pcr = new DocRequest(container, system, userAcc);
 
-        rightSidePanel.add(pcr);
+        appointments.setBackground(new Color(255, 255, 255));
+        manageStock.setBackground(new Color(255, 255, 255));
+        docRequest.setBackground(new Color(213, 230, 249));
+
+        DocRequest docReq = new DocRequest(container, system, userAcc);
+
+        rightSidePanel.add(docReq);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-    
+
     }
 
     private void manageStockShow() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    
-      appointments.setBackground(new Color(255,255,255));
-        docRequest.setBackground(new Color(255,255,255));
-        manageStock.setBackground(new Color(213,230,249));
-        
-       BloodStock pcr = new BloodStock(container, system, userAcc);
 
-        rightSidePanel.add(pcr);
+        appointments.setBackground(new Color(255, 255, 255));
+        docRequest.setBackground(new Color(255, 255, 255));
+        manageStock.setBackground(new Color(213, 230, 249));
+
+        BloodStock bloodStock = new BloodStock(container, system, userAcc);
+
+        rightSidePanel.add(bloodStock);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-    
-    
+
     }
 }

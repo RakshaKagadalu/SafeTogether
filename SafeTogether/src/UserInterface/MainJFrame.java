@@ -5,22 +5,14 @@
 package UserInterface;
 
 import Business.DatabaseUtil.DB4OUtil;
-import Business.Doctor.Doctor;
 import Business.EcoSystem;
-import Business.BloodBank.BloodWork;
 import Business.EmergencyAmbulance.Ambulance;
 import Business.EmergencyFire.Fire;
 import Business.EmergencyPolice.Police;
 
 import Business.PandemicCenter.PandemicCenter;
-import Business.Pharma.Pharma;
-import Business.userR.User;
 import UserInterface.SysAdmin.SysAdminWorkAreaJPanel;
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

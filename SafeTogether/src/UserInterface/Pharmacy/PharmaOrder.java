@@ -9,7 +9,6 @@ import Business.Pharma.Pharma;
 import Business.UserAcc.UserAcc;
 import Business.WorkQueue.Req_Medicine;
 import Business.WorkQueue.Req_MedicineDir;
-import Business.userR.User;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -25,12 +24,13 @@ public class PharmaOrder extends javax.swing.JPanel {
     /**
      * Creates new form PharmaOrder
      */
-     private UserAcc userAcc;
+    private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-    public PharmaOrder(EcoSystem system,JPanel userProcessContainer, UserAcc userAcc) {
+
+    public PharmaOrder(EcoSystem system, JPanel userProcessContainer, UserAcc userAcc) {
         initComponents();
-         this.system = system;
+        this.system = system;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
         displayTable();
@@ -199,123 +199,20 @@ public class PharmaOrder extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-  DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-       Req_MedicineDir dire=system.getMedicineReqDir();
-        ArrayList<Req_Medicine> order=dire.getMedReqDir();
-        
-        int u=order.size();
-        
-        for(int i=0;i<u;i++)
-        {
-            Req_Medicine o=order.get(i);
-            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
-            {
-                if(o.getStatus().matches("Order Placed"))
-                {
-                o.setStatus("Ready for pickup");
-                }
-                else
-                {
-                 JOptionPane.showMessageDialog(null,"Order Cancelled");  
-
-                }
-            }
-        }
-           jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Patient Name","Doctor Name","Status"}));
-        displayTable();
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Select a Row!!");  
-        }
-       // DB4OUtil.dB4OUtil.storeSystem(ecosystem);
+        UpdateStatus();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         DefaultTableModel  t2 = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-       Req_MedicineDir dire=system.getMedicineReqDir();
-        ArrayList<Req_Medicine> order=dire.getMedReqDir();
-        
-        int u=order.size();
-        
-        for(int i=0;i<u;i++)
-        {
-            Req_Medicine o=order.get(i);
-            if(s==o.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/)
-            {
-                if(o.getStatus().matches("Ready for pickup"))
-                {
-                o.setStatus("Order Placed");
-                }
-                else
-                {
-                 JOptionPane.showMessageDialog(null,"Order Cancelled");  
-
-                }
-            }
-        }
-           jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Patient Name","Doctor Name","Status"}));
-        displayTable();
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Select a Row!!");  
-        }
+       resetOrder();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        
-        
-           jTextArea2.setText("");
-                jTextArea1.setText("");
 
-        DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-        Req_MedicineDir dire=system.getMedicineReqDir();
-        ArrayList<Req_Medicine> order=dire.getMedReqDir();
-        
-        int u=order.size();
-        for(int i=0;i<u;i++)
-        {
-            Req_Medicine o=order.get(i);
-            if(s==o.getId())
-            {
-                Map<String,String> f=o.getMedOrderlist();
-                int count =1;
-                for (String key: f.keySet()) {
-                    jTextArea1.append("Item "+ count+ " : "+key+" Quantity : "+f.get(key)+"\n");
-                    count++;
-                   
-            }
-                Map<String,String> f1=o.getMedCostlist();
-                int a=0;
-                for (String key: f1.keySet()) {
-                     System.out.println(Integer.parseInt(f1.get(key)));
-                     a=a+(Integer.parseInt(f1.get(key)));
-                     System.out.println("a"+a);
-                   
-            }
-                jTextArea2.append(String.valueOf(a));
-                
-            }
-        }
+        displayOrder();
     }//GEN-LAST:event_jTable1MouseClicked
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -336,27 +233,124 @@ public class PharmaOrder extends javax.swing.JPanel {
 
     private void displayTable() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-          
-       // System.out.print("im inside display table "+system);
-        Req_MedicineDir dire=system.getMedicineReqDir();
-        ArrayList<Req_Medicine> order=dire.getMedReqDir();
-    
-        int u=order.size();
-        Pharma r=(Pharma)userAcc;
-        for(int i=0;i<u;i++)
-        {
-            Req_Medicine o=order.get(i);
-            if(r.getPharmaName().matches(o.getPharmaName()))
-            {
-                DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
-                String s1=String.valueOf(o.getId());
-                
-                
-                String s[]={s1,o.getPatientId(),o.getDoctorName(),o.getStatus()};
-                t2.addRow(s);
-            
-            
+
+        // System.out.print("im inside display table "+system);
+        Req_MedicineDir reMedDir = system.getMedicineReqDir();
+        ArrayList<Req_Medicine> medorderList = reMedDir.getMedReqDir();
+
+        int l = medorderList.size();
+        Pharma ph = (Pharma) userAcc;
+        for (int i = 0; i < l; i++) {
+            Req_Medicine medReq = medorderList.get(i);
+            if (ph.getPharmaName().matches(medReq.getPharmaName())) {
+                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+                String r1 = String.valueOf(medReq.getId());
+
+                String r2[] = {r1, medReq.getPatientId(), medReq.getDoctorName(), medReq.getStatus()};
+                table.addRow(r2);
+
             }
+        }
+
+    }
+
+    private void UpdateStatus() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow >= 0) {
+            int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+
+            Req_MedicineDir medReqDir = system.getMedicineReqDir();
+            ArrayList<Req_Medicine> medOrderList = medReqDir.getMedReqDir();
+
+            int l = medOrderList.size();
+
+            for (int i = 0; i < l; i++) {
+                Req_Medicine medReq = medOrderList.get(i);
+                if (sRow == medReq.getId()) {
+                    if (medReq.getStatus().matches("Order Placed")) {
+                        medReq.setStatus("Ready for pickup");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Order Cancelled");
+
+                    }
+                }
+            }
+            jTable1.setModel(new DefaultTableModel(null, new String[]{"ID", "Patient Name", "Doctor Name", "Status"}));
+            displayTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a Row!!");
+        }
+
+    }
+
+    private void displayOrder() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        jTextArea2.setText("");
+        jTextArea1.setText("");
+
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+        int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+
+        Req_MedicineDir medOrderDir = system.getMedicineReqDir();
+        ArrayList<Req_Medicine> medOrderDirList = medOrderDir.getMedReqDir();
+
+        int l = medOrderDirList.size();
+        for (int i = 0; i < l; i++) {
+            Req_Medicine medReq = medOrderDirList.get(i);
+            if (sRow == medReq.getId()) {
+                Map<String, String> f = medReq.getMedOrderlist();
+                int count = 1;
+                for (String key : f.keySet()) {
+                    jTextArea1.append("Item " + count + " : " + key + " Quantity : " + f.get(key) + "\n");
+                    count++;
+
+                }
+                Map<String, String> medCostmap = medReq.getMedCostlist();
+                int num = 0;
+                for (String key : medCostmap.keySet()) {
+
+                    num = num + (Integer.parseInt(medCostmap.get(key)));
+
+                }
+                jTextArea2.append(String.valueOf(num));
+
+            }
+        }
+
+    }
+
+    private void resetOrder() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  
+     DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow >= 0) {
+            int sRow = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+
+            Req_MedicineDir medReqDir = system.getMedicineReqDir();
+            ArrayList<Req_Medicine> medorderList = medReqDir.getMedReqDir();
+
+            int l = medorderList.size();
+
+            for (int i = 0; i < l; i++) {
+                Req_Medicine medreq = medorderList.get(i);
+                if (sRow == medreq.getId()) {
+                    if (medreq.getStatus().matches("Ready for pickup")) {
+                        medreq.setStatus("Order Placed");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Order Cancelled");
+
+                    }
+                }
+            }
+            jTable1.setModel(new DefaultTableModel(null, new String[]{"ID", "Patient Name", "Doctor Name", "Status"}));
+            displayTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a Row!!");
         }
     
     

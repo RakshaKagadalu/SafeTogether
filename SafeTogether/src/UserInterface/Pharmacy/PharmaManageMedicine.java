@@ -21,25 +21,23 @@ public class PharmaManageMedicine extends javax.swing.JPanel {
     /**
      * Creates new form PharmaManageMedicine
      */
-         private UserAcc userAcc;
+    private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-     Map<String,String> medicines;
-    public PharmaManageMedicine(EcoSystem system,JPanel userProcessContainer, UserAcc userAcc) {
+    Map<String, String> medicines;
+
+    public PharmaManageMedicine(EcoSystem system, JPanel userProcessContainer, UserAcc userAcc) {
         initComponents();
         this.system = system;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
-          Pharma p=(Pharma)userAcc;
-        medicines=p.getMedicines();
-      
+        Pharma p = (Pharma) userAcc;
+        medicines = p.getMedicines();
+
         displayTable();
-       
+
     }
 
-   
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,51 +146,22 @@ public class PharmaManageMedicine extends javax.swing.JPanel {
 
     private void delMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delMedActionPerformed
         // TODO add your handling code here:
-           DefaultTableModel t2 = (DefaultTableModel) tblMed.getModel();
-        int selectedRow=tblMed.getSelectedRow();
-        if(selectedRow>=0)
-        {
-        String key=t2.getValueAt(selectedRow, 0).toString();
-        medicines.remove(key);
-        displayTable();
-         JOptionPane.showMessageDialog(null, "Deleted Medicine Successfully!");
-       // DB4OUtil.dB4OUtil.storeSystem(ecosystem);
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Select a row!!");
-        }
+     deleteMed();
     }//GEN-LAST:event_delMedActionPerformed
 
     private void addMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMedActionPerformed
         // TODO add your handling code here:
-           if(medName.getText().isEmpty()||medCost.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null, "All fields are mandatory!!");
-        
-        }
-        else
-        {
-            String a=medName.getText();
-        String b=medCost.getText();
-        medicines.put(a, b);
-        displayTable();
-        JOptionPane.showMessageDialog(null, "Added Medicine Successfully!");
-        }
-
+      addNewMed();
 
     }//GEN-LAST:event_addMedActionPerformed
 
     private void medCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_medCostKeyPressed
         // TODO add your handling code here:
-            char c=evt.getKeyChar();
-        if(Character.isLetter(c))
-        {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
             medCost.setEditable(false);
             JOptionPane.showMessageDialog(null, "enter number");
-        }
-        else
-        {
+        } else {
             medCost.setEditable(true);
         }
     }//GEN-LAST:event_medCostKeyPressed
@@ -212,21 +181,53 @@ public class PharmaManageMedicine extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void displayTable() {
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        DefaultTableModel table = (DefaultTableModel) tblMed.getModel();
+
+        table.setRowCount(0);
+        for (String key : medicines.keySet()) {
+            Object[] row = new Object[5];
+            row[0] = key;
+            row[1] = medicines.get(key);
+
+            table.addRow(row);
+
+        }
+
+    }
+
+    private void deleteMed() {
        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-   
-     DefaultTableModel model = (DefaultTableModel) tblMed.getModel();
-        
+      DefaultTableModel table = (DefaultTableModel) tblMed.getModel();
+        int selectedRow = tblMed.getSelectedRow();
+        if (selectedRow >= 0) {
+            String key = table.getValueAt(selectedRow, 0).toString();
+            medicines.remove(key);
+            displayTable();
+            JOptionPane.showMessageDialog(null, "Deleted Medicine Successfully!");
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a row!!");
+        }
+    
+    
+    
+    }
 
-        model.setRowCount(0);
-        for (String key: medicines.keySet()) {
-                    Object[] row = new Object[5];
-                    row[0] = key;
-                    row[1] =  medicines.get(key);
-                    
+    private void addNewMed() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      if (medName.getText().isEmpty() || medCost.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "All fields are mandatory!!");
 
-                    model.addRow(row);
-                
-            }
+        } else {
+            String med = medName.getText();
+            String cost = medCost.getText();
+            medicines.put(med, cost);
+            displayTable();
+            JOptionPane.showMessageDialog(null, "Added Medicine Successfully!");
+        }
+
     
     }
 }
