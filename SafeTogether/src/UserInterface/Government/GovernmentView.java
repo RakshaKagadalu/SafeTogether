@@ -14,8 +14,15 @@ import Business.Vac.Vaccinations;
 import Business.WorkQueue.OutbreakTracer;
 import Business.WorkQueue.OutbreakTracerDir;
 import Business.WorkQueue.VacRequest_Dir;
+import Utility.MapCoordinates;
 import com.sun.mail.imap.Rights;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.Timer;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -33,6 +40,22 @@ public class GovernmentView extends javax.swing.JPanel {
     private EcoSystem system;
     private JPanel container;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    Timer timer;
+    
+    private void Time() {
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date date= new Date();
+                DateFormat timeFormat =  new SimpleDateFormat("HH:mm a");
+                String time = timeFormat.format(date);
+                timeLabel.setText(time);
+            }
+        };
+        timer = new Timer(100, actionListener);
+        timer.setInitialDelay(0);
+        timer.start();
+    }
     /**
      * Creates new form PoliceMain
      * @param userProcessContainer
@@ -45,8 +68,7 @@ public class GovernmentView extends javax.swing.JPanel {
         this.system = system;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
-       
-//        Time();
+        Time();
     }
 
 
@@ -248,8 +270,9 @@ public class GovernmentView extends javax.swing.JPanel {
         rightSidePanel.removeAll();
         rightSidePanel.add(cp);
         rightSidePanel.updateUI();
+      
        
-        
+      
     }//GEN-LAST:event_jLabel10MouseClicked
 
     

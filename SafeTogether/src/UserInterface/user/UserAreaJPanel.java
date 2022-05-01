@@ -49,8 +49,8 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         timer.setInitialDelay(0);
         timer.start();
     }
-
     
+   
     public UserAreaJPanel(  JPanel userProcessContainer, UserAcc userAcc,EcoSystem system) {
         initComponents();
         this.system = system;
