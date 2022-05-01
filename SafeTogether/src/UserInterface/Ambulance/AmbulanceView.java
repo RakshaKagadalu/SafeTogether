@@ -8,9 +8,16 @@ import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
 import UserInterface.Police.PoliceDisplay;
+import Utility.MapCoordinates;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
@@ -25,6 +32,23 @@ public class AmbulanceView extends javax.swing.JPanel {
     private EcoSystem system;
     private JPanel container;
     private DB4OUtil dB4OUtil;
+    Timer timer;
+
+    
+    private void Time() {
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date date= new Date();
+                DateFormat timeFormat =  new SimpleDateFormat("HH:mm a");
+                String time = timeFormat.format(date);
+                timeLabel.setText(time);
+            }
+        };
+        timer = new Timer(100, actionListener);
+        timer.setInitialDelay(0);
+        timer.start();
+    }
     /**
      * Creates new form PoliceMain
      * @param userProcessContainer
@@ -37,7 +61,7 @@ public class AmbulanceView extends javax.swing.JPanel {
         this.container = userProcessContainer;
         this.userAcc = userAcc;
         this.dB4OUtil = DB4OUtil.getInstance();
-//        Time();
+        Time();
     }
 
     /**

@@ -10,6 +10,25 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Business.DatabaseUtil.DB4OUtil;
+import Business.Vac.Vaccinations;
+import Business.WorkQueue.OutbreakTracer;
+import Business.WorkQueue.OutbreakTracerDir;
+import Business.WorkQueue.VacRequest_Dir;
+import Utility.MapCoordinates;
+import com.sun.mail.imap.Rights;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.Timer;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -21,6 +40,22 @@ public class GovernmentView extends javax.swing.JPanel {
     private EcoSystem system;
     private JPanel container;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    Timer timer;
+    
+    private void Time() {
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date date= new Date();
+                DateFormat timeFormat =  new SimpleDateFormat("HH:mm a");
+                String time = timeFormat.format(date);
+                timeLabel.setText(time);
+            }
+        };
+        timer = new Timer(100, actionListener);
+        timer.setInitialDelay(0);
+        timer.start();
+    }
     /**
      * Creates new form PoliceMain
      * @param userProcessContainer
@@ -33,8 +68,7 @@ public class GovernmentView extends javax.swing.JPanel {
         this.system = system;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
-       
-//        Time();
+        Time();
     }
 
 
@@ -117,6 +151,11 @@ public class GovernmentView extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(115, 120, 128));
         jLabel10.setText("Statistics");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
         orderPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel6.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 60));
@@ -195,6 +234,46 @@ public class GovernmentView extends javax.swing.JPanel {
     private void orderPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPanelMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_orderPanelMousePressed
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        // TODO add your handling code here:
+        OutbreakTracerDir vaccinationDirectory = system.getOutbreakStatusDir();
+        ArrayList<OutbreakTracer> c1= vaccinationDirectory.getOutbreakLog();
+        
+        int a=0;
+        int b=0;
+        for(int i=0;i<c1.size();i++)
+        {
+            
+            OutbreakTracer c2 = c1.get(i);
+            if(c2.getResult().matches("Positive"))
+            {
+                a+=1;
+            }
+            else if(c2.getResult().matches("Negative"))
+            {
+                b+=1;
+            }
+            
+        }
+        
+        DefaultPieDataset pie=new DefaultPieDataset();
+        pie.setValue("Positive Case", a);
+        pie.setValue("Negative Case", b);
+        JFreeChart c2=ChartFactory.createPieChart("Covid-19 Statistics", pie,true,true,true);
+        PiePlot p = (PiePlot)c2.getPlot();
+        ChartFrame f=new ChartFrame("Pie Chart",c2);
+        f.setVisible(false);
+        f.setSize(300, 400);
+        ChartPanel cp=new ChartPanel(c2);
+        cp.setSize(500, 600);
+        rightSidePanel.removeAll();
+        rightSidePanel.add(cp);
+        rightSidePanel.updateUI();
+      
+       
+      
+    }//GEN-LAST:event_jLabel10MouseClicked
 
     
     public void sendToVacReqScreen(){
