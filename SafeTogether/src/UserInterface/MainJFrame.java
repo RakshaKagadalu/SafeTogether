@@ -83,7 +83,7 @@ public class MainJFrame extends javax.swing.JFrame {
 //            system.getUserDir().addUser(user2);
 //            System.out.println(system.getUserAccDir().getUserAccList());
 //         
-//        
+////        
 //            Police pol = new Police("police1", "pol123", "Boston", "NUPD","9999999991");
 //            system.getPoliceDir().addNewPolice(pol);
 //            system.getUserAccDir().addAccount(pol);
@@ -100,8 +100,6 @@ public class MainJFrame extends javax.swing.JFrame {
 //            PandemicCenter pa = new PandemicCenter("Pandu","Boston","pan1", "pan123","1234567890");
 //            system.getPandemicCenterDir().addPandemicCenter(pa);
 //            system.getUserAccDir().addAccount(pa);
-         
-        
     }
     
 

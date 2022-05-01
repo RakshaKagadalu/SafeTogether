@@ -35,7 +35,7 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
     FireDepartmentRegistration(EcoSystem system, JPanel container, MapCoordinates locationPoint) {
          initComponents();
         this.system = system;
-        this.rightSidePanel = rightSidePanel;
+        this.rightSidePanel = container;
         this.locationPoint = locationPoint;
         this.setSize(1160, 750); 
         populateTable();
@@ -213,7 +213,9 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 580, 630));
+
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 740));
     }// </editor-fold>//GEN-END:initComponents
@@ -377,7 +379,6 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
         this.locationPoint = locationPoint;
         locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());   
     }
-    
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:

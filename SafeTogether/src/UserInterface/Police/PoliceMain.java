@@ -283,12 +283,12 @@ public class PoliceMain extends javax.swing.JPanel {
         policeDepartmentPanel.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
         //BloodDonations pcr=new BloodDonations (system, container);
-        PoliceDisplay pr=new PoliceDisplay (system, container,userAcc);
+        PoliceDisplay pr=new PoliceDisplay (system, rightSidePanel,userAcc);
 
         rightSidePanel.add(pr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-    
+  
     
     }
 

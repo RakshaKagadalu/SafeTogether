@@ -7,6 +7,7 @@ package UserInterface.user;
 import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.UserAcc.UserAcc;
+import Utility.MapCoordinates;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
     private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
+    MapCoordinates locationPoint;
   private DB4OUtil dB4OUtil = DB4OUtil.getInstance();    
     Timer timer;
     
@@ -443,7 +445,7 @@ public class UserAreaJPanel extends javax.swing.JPanel {
         testing.setBackground(new Color(255,255,255));
         bookAppointment.setBackground(new Color(255,255,255));
       
-        EmergencyReport pcr = new EmergencyReport(container,system,userAcc);
+        EmergencyReport pcr = new EmergencyReport(rightSidePanel,system,userAcc,locationPoint);
         rightSidePanel.add(pcr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);

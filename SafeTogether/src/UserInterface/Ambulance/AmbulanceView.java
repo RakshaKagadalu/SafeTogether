@@ -301,7 +301,7 @@ public class AmbulanceView extends javax.swing.JPanel {
     }//GEN-LAST:event_ambulancePanelMousePressed
     private void checkEmergency() {
         ambulancePanel.setBackground(new Color(213,230,249));
-        AmbulanceDisplay pr=new AmbulanceDisplay(system, container,userAcc);
+        AmbulanceDisplay pr=new AmbulanceDisplay(system, rightSidePanel,userAcc);
         rightSidePanel.add(pr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);

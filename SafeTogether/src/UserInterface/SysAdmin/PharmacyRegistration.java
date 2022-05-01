@@ -329,9 +329,14 @@ public class PharmacyRegistration extends javax.swing.JPanel {
  
              
          //  System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
-            
-            
-            
+
+            displayTable();
+            populateDashBoard();
+            locationInputField.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
