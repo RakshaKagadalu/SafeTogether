@@ -35,7 +35,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
         this.rightSidePanel = rightSidePanel;
         this.setSize(1160, 750);
         displayTable();
-        populateDashBoard();
+//        populateDashBoard();
     }
 
     /**
@@ -287,18 +287,38 @@ public class DoctorRegistration extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-          String name = (userNameTextField4.getText());
-           String hospital = (userNameTextField3.getText());
-           String specialization = (userNameTextField5.getText());
+            String name = (userNameTextField4.getText());
+            String hospital = (userNameTextField3.getText());
+            String specialization = (userNameTextField5.getText());
             String userId = (userNameTextField6.getText());
             String pwd = (userNameTextField7.getText());
             String phoneNum = (userNameTextField8.getText());
-             Doctor doc = new Doctor(name,hospital,specialization,userId,pwd,phoneNum);
+            
+//            DoctorDir doctorDirectory = system.getDoctorDir();
+//            ArrayList<Doctor> list=doctorDirectory.getDoc();
+            
+            if(!system.getUserAccDir().checkIfUsernameIsUnique(userId)){
+                JOptionPane.showMessageDialog(null, "User name already exists");
+                userNameTextField5.setText("");
+                return;
+            }
+//            int z= list.size();
+//            for(int i=0;i<z;i++)
+//            {
+//                Doctor c = list.get(i);
+//                c.getUserName();
+//                if(c.getUserName().matches(userId))
+//                {
+//                    
+//                }
+//            }
+            
+            
+            Doctor doc = new Doctor(name,hospital,specialization,userId,pwd,phoneNum);
             system.getUserAccDir().addAccount(doc);
             system.getDoctorDir().addNewDoc(doc);
-           //System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
+          
             displayTable();
-            populateDashBoard();
             
             userNameTextField3.setText("");
             userNameTextField4.setText("");
@@ -306,29 +326,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
             userNameTextField6.setText("");
             userNameTextField7.setText("");
             userNameTextField8.setText("");
-            // DB4OUtil.dB4OUtil.storeSystem(system);
-            
-//            Person per = personDir.addPerson();
-//            per.setName(name);
-//            per.setAge(age);
-//             per.setSsn(ssn);
-//            House house = new House();
-//            house.setCityName(city);
-//            house.setCommunityName(community);
-//            house.setAddress(address);
-//            house.setSetPerson(per);
-//            house.setCommunityList(house);
-//            house.setHouseList(house);
-//            per.setHouse(house);
-//
-//            JOptionPane.showMessageDialog(this, "New Person Details added!");
-
-//            txtName.setText("");
-//            txtAge.setText("");
-//            txtCity.setText("");
-//            txtComm.setText("");
-//            txtAddress.setText("");
-//            txtSsn.setText("");
+ 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -340,6 +338,17 @@ public class DoctorRegistration extends javax.swing.JPanel {
         {
              
         String value=(String)table.getValueAt(sRow, 3);
+        
+        if(!userNameTextField6.getText().matches(value)){
+            JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+            userNameTextField3.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+            userNameTextField8.setText("");
+            return;
+        }
         DoctorDir doctorDirectory = system.getDoctorDir();
         ArrayList<Doctor> list=doctorDirectory.getDoc();
         int listsize=list.size();
@@ -351,11 +360,11 @@ public class DoctorRegistration extends javax.swing.JPanel {
             if(doc.getUserName().matches(value))
                     {
                         if(!userNameTextField8.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-            {
-                JOptionPane.showMessageDialog(null, " 10 digit phone number");
-                userNameTextField8.setText("");
-                return;
-            }
+                {
+                    JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                    userNameTextField8.setText("");
+                    return;
+                }
 
                      doc.setFirstName(userNameTextField4.getText());
                         doc.setHospital(userNameTextField3.getText());
@@ -365,12 +374,20 @@ public class DoctorRegistration extends javax.swing.JPanel {
                         doc.setPhoneNum(userNameTextField8.getText());
                     
                     }
-            else {
-                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
-            }
+//            else {
+//                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+//                  userNameTextField3.setText("");
+//                userNameTextField4.setText("");
+//                userNameTextField5.setText("");
+//                userNameTextField6.setText("");
+//                userNameTextField7.setText("");
+//                userNameTextField8.setText("");
+//                return;
+//            }
         }
 
-          displayTable();        
+          displayTable();
+
               userNameTextField3.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
@@ -382,72 +399,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
-//        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-//        int selectedRow=jTable1.getSelectedRow();
-//          if (selectedRow < 0) {
-//            JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        } else{
-//        String a=(String)table.getValueAt(selectedRow, 3);
-//        DoctorDir doctorDirectory = system.getDoctorDir();
-//        ArrayList<Doctor> cd1=doctorDirectory.getDoc();
-//        int z=cd1.size();
-//        for(int i=0;i<z;i++)
-//        {
-//            Doctor c=cd1.get(i);
-//            if(c.getUserName().matches(a))
-//                        c.setFirstName(userNameTextField4.getText());
-//                        c.setHospital(userNameTextField3.getText());
-//                        c.setSpecialization(userNameTextField5.getText());
-//                        c.setUserId(userNameTextField6.getText());
-//                        c.setAccPassword(userNameTextField7.getText());
-//                        c.setPhoneNum(userNameTextField8.getText());
-//                    
-//        }
-//              displayTable();
-//            
-//              userNameTextField3.setText("");
-//            userNameTextField4.setText("");
-//            userNameTextField5.setText("");
-//            userNameTextField6.setText("");
-//            userNameTextField7.setText("");
-//            userNameTextField8.setText("");
-//          }
-//         
-//       int selectedRow = jTable1.getSelectedRow();
-//        if (selectedRow < 0) {
-//            JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        } else{
-//         System.out.println("row" + selectedRow);
-//        System.out.println("Value" + jTable1.getValueAt(selectedRow, 0));
-//        
-////         DefaultTableModel dtm = (DefaultTableModel) labTable.getModel();
-////
-////        String name = dtm.getValueAt(labTable.getSelectedRow(), 0).toString();
-////        String address = dtm.getValueAt(labTable.getSelectedRow(), 1).toString();
-////        nameTxtField.setText(name);
-////        addrTxtField.setText(address);
-//
-//        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-//        
-//       // Doctor per= (Doctor) jTable1.getValueAt(selectedRow, 0);
-//         String name =  model.getValueAt(jTable1.getSelectedRow(), 0).toString();
-//         String hospital =  model.getValueAt(jTable1.getSelectedRow(), 1).toString();
-//         String specialization =  model.getValueAt(jTable1.getSelectedRow(), 2).toString();
-//          String userid =  model.getValueAt(jTable1.getSelectedRow(), 3).toString();
-//            String pwd =  model.getValueAt(jTable1.getSelectedRow(), 4).toString();
-//             String phnum =  model.getValueAt(jTable1.getSelectedRow(), 5).toString();
-//        //System.out.println(per);
-//        
-// //        System.out.println("to be displayed" + per.getFirstName());
-//       userNameTextField4.setText(name);
-//       userNameTextField3.setText(hospital);
-//       userNameTextField5.setText(specialization);
-//       userNameTextField6.setText(userid);
-//       userNameTextField7.setText(pwd);
-//       userNameTextField8.setText(phnum);
-//        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void userNameTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextField4ActionPerformed
@@ -479,6 +431,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
                     }
         }
           displayTable();
+
           anotherLoad();
           userNameTextField3.setText("");
           userNameTextField4.setText("");
@@ -581,7 +534,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
                     model.addRow(row);
                 
             }
-        
+        populateDashBoard();
     }
     
     

@@ -298,16 +298,38 @@ public class PharmacyRegistration extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         String name = (userNameTextField4.getText());
+            String name = (userNameTextField4.getText());
             String location = (locationInputField.getText());
             String phoneNum = (userNameTextField7.getText());
             String userId = (userNameTextField5.getText());
             String pwd = (userNameTextField6.getText());
+            
+            
+            if(system.getUserAccountDirectory().checkIfUsernameIsUnique(userId)){
+                if(!phoneNum.matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+                {
+                    JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                    userNameTextField7.setText("");
+                    return;
+                }
+
+                Pharma pc = new Pharma(name,location,userId,pwd,phoneNum);
+                system.getUserAccDir().addAccount(pc);
+                system.getPharmaDir().addToPharma(pc);
+                displayTable();
+                locationInputField.setText("");
+                userNameTextField4.setText("");
+                userNameTextField5.setText("");
+                userNameTextField6.setText("");
+                userNameTextField7.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Username " + userId + " already exists !!!, Please try a new one");
+            }
+            
  
-             Pharma pc = new Pharma(name,location,userId,pwd,phoneNum);
-            system.getUserAccDir().addAccount(pc);
-            system.getPharmaDir().addToPharma(pc);
+             
          //  System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
+
             displayTable();
             populateDashBoard();
             locationInputField.setText("");
@@ -315,13 +337,6 @@ public class PharmacyRegistration extends javax.swing.JPanel {
             userNameTextField5.setText("");
             userNameTextField6.setText("");
             userNameTextField7.setText("");
-           
-        
-        
-        
-        
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -331,39 +346,44 @@ public class PharmacyRegistration extends javax.swing.JPanel {
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
         int t1=jTable1.getSelectedRow();
         if(t1>=0)
-        {
-           
-            {
-        //String a=(String)t.getValueAt(t1, 3);
-        PharmaDirectory bbd = system.getPharmaDir();
-        ArrayList<Pharma> cd1=bbd.getPharmaArrayList();
-        int z=cd1.size();
-        for(int i=0;i<z;i++)
-        {
-            Pharma c=cd1.get(i);
-            c.getUserName();
-            if(c.getUserName().matches(username))
-            {
-                if(!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-            {
-                JOptionPane.showMessageDialog(null, " 10 digit phone number");
+        {      
+            String a=(String)t.getValueAt(t1, 2);
+            PharmaDirectory bbd = system.getPharmaDir();
+            ArrayList<Pharma> cd1=bbd.getPharmaArrayList();
+            int z=cd1.size();
+              if(!username.matches(a)){
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                locationInputField.setText("");
+                userNameTextField4.setText("");
+                userNameTextField5.setText("");
+                userNameTextField6.setText("");
                 userNameTextField7.setText("");
                 return;
-            }
+                }
+            for(int i=0;i<z;i++)
+            {
+                Pharma c=cd1.get(i);
+                c.getUserName();
+                if(c.getUserName().matches(username))
+                {
+                  if(!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+                {
+                    JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                    userNameTextField7.setText("");
+                    return;
+                }
 
-                c.setPharmaName(userNameTextField4.getText());
-                c.setPharmaLocation(locationInputField.getText());
-                c.setPharmaUserID(userNameTextField5.getText());
-                c.setPharmaPassword(userNameTextField6.getText());
-                c.setPharmaPhoneNumber(userNameTextField7.getText());
+                    c.setPharmaName(userNameTextField4.getText());
+                    c.setPharmaLocation(locationInputField.getText());
+                    c.setPharmaUserID(userNameTextField5.getText());
+                    c.setPharmaPassword(userNameTextField6.getText());
+                    c.setPharmaPhoneNumber(userNameTextField7.getText());       
+                }
             }
-            else {
-                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
-            }
+                displayTable();
+                populateDashBoard();
         }
-        displayTable();
-        populateDashBoard();
-            }}else
+        else
         {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }

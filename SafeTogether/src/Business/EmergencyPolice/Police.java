@@ -12,60 +12,61 @@ import Business.UserAcc.UserAcc;
  * @author arjunbirju
  */
 public class Police extends UserAcc {
-    String user_Id;
-    String pwd;
-    String PoliceLocation;
-    String namePolice;
-    String phNum;
+    String name;
+    String Location;
+    String phonenumber;
+    String userid;
+    String password;
 
-    public Police(String user_Id, String pwd, String PoliceLocation, String namePolice, String phNum) {
-        this.user_Id = user_Id;
-        this.pwd = pwd;
-        this.PoliceLocation = PoliceLocation;
-        this.namePolice = namePolice;
-        this.phNum = phNum;
-        setUserName(user_Id);
-        setPwd(pwd);
+    public Police(String name, String Location, String phonenumber, String userid, String password) {
+        this.name = name;
+        this.Location = Location;
+        this.phonenumber = phonenumber;
+        this.userid = userid;
+        this.password = password;
+        setUserName(userid);
+        setPwd(password);
         setRole(new Police_Officer());
     }
 
-    public String getUser_Id() {
-        return user_Id;
+    public String getName() {
+        return name;
     }
 
-    public void setUser_Id(String user_Id) {
-        this.user_Id = user_Id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getLocation() {
+        return Location;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setLocation(String Location) {
+        this.Location = Location;
     }
 
-    public String getPoliceLocation() {
-        return PoliceLocation;
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public void setPoliceLocation(String PoliceLocation) {
-        this.PoliceLocation = PoliceLocation;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
-    public String getNamePolice() {
-        return namePolice;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setNamePolice(String namePolice) {
-        this.namePolice = namePolice;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
-    public String getPhNum() {
-        return phNum;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPhNum(String phNum) {
-        this.phNum = phNum;
+    public void setPassword(String password) {
+        this.password = password;
     }
+    
 }

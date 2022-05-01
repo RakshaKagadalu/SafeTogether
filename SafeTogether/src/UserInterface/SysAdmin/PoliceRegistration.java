@@ -70,8 +70,6 @@ public class PoliceRegistration extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         locationInputField = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        addressInput = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -209,14 +207,6 @@ public class PoliceRegistration extends javax.swing.JPanel {
         });
         jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 150, 39));
 
-        jLabel12.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel12.setText("Address");
-        jPanel7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 220, -1));
-
-        addressInput.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(addressInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 40));
-
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 740));
@@ -237,8 +227,8 @@ public class PoliceRegistration extends javax.swing.JPanel {
                 phoneTxt.setText("");
                 return;
             }
-
-            Police customer = new Police(userIdTxt.getText(),passwordTxt.getText(),locationInputField.getText(),firstNameTxt.getText(),phoneTxt.getText() );
+            
+            Police customer = new Police(firstNameTxt.getText(), locationInputField.getText(), phoneTxt.getText(), userIdTxt.getText(),passwordTxt.getText());
             system.getUserAccountDirectory().addAccount(customer);
             system.getPoliceDir().addNewPolice(customer);
             populateTable();
@@ -258,14 +248,14 @@ public class PoliceRegistration extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (Police customer : policeDir.getPoliceList()) {
-                    Object[] row = new Object[5];
-                    row[0] = customer.getNamePolice();
-                    row[1] = customer.getPoliceLocation();                    
-                    row[2] = customer.getUser_Id();
-                    row[3] = customer.getPwd();
-                    row[4] = customer.getPhNum();
+                Object[] row = new Object[5];
+                row[0] = customer.getName();
+                row[1] = customer.getLocation();                    
+                row[2] = customer.getUserid();
+                row[3] = customer.getPassword();
+                row[4] = customer.getPhonenumber();
 
-                    model.addRow(row);
+                model.addRow(row);
                 
             }
     }
@@ -277,17 +267,28 @@ public class PoliceRegistration extends javax.swing.JPanel {
         int t1=jTable1.getSelectedRow();
         if(t1>=0)
         {
+             
+            String value=(String)jTable1.getValueAt(t1, 2);
+            PoliceDir police1 = system.getPoliceDir();
+            ArrayList<Police> list= police1.getPoliceList();
+            int listsize = list.size();
             
+            if(!username.matches(value)){
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                    firstNameTxt.setText("");
+                    locationInputField.setText("");
+                    phoneTxt.setText("");
+                    passwordTxt.setText("");
+                    userIdTxt.setText("");
+                    return;
+            }
+            
+            for(int i=0;i<listsize;i++)
             {
-                String a=(String)t.getValueAt(t1, 2);
-                PoliceDir pol = system.getPoliceDir();
-                ArrayList<Police> cd1= pol.getPoliceList();
-                int z=cd1.size();
-                for(int i=0;i<z;i++)
-                {
-                    Police c=cd1.get(i);
-                    c.getUser_Id();
-                    if(c.getUser_Id().matches(a))
+                Police doc = list.get(i);
+                System.out.println("username" + doc.getUserName());
+                System.out.println("value" + value);
+                if(doc.getUserName().matches(value))
                     {
                         if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
                         {
@@ -296,20 +297,74 @@ public class PoliceRegistration extends javax.swing.JPanel {
                             return;
                         }
 
-                        c.setNamePolice(firstNameTxt.getText());
-                        c.setPoliceLocation(locationInputField.getText());
-                        c.setPhNum(phoneTxt.getText());
-                        c.setUser_Id(userIdTxt.getText());
-                        c.setPwd(passwordTxt.getText());
+                        doc.setName(firstNameTxt.getText());
+                        doc.setLocation(locationInputField.getText());
+                        doc.setPhonenumber(phoneTxt.getText());
+                        doc.setPassword(passwordTxt.getText());
+                        doc.setUserid(userIdTxt.getText());
+
                     }
-                }
-            populateTable();
-            }                                        
+//                else {
+//                    
+//                }
+            }
+              populateTable();
+
+                    firstNameTxt.setText("");
+                    locationInputField.setText("");
+                    phoneTxt.setText("");
+                    passwordTxt.setText("");
+                    userIdTxt.setText("");
         }
-            else
+        else
         {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
+        
+        
+        
+        
+        
+//        if(t1>=0)
+//        {
+//            
+//            {
+//                String a=(String)t.getValueAt(t1, 2);
+//                System.out.println("a" + a);
+//                System.out.println("3" + (String)t.getValueAt(t1, 3));
+//                System.out.println("1" + (String)t.getValueAt(t1, 1));
+//                PoliceDir pol = system.getPoliceDir();
+//                ArrayList<Police> cd1= pol.getPoliceList();
+//                int z=cd1.size();
+//                for(int i=0;i<z;i++)
+//                {
+//                    Police c=cd1.get(i);
+//                    c.getUserid()();
+//                    if(c.getUserid()().matches(a))
+//                    {
+//                        if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
+//                        {
+//                            JOptionPane.showMessageDialog(null, " 10 digit phone number");
+//                            phoneTxt.setText("");
+//                            return;
+//                        }
+//
+//                        c.setNamePolice(firstNameTxt.getText());
+//                        c.setPoliceLocation(locationInputField.getText());
+//                        c.setPhNum(phoneTxt.getText());
+//                        c.setUser_Id(userIdTxt.getText());
+//                        c.setPwd(passwordTxt.getText());
+//                    } else{
+//                        JOptionPane.showMessageDialog(null, "Username " + userIdTxt.getText() + " already exists !!!, Please try a new one");
+//                    }
+//                } 
+//            populateTable();
+//            }                                        
+//        }
+//            else
+//        {
+//            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+//        }
     }//GEN-LAST:event_updateBtnActionPerformed
 
     
@@ -322,6 +377,11 @@ public class PoliceRegistration extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a Official from the table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else{
+            System.out.println("0 -> " + table.getValueAt(selectedRow,0).toString());
+            System.out.println("1 -> " + table.getValueAt(selectedRow,1).toString());
+            System.out.println("2 -> " + table.getValueAt(selectedRow,2).toString());
+            System.out.println("3 -> " + table.getValueAt(selectedRow,3).toString());
+            System.out.println("4 -> " + table.getValueAt(selectedRow,4).toString());
             firstNameTxt.setText(table.getValueAt(selectedRow,0).toString());
             locationInputField.setText(table.getValueAt(selectedRow,1).toString());
             userIdTxt.setText(table.getValueAt(selectedRow,2).toString());
@@ -347,8 +407,8 @@ public class PoliceRegistration extends javax.swing.JPanel {
             for(int i=0;i<z;i++)
             {
                 Police c=cd1.get(i);
-                System.out.println(c.getUser_Id());
-                if(c.getUser_Id().matches(a))
+                System.out.println(c.getUserid());
+                if(c.getUserid().matches(a))
                 {
                     cd1.remove(c);
                     System.out.println("delete");
@@ -390,13 +450,11 @@ public class PoliceRegistration extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DelBtn;
     private javax.swing.JButton addBtn;
-    private javax.swing.JTextField addressInput;
     private javax.swing.JTextField firstNameTxt;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

@@ -100,8 +100,6 @@ public class MainJFrame extends javax.swing.JFrame {
 //            PandemicCenter pa = new PandemicCenter("Pandu","Boston","pan1", "pan123","1234567890");
 //            system.getPandemicCenterDir().addPandemicCenter(pa);
 //            system.getUserAccDir().addAccount(pa);
-//         
-//        
     }
     
 

@@ -233,11 +233,20 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
         if(t1>=0)
         {
             
-            {
+            
                 String a=(String)t.getValueAt(t1, 2);
                 AmbulanceDir pol = system.getAmbulanceDir();
                 ArrayList<Ambulance> cd1= pol.getAmbulances();
                 int z=cd1.size();
+                 if(!username.matches(a)){
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                    firstNameTxt.setText("");
+                    userIdTxt.setText("");
+                    phoneTxt.setText("");
+                    passwordTxt.setText("");
+                    userIdTxt.setText("");
+                    return;
+            }
                 for(int i=0;i<z;i++)
                 {
                     Ambulance c=cd1.get(i);
@@ -256,7 +265,8 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
                         c.setPhNum(phoneTxt.getText());
                         c.setUser_Id(userIdTxt.getText());
                         c.setPwd(passwordTxt.getText());
-                    }
+                    
+                    
                 }
             populateTable();
             }                                        

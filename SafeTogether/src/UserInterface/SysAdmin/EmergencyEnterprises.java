@@ -4,6 +4,7 @@
  */
 package UserInterface.SysAdmin;
 
+import Business.DatabaseUtil.DB4OUtil;
 import Business.EcoSystem;
 import Utility.MapCoordinates;
 import java.awt.CardLayout;
@@ -28,6 +29,7 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
     private final EcoSystem system;
     private final JPanel container;
     MapCoordinates locationPoint;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     
     Timer timer;
     
@@ -315,6 +317,7 @@ public class EmergencyEnterprises extends javax.swing.JPanel {
         container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_goBackButtonMousePressed
 
     private void ambulancePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ambulancePanelMousePressed

@@ -126,7 +126,7 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel2.setText("Enter Details");
-        jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 300, 50));
+        jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 300, 50));
 
         jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(73, 84, 90));
@@ -213,7 +213,9 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
+
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 580, 630));
+
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 740));
     }// </editor-fold>//GEN-END:initComponents
@@ -274,15 +276,25 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
         if(t1>=0)
         {
             
-            {
+           
                 String a=(String)t.getValueAt(t1, 2);
                 FireDir pol = system.getFireDir();
                 ArrayList<Fire> cd1= pol.getFireEngines();
                 int z=cd1.size();
+                 if(!username.matches(a)){
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                    firstNameTxt.setText("");
+                    locationInputField.setText("");
+                    phoneTxt.setText("");
+                    passwordTxt.setText("");
+                    userIdTxt.setText("");
+                    return;
+            }
                 for(int i=0;i<z;i++)
                 {
                     Fire c=cd1.get(i);
                     c.getUser_Id();
+                    
                     if(c.getUser_Id().matches(a))
                     {
                         if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
@@ -300,7 +312,7 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
                     }
                 }
             populateTable();
-            }                                        
+                                                   
         }
             else
         {

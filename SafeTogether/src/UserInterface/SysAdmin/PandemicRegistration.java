@@ -224,10 +224,31 @@ public class PandemicRegistration extends javax.swing.JPanel {
             String userId = (userNameTextField5.getText());
             String pwd = (userNameTextField6.getText());
  
-             PandemicCenter pc = new PandemicCenter(name,location,userId,pwd,phoneNum);
+//            PandemicCenter_Dir bbd = system.getPandemicCenterDir();
+//            ArrayList<PandemicCenter> cd1=bbd.getPandemicdirectory();
+//            int z=cd1.size();
+//            for(int i=0;i<z;i++)
+//            {
+//                PandemicCenter c=cd1.get(i);
+//                c.getUserName();
+//                if(c.getUserName().matches(userId))
+//                {
+//                    JOptionPane.showMessageDialog(null, "User name already exists");
+//                    userNameTextField5.setText("");
+//                    return;
+//                }
+//            }
+
+            if(!system.getUserAccDir().checkIfUsernameIsUnique(userId)){
+                JOptionPane.showMessageDialog(null, "User name already exists");
+                userNameTextField5.setText("");
+                return;
+            }
+            
+            PandemicCenter pc = new PandemicCenter(name,location,userId,pwd,phoneNum);
+             
             system.getUserAccDir().addAccount(pc);
             system.getPandemicCenterDir().addPandemicCenter(pc);
-         //  System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
             displayTable();
             
             locationInputField.setText("");
@@ -250,8 +271,17 @@ public class PandemicRegistration extends javax.swing.JPanel {
         if(t1>=0)
         {
            
-            {
-        //String a=(String)t.getValueAt(t1, 3);
+            
+        String a=(String)t.getValueAt(t1, 2);
+        if(!username.matches(a)){
+            JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+            locationInputField.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+            return;
+        }
         PandemicCenter_Dir bbd = system.getPandemicCenterDir();
         ArrayList<PandemicCenter> cd1=bbd.getPandemicdirectory();
         int z=cd1.size();
@@ -274,12 +304,18 @@ public class PandemicRegistration extends javax.swing.JPanel {
                 c.setPassword(userNameTextField6.getText());
                 c.setPhoneNumber(userNameTextField7.getText());
             }
-            else {
-                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
-            }
+//            else {
+//                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+//            }
         }
+        locationInputField.setText("");
+        userNameTextField4.setText("");
+        userNameTextField5.setText("");
+        userNameTextField6.setText("");
+        userNameTextField7.setText("");
         displayTable();
-            }}else
+        
+        }else
         {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
@@ -331,10 +367,10 @@ public class PandemicRegistration extends javax.swing.JPanel {
         }
         displayTable();
         locationInputField.setText("");
-            userNameTextField4.setText("");
-            userNameTextField5.setText("");
-            userNameTextField6.setText("");
-            userNameTextField7.setText("");
+        userNameTextField4.setText("");
+        userNameTextField5.setText("");
+        userNameTextField6.setText("");
+        userNameTextField7.setText("");
         
         }
         else
