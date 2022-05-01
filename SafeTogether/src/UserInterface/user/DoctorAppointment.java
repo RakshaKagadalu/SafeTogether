@@ -286,7 +286,11 @@ public class DoctorAppointment extends javax.swing.JPanel {
                 LocalDateTime date2 = LocalDateTime.now();
                 String name = (model.getValueAt(selectedRow, 0).toString());
                 String date = specializationCombo.getSelectedItem().toString();
-                if (appDate.compareTo(date2.toString()) >= 0) {
+                if(isAreadyBooked(appDate)){
+                    JOptionPane.showMessageDialog(null,"Appointment already booked for the chosen date.");
+                    return;
+                }
+                else if (appDate.compareTo(date2.toString()) >= 0) {
                     appoint = verify(name, appDate, date);
                     if (appoint == false) {
                         DoctorsAppointment doc = new DoctorsAppointment();
@@ -329,6 +333,24 @@ public class DoctorAppointment extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please Select a Doctor you want to book an appointment with!!");
         }
 
+    }
+    
+    public boolean isAreadyBooked(String date){
+        DoctorsAppointment_Dir docDir = system.getDocAppDir();
+        ArrayList<DoctorsAppointment> appointments = docDir.getAppointments();
+        int size = appointments.size();
+        User a =(User)(userAcc);
+        String userId = a.getUserId();
+        for(int i=0; i<size; i++){
+            DoctorsAppointment appointment = appointments.get(i);
+            if(appointment.getUserId().matches(userId)){
+                String currentAppointment = appointment.getDate();
+                if(currentAppointment.compareTo(date) == 0){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean verify(String name, String date1, String date) {

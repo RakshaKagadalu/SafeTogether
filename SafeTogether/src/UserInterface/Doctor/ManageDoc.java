@@ -282,7 +282,7 @@ public class ManageDoc extends javax.swing.JPanel {
                 if (sRow == docList.getId()/*&&o.getStatus().matches("Deliver Man Assigned")*/) {
                     if (docList.getStatus().matches("Consultation Done")) {
 
-                        PharmacyDoctor docPharma = new PharmacyDoctor(container, system, userAcc, docList.getUserId());
+                        PharmacyDoctor docPharma = new PharmacyDoctor(container, system, userAcc, docList.getUserId(), sRow);
 
                         container.add(docPharma);
                         CardLayout layout = (CardLayout) container.getLayout();

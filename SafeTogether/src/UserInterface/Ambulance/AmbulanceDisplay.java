@@ -34,7 +34,7 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
         this.container = userProcessContainer;
         this.userAcc = userAcc;
         initComponents();
-        populate_table();
+        populateTable();
     }
 
     /**
@@ -48,12 +48,12 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         bookButton2 = new javax.swing.JButton();
         bookButton = new javax.swing.JButton();
         bookButton1 = new javax.swing.JButton();
         locationButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1920, 1080));
@@ -65,21 +65,6 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel1.setText("Ambulance Details");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 853, -1));
 
         bookButton2.setBackground(new java.awt.Color(255, 55, 95));
         bookButton2.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
@@ -128,6 +113,26 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
             }
         });
         jPanel1.add(locationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 180, 50));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Name", "Location", "Status", "Response"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 853, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -181,7 +186,7 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
 
         }
         jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Emergency","Location","Status","Response"}));
-        populate_table();
+        populateTable();
         }
         else
         {
@@ -227,7 +232,7 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
 
         }
         jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Emergency","Location","Status","Response"}));
-        populate_table();
+        populateTable();
         }
         else
         {
@@ -274,7 +279,7 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
 
         }
         jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Emergency","Location","Status","Response"}));
-        populate_table();
+        populateTable();
         }
         else
         {
@@ -326,7 +331,7 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
         
     }
     
-    public void populate_table()
+    public void populateTable()
     {
         Req_EmergencyDir requestemergencyDir=system.getEmergencyReqDir();
         ArrayList<Req_Emergency> emergencies = requestemergencyDir.getEmergencyUserList();
@@ -336,6 +341,7 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
         {
             
             Req_Emergency emergency = emergencies.get(i);
+            System.out.println("emergency.getEmergency()  "+ emergency.getEmergency());
             if(emergency.getEmergency().matches("Ambulance"))
             {
             

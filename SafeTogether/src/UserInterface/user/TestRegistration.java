@@ -53,6 +53,7 @@ public class TestRegistration extends javax.swing.JPanel {
             comboCenter.addItem(o.getName());
             locationCordinate = o.getLocation();
         }
+          jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Status","Center","Temperature","Date","Time","Result"}));
         displayCenter();
     }
 
@@ -109,10 +110,7 @@ public class TestRegistration extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -339,15 +337,24 @@ public class TestRegistration extends javax.swing.JPanel {
     }//GEN-LAST:event_comboCenterActionPerformed
 
     private void showInMap() {
-        System.out.println(locationCordinate);
-        String [] parts = locationCordinate.split(",");
-        String lattitude = parts[0].replaceAll("\\s","");
-        String longitude = parts[1].replaceAll("\\s","");
+  
+        if(locationCordinate == null || !locationCordinate.contains(",")){
+            JOptionPane.showMessageDialog(null,"Map not available at this moment!!");
+        } else {
+            System.out.println(locationCordinate);
+            String [] parts = locationCordinate.split(",");
+            String lattitude = parts[0].replaceAll("\\s","");
+            String longitude = parts[1].replaceAll("\\s","");
+
+            MapViewerTwo oLJP = new MapViewerTwo(rightSidePanel, lattitude, longitude);
+            rightSidePanel.add("MapViewr", oLJP);
+            CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+            layout.next(rightSidePanel);
+        }
         
-        MapViewerTwo oLJP = new MapViewerTwo(rightSidePanel, lattitude, longitude);
-        rightSidePanel.add("MapViewr", oLJP);
-        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
-        layout.next(rightSidePanel);
+        
+        
+        
         
 
     }
@@ -391,6 +398,7 @@ public class TestRegistration extends javax.swing.JPanel {
         {
             OutbreakTracer c1 =new OutbreakTracer();
             int x = 1 + (int) (Math.random() * 100);
+            
             c1.setId(x);
             c1.setFirstName(firstNameInputBox.getText());
             c1.setTestCenter(comboCenter.getSelectedItem().toString());
@@ -400,10 +408,11 @@ public class TestRegistration extends javax.swing.JPanel {
             c1.setPositive(jComboBox5.getSelectedItem().toString());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String d1 = sdf.format(dateChooser.getDate());
+            
             c1.setStatus("Appoinment Booked");
             c1.setResult("NA");
             User a=(User)(userAcc);
-          
+          // isAreadyBooked
             c1.setUserName(a.getFirstName());
             c1.setUserId(a.getUserId());
             
@@ -412,13 +421,15 @@ public class TestRegistration extends javax.swing.JPanel {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime d2 = LocalDateTime.now();
             System.out.println(dtf.format(d2));
-            if(d1.compareTo(d2.toString()) >= 0) {
+            if(isAreadyBooked(d1)){
+                JOptionPane.showMessageDialog(null,"Appointment already booked for the chosen date.");
+                return;
+            } else if(d1.compareTo(d2.toString()) >= 0) {
                 OutbreakTracerDir cdd= system.getOutbreakStatusDir();
                 cdd.addrequest(c1);
                 jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Status","Center","Temperature","Date","Time","Result"}));
                 displayCenter();
                  JOptionPane.showMessageDialog(null, "Your Appointment Booked successfully!!");
-        
             }
             else
             {
@@ -430,6 +441,24 @@ public class TestRegistration extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Please select A Date!!");
         }
     
+    }
+    
+    public boolean isAreadyBooked(String date){
+        OutbreakTracerDir outbreakdir = system.getOutbreakStatusDir();
+        ArrayList<OutbreakTracer> appointments = outbreakdir.getOutbreakLog();
+        int size = appointments.size();
+        User a =(User)(userAcc);
+        String userId = a.getUserId();
+        for(int i=0; i<size; i++){
+            OutbreakTracer appointment = appointments.get(i);
+            if(appointment.getUserId().matches(userId)){
+                String currentAppointment = appointment.getAppDate();
+                if(currentAppointment.compareTo(date) == 0){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void cancelRegistration() {
@@ -452,7 +481,7 @@ public class TestRegistration extends javax.swing.JPanel {
                 {
                     if(o.getStatus().matches("Appoinment Booked"))
                     {
-                        o.setStatus("Cancled");
+                        o.setStatus("Cancelled");
                          JOptionPane.showMessageDialog(null,"Your Appointment is cancelled successfully!!");
                     }
                     else
@@ -486,7 +515,8 @@ public class TestRegistration extends javax.swing.JPanel {
             if(userAcc.getUserName().matches(o.getUserId()))
             {
                 DefaultTableModel t2 = (DefaultTableModel) jTable1.getModel();
-                String s1=String.valueOf(o.getId());    
+                String s1=String.valueOf(o.getId());   
+                //jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Status","Center","Temperature","Date","Time","Result"}));
                 String s[]={s1,o.getStatus(),o.getTestCenter(),o.getTemp(), o.getAppDate(),o.getAppTime(),o.getResult()};
                 t2.addRow(s);
             }

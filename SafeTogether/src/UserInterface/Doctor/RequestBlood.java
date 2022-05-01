@@ -94,7 +94,7 @@ public class RequestBlood extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "User ID", "Password", "Phone Number"
+                "Req Id", "Name", "Status", "Blood Type"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -276,7 +276,8 @@ public class MedicineReport extends javax.swing.JPanel {
             {
                 if(o.getStatus().matches("Ready for pickup"))
                 {
-                o.setStatus("Order Recieved");
+                    o.setStatus("Order Recieved");
+                    JOptionPane.showMessageDialog(null,"Order Received, Successfully.");  
                 }
                 else
                 {
