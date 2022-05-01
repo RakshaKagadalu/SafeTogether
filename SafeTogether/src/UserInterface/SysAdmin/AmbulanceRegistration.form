@@ -247,7 +247,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="5a" green="54" red="49" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ambulance Name"/>
+                <Property name="text" type="java.lang.String" value="First Name"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -275,7 +275,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="5a" green="54" red="49" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Driver Name"/>
+                <Property name="text" type="java.lang.String" value="Last Name"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
