@@ -25,7 +25,7 @@ public class PieChart extends javax.swing.JPanel{
       this.dataset = dataset;
     }
     
-    public JPanel getChartPanel() {
+    public ChartPanel getChartPanel() {
         return createDemoPanel();
     }
     
@@ -40,7 +40,7 @@ public class PieChart extends javax.swing.JPanel{
       return chart;
    }
    
-   private JPanel createDemoPanel() {
+   private ChartPanel createDemoPanel() {
       JFreeChart chart;  
       chart = createChart(dataset, title);
       return new ChartPanel( chart ); 
