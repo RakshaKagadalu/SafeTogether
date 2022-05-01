@@ -387,6 +387,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
         }
 
           displayTable();
+          anotherLoad();
 
               userNameTextField3.setText("");
             userNameTextField4.setText("");
