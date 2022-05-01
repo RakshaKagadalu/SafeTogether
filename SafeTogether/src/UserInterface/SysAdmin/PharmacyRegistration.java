@@ -37,7 +37,7 @@ public class PharmacyRegistration extends javax.swing.JPanel {
     MapCoordinates locationPoint;
     
  
-    public PharmacyRegistration(EcoSystem system, JPanel rightSidePanel,MapCoordinates locationPoint) {
+    public PharmacyRegistration(EcoSystem system, JPanel rightSidePanel, MapCoordinates locationPoint) {
         initComponents();
         this.system = system;
         this.rightSidePanel = rightSidePanel;
@@ -56,7 +56,7 @@ public class PharmacyRegistration extends javax.swing.JPanel {
         
         // get the count of hash sets
         locationCount = uniqueLocations.size();
-        pharmaciesCount = uniqueLocations.size();
+        pharmaciesCount = uniquePharma.size();
         
         locationLabel.setText(Integer.toString(locationCount));
         jLabel3.setText(Integer.toString(pharmaciesCount));
@@ -331,7 +331,7 @@ public class PharmacyRegistration extends javax.swing.JPanel {
          //  System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
 
             displayTable();
-            populateDashBoard();
+            anotherLoad();
             locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
@@ -381,7 +381,7 @@ public class PharmacyRegistration extends javax.swing.JPanel {
                 }
             }
                 displayTable();
-                populateDashBoard();
+                anotherLoad();
         }
         else
         {
@@ -389,6 +389,17 @@ public class PharmacyRegistration extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    private void anotherLoad() {
+        populateDashBoard();
+        PharmacyRegistration dr =new PharmacyRegistration(system, rightSidePanel, locationPoint);
+        rightSidePanel.add(dr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+          
+    }
+    
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
          
@@ -415,6 +426,7 @@ public class PharmacyRegistration extends javax.swing.JPanel {
             }
         }
         displayTable();
+        anotherLoad();
         locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
