@@ -36,6 +36,7 @@ public class PandemicDisplay extends javax.swing.JPanel {
         this.system = ecosystem;
         this.container = userProcessContainer;
         this.userAcc = userAcc;
+        populate_table();
 //        Time();
     }
 

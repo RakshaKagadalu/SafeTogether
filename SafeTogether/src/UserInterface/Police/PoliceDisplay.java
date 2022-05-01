@@ -262,7 +262,7 @@ public class PoliceDisplay extends javax.swing.JPanel {
                 }
                 else if(emergency.getResponse().matches("No Response"))
                 {
-                    emergency.setResponse(police.getNamePolice()+" "+"Responded");
+                    emergency.setResponse(police.getName()+" "+"Responded");
                 }
                 else
                 {
