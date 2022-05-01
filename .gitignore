@@ -16,6 +16,7 @@
 *Databank.db4o
 project.properties
 *.db4o
+Databank.db40
 
 # Package Files #
 *.jar
