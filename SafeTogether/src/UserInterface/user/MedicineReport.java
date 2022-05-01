@@ -164,34 +164,34 @@ public class MedicineReport extends javax.swing.JPanel {
         txtCost.setText("");
         jTextMedicine.setText("");
 
-        DefaultTableModel t2 = (DefaultTableModel) tblPharma.getModel();
+        DefaultTableModel table = (DefaultTableModel) tblPharma.getModel();
         int selectedRow=tblPharma.getSelectedRow();
-        int s=Integer.parseInt(t2.getValueAt(selectedRow, 0).toString());
-        System.out.println("id"+s);
-        Req_MedicineDir dire= system.getMedicineReqDir();
-        ArrayList<Req_Medicine> order=dire.getMedReqDir();
-        int u=order.size();
-        for(int i=0;i<u;i++)
+        int sRow=Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+      
+        Req_MedicineDir medDir= system.getMedicineReqDir();
+        ArrayList<Req_Medicine> listorder=medDir.getMedReqDir();
+        int l=listorder.size();
+        for(int i=0;i<l;i++)
         {
-            Req_Medicine o=order.get(i);
-            if(s==o.getId())
+            Req_Medicine medReq=listorder.get(i);
+            if(sRow==medReq.getId())
             {
-                Map<String,String> f=o.getMedOrderlist();
+                Map<String,String> orderMap=medReq.getMedOrderlist();
                 int count =1;
-                for (String key: f.keySet()) {
-                    jTextMedicine.append("Item "+ count+ " : "+key+" Quantity : "+f.get(key)+"\n");
+                for (String key: orderMap.keySet()) {
+                    jTextMedicine.append("Item "+ count+ " : "+key+" Quantity : "+orderMap.get(key)+"\n");
                     count++;
 
                 }
-                Map<String,String> f1=o.getMedCostlist();
-                int a=0;
-                for (String key: f1.keySet()) {
-                    System.out.println(Integer.parseInt(f1.get(key)));
-                    a=a+(Integer.parseInt(f1.get(key)));
-                    System.out.println("a"+a);
+                Map<String,String> orderMap2=medReq.getMedCostlist();
+                int n=0;
+                for (String key: orderMap2.keySet()) {
+                    
+                    n=n+(Integer.parseInt(orderMap2.get(key)));
+                    
 
                 }
-                txtCost.append(String.valueOf(a));
+                txtCost.append(String.valueOf(n));
 
             }
         }
@@ -234,21 +234,21 @@ public class MedicineReport extends javax.swing.JPanel {
     private void displayTable() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     
-        Req_MedicineDir dire=system.getMedicineReqDir();
-        ArrayList<Req_Medicine> order=dire.getMedReqDir();
-        int u=order.size();
+        Req_MedicineDir medDir=system.getMedicineReqDir();
+        ArrayList<Req_Medicine> order=medDir.getMedReqDir();
+        int l=order.size();
         User r=(User)userAcc;
-        for(int i=0;i<u;i++)
+        for(int i=0;i<l;i++)
         {
-            Req_Medicine o=order.get(i);
-            if(o.getPatientId().matches(r.getUserId()))
+            Req_Medicine reqMed=order.get(i);
+            if(reqMed.getPatientId().matches(r.getUserId()))
             {
-                DefaultTableModel t2 = (DefaultTableModel) tblPharma.getModel();
-                String s1=String.valueOf(o.getId());
+                DefaultTableModel table = (DefaultTableModel) tblPharma.getModel();
+                String s1=String.valueOf(reqMed.getId());
                 
                 
-                String s[]={s1,o.getDoctorName(),o.getPharmaName(),o.getStatus()};
-                t2.addRow(s);
+                String s[]={s1,reqMed.getDoctorName(),reqMed.getPharmaName(),reqMed.getStatus()};
+                table.addRow(s);
             
             
             }
