@@ -72,7 +72,6 @@ public class MapViewerTwo extends javax.swing.JPanel {
         setLocationBtn.setFont(new java.awt.Font("SF Pro Text", 1, 12)); // NOI18N
         setLocationBtn.setForeground(new java.awt.Color(255, 255, 255));
         setLocationBtn.setText("Go Back");
-        setLocationBtn.setActionCommand("Go Back");
         setLocationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 setLocationBtnActionPerformed(evt);

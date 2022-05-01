@@ -10,6 +10,9 @@ import Business.UserAcc.UserAcc;
 import Business.WorkQueue.Req_Emergency;
 import Business.WorkQueue.Req_EmergencyDir;
 import Business.userR.User;
+import UserInterface.SysAdmin.MapViewr;
+import Utility.MapCoordinates;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,6 +26,7 @@ public class EmergencyReport extends javax.swing.JPanel {
 
     EcoSystem system;
     JPanel rightSidePanel;
+    MapCoordinates locationPoint;
     /**
      * Creates new form BloodDonations
      * @param system
@@ -31,11 +35,12 @@ public class EmergencyReport extends javax.swing.JPanel {
 
     JPanel container;
    UserAcc userAcc;
-    public EmergencyReport(JPanel container,EcoSystem system,UserAcc userAcc) {
+    public EmergencyReport(JPanel container,EcoSystem system,UserAcc userAcc, MapCoordinates locationPoint) {
         initComponents();
-         this.container=container;
+         this.rightSidePanel=container;
         this.system=system;
         this.userAcc=userAcc;
+        this.locationPoint = locationPoint;
         User a=(User)userAcc;
         firstNameField.setText(a.getFirstName());
         lastNameField.setText(a.getLastName());
@@ -66,8 +71,9 @@ public class EmergencyReport extends javax.swing.JPanel {
         firstNameField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         emergencyBox = new javax.swing.JComboBox<>();
-        lastNameLabel1 = new javax.swing.JLabel();
-        locationField = new javax.swing.JTextField();
+        locationInputField = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -132,34 +138,46 @@ public class EmergencyReport extends javax.swing.JPanel {
         firstNameLabel.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         firstNameLabel.setForeground(new java.awt.Color(73, 84, 90));
         firstNameLabel.setText("First Name");
-        jPanel7.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 220, -1));
+        jPanel7.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 220, -1));
 
         lastNameField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 420, 40));
+        jPanel7.add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 420, 40));
 
         lastNameLabel.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         lastNameLabel.setForeground(new java.awt.Color(73, 84, 90));
         lastNameLabel.setText("Last Name");
-        jPanel7.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
+        jPanel7.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 220, -1));
 
         firstNameField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 420, 40));
+        jPanel7.add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 420, 40));
 
         jLabel9.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(73, 84, 90));
         jLabel9.setText("Emergency");
-        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 220, -1));
+        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 220, -1));
 
         emergencyBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ambulance", "Fire", "Police" }));
-        jPanel7.add(emergencyBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 40));
+        jPanel7.add(emergencyBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 420, 40));
 
-        lastNameLabel1.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
-        lastNameLabel1.setForeground(new java.awt.Color(73, 84, 90));
-        lastNameLabel1.setText("Location");
-        jPanel7.add(lastNameLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 220, -1));
+        locationInputField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        jPanel7.add(locationInputField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 220, 40));
 
-        locationField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jPanel7.add(locationField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 420, 40));
+        jButton4.setBackground(new java.awt.Color(255, 55, 95));
+        jButton4.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Search");
+        jButton4.setBorder(null);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 150, 39));
+
+        jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(73, 84, 90));
+        jLabel8.setText("Location");
+        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 220, -1));
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
@@ -195,22 +213,38 @@ public class EmergencyReport extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
 
+        public void populateLongituteLatitude(MapCoordinates locationPoint) {
+        this.locationPoint = locationPoint;
+        locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());   
+    }
+    
+    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        MapViewr oLJP = new MapViewr(rightSidePanel);
+        rightSidePanel.add("MapViewr", oLJP);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox<String> emergencyBox;
     private javax.swing.JTextField firstNameField;
     private javax.swing.JLabel firstNameLabel;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lastNameField;
     private javax.swing.JLabel lastNameLabel;
-    private javax.swing.JLabel lastNameLabel1;
-    private javax.swing.JTextField locationField;
+    private javax.swing.JTextField locationInputField;
     private javax.swing.JTable tblEmergency;
     // End of variables declaration//GEN-END:variables
 
@@ -238,7 +272,7 @@ public class EmergencyReport extends javax.swing.JPanel {
 
     private void reportEmergency() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-     if(!locationField.getText().isEmpty())
+     if(!locationInputField.getText().isEmpty())
         {
             Req_Emergency re=new Req_Emergency();
         User a=(User)userAcc;
@@ -247,7 +281,7 @@ public class EmergencyReport extends javax.swing.JPanel {
         re.setName(a.getFirstName());
         re.setUserId(a.getUserId());
         re.setEmergency(emergencyBox.getSelectedItem().toString());
-        re.setLocation(locationField.getText());
+        re.setLocation(locationInputField.getText());
         re.setStatus("In Progress");
         re.setResponse("No Response");
             Req_EmergencyDir red=system.getEmergencyReqDir();

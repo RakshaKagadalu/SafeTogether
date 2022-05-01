@@ -4,6 +4,7 @@
  */
 package UserInterface.SysAdmin;
 
+import UserInterface.user.EmergencyReport;
 import Utility.MapCoordinates;
 import com.teamdev.jxbrowser.browser.Browser;
 import com.teamdev.jxbrowser.engine.Engine;
@@ -147,6 +148,9 @@ public class MapViewr extends javax.swing.JPanel {
             }else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof BloodRegistration) {
                 BloodRegistration fireDept = (BloodRegistration) userProcessContainer.getComponent(componentArray.length -1);
                 fireDept.populateLongituteLatitude(locationPoint);
+            } else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof EmergencyReport) {
+                EmergencyReport emergencyReport = (EmergencyReport) userProcessContainer.getComponent(componentArray.length - 1);
+                emergencyReport.populateLongituteLatitude(locationPoint);
             }
             else {
                                 System.out.println("ELSE LOCATION " + componentArray.length);

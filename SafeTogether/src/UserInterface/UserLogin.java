@@ -52,6 +52,7 @@ public class UserLogin extends javax.swing.JPanel {
     EcoSystem system;
     JPanel workArea;
     UserAcc userAcc;
+    JPanel JPanel;
 
     public UserLogin(JPanel workArea, EcoSystem system) {
         initComponents();
@@ -257,7 +258,7 @@ public class UserLogin extends javax.swing.JPanel {
 
                     }
                 }
-            } else if (userRole.equals("Business.Roles.Fire_man")) {
+            } else if (userRole.equals("Business.Roles.Fire_Man")) {
 
                 FireDir fireDir = system.getFireDir();
                 ArrayList<Fire> fireDepList = fireDir.getFireEngines();
@@ -266,7 +267,7 @@ public class UserLogin extends javax.swing.JPanel {
                 int count = 0;
                 for (int i = 0; i < size; i++) {
                     Fire f1 = fireDepList.get(i);
-
+System.out.println("inside fire username"+userAcc.getUserName());
                     if (userAcc.getUserName().matches(f1.getUserName())) {
                         System.out.print("inside fire dept admin role method");
                         fireDashboard();
