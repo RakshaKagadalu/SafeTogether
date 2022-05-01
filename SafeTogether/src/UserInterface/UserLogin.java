@@ -232,6 +232,7 @@ public class UserLogin extends javax.swing.JPanel {
                 int count = 0;
                 for (int i = 0; i < size; i++) {
                     Police p1 = policeList.get(i);
+                    System.out.println("Police role -> " + userAcc.getUserName());
 
                     if (userAcc.getUserName().matches(p1.getUserName())) {
                         System.out.print("inside police role method");

@@ -51,11 +51,8 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -74,29 +71,8 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         addressInput = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Name", "Location", "User ID", "Password", "Phone Number"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -108,10 +84,6 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel1.setText("Dashboard");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 580, 630));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -154,7 +126,7 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel2.setText("Enter Details");
-        jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 300, 50));
+        jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 300, 50));
 
         jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(73, 84, 90));
@@ -218,6 +190,31 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 470, 630));
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Location", "User ID", "Password", "Phone Number"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 740));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -277,15 +274,25 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
         if(t1>=0)
         {
             
-            {
+           
                 String a=(String)t.getValueAt(t1, 2);
                 FireDir pol = system.getFireDir();
                 ArrayList<Fire> cd1= pol.getFireEngines();
                 int z=cd1.size();
+                 if(!username.matches(a)){
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                    firstNameTxt.setText("");
+                    locationInputField.setText("");
+                    phoneTxt.setText("");
+                    passwordTxt.setText("");
+                    userIdTxt.setText("");
+                    return;
+            }
                 for(int i=0;i<z;i++)
                 {
                     Fire c=cd1.get(i);
                     c.getUser_Id();
+                    
                     if(c.getUser_Id().matches(a))
                     {
                         if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
@@ -303,7 +310,7 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
                     }
                 }
             populateTable();
-            }                                        
+                                                   
         }
             else
         {
@@ -397,7 +404,6 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

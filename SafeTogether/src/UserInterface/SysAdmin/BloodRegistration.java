@@ -221,10 +221,30 @@ public class BloodRegistration extends javax.swing.JPanel {
             String userId = (userNameTextField5.getText());
             String phoneNum = (userNameTextField7.getText());
 
+//              BloodWorkDirectory bloodbankDir = system.getBloodBankDir();
+//            ArrayList<BloodWork> list=bloodbankDir.getBloodWorkList();
+//            int z= list.size();
+//            for(int i=0;i<z;i++)
+//            {
+//                BloodWork c = list.get(i);
+//                c.getUserName();
+//                if(c.getUserName().matches(userId))
+//                {
+//                    JOptionPane.showMessageDialog(null, "User name already exists");
+//                    userNameTextField5.setText("");
+//                    return;
+//                }
+//            }
+            if(!system.getUserAccDir().checkIfUsernameIsUnique(userId)){
+                JOptionPane.showMessageDialog(null, "User name already exists");
+                userNameTextField5.setText("");
+                return;
+            }
+            
             BloodWork doc = new BloodWork(name,location,userId,pwd,phoneNum);
             system.getUserAccDir().addAccount(doc);
             system.getBloodBankDir().addBloodWork(doc);
-           //System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
+            
             displayTable();
             
             locationInputField.setText("");
@@ -244,36 +264,47 @@ public class BloodRegistration extends javax.swing.JPanel {
         int sRow=jTable1.getSelectedRow();
         if(sRow>=0)
         {
-             
-        //String value=(String)table.getValueAt(sRow, 3);
-            BloodWorkDirectory doctorDirectory = system.getBloodBankDir();
+            
+        String value=(String)jTable1.getValueAt(sRow, 2);
+        BloodWorkDirectory doctorDirectory = system.getBloodBankDir();
         ArrayList<BloodWork> list=doctorDirectory.getBloodWorkList();
         int listsize=list.size();
+        
+        if(!username.matches(value)){
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                locationInputField.setText("");
+                userNameTextField4.setText("");
+                userNameTextField5.setText("");
+                userNameTextField6.setText("");
+                userNameTextField7.setText("");
+                return;
+          }
+        
         for(int i=0;i<listsize;i++)
         {
             BloodWork doc=list.get(i);
-            //System.out.println(doc.getUserName());
+            
             
             if(doc.getUserName().matches(username))
                     {
                         if(!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-            {
-                JOptionPane.showMessageDialog(null, " 10 digit phone number");
-                userNameTextField7.setText("");
-                return;
-            }
+                        {
+                            JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                            userNameTextField7.setText("");
+                            return;
+                        }
 
-                      doc.setUserNames(userNameTextField4.getText());
-                        doc.setUserLocation(locationInputField.getText());
-                        doc.setUserPhone(userNameTextField7.getText());
-                        doc.setUserId(userNameTextField5.getText());
-                        doc.setPassword(userNameTextField6.getText());
+                    doc.setUserNames(userNameTextField4.getText());
+                    doc.setUserLocation(locationInputField.getText());
+                    doc.setUserPhone(userNameTextField7.getText());
+                    doc.setUserId(userNameTextField5.getText());
+                    doc.setPassword(userNameTextField6.getText());
                       
                     
                     }
-             else {
-                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
-            }
+//             else {
+//                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+//            }
         }
           displayTable();
             

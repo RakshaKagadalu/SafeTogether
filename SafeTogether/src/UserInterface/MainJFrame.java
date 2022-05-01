@@ -84,22 +84,22 @@ public class MainJFrame extends javax.swing.JFrame {
 //            System.out.println(system.getUserAccDir().getUserAccList());
 //         
 //        
-            Police pol = new Police("police1", "pol123", "Boston", "NUPD","9999999991");
-            system.getPoliceDir().addNewPolice(pol);
-            system.getUserAccDir().addAccount(pol);
-            
-            Fire fire = new Fire("f1", "f123", "Boston", "FPD", "1234567890");
-            system.getFireDir().addNewFire(fire);
-            system.getUserAccDir().addAccount(fire);
-            
-            
-            Ambulance ambu = new Ambulance("amb1", "a123", "boston", "driver1","9999999980");
-            system.getAmbulanceDir().addNewAmbulance(ambu);
-            system.getUserAccDir().addAccount(ambu);
-            
-            PandemicCenter pa = new PandemicCenter("Pandu","Boston","pan1", "pan123","1234567890");
-            system.getPandemicCenterDir().addPandemicCenter(pa);
-            system.getUserAccDir().addAccount(pa);
+//            Police pol = new Police("police1", "pol123", "Boston", "NUPD","9999999991");
+//            system.getPoliceDir().addNewPolice(pol);
+//            system.getUserAccDir().addAccount(pol);
+//            
+//            Fire fire = new Fire("f1", "f123", "Boston", "FPD", "1234567890");
+//            system.getFireDir().addNewFire(fire);
+//            system.getUserAccDir().addAccount(fire);
+//            
+//            
+//            Ambulance ambu = new Ambulance("amb1", "a123", "boston", "driver1","9999999980");
+//            system.getAmbulanceDir().addNewAmbulance(ambu);
+//            system.getUserAccDir().addAccount(ambu);
+//            
+//            PandemicCenter pa = new PandemicCenter("Pandu","Boston","pan1", "pan123","1234567890");
+//            system.getPandemicCenterDir().addPandemicCenter(pa);
+//            system.getUserAccDir().addAccount(pa);
          
         
     }

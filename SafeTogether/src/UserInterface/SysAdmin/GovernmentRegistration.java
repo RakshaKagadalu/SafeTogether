@@ -249,10 +249,19 @@ public class GovernmentRegistration extends javax.swing.JPanel {
         {
             
             {
-                String a=(String)t.getValueAt(t1, 3);
+                String a=(String)t.getValueAt(t1, 2);
                 CDCDirectory bbd = system.getcDCDir();
                 ArrayList<CDC> cd1=bbd.getCdcList();
                 int z=cd1.size();
+                  if(!username.matches(a)){
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                    firstNameTxt.setText("");
+                    userIdTxt.setText("");
+                    phoneTxt.setText("");
+                    passwordTxt.setText("");
+                    userIdTxt.setText("");
+                    return;
+            }
                 for(int i=0;i<z;i++)
                 {
                     CDC c=cd1.get(i);
