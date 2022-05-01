@@ -31,13 +31,13 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
     JPanel rightSidePanel;
     Fire amb;
     MapCoordinates locationPoint;
- 
+
     FireDepartmentRegistration(EcoSystem system, JPanel container, MapCoordinates locationPoint) {
-         initComponents();
+        initComponents();
         this.system = system;
         this.rightSidePanel = container;
         this.locationPoint = locationPoint;
-        this.setSize(1160, 750); 
+        this.setSize(1160, 750);
         populateTable();
 // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -220,21 +220,26 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-         if( firstNameTxt.getText().isEmpty()||locationInputField.getText().isEmpty()|| userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty())
-        {
+        if (firstNameTxt.getText().isEmpty() || locationInputField.getText().isEmpty() || userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
             return;
         }
 
-        if(system.getUserAccountDirectory().checkIfUsernameIsUnique(userIdTxt.getText())){
-            if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-            {
+        if (system.getUserAccountDirectory().checkIfUsernameIsUnique(userIdTxt.getText())) {
+            if (!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
                 JOptionPane.showMessageDialog(null, " 10 digit phone number");
                 phoneTxt.setText("");
                 return;
             }
 
-            Fire customer = new Fire(userIdTxt.getText(),passwordTxt.getText(),locationInputField.getText(),firstNameTxt.getText(),phoneTxt.getText() );
+            if (!passwordTxt.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                        + "with one upper case, one lower case, one digit and one special character");
+                passwordTxt.setText("");
+                return;
+            }
+
+            Fire customer = new Fire(userIdTxt.getText(), passwordTxt.getText(), locationInputField.getText(), firstNameTxt.getText(), phoneTxt.getText());
             system.getUserAccountDirectory().addAccount(customer);
             system.getFireDir().addNewFire(customer);
             populateTable();
@@ -243,7 +248,7 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
             userIdTxt.setText("");
             passwordTxt.setText("");
             locationInputField.setText("");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Username " + userIdTxt.getText() + " already exists !!!, Please try a new one");
         }
     }//GEN-LAST:event_addButtonActionPerformed
@@ -254,92 +259,94 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (Fire customer : fireDir.getFireEngines()) {
-                    Object[] row = new Object[5];
-                    row[0] = customer.getNameFireman();
-                    row[1] = customer.getFireServLocation();                    
-                    row[2] = customer.getUser_Id();
-                    row[3] = customer.getPwd();
-                    row[4] = customer.getPhNum();
+            Object[] row = new Object[5];
+            row[0] = customer.getNameFireman();
+            row[1] = customer.getFireServLocation();
+            row[2] = customer.getUser_Id();
+            row[3] = customer.getPwd();
+            row[4] = customer.getPhNum();
 
-                    model.addRow(row);
-                
-            }
+            model.addRow(row);
+
+        }
     }
-    
+
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        String username=userIdTxt.getText();
+        String username = userIdTxt.getText();
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
-        {
-            
-           
-                String a=(String)t.getValueAt(t1, 2);
-                FireDir pol = system.getFireDir();
-                ArrayList<Fire> cd1= pol.getFireEngines();
-                int z=cd1.size();
-                 if(!username.matches(a)){
-                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
-                    firstNameTxt.setText("");
-                    locationInputField.setText("");
-                    phoneTxt.setText("");
-                    passwordTxt.setText("");
-                    userIdTxt.setText("");
-                    return;
-            }
-                for(int i=0;i<z;i++)
-                {
-                    Fire c=cd1.get(i);
-                    c.getUser_Id();
-                    
-                    if(c.getUser_Id().matches(a))
-                    {
-                        if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-                        {
-                            JOptionPane.showMessageDialog(null, " 10 digit phone number");
-                            phoneTxt.setText("");
-                            return;
-                        }
+        int t1 = jTable1.getSelectedRow();
+        if (t1 >= 0) {
 
-                        c.setNameFireman(firstNameTxt.getText());
-                        c.setFireServLocation(locationInputField.getText());
-                        c.setPhNum(phoneTxt.getText());
-                        c.setUser_Id(userIdTxt.getText());
-                        c.setPwd(passwordTxt.getText());
+            String a = (String) t.getValueAt(t1, 2);
+            FireDir pol = system.getFireDir();
+            ArrayList<Fire> cd1 = pol.getFireEngines();
+            int z = cd1.size();
+            if (!username.matches(a)) {
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                firstNameTxt.setText("");
+                locationInputField.setText("");
+                phoneTxt.setText("");
+                passwordTxt.setText("");
+                userIdTxt.setText("");
+                return;
+            }
+            if (firstNameTxt.getText().isEmpty() || locationInputField.getText().isEmpty() || userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+                return;
+            }
+
+            for (int i = 0; i < z; i++) {
+                Fire c = cd1.get(i);
+                c.getUser_Id();
+
+                if (c.getUser_Id().matches(a)) {
+                    if (!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+                        JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                        phoneTxt.setText("");
+                        return;
                     }
+
+                    if (!passwordTxt.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                        JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                                + "with one upper case, one lower case, one digit and one special character");
+                        passwordTxt.setText("");
+                        return;
+                    }
+
+                    c.setNameFireman(firstNameTxt.getText());
+                    c.setFireServLocation(locationInputField.getText());
+                    c.setPhNum(phoneTxt.getText());
+                    c.setUser_Id(userIdTxt.getText());
+                    c.setPwd(passwordTxt.getText());
                 }
+            }
             populateTable();
-                                                   
-        }
-            else
-        {
+
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        String username=userIdTxt.getText();
+        String username = userIdTxt.getText();
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
-        {
-            String a=(String)t.getValueAt(t1, 2);
+        int t1 = jTable1.getSelectedRow();
+        if (t1 >= 0) {
+            String a = (String) t.getValueAt(t1, 2);
             System.out.println(a);
             FireDir bbd = system.getFireDir();
-            ArrayList<Fire> cd1=bbd.getFireEngines();
-            int z=cd1.size();
-            for(int i=0;i<z;i++)
-            {
-                Fire c=cd1.get(i);
+            ArrayList<Fire> cd1 = bbd.getFireEngines();
+            int z = cd1.size();
+            for (int i = 0; i < z; i++) {
+                Fire c = cd1.get(i);
                 System.out.println(c.getUser_Id());
-                if(c.getUser_Id().matches(a))
-                {
+                if (c.getUser_Id().matches(a)) {
                     cd1.remove(c);
                     System.out.println("delete");
                     system.getUserAccountDirectory().removeccount(c);
-                     break;
+                    break;
                 }
             }
             populateTable();
@@ -349,35 +356,33 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
             userIdTxt.setText("");
             passwordTxt.setText("");
 
-        }                                        
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a FireStation from the table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        } else{
-            firstNameTxt.setText(table.getValueAt(selectedRow,0).toString());
-            locationInputField.setText(table.getValueAt(selectedRow,1).toString());
-            userIdTxt.setText(table.getValueAt(selectedRow,2).toString());
-            passwordTxt.setText(table.getValueAt(selectedRow,3).toString());
-            phoneTxt.setText(table.getValueAt(selectedRow,4).toString());
-        
+        } else {
+            firstNameTxt.setText(table.getValueAt(selectedRow, 0).toString());
+            locationInputField.setText(table.getValueAt(selectedRow, 1).toString());
+            userIdTxt.setText(table.getValueAt(selectedRow, 2).toString());
+            passwordTxt.setText(table.getValueAt(selectedRow, 3).toString());
+            phoneTxt.setText(table.getValueAt(selectedRow, 4).toString());
+
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     public void populateLongituteLatitude(MapCoordinates locationPoint) {
         this.locationPoint = locationPoint;
-        locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());   
+        locationInputField.setText(locationPoint.getLatitudeCoordinate() + ", " + locationPoint.getLongitudeCoordinate());
     }
-    
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         MapViewr oLJP = new MapViewr(rightSidePanel);
@@ -385,7 +390,7 @@ public class FireDepartmentRegistration extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
     }//GEN-LAST:event_jButton4ActionPerformed
- 
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
