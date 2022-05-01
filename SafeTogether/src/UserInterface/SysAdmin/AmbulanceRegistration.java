@@ -29,6 +29,7 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
     EcoSystem system;
     JPanel rightSidePanel;
     Ambulance amb;
+
     public AmbulanceRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
         this.system = system;
@@ -36,6 +37,7 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
         this.setSize(1160, 750);
         populateTable();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,7 +154,7 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel7.setText("Ambulance Name");
+        jLabel7.setText("First Name");
         jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 220, -1));
 
         locationTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
@@ -160,7 +162,7 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(73, 84, 90));
-        jLabel8.setText("Driver Name");
+        jLabel8.setText("Last Name");
         jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
 
         firstNameTxt.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
@@ -197,21 +199,26 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:`
-        if( firstNameTxt.getText().isEmpty()||locationTxt.getText().isEmpty()|| userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty())
-        {
+        if (firstNameTxt.getText().isEmpty() || locationTxt.getText().isEmpty() || userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
             return;
         }
 
-        if(system.getUserAccountDirectory().checkIfUsernameIsUnique(userIdTxt.getText())){
-            if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-            {
+        if (system.getUserAccountDirectory().checkIfUsernameIsUnique(userIdTxt.getText())) {
+            if (!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
                 JOptionPane.showMessageDialog(null, " 10 digit phone number");
                 phoneTxt.setText("");
                 return;
             }
 
-            Ambulance customer = new Ambulance(userIdTxt.getText(),passwordTxt.getText(),locationTxt.getText(),firstNameTxt.getText(),phoneTxt.getText() );
+            if (!passwordTxt.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                        + "with one upper case, one lower case, one digit and one special character");
+                passwordTxt.setText("");
+                return;
+            }
+
+            Ambulance customer = new Ambulance(userIdTxt.getText(), passwordTxt.getText(), locationTxt.getText(), firstNameTxt.getText(), phoneTxt.getText());
             system.getUserAccountDirectory().addAccount(customer);
             system.getAmbulanceDir().addNewAmbulance(customer);
             populateTable();
@@ -220,85 +227,86 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
             userIdTxt.setText("");
             passwordTxt.setText("");
             locationTxt.setText("");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Username " + userIdTxt.getText() + " already exists !!!, Please try a new one");
         }
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        String username=userIdTxt.getText();
+        String username = userIdTxt.getText();
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
-        {
-            
-            
-                String a=(String)t.getValueAt(t1, 2);
-                AmbulanceDir pol = system.getAmbulanceDir();
-                ArrayList<Ambulance> cd1= pol.getAmbulances();
-                int z=cd1.size();
-                 if(!username.matches(a)){
-                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
-                    firstNameTxt.setText("");
-                    userIdTxt.setText("");
-                    phoneTxt.setText("");
-                    passwordTxt.setText("");
-                    userIdTxt.setText("");
-                    return;
-            }
-                for(int i=0;i<z;i++)
-                {
-                    Ambulance c=cd1.get(i);
-                    c.getUser_Id();
-                    if(c.getUser_Id().matches(a))
-                    {
-                        if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-                        {
-                            JOptionPane.showMessageDialog(null, " 10 digit phone number");
-                            phoneTxt.setText("");
-                            return;
-                        }
+        int t1 = jTable1.getSelectedRow();
+        if (t1 >= 0) {
 
-                        c.setNameDriver(firstNameTxt.getText());
-                        c.setAmbulanceServName(locationTxt.getText());
-                        c.setPhNum(phoneTxt.getText());
-                        c.setUser_Id(userIdTxt.getText());
-                        c.setPwd(passwordTxt.getText());
-                    
-                    
+            String a = (String) t.getValueAt(t1, 2);
+            AmbulanceDir pol = system.getAmbulanceDir();
+            ArrayList<Ambulance> cd1 = pol.getAmbulances();
+            int z = cd1.size();
+
+            if (firstNameTxt.getText().isEmpty() || locationTxt.getText().isEmpty() || userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+                return;
+            }
+            if (!username.matches(a)) {
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                firstNameTxt.setText("");
+                userIdTxt.setText("");
+                phoneTxt.setText("");
+                passwordTxt.setText("");
+                userIdTxt.setText("");
+                return;
+            }
+
+            for (int i = 0; i < z; i++) {
+                Ambulance c = cd1.get(i);
+                c.getUser_Id();
+                if (c.getUser_Id().matches(a)) {
+                    if (!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+                        JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                        phoneTxt.setText("");
+                        return;
+                    }
+                    if (!passwordTxt.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                        JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                                + "with one upper case, one lower case, one digit and one special character");
+                        passwordTxt.setText("");
+                        return;
+                    }
+
+                    c.setNameDriver(firstNameTxt.getText());
+                    c.setAmbulanceServName(locationTxt.getText());
+                    c.setPhNum(phoneTxt.getText());
+                    c.setUser_Id(userIdTxt.getText());
+                    c.setPwd(passwordTxt.getText());
+
                 }
-            populateTable();
-            }                                        
-        }
-            else
-        {
+                populateTable();
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        String username=userIdTxt.getText();
+        String username = userIdTxt.getText();
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
-        {
-            String a=(String)t.getValueAt(t1, 2);
+        int t1 = jTable1.getSelectedRow();
+        if (t1 >= 0) {
+            String a = (String) t.getValueAt(t1, 2);
             System.out.println(a);
             AmbulanceDir bbd = system.getAmbulanceDir();
-            ArrayList<Ambulance> cd1=bbd.getAmbulances();
-            int z=cd1.size();
-            for(int i=0;i<z;i++)
-            {
-                Ambulance c=cd1.get(i);
+            ArrayList<Ambulance> cd1 = bbd.getAmbulances();
+            int z = cd1.size();
+            for (int i = 0; i < z; i++) {
+                Ambulance c = cd1.get(i);
                 System.out.println(c.getUser_Id());
-                if(c.getUser_Id().matches(a))
-                {
+                if (c.getUser_Id().matches(a)) {
                     cd1.remove(c);
                     System.out.println("delete");
                     system.getUserAccountDirectory().removeccount(c);
-                     break;
+                    break;
                 }
             }
             populateTable();
@@ -308,9 +316,7 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
             userIdTxt.setText("");
             passwordTxt.setText("");
 
-        }                                        
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
@@ -321,31 +327,31 @@ public class AmbulanceRegistration extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (Ambulance customer : AmbulanceDir.getAmbulances()) {
-                    Object[] row = new Object[5];
-                    row[0] = customer.getNameDriver();  
-                    row[1] = customer.getAmbulanceServName();                 
-                    row[2] = customer.getUser_Id();
-                    row[3] = customer.getPwd();
-                    row[4] = customer.getPhNum();
-                    model.addRow(row);
-                
-            }
+            Object[] row = new Object[5];
+            row[0] = customer.getNameDriver();
+            row[1] = customer.getAmbulanceServName();
+            row[2] = customer.getUser_Id();
+            row[3] = customer.getPwd();
+            row[4] = customer.getPhNum();
+            model.addRow(row);
+
+        }
     }
-    
+
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
+        int selectedRow = jTable1.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a AmbulanceStation from the table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        } else{
-            firstNameTxt.setText(table.getValueAt(selectedRow,0).toString());
-            locationTxt.setText(table.getValueAt(selectedRow,1).toString());
-            userIdTxt.setText(table.getValueAt(selectedRow,2).toString());
-            passwordTxt.setText(table.getValueAt(selectedRow,3).toString());
-            phoneTxt.setText(table.getValueAt(selectedRow,4).toString());
-        
+        } else {
+            firstNameTxt.setText(table.getValueAt(selectedRow, 0).toString());
+            locationTxt.setText(table.getValueAt(selectedRow, 1).toString());
+            userIdTxt.setText(table.getValueAt(selectedRow, 2).toString());
+            passwordTxt.setText(table.getValueAt(selectedRow, 3).toString());
+            phoneTxt.setText(table.getValueAt(selectedRow, 4).toString());
+
         }
     }//GEN-LAST:event_jTable1MouseClicked
 

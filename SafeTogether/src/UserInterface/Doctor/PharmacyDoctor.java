@@ -10,6 +10,8 @@ import Business.EcoSystem;
 import Business.Pharma.Pharma;
 import Business.Pharma.PharmaDirectory;
 import Business.UserAcc.UserAcc;
+import Business.WorkQueue.DoctorsAppointment;
+import Business.WorkQueue.DoctorsAppointment_Dir;
 import Business.WorkQueue.Req_Medicine;
 import Business.WorkQueue.Req_MedicineDir;
 import java.util.ArrayList;
@@ -31,15 +33,17 @@ public class PharmacyDoctor extends javax.swing.JPanel {
     private final EcoSystem system;
     private final UserAcc userAcc;
     private final String patientid;
+    private final int appointmentId;
 
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
 
-    public PharmacyDoctor(JPanel container, EcoSystem system, UserAcc userAcc, String userid) {
+    public PharmacyDoctor(JPanel container, EcoSystem system, UserAcc userAcc, String userid, int appointmentId) {
         initComponents();
         this.container = container;
         this.system = system;
         this.userAcc = userAcc;
         this.patientid = userid;
+        this.appointmentId = appointmentId;
         PharmaDirectory rd = system.getPharmaDir();
         ArrayList<Pharma> list = rd.getPharmaArrayList();
         int s = list.size();
@@ -50,7 +54,8 @@ public class PharmacyDoctor extends javax.swing.JPanel {
             jComboBox1.addItem(s1);
 
         }
-        // displayTable();
+//        orderList.setModel(new DefaultTableModel(null, new String[]{"Medicine","Cost", "Quantity"}));
+//        displayOrderTable();
     }
 
     /**
@@ -237,9 +242,10 @@ public class PharmacyDoctor extends javax.swing.JPanel {
 
             }
             Req_MedicineDir mdir = system.getMedicineReqDir();
-            ArrayList<Req_Medicine> orderList = mdir.getMedReqDir();
-            orderList.add(reqMed);
-            dB4OUtil.storeSystem(system);
+            ArrayList<Req_Medicine> orderList1 = mdir.getMedReqDir();
+            orderList1.add(reqMed);
+            updateStatus();
+//            dB4OUtil.storeSystem(system);
             JOptionPane.showMessageDialog(null, "Order placed");
         } else {
             JOptionPane.showMessageDialog(null, "Cart is empty!!");
@@ -257,11 +263,26 @@ public class PharmacyDoctor extends javax.swing.JPanel {
         String response;
         do {
             response = JOptionPane.showInputDialog("Please provide Quantity");
-        } while (!response.matches("[0-9][0-9]"));
+        } while (!response.matches("^[0-9][0-9]?"));
 
         DefaultTableModel t2 = (DefaultTableModel) orderList.getModel();
         t2.addRow(new Object[]{s1, s2, response});
+        
 
+    }
+    
+    public void updateStatus(){
+            DoctorsAppointment_Dir docApp = system.getDocAppDir();
+            ArrayList<DoctorsAppointment> docAppList = docApp.getAppointments();
+            System.out.println("appid   " + appointmentId);
+            int l = docAppList.size();
+
+            for (int i = 0; i < l; i++) {
+                DoctorsAppointment docList = docAppList.get(i);
+                if(appointmentId == docList.getId()){
+                    docList.setStatus("Prescribed");
+                }
+            }
     }
 
     private void displayMedicines() {
@@ -289,6 +310,7 @@ public class PharmacyDoctor extends javax.swing.JPanel {
                 }
             }
         }
+//        displayOrderTable();
 
     }
 
@@ -296,4 +318,28 @@ public class PharmacyDoctor extends javax.swing.JPanel {
 //        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 //
 //    }
+
+    private void displayOrderTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Req_MedicineDir medDir = system.getMedicineReqDir();
+        ArrayList<Req_Medicine> orders = medDir.getMedReqDir();
+        int size = orders.size();
+        for(int i=0; i<size;i++){
+            Req_Medicine order = orders.get(i);
+            if(order.getPatientId().matches(patientid)){
+                 Map<String,String> orderMap= order.getMedOrderlist();
+                 Map<String, String> costMap = order.getMedCostlist();
+                 for (String key: orderMap.keySet()) {
+                    DefaultTableModel t2 = (DefaultTableModel) orderList.getModel();
+                    t2.addRow(new Object[]{key, costMap.get(key), orderMap.get(key)});
+//                    t2.addRow(new Object[]{order.ge});
+//                    jTextMedicine.append("Item "+ count+ " : "+key+" Quantity : "+orderMap.get(key)+"\n");
+//                    count++;
+
+                }
+            }
+        }
+    
+    
+    }
 }

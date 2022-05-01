@@ -17,19 +17,20 @@ import javax.swing.table.DefaultTableModel;
  * @author shrikrishnajoisa
  */
 public class GovernmentRegistration extends javax.swing.JPanel {
+
     private final JPanel container;
     private final EcoSystem system;
 
     /**
      * Creates new form GovernmentRegistration
      */
-    public GovernmentRegistration(JPanel container,EcoSystem system) {
+    public GovernmentRegistration(JPanel container, EcoSystem system) {
         initComponents();
-        this.container=container;
-        this.system=system;
+        this.container = container;
+        this.system = system;
 //        this.setSize(619,600);
         populateTable();
-        
+
     }
 
     /**
@@ -193,21 +194,25 @@ public class GovernmentRegistration extends javax.swing.JPanel {
 
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
         // TODO add your handling code here:
-        if( firstNameTxt.getText().isEmpty()||lastNameTxt.getText().isEmpty()|| userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty())
-        {
+        if (firstNameTxt.getText().isEmpty() || lastNameTxt.getText().isEmpty() || userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
             return;
         }
 
-        if(system.getUserAccountDirectory().checkIfUsernameIsUnique(userIdTxt.getText())){
-            if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-            {
+        if (system.getUserAccountDirectory().checkIfUsernameIsUnique(userIdTxt.getText())) {
+            if (!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
                 JOptionPane.showMessageDialog(null, " 10 digit phone number");
                 phoneTxt.setText("");
                 return;
             }
+            if (!passwordTxt.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                        + "with one upper case, one lower case, one digit and one special character");
+                passwordTxt.setText("");
+                return;
+            }
 
-            CDC customer = new CDC(firstNameTxt.getText(),lastNameTxt.getText(), userIdTxt.getText(),passwordTxt.getText(), phoneTxt.getText() );
+            CDC customer = new CDC(firstNameTxt.getText(), lastNameTxt.getText(), userIdTxt.getText(), passwordTxt.getText(), phoneTxt.getText());
             system.getUserAccountDirectory().addAccount(customer);
             system.getcDCDir().addCDCPeople(customer);
             populateTable();
@@ -216,7 +221,7 @@ public class GovernmentRegistration extends javax.swing.JPanel {
             phoneTxt.setText("");
             userIdTxt.setText("");
             passwordTxt.setText("");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Username " + userIdTxt.getText() + " already exists !!!, Please try a new one");
         }
     }//GEN-LAST:event_addbtnActionPerformed
@@ -227,51 +232,57 @@ public class GovernmentRegistration extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (CDC customer : cdcDir.getCdcList()) {
-                    Object[] row = new Object[5];
-                    row[0] = customer.getFirstName();
-                    row[1] = customer.getSecondName();                    
-                    row[2] = customer.getUserID();
-                    row[3] = customer.getUserPassword();
-                    row[4] = customer.getPhoneNumber();
+            Object[] row = new Object[5];
+            row[0] = customer.getFirstName();
+            row[1] = customer.getSecondName();
+            row[2] = customer.getUserID();
+            row[3] = customer.getUserPassword();
+            row[4] = customer.getPhoneNumber();
 
-                    model.addRow(row);
-                
-            }
-        
+            model.addRow(row);
+
+        }
+
     }
-    
+
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-        String username=userIdTxt.getText();
+        String username = userIdTxt.getText();
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
-        {
-            
+        int t1 = jTable1.getSelectedRow();
+        if (t1 >= 0) {
+
             {
-                String a=(String)t.getValueAt(t1, 2);
+                String a = (String) t.getValueAt(t1, 2);
                 CDCDirectory bbd = system.getcDCDir();
-                ArrayList<CDC> cd1=bbd.getCdcList();
-                int z=cd1.size();
-                  if(!username.matches(a)){
-                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                ArrayList<CDC> cd1 = bbd.getCdcList();
+                int z = cd1.size();
+                if (!username.matches(a)) {
+                    JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
                     firstNameTxt.setText("");
                     userIdTxt.setText("");
                     phoneTxt.setText("");
                     passwordTxt.setText("");
                     userIdTxt.setText("");
                     return;
-            }
-                for(int i=0;i<z;i++)
-                {
-                    CDC c=cd1.get(i);
+                }
+                if (firstNameTxt.getText().isEmpty() || lastNameTxt.getText().isEmpty() || userIdTxt.getText().isEmpty() || passwordTxt.getText().isEmpty() || phoneTxt.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+                    return;
+                }
+                for (int i = 0; i < z; i++) {
+                    CDC c = cd1.get(i);
                     c.getUserID();
-                    if(c.getUserID().matches(a))
-                    {
-                        if(!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-                        {
+                    if (c.getUserID().matches(a)) {
+                        if (!phoneTxt.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
                             JOptionPane.showMessageDialog(null, " 10 digit phone number");
                             phoneTxt.setText("");
+                            return;
+                        }
+                        if (!passwordTxt.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                            JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                                    + "with one upper case, one lower case, one digit and one special character");
+                            passwordTxt.setText("");
                             return;
                         }
 
@@ -282,37 +293,32 @@ public class GovernmentRegistration extends javax.swing.JPanel {
                         c.setUserPassword(passwordTxt.getText());
                     }
                 }
-            populateTable();
-            }                                        
-        }
-            else
-        {
+                populateTable();
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
-        String username=userIdTxt.getText();
+        String username = userIdTxt.getText();
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
-        {
-            String a=(String)t.getValueAt(t1, 3);
+        int t1 = jTable1.getSelectedRow();
+        if (t1 >= 0) {
+            String a = (String) t.getValueAt(t1, 3);
             System.out.println(a);
             CDCDirectory bbd = system.getcDCDir();
-            ArrayList<CDC> cd1=bbd.getCdcList();
-            int z=cd1.size();
-            for(int i=0;i<z;i++)
-            {
-                CDC c=cd1.get(i);
+            ArrayList<CDC> cd1 = bbd.getCdcList();
+            int z = cd1.size();
+            for (int i = 0; i < z; i++) {
+                CDC c = cd1.get(i);
                 System.out.println(c.getUserID());
-                if(c.getUserID().matches(a))
-                {
+                if (c.getUserID().matches(a)) {
                     cd1.remove(c);
                     System.out.println("delete");
                     system.getUserAccountDirectory().removeccount(c);
-                     break;
+                    break;
                 }
             }
             populateTable();
@@ -322,9 +328,7 @@ public class GovernmentRegistration extends javax.swing.JPanel {
             userIdTxt.setText("");
             passwordTxt.setText("");
 
-        }                                        
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
@@ -332,21 +336,20 @@ public class GovernmentRegistration extends javax.swing.JPanel {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
+        int selectedRow = jTable1.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a Official from the table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        } else{
-            firstNameTxt.setText(table.getValueAt(selectedRow,0).toString());
-            lastNameTxt.setText(table.getValueAt(selectedRow,1).toString());
-            userIdTxt.setText(table.getValueAt(selectedRow,2).toString());
-            passwordTxt.setText(table.getValueAt(selectedRow,3).toString());
-            phoneTxt.setText(table.getValueAt(selectedRow,4).toString());
-        
+        } else {
+            firstNameTxt.setText(table.getValueAt(selectedRow, 0).toString());
+            lastNameTxt.setText(table.getValueAt(selectedRow, 1).toString());
+            userIdTxt.setText(table.getValueAt(selectedRow, 2).toString());
+            passwordTxt.setText(table.getValueAt(selectedRow, 3).toString());
+            phoneTxt.setText(table.getValueAt(selectedRow, 4).toString());
+
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addbtn;

@@ -28,15 +28,14 @@ public class PharmacyRegistration extends javax.swing.JPanel {
     /**
      * Creates new form PharmacyRegistration
      */
-     EcoSystem system;
+    EcoSystem system;
     JPanel rightSidePanel;
     ArrayList<String> locations = new ArrayList<String>();
     ArrayList<String> pharmacies = new ArrayList<String>();
     int locationCount = 0;
     int pharmaciesCount = 0;
     MapCoordinates locationPoint;
-    
- 
+
     public PharmacyRegistration(EcoSystem system, JPanel rightSidePanel, MapCoordinates locationPoint) {
         initComponents();
         this.system = system;
@@ -47,20 +46,20 @@ public class PharmacyRegistration extends javax.swing.JPanel {
         populateDashBoard();
 
     }
-    
+
     private void populateDashBoard() {
         // Print the count of the location
         // Converting it to hash set
         HashSet<String> uniqueLocations = new HashSet<String>(locations);
         HashSet<String> uniquePharma = new HashSet<String>(pharmacies);
-        
+
         // get the count of hash sets
         locationCount = uniqueLocations.size();
         pharmaciesCount = uniquePharma.size();
-        
+
         locationLabel.setText(Integer.toString(locationCount));
         jLabel3.setText(Integer.toString(pharmaciesCount));
-        
+
     }
 
     /**
@@ -298,60 +297,69 @@ public class PharmacyRegistration extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-            String name = (userNameTextField4.getText());
-            String location = (locationInputField.getText());
-            String phoneNum = (userNameTextField7.getText());
-            String userId = (userNameTextField5.getText());
-            String pwd = (userNameTextField6.getText());
-            
-            
-            if(system.getUserAccountDirectory().checkIfUsernameIsUnique(userId)){
-                if(!phoneNum.matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-                {
-                    JOptionPane.showMessageDialog(null, " 10 digit phone number");
-                    userNameTextField7.setText("");
-                    return;
-                }
+        if (userNameTextField4.getText().isEmpty() || locationInputField.getText().isEmpty() || userNameTextField5.getText().isEmpty() || userNameTextField7.getText().isEmpty() || userNameTextField6.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        }
+        String name = (userNameTextField4.getText());
+        String location = (locationInputField.getText());
+        String phoneNum = (userNameTextField7.getText());
+        String userId = (userNameTextField5.getText());
+        String pwd = (userNameTextField6.getText());
 
-                Pharma pc = new Pharma(name,location,userId,pwd,phoneNum);
-                system.getUserAccDir().addAccount(pc);
-                system.getPharmaDir().addToPharma(pc);
-                displayTable();
-                locationInputField.setText("");
-                userNameTextField4.setText("");
-                userNameTextField5.setText("");
-                userNameTextField6.setText("");
+        if (system.getUserAccountDirectory().checkIfUsernameIsUnique(userId)) {
+
+            if (!phoneNum.matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+                JOptionPane.showMessageDialog(null, " 10 digit phone number");
                 userNameTextField7.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "Username " + userId + " already exists !!!, Please try a new one");
+                return;
             }
-            
- 
-             
-         //  System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
 
+            if (!userNameTextField6.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                        + "with one upper case, one lower case, one digit and one special character");
+                userNameTextField6.setText("");
+                return;
+            }
+
+            Pharma pc = new Pharma(name, location, userId, pwd, phoneNum);
+            system.getUserAccDir().addAccount(pc);
+            system.getPharmaDir().addToPharma(pc);
             displayTable();
-            anotherLoad();
             locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
             userNameTextField7.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Username " + userId + " already exists !!!, Please try a new one");
+        }
+
+        //  System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
+        displayTable();
+        anotherLoad();
+        locationInputField.setText("");
+        userNameTextField4.setText("");
+        userNameTextField5.setText("");
+        userNameTextField6.setText("");
+        userNameTextField7.setText("");
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        
-         String username= userNameTextField5.getText();
+        if (userNameTextField4.getText().isEmpty() || locationInputField.getText().isEmpty() || userNameTextField5.getText().isEmpty() || userNameTextField7.getText().isEmpty() || userNameTextField6.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        }
+        String username = userNameTextField5.getText();
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
-        {      
-            String a=(String)t.getValueAt(t1, 2);
+        int t1 = jTable1.getSelectedRow();
+        if (t1 >= 0) {
+            String a = (String) t.getValueAt(t1, 2);
             PharmaDirectory bbd = system.getPharmaDir();
-            ArrayList<Pharma> cd1=bbd.getPharmaArrayList();
-            int z=cd1.size();
-              if(!username.matches(a)){
+            ArrayList<Pharma> cd1 = bbd.getPharmaArrayList();
+            int z = cd1.size();
+            if (!username.matches(a)) {
                 JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
                 locationInputField.setText("");
                 userNameTextField4.setText("");
@@ -359,115 +367,107 @@ public class PharmacyRegistration extends javax.swing.JPanel {
                 userNameTextField6.setText("");
                 userNameTextField7.setText("");
                 return;
-                }
-            for(int i=0;i<z;i++)
-            {
-                Pharma c=cd1.get(i);
+            }
+            for (int i = 0; i < z; i++) {
+                Pharma c = cd1.get(i);
                 c.getUserName();
-                if(c.getUserName().matches(username))
-                {
-                  if(!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-                {
-                    JOptionPane.showMessageDialog(null, " 10 digit phone number");
-                    userNameTextField7.setText("");
-                    return;
-                }
+                if (c.getUserName().matches(username)) {
+                    if (!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+                        JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                        userNameTextField7.setText("");
+                        return;
+                    }
+                    if (!userNameTextField6.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                        JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                                + "with one upper case, one lower case, one digit and one special character");
+                        userNameTextField6.setText("");
+                        return;
+                    }
 
                     c.setPharmaName(userNameTextField4.getText());
                     c.setPharmaLocation(locationInputField.getText());
                     c.setPharmaUserID(userNameTextField5.getText());
                     c.setPharmaPassword(userNameTextField6.getText());
-                    c.setPharmaPhoneNumber(userNameTextField7.getText());       
+                    c.setPharmaPhoneNumber(userNameTextField7.getText());
                 }
             }
-                displayTable();
-                anotherLoad();
-        }
-        else
-        {
+            displayTable();
+            anotherLoad();
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
     }//GEN-LAST:event_updateButtonActionPerformed
 
-    
     private void anotherLoad() {
         populateDashBoard();
-        PharmacyRegistration dr =new PharmacyRegistration(system, rightSidePanel, locationPoint);
+        PharmacyRegistration dr = new PharmacyRegistration(system, rightSidePanel, locationPoint);
         rightSidePanel.add(dr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-          
+
     }
-    
-    
+
+
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-         
-         String username=userNameTextField5.getText();
+
+        String username = userNameTextField5.getText();
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
-        {
-        String a=(String)t.getValueAt(t1, 3);
-        PharmaDirectory bbd = system.getPharmaDir();
-        ArrayList<Pharma> cd1=bbd.getPharmaArrayList();
-        int z=cd1.size();
-        for(int i=0;i<z;i++)
-        {
-            Pharma c=cd1.get(i);
-          
-            
-            if(c.getUserName().matches(username))
-            {
-                bbd.removeFromPharma(c);
-                system.getUserAccDir().removeccount(c);
-               // System.out.println("delete");
-                 break;
+        int t1 = jTable1.getSelectedRow();
+        if (t1 >= 0) {
+            String a = (String) t.getValueAt(t1, 3);
+            PharmaDirectory bbd = system.getPharmaDir();
+            ArrayList<Pharma> cd1 = bbd.getPharmaArrayList();
+            int z = cd1.size();
+            for (int i = 0; i < z; i++) {
+                Pharma c = cd1.get(i);
+
+                if (c.getUserName().matches(username)) {
+                    bbd.removeFromPharma(c);
+                    system.getUserAccDir().removeccount(c);
+                    // System.out.println("delete");
+                    break;
+                }
             }
-        }
-        displayTable();
-        anotherLoad();
-        locationInputField.setText("");
+            displayTable();
+            anotherLoad();
+            locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
             userNameTextField7.setText("");
-        
-        }
-        else
-        {
+
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
-        
-       
-        
+
+
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-            DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-          if (selectedRow < 0) {
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        } else{
-        userNameTextField4.setText(table.getValueAt(selectedRow,0).toString());
-        locationInputField.setText(table.getValueAt(selectedRow,1).toString());
-        userNameTextField5.setText(table.getValueAt(selectedRow,2).toString());
-        userNameTextField6.setText(table.getValueAt(selectedRow,3).toString());
-        userNameTextField7.setText(table.getValueAt(selectedRow,4).toString());
-       
-        
-          }
-        
+        } else {
+            userNameTextField4.setText(table.getValueAt(selectedRow, 0).toString());
+            locationInputField.setText(table.getValueAt(selectedRow, 1).toString());
+            userNameTextField5.setText(table.getValueAt(selectedRow, 2).toString());
+            userNameTextField6.setText(table.getValueAt(selectedRow, 3).toString());
+            userNameTextField7.setText(table.getValueAt(selectedRow, 4).toString());
+
+        }
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     public void populateLongituteLatitude(MapCoordinates locationPoint) {
         this.locationPoint = locationPoint;
-        locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());   
+        locationInputField.setText(locationPoint.getLatitudeCoordinate() + ", " + locationPoint.getLongitudeCoordinate());
     }
-    
-    
+
+
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         MapViewr oLJP = new MapViewr(rightSidePanel);
@@ -513,22 +513,23 @@ public class PharmacyRegistration extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 private void displayTable() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-       PharmaDirectory docDir = system.getPharmaDir();
+        PharmaDirectory docDir = system.getPharmaDir();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
         model.setRowCount(0);
         for (Pharma doc : docDir.getPharmaArrayList()) {
-                    Object[] row = new Object[6];
-                    row[0] = doc.getPharmaName();
-                    row[1] = doc.getPharmaLocation();
-                    row[2] = doc.getPharmaUserID();
-                    row[3] = doc.getPharmaPassword();
-                    row[4] = doc.getPharmaPhoneNumber();
-                    locations.add(doc.getPharmaLocation());
-                    pharmacies.add(doc.getPharmaName());
+            Object[] row = new Object[6];
+            row[0] = doc.getPharmaName();
+            row[1] = doc.getPharmaLocation();
+            row[2] = doc.getPharmaUserID();
+            row[3] = doc.getPharmaPassword();
+            row[4] = doc.getPharmaPhoneNumber();
+            locations.add(doc.getPharmaLocation());
+            pharmacies.add(doc.getPharmaName());
 
-                    model.addRow(row);
-                
-            }
-        
-    }}
+            model.addRow(row);
+
+        }
+
+    }
+}

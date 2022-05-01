@@ -231,8 +231,10 @@ public class BloodDonations extends javax.swing.JPanel {
             donate.setAppoinmentTime(timeBox.getSelectedItem().toString());
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime date2 = LocalDateTime.now();
-
-            if (date1.compareTo(date2.toString()) >= 0) {
+            if(isAreadyBooked(date1)){
+                JOptionPane.showMessageDialog(null,"Appointment already booked for the chosen date.");
+                return;
+            } else if (date1.compareTo(date2.toString()) >= 0) {
                 DonateBlood_Dir bloodDir = system.getDonateBloodDir();
                 bloodDir.addrequest(donate);
                 jTable1.setModel(new DefaultTableModel(null, new String[]{"ID", "Center", "Status", "Date", "Time"}));
@@ -246,6 +248,24 @@ public class BloodDonations extends javax.swing.JPanel {
 
     }
 
+    
+    public boolean isAreadyBooked(String date){
+        DonateBlood_Dir bloodDonors = system.getDonateBloodDir();
+        ArrayList<DonateBlood> appointments = bloodDonors.getDonors();
+        int size = appointments.size();
+        User a =(User)(userAccount);
+        String userId = a.getUserId();
+        for(int i=0; i<size; i++){
+            DonateBlood appointment = appointments.get(i);
+            if(appointment.getUserId().matches(userId)){
+                String currentAppointment = appointment.getAppoinmentDate();
+                if(currentAppointment.compareTo(date) == 0){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:

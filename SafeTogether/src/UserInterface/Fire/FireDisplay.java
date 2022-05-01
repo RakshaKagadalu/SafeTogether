@@ -298,6 +298,24 @@ public class FireDisplay extends javax.swing.JPanel {
     }//GEN-LAST:event_locationButtonActionPerformed
 
     private void showMap() {
+          DefaultTableModel  table2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
+        if(selectedRow>=0)
+        {       
+        int rowId = Integer.parseInt(table2.getValueAt(selectedRow, 0).toString());
+        Req_EmergencyDir reqEmergencyDirectory=system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> reqEmergencyList = reqEmergencyDirectory.getEmergencyUserList();
+        int size= reqEmergencyList.size();
+        Fire police =(Fire) userAcc;
+        for(int i=0;i<size;i++)
+        {
+            Req_Emergency emergency = reqEmergencyList.get(i);
+            if(rowId ==emergency.getId())
+            {
+                locationCordinate = emergency.getLocation();
+            }
+
+        }
         String [] parts = locationCordinate.split(",");
         String lattitude = parts[0].replaceAll("\\s","");
         String longitude = parts[1].replaceAll("\\s","");
@@ -306,6 +324,22 @@ public class FireDisplay extends javax.swing.JPanel {
         container.add("MapViewr", oLJP);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.next(container);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Select A Row!!");
+        }
+        
+        
+        
+//        String [] parts = locationCordinate.split(",");
+//        String lattitude = parts[0].replaceAll("\\s","");
+//        String longitude = parts[1].replaceAll("\\s","");
+//        
+//        MapViewerTwo oLJP = new MapViewerTwo(container, lattitude, longitude);
+//        container.add("MapViewr", oLJP);
+//        CardLayout layout = (CardLayout) container.getLayout();
+//        layout.next(container);
     }
     
      public void populate_table()
