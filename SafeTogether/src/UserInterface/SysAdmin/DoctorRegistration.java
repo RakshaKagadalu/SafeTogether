@@ -15,8 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-
-
 public class DoctorRegistration extends javax.swing.JPanel {
 
     /**
@@ -28,7 +26,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
     ArrayList<String> specializations = new ArrayList<String>();
     int hospitalCount = 0;
     int specializationCount = 0;
-    
+
     public DoctorRegistration(EcoSystem system, JPanel rightSidePanel) {
         initComponents();
         this.system = system;
@@ -286,22 +284,35 @@ public class DoctorRegistration extends javax.swing.JPanel {
 
     private void addbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbuttonActionPerformed
         // TODO add your handling code here:
-        
-            String name = (userNameTextField4.getText());
-            String hospital = (userNameTextField3.getText());
-            String specialization = (userNameTextField5.getText());
-            String userId = (userNameTextField6.getText());
-            String pwd = (userNameTextField7.getText());
-            String phoneNum = (userNameTextField8.getText());
-            
+        if (userNameTextField4.getText().isEmpty() || userNameTextField3.getText().isEmpty() || userNameTextField5.getText().isEmpty() || userNameTextField7.getText().isEmpty() || userNameTextField6.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        }
+        String name = (userNameTextField4.getText());
+        String hospital = (userNameTextField3.getText());
+        String specialization = (userNameTextField5.getText());
+        String userId = (userNameTextField6.getText());
+        String pwd = (userNameTextField7.getText());
+        String phoneNum = (userNameTextField8.getText());
+
 //            DoctorDir doctorDirectory = system.getDoctorDir();
 //            ArrayList<Doctor> list=doctorDirectory.getDoc();
-            
-            if(!system.getUserAccDir().checkIfUsernameIsUnique(userId)){
-                JOptionPane.showMessageDialog(null, "User name already exists");
-                userNameTextField5.setText("");
-                return;
-            }
+        if (!system.getUserAccDir().checkIfUsernameIsUnique(userId)) {
+            JOptionPane.showMessageDialog(null, "User name already exists");
+            userNameTextField5.setText("");
+            return;
+        }
+        if (!userNameTextField8.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+            JOptionPane.showMessageDialog(null, " 10 digit phone number");
+            userNameTextField8.setText("");
+            return;
+        }
+        if (!userNameTextField7.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+            JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                    + "with one upper case, one lower case, one digit and one special character");
+            userNameTextField7.setText("");
+            return;
+        }
 //            int z= list.size();
 //            for(int i=0;i<z;i++)
 //            {
@@ -312,68 +323,74 @@ public class DoctorRegistration extends javax.swing.JPanel {
 //                    
 //                }
 //            }
-            
-            
-            Doctor doc = new Doctor(name,hospital,specialization,userId,pwd,phoneNum);
-            system.getUserAccDir().addAccount(doc);
-            system.getDoctorDir().addNewDoc(doc);
-          
-            displayTable();
-            
-            userNameTextField3.setText("");
-            userNameTextField4.setText("");
-            userNameTextField5.setText("");
-            userNameTextField6.setText("");
-            userNameTextField7.setText("");
-            userNameTextField8.setText("");
- 
+
+        Doctor doc = new Doctor(name, hospital, specialization, userId, pwd, phoneNum);
+        system.getUserAccDir().addAccount(doc);
+        system.getDoctorDir().addNewDoc(doc);
+
+        displayTable();
+
+        userNameTextField3.setText("");
+        userNameTextField4.setText("");
+        userNameTextField5.setText("");
+        userNameTextField6.setText("");
+        userNameTextField7.setText("");
+        userNameTextField8.setText("");
+
     }//GEN-LAST:event_addbuttonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int sRow=jTable1.getSelectedRow();
-        if(sRow>=0)
-        {
-             
-        String value=(String)table.getValueAt(sRow, 3);
-        
-        if(!userNameTextField6.getText().matches(value)){
-            JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
-            userNameTextField3.setText("");
-            userNameTextField4.setText("");
-            userNameTextField5.setText("");
-            userNameTextField6.setText("");
-            userNameTextField7.setText("");
-            userNameTextField8.setText("");
-            return;
-        }
-        DoctorDir doctorDirectory = system.getDoctorDir();
-        ArrayList<Doctor> list=doctorDirectory.getDoc();
-        int listsize=list.size();
-        for(int i=0;i<listsize;i++)
-        {
-            Doctor doc=list.get(i);
-            //System.out.println(doc.getUserName());
-            
-            if(doc.getUserName().matches(value))
-                    {
-                        if(!userNameTextField8.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-                {
-                    JOptionPane.showMessageDialog(null, " 10 digit phone number");
-                    userNameTextField8.setText("");
-                    return;
-                }
 
-                     doc.setFirstName(userNameTextField4.getText());
-                        doc.setHospital(userNameTextField3.getText());
-                        doc.setSpecialization(userNameTextField5.getText());
-                        doc.setUserId(userNameTextField6.getText());
-                        doc.setAccPassword(userNameTextField7.getText());
-                        doc.setPhoneNum(userNameTextField8.getText());
-                    
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int sRow = jTable1.getSelectedRow();
+        if (sRow >= 0) {
+
+            String value = (String) table.getValueAt(sRow, 3);
+
+            if (!userNameTextField6.getText().matches(value)) {
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                userNameTextField3.setText("");
+                userNameTextField4.setText("");
+                userNameTextField5.setText("");
+                userNameTextField6.setText("");
+                userNameTextField7.setText("");
+                userNameTextField8.setText("");
+                return;
+            }
+
+            if (userNameTextField4.getText().isEmpty() || userNameTextField3.getText().isEmpty() || userNameTextField5.getText().isEmpty() || userNameTextField7.getText().isEmpty() || userNameTextField6.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+                return;
+            }
+            DoctorDir doctorDirectory = system.getDoctorDir();
+            ArrayList<Doctor> list = doctorDirectory.getDoc();
+            int listsize = list.size();
+            for (int i = 0; i < listsize; i++) {
+                Doctor doc = list.get(i);
+                //System.out.println(doc.getUserName());
+
+                if (doc.getUserName().matches(value)) {
+                    if (!userNameTextField8.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+                        JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                        userNameTextField8.setText("");
+                        return;
                     }
+                    if (!userNameTextField7.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                        JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                                + "with one upper case, one lower case, one digit and one special character");
+                        userNameTextField7.setText("");
+                        return;
+                    }
+
+                    doc.setFirstName(userNameTextField4.getText());
+                    doc.setHospital(userNameTextField3.getText());
+                    doc.setSpecialization(userNameTextField5.getText());
+                    doc.setUserId(userNameTextField6.getText());
+                    doc.setAccPassword(userNameTextField7.getText());
+                    doc.setPhoneNum(userNameTextField8.getText());
+
+                }
 //            else {
 //                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
 //                  userNameTextField3.setText("");
@@ -384,20 +401,18 @@ public class DoctorRegistration extends javax.swing.JPanel {
 //                userNameTextField8.setText("");
 //                return;
 //            }
-        }
+            }
 
-          displayTable();
-          anotherLoad();
+            displayTable();
+            anotherLoad();
 
-              userNameTextField3.setText("");
+            userNameTextField3.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
             userNameTextField7.setText("");
             userNameTextField8.setText("");
-             }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
 
@@ -409,71 +424,64 @@ public class DoctorRegistration extends javax.swing.JPanel {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        
-        
-         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int sRow=jTable1.getSelectedRow();
-        if(sRow>=0)
-        {
-             
-        String value=(String)table.getValueAt(sRow, 3);
-        DoctorDir doctorDirectory = system.getDoctorDir();
-        ArrayList<Doctor> docs=doctorDirectory.getDoc();
-        int z=docs.size();
-        for(int i=0;i<z;i++)
-           {
-            Doctor d=docs.get(i);
-            if(d.getUserName().matches(value))
-                    {
-                       doctorDirectory.removeDoc(d);
-                       system.getUserAccDir().removeccount(d);
-                  
-                        break;
-                    }
-        }
-          displayTable();
 
-          anotherLoad();
-          userNameTextField3.setText("");
-          userNameTextField4.setText("");
-          userNameTextField5.setText("");
-          userNameTextField6.setText("");
-          userNameTextField7.setText("");
-          userNameTextField8.setText("");
-             }
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int sRow = jTable1.getSelectedRow();
+        if (sRow >= 0) {
 
-        else
-        {
+            String value = (String) table.getValueAt(sRow, 3);
+            DoctorDir doctorDirectory = system.getDoctorDir();
+            ArrayList<Doctor> docs = doctorDirectory.getDoc();
+            int z = docs.size();
+            for (int i = 0; i < z; i++) {
+                Doctor d = docs.get(i);
+                if (d.getUserName().matches(value)) {
+                    doctorDirectory.removeDoc(d);
+                    system.getUserAccDir().removeccount(d);
+
+                    break;
+                }
+            }
+            displayTable();
+
+            anotherLoad();
+            userNameTextField3.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+            userNameTextField8.setText("");
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
-        
+
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void anotherLoad() {
         populateDashBoard();
-        DoctorRegistration dr=new DoctorRegistration(system, rightSidePanel);
+        DoctorRegistration dr = new DoctorRegistration(system, rightSidePanel);
         rightSidePanel.add(dr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-          
+
     }
-    
+
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        
+
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-          if (selectedRow < 0) {
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        } else{
-        userNameTextField4.setText(table.getValueAt(selectedRow,0).toString());
-        userNameTextField3.setText(table.getValueAt(selectedRow,1).toString());
-        userNameTextField5.setText(table.getValueAt(selectedRow,2).toString());
-        userNameTextField6.setText(table.getValueAt(selectedRow,3).toString());
-        userNameTextField7.setText(table.getValueAt(selectedRow,4).toString());
-        userNameTextField8.setText(table.getValueAt(selectedRow,5).toString());
-        }    
+        } else {
+            userNameTextField4.setText(table.getValueAt(selectedRow, 0).toString());
+            userNameTextField3.setText(table.getValueAt(selectedRow, 1).toString());
+            userNameTextField5.setText(table.getValueAt(selectedRow, 2).toString());
+            userNameTextField6.setText(table.getValueAt(selectedRow, 3).toString());
+            userNameTextField7.setText(table.getValueAt(selectedRow, 4).toString());
+            userNameTextField8.setText(table.getValueAt(selectedRow, 5).toString());
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
 
@@ -522,24 +530,23 @@ public class DoctorRegistration extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (Doctor doc : docDir.getDoc()) {
-                    Object[] row = new Object[6];
-                    row[0] = doc.getFirstName();
-                    row[1] = doc.getHospital();
-                    row[2] = doc.getSpecialization();
-                    row[3] = doc.getUserId();
-                    row[4] = doc.getAccPassword();
-                    row[5] = doc.getPhoneNum();
-                    hospitals.add(doc.getHospital());
-                    specializations.add(doc.getSpecialization());
+            Object[] row = new Object[6];
+            row[0] = doc.getFirstName();
+            row[1] = doc.getHospital();
+            row[2] = doc.getSpecialization();
+            row[3] = doc.getUserId();
+            row[4] = doc.getAccPassword();
+            row[5] = doc.getPhoneNum();
+            hospitals.add(doc.getHospital());
+            specializations.add(doc.getSpecialization());
 
-                    model.addRow(row);
-                
-            }
+            model.addRow(row);
+
+        }
         populateDashBoard();
     }
-    
-    
-     private void populateDashBoard() {
+
+    private void populateDashBoard() {
         // Print the count of the location
         // Converting it to hash set
         System.out.println(hospitals.size());
@@ -547,17 +554,12 @@ public class DoctorRegistration extends javax.swing.JPanel {
         HashSet<String> uniqueHospital = new HashSet<String>(hospitals);
         HashSet<String> uniqueSpecialization = new HashSet<String>(specializations);
 
-        
         // get the count of hash sets
         hospitalCount = uniqueHospital.size();
         specializationCount = uniqueSpecialization.size();
-        
-     
+
         hosCount.setText(Integer.toString(hospitalCount));
         splCount.setText(Integer.toString(specializationCount));
- 
 
-        
     }
-    }
-
+}

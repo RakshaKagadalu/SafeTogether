@@ -28,7 +28,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
     EcoSystem system;
     MapCoordinates locationPoint;
     JPanel panel;
- 
+
     public PandemicRegistration(EcoSystem system, JPanel rightSidePanel, MapCoordinates locationPoint) {
         initComponents();
         this.system = system;
@@ -218,12 +218,17 @@ public class PandemicRegistration extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-         String name = (userNameTextField4.getText());
-            String location = (locationInputField.getText());
-            String phoneNum = (userNameTextField7.getText());
-            String userId = (userNameTextField5.getText());
-            String pwd = (userNameTextField6.getText());
- 
+
+        if (userNameTextField4.getText().isEmpty() || locationInputField.getText().isEmpty() || userNameTextField5.getText().isEmpty() || userNameTextField7.getText().isEmpty() || userNameTextField6.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        }
+        String name = (userNameTextField4.getText());
+        String location = (locationInputField.getText());
+        String phoneNum = (userNameTextField7.getText());
+        String userId = (userNameTextField5.getText());
+        String pwd = (userNameTextField6.getText());
+
 //            PandemicCenter_Dir bbd = system.getPandemicCenterDir();
 //            ArrayList<PandemicCenter> cd1=bbd.getPandemicdirectory();
 //            int z=cd1.size();
@@ -238,85 +243,96 @@ public class PandemicRegistration extends javax.swing.JPanel {
 //                    return;
 //                }
 //            }
-
-            if(!system.getUserAccDir().checkIfUsernameIsUnique(userId)){
-                JOptionPane.showMessageDialog(null, "User name already exists");
-                userNameTextField5.setText("");
-                return;
-            }
-            
-            PandemicCenter pc = new PandemicCenter(name,location,userId,pwd,phoneNum);
-             
-            system.getUserAccDir().addAccount(pc);
-            system.getPandemicCenterDir().addPandemicCenter(pc);
-            displayTable();
-            
-            locationInputField.setText("");
-            userNameTextField4.setText("");
+        if (!system.getUserAccDir().checkIfUsernameIsUnique(userId)) {
+            JOptionPane.showMessageDialog(null, "User name already exists");
             userNameTextField5.setText("");
-            userNameTextField6.setText("");
-            userNameTextField7.setText("");
-           
-       
-   
-        
-    }//GEN-LAST:event_addButtonActionPerformed
-
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        // TODO add your handling code here:
-        
-        String username= userNameTextField5.getText();
-        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
-        {
-           
-            
-        String a=(String)t.getValueAt(t1, 2);
-        if(!username.matches(a)){
-            JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
-            locationInputField.setText("");
-            userNameTextField4.setText("");
-            userNameTextField5.setText("");
-            userNameTextField6.setText("");
+            return;
+        }
+        if (!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+            JOptionPane.showMessageDialog(null, " 10 digit phone number");
             userNameTextField7.setText("");
             return;
         }
-        PandemicCenter_Dir bbd = system.getPandemicCenterDir();
-        ArrayList<PandemicCenter> cd1=bbd.getPandemicdirectory();
-        int z=cd1.size();
-        for(int i=0;i<z;i++)
-        {
-            PandemicCenter c=cd1.get(i);
-            c.getUserName();
-            if(c.getUserName().matches(username))
-            {
-                if(!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-            {
-                JOptionPane.showMessageDialog(null, " 10 digit phone number");
-                userNameTextField7.setText("");
-                return;
-            }
-
-                c.setName(userNameTextField4.getText());
-                c.setLocation(locationInputField.getText());
-                c.setUserId(userNameTextField5.getText());
-                c.setPassword(userNameTextField6.getText());
-                c.setPhoneNumber(userNameTextField7.getText());
-            }
-//            else {
-//                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
-//            }
+        if (!userNameTextField6.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+            JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                    + "with one upper case, one lower case, one digit and one special character");
+            userNameTextField6.setText("");
+            return;
         }
+        PandemicCenter pc = new PandemicCenter(name, location, userId, pwd, phoneNum);
+
+        system.getUserAccDir().addAccount(pc);
+        system.getPandemicCenterDir().addPandemicCenter(pc);
+        displayTable();
+
         locationInputField.setText("");
         userNameTextField4.setText("");
         userNameTextField5.setText("");
         userNameTextField6.setText("");
         userNameTextField7.setText("");
-        displayTable();
-        
-        }else
-        {
+
+
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+
+        String username = userNameTextField5.getText();
+        DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
+        int t1 = jTable1.getSelectedRow();
+        if (t1 >= 0) {
+
+            String a = (String) t.getValueAt(t1, 2);
+            if (!username.matches(a)) {
+                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+                locationInputField.setText("");
+                userNameTextField4.setText("");
+                userNameTextField5.setText("");
+                userNameTextField6.setText("");
+                userNameTextField7.setText("");
+                return;
+            }
+            if (userNameTextField4.getText().isEmpty() || locationInputField.getText().isEmpty() || userNameTextField5.getText().isEmpty() || userNameTextField7.getText().isEmpty() || userNameTextField6.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+                return;
+            }
+            PandemicCenter_Dir bbd = system.getPandemicCenterDir();
+            ArrayList<PandemicCenter> cd1 = bbd.getPandemicdirectory();
+            int z = cd1.size();
+            for (int i = 0; i < z; i++) {
+                PandemicCenter c = cd1.get(i);
+                c.getUserName();
+                if (c.getUserName().matches(username)) {
+                    if (!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+                        JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                        userNameTextField7.setText("");
+                        return;
+                    }
+                    if (!userNameTextField6.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                        JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                                + "with one upper case, one lower case, one digit and one special character");
+                        userNameTextField6.setText("");
+                        return;
+                    }
+
+                    c.setName(userNameTextField4.getText());
+                    c.setLocation(locationInputField.getText());
+                    c.setUserId(userNameTextField5.getText());
+                    c.setPassword(userNameTextField6.getText());
+                    c.setPhoneNumber(userNameTextField7.getText());
+                }
+//            else {
+//                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
+//            }
+            }
+            locationInputField.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+            displayTable();
+
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
     }//GEN-LAST:event_updateButtonActionPerformed
@@ -324,65 +340,53 @@ public class PandemicRegistration extends javax.swing.JPanel {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-          if (selectedRow < 0) {
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        } else{
-     
-        
-        userNameTextField4.setText(table.getValueAt(selectedRow,0).toString());
-        locationInputField.setText(table.getValueAt(selectedRow,1).toString());
-        userNameTextField5.setText(table.getValueAt(selectedRow,2).toString());
-        userNameTextField6.setText(table.getValueAt(selectedRow,3).toString());
-        userNameTextField7.setText(table.getValueAt(selectedRow,4).toString());
+        } else {
+
+            userNameTextField4.setText(table.getValueAt(selectedRow, 0).toString());
+            locationInputField.setText(table.getValueAt(selectedRow, 1).toString());
+            userNameTextField5.setText(table.getValueAt(selectedRow, 2).toString());
+            userNameTextField6.setText(table.getValueAt(selectedRow, 3).toString());
+            userNameTextField7.setText(table.getValueAt(selectedRow, 4).toString());
         }
-        
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        
-         String username=userNameTextField5.getText();
+
+        String username = userNameTextField5.getText();
         DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-        int t1=jTable1.getSelectedRow();
-        if(t1>=0)
-        {
-        String a=(String)t.getValueAt(t1, 3);
-        PandemicCenter_Dir bbd = system.getPandemicCenterDir();
-        ArrayList<PandemicCenter> cd1=bbd.getPandemicdirectory();
-        int z=cd1.size();
-        for(int i=0;i<z;i++)
-        {
-            PandemicCenter c=cd1.get(i);
-          
-            
-            if(c.getUserName().matches(username))
-            {
-                bbd.removePandemicCenter(c);
-                system.getUserAccDir().removeccount(c);
-               // System.out.println("delete");
-                 break;
+        int t1 = jTable1.getSelectedRow();
+        if (t1 >= 0) {
+            String a = (String) t.getValueAt(t1, 3);
+            PandemicCenter_Dir bbd = system.getPandemicCenterDir();
+            ArrayList<PandemicCenter> cd1 = bbd.getPandemicdirectory();
+            int z = cd1.size();
+            for (int i = 0; i < z; i++) {
+                PandemicCenter c = cd1.get(i);
+
+                if (c.getUserName().matches(username)) {
+                    bbd.removePandemicCenter(c);
+                    system.getUserAccDir().removeccount(c);
+                    // System.out.println("delete");
+                    break;
+                }
             }
-        }
-        displayTable();
-        locationInputField.setText("");
-        userNameTextField4.setText("");
-        userNameTextField5.setText("");
-        userNameTextField6.setText("");
-        userNameTextField7.setText("");
-        
-        }
-        else
-        {
+            displayTable();
+            locationInputField.setText("");
+            userNameTextField4.setText("");
+            userNameTextField5.setText("");
+            userNameTextField6.setText("");
+            userNameTextField7.setText("");
+
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
-        
-        
-        
-        
-        
-         
+
 //         String username= userNameTextField5.getText();
 //        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
 //        int sRow=jTable1.getSelectedRow();
@@ -421,9 +425,9 @@ public class PandemicRegistration extends javax.swing.JPanel {
 
     public void populateLongituteLatitude(MapCoordinates locationPoint) {
         this.locationPoint = locationPoint;
-        locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());   
+        locationInputField.setText(locationPoint.getLatitudeCoordinate() + ", " + locationPoint.getLongitudeCoordinate());
     }
-    
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         MapViewr oLJP = new MapViewr(panel);
@@ -457,7 +461,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
     private javax.swing.JTextField userNameTextField6;
     private javax.swing.JTextField userNameTextField7;
     // End of variables declaration//GEN-END:variables
-    
+
     private void displayTable() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         PandemicCenter_Dir docDir = system.getPandemicCenterDir();
@@ -465,16 +469,16 @@ public class PandemicRegistration extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (PandemicCenter doc : docDir.getPandemicdirectory()) {
-                    Object[] row = new Object[6];
-                    row[0] = doc.getName();
-                    row[1] = doc.getLocation();
-                    row[2] = doc.getUserId();
-                    row[3] = doc.getPassword();
-                    row[4] = doc.getPhoneNumber();
-                    
+            Object[] row = new Object[6];
+            row[0] = doc.getName();
+            row[1] = doc.getLocation();
+            row[2] = doc.getUserId();
+            row[3] = doc.getPassword();
+            row[4] = doc.getPhoneNumber();
 
-                    model.addRow(row);
-                
-            }
-        
-    }}
+            model.addRow(row);
+
+        }
+
+    }
+}

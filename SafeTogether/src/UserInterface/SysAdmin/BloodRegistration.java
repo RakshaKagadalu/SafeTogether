@@ -8,14 +8,9 @@ package UserInterface.SysAdmin;
  *
  * @author shrikrishnajoisa
  */
- 
-import Business.Doctor.Doctor;
-import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
 import Business.BloodBank.BloodWork;
 import Business.BloodBank.BloodWorkDirectory;
-import Business.PandemicCenter.PandemicCenter;
-import Business.PandemicCenter.PandemicCenter_Dir;
 import Utility.MapCoordinates;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -215,11 +210,16 @@ public class BloodRegistration extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-           String name = (userNameTextField4.getText());
-            String location = (locationInputField.getText());
-            String pwd = (userNameTextField6.getText());
-            String userId = (userNameTextField5.getText());
-            String phoneNum = (userNameTextField7.getText());
+
+        if (userNameTextField4.getText().isEmpty() || locationInputField.getText().isEmpty() || userNameTextField5.getText().isEmpty() || userNameTextField7.getText().isEmpty() || userNameTextField6.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+            return;
+        }
+        String name = (userNameTextField4.getText());
+        String location = (locationInputField.getText());
+        String pwd = (userNameTextField6.getText());
+        String userId = (userNameTextField5.getText());
+        String phoneNum = (userNameTextField7.getText());
 
 //              BloodWorkDirectory bloodbankDir = system.getBloodBankDir();
 //            ArrayList<BloodWork> list=bloodbankDir.getBloodWorkList();
@@ -235,42 +235,53 @@ public class BloodRegistration extends javax.swing.JPanel {
 //                    return;
 //                }
 //            }
-            if(!system.getUserAccDir().checkIfUsernameIsUnique(userId)){
-                JOptionPane.showMessageDialog(null, "User name already exists");
-                userNameTextField5.setText("");
-                return;
-            }
-            
-            BloodWork doc = new BloodWork(name,location,userId,pwd,phoneNum);
-            system.getUserAccDir().addAccount(doc);
-            system.getBloodBankDir().addBloodWork(doc);
-            
-            displayTable();
-            
-            locationInputField.setText("");
-            userNameTextField4.setText("");
+        if (!system.getUserAccDir().checkIfUsernameIsUnique(userId)) {
+            JOptionPane.showMessageDialog(null, "User name already exists");
             userNameTextField5.setText("");
-            userNameTextField6.setText("");
+            return;
+        }
+
+        if (!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+            JOptionPane.showMessageDialog(null, " 10 digit phone number");
             userNameTextField7.setText("");
-           
-        
-        
+            return;
+        }
+
+        if (!userNameTextField6.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+            JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                    + "with one upper case, one lower case, one digit and one special character");
+            userNameTextField6.setText("");
+            return;
+        }
+
+        BloodWork doc = new BloodWork(name, location, userId, pwd, phoneNum);
+        system.getUserAccDir().addAccount(doc);
+        system.getBloodBankDir().addBloodWork(doc);
+
+        displayTable();
+
+        locationInputField.setText("");
+        userNameTextField4.setText("");
+        userNameTextField5.setText("");
+        userNameTextField6.setText("");
+        userNameTextField7.setText("");
+
+
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        String username=userNameTextField5.getText(); 
+        String username = userNameTextField5.getText();
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int sRow=jTable1.getSelectedRow();
-        if(sRow>=0)
-        {
-            
-        String value=(String)jTable1.getValueAt(sRow, 2);
-        BloodWorkDirectory doctorDirectory = system.getBloodBankDir();
-        ArrayList<BloodWork> list=doctorDirectory.getBloodWorkList();
-        int listsize=list.size();
-        
-        if(!username.matches(value)){
+        int sRow = jTable1.getSelectedRow();
+        if (sRow >= 0) {
+
+            String value = (String) jTable1.getValueAt(sRow, 2);
+            BloodWorkDirectory doctorDirectory = system.getBloodBankDir();
+            ArrayList<BloodWork> list = doctorDirectory.getBloodWorkList();
+            int listsize = list.size();
+
+            if (!username.matches(value)) {
                 JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
                 locationInputField.setText("");
                 userNameTextField4.setText("");
@@ -278,114 +289,117 @@ public class BloodRegistration extends javax.swing.JPanel {
                 userNameTextField6.setText("");
                 userNameTextField7.setText("");
                 return;
-          }
-        
-        for(int i=0;i<listsize;i++)
-        {
-            BloodWork doc=list.get(i);
-            
-            
-            if(doc.getUserName().matches(username))
-                    {
-                        if(!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"))
-                        {
-                            JOptionPane.showMessageDialog(null, " 10 digit phone number");
-                            userNameTextField7.setText("");
-                            return;
-                        }
+            }
+            if (userNameTextField4.getText().isEmpty() || locationInputField.getText().isEmpty() || userNameTextField5.getText().isEmpty() || userNameTextField7.getText().isEmpty() || userNameTextField6.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "please enter all mandatory fields");
+                return;
+            }
+            if (!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+                JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                userNameTextField7.setText("");
+                return;
+            }
+
+            if (!userNameTextField6.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+                JOptionPane.showMessageDialog(null, "Password is in incorrect \nFormat. Should be minimum 8 in length "
+                        + "with one upper case, one lower case, one digit and one special character");
+                userNameTextField6.setText("");
+                return;
+            }
+
+            for (int i = 0; i < listsize; i++) {
+                BloodWork doc = list.get(i);
+
+                if (doc.getUserName().matches(username)) {
+                    if (!userNameTextField7.getText().matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")) {
+                        JOptionPane.showMessageDialog(null, " 10 digit phone number");
+                        userNameTextField7.setText("");
+                        return;
+                    }
 
                     doc.setUserNames(userNameTextField4.getText());
                     doc.setUserLocation(locationInputField.getText());
                     doc.setUserPhone(userNameTextField7.getText());
                     doc.setUserId(userNameTextField5.getText());
                     doc.setPassword(userNameTextField6.getText());
-                      
-                    
-                    }
+
+                }
 //             else {
 //                JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
 //            }
-        }
-          displayTable();
-            
+            }
+            displayTable();
+
             locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
             userNameTextField7.setText("");
-          
-             }
-        else
-        {
+
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
-        
+
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-             String username=userNameTextField5.getText();   
-         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int sRow=jTable1.getSelectedRow();
-        if(sRow>=0)
-        {
-             
-        String value=(String)table.getValueAt(sRow, 3);
-         BloodWorkDirectory doctorDirectory = system.getBloodBankDir();
-        ArrayList<BloodWork> list=doctorDirectory.getBloodWorkList();
-        int z=list.size();
-        for(int i=0;i<z;i++)
-           {
-            BloodWork d=list.get(i);
-            if(d.getUserName().matches(username))
-                    {
-                       doctorDirectory.removeBloodWork(d);
-                       system.getUserAccDir().removeccount(d);
-                  
-                        break;
-                    }
-           
-        }
-          displayTable();
-          locationInputField.setText("");
+        String username = userNameTextField5.getText();
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int sRow = jTable1.getSelectedRow();
+        if (sRow >= 0) {
+
+            String value = (String) table.getValueAt(sRow, 3);
+            BloodWorkDirectory doctorDirectory = system.getBloodBankDir();
+            ArrayList<BloodWork> list = doctorDirectory.getBloodWorkList();
+            int z = list.size();
+            for (int i = 0; i < z; i++) {
+                BloodWork d = list.get(i);
+                if (d.getUserName().matches(username)) {
+                    doctorDirectory.removeBloodWork(d);
+                    system.getUserAccDir().removeccount(d);
+
+                    break;
+                }
+
+            }
+            displayTable();
+            locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
             userNameTextField7.setText("");
-           
-             }
-        else
-        {
+
+        } else {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
-        
+
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        
-             DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        int selectedRow=jTable1.getSelectedRow();
-          if (selectedRow < 0) {
+
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        } else{
-        userNameTextField4.setText(table.getValueAt(selectedRow,0).toString());
-        locationInputField.setText(table.getValueAt(selectedRow,1).toString());
-        userNameTextField5.setText(table.getValueAt(selectedRow,2).toString());
-        userNameTextField6.setText(table.getValueAt(selectedRow,3).toString());
-        userNameTextField7.setText(table.getValueAt(selectedRow,4).toString());
-    
-        
-          }
+        } else {
+            userNameTextField4.setText(table.getValueAt(selectedRow, 0).toString());
+            locationInputField.setText(table.getValueAt(selectedRow, 1).toString());
+            userNameTextField5.setText(table.getValueAt(selectedRow, 2).toString());
+            userNameTextField6.setText(table.getValueAt(selectedRow, 3).toString());
+            userNameTextField7.setText(table.getValueAt(selectedRow, 4).toString());
+
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     public void populateLongituteLatitude(MapCoordinates locationPoint) {
         this.locationPoint = locationPoint;
-        locationInputField.setText(locationPoint.getLatitudeCoordinate()+ ", " + locationPoint.getLongitudeCoordinate());   
+        locationInputField.setText(locationPoint.getLatitudeCoordinate() + ", " + locationPoint.getLongitudeCoordinate());
     }
-    
-    
+
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         MapViewr oLJP = new MapViewr(rightSidePanel);
@@ -425,16 +439,16 @@ public class BloodRegistration extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (BloodWork doc : docDir.getBloodWorkList()) {
-                    Object[] row = new Object[6];
-                    row[0] = doc.getUserNames();
-                    row[1] = doc.getUserLocation();
-                    row[2] = doc.getUserId();
-                    row[3] = doc.getPassword();
-                    row[4] = doc.getUserPhone();
-                    
+            Object[] row = new Object[6];
+            row[0] = doc.getUserNames();
+            row[1] = doc.getUserLocation();
+            row[2] = doc.getUserId();
+            row[3] = doc.getPassword();
+            row[4] = doc.getUserPhone();
 
-                    model.addRow(row);
-                
-            }
-        
-    }}
+            model.addRow(row);
+
+        }
+
+    }
+}
