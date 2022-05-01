@@ -69,7 +69,7 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
         goBack = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        doctorAssociationPanel = new javax.swing.JPanel();
+        manageBloodBankPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -132,24 +132,24 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
 
         jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
-        doctorAssociationPanel.setBackground(new java.awt.Color(255, 255, 255));
-        doctorAssociationPanel.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorAssociationPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        manageBloodBankPanel.setBackground(new java.awt.Color(255, 255, 255));
+        manageBloodBankPanel.setPreferredSize(new java.awt.Dimension(100, 48));
+        manageBloodBankPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorAssociationPanelMousePressed(evt);
+                manageBloodBankPanelMousePressed(evt);
             }
         });
-        doctorAssociationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        manageBloodBankPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-drop-of-blood-24.png"))); // NOI18N
-        doctorAssociationPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        manageBloodBankPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
         jLabel6.setText("Manage Blood Banks");
-        doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        manageBloodBankPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 290, 60));
+        jPanel2.add(manageBloodBankPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 290, 60));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
@@ -272,13 +272,12 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
         layout.previous(container);
     }                                   
 
-    private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
+    private void manageBloodBankPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageBloodBankPanelMousePressed
         // TODO add your handling code here:
           manageBloodBank();
-    }//GEN-LAST:event_doctorAssociationPanelMousePressed
+    }//GEN-LAST:event_manageBloodBankPanelMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel doctorAssociationPanel;
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -312,13 +311,14 @@ public class NonProfitEnterprisse extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JPanel manageBloodBankPanel;
     private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 
     private void manageBloodBank() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-     doctorAssociationPanel.setBackground(new Color(213,230,249));
+     manageBloodBankPanel.setBackground(new Color(213,230,249));
          //PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
         BloodRegistration br=new BloodRegistration (system, rightSidePanel, locationPoint);
         rightSidePanel.add(br);

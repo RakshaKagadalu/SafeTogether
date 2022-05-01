@@ -61,7 +61,7 @@ public class MedicineReport extends javax.swing.JPanel {
         txtCost = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        bookButton = new javax.swing.JButton();
+        collectOrder = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
@@ -122,16 +122,16 @@ public class MedicineReport extends javax.swing.JPanel {
         jLabel3.setText("List of all Medicines :");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 270, -1));
 
-        bookButton.setBackground(new java.awt.Color(10, 132, 255));
-        bookButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton.setText("Collect the Order");
-        bookButton.addActionListener(new java.awt.event.ActionListener() {
+        collectOrder.setBackground(new java.awt.Color(10, 132, 255));
+        collectOrder.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        collectOrder.setForeground(new java.awt.Color(255, 255, 255));
+        collectOrder.setText("Collect the Order");
+        collectOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
+                collectOrderActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 630, 210, 39));
+        jPanel1.add(collectOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 630, 210, 39));
 
         cancelButton.setBackground(new java.awt.Color(255, 55, 95));
         cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
@@ -202,11 +202,11 @@ public class MedicineReport extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
-    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+    private void collectOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_collectOrderActionPerformed
         // TODO add your handling code here:
         orderCollection();
 
-    }//GEN-LAST:event_bookButtonActionPerformed
+    }//GEN-LAST:event_collectOrderActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
@@ -217,8 +217,8 @@ public class MedicineReport extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookButton;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton collectOrder;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

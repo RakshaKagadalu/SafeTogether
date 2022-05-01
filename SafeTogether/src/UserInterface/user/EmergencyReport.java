@@ -65,7 +65,7 @@ public class EmergencyReport extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmergency = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
-        bookButton = new javax.swing.JButton();
+        reportButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         firstNameLabel = new javax.swing.JLabel();
@@ -75,7 +75,7 @@ public class EmergencyReport extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         emergencyBox = new javax.swing.JComboBox<>();
         locationInputField = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(250, 249, 251));
@@ -112,16 +112,16 @@ public class EmergencyReport extends javax.swing.JPanel {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bookButton.setBackground(new java.awt.Color(10, 132, 255));
-        bookButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton.setText("Report");
-        bookButton.addActionListener(new java.awt.event.ActionListener() {
+        reportButton.setBackground(new java.awt.Color(10, 132, 255));
+        reportButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        reportButton.setForeground(new java.awt.Color(255, 255, 255));
+        reportButton.setText("Report");
+        reportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
+                reportButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 210, 39));
+        jPanel7.add(reportButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 210, 39));
 
         cancelButton.setBackground(new java.awt.Color(255, 55, 95));
         cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
@@ -165,17 +165,17 @@ public class EmergencyReport extends javax.swing.JPanel {
         locationInputField.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
         jPanel7.add(locationInputField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 220, 40));
 
-        jButton4.setBackground(new java.awt.Color(255, 55, 95));
-        jButton4.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Search");
-        jButton4.setBorder(null);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(255, 55, 95));
+        searchButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        searchButton.setForeground(new java.awt.Color(255, 255, 255));
+        searchButton.setText("Search");
+        searchButton.setBorder(null);
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 150, 39));
+        jPanel7.add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 150, 39));
 
         jLabel8.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(73, 84, 90));
@@ -200,12 +200,12 @@ public class EmergencyReport extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+    private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed
         // TODO add your handling code here:
         reportEmergency();
 
 
-    }//GEN-LAST:event_bookButtonActionPerformed
+    }//GEN-LAST:event_reportButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
@@ -222,22 +222,20 @@ public class EmergencyReport extends javax.swing.JPanel {
     }
     
     
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         MapViewr oLJP = new MapViewr(rightSidePanel);
         rightSidePanel.add("MapViewr", oLJP);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_searchButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox<String> emergencyBox;
     private javax.swing.JTextField firstNameField;
     private javax.swing.JLabel firstNameLabel;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
@@ -248,6 +246,8 @@ public class EmergencyReport extends javax.swing.JPanel {
     private javax.swing.JTextField lastNameField;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField locationInputField;
+    private javax.swing.JButton reportButton;
+    private javax.swing.JButton searchButton;
     private javax.swing.JTable tblEmergency;
     // End of variables declaration//GEN-END:variables
 

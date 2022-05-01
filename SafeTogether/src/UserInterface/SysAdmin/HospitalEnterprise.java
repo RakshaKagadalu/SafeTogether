@@ -74,7 +74,7 @@ public class HospitalEnterprise extends javax.swing.JPanel {
         returnPanel = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        doctorAssociationPanel = new javax.swing.JPanel();
+        manageDoctorsPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         PandemicTestCentreJPanel = new javax.swing.JPanel();
@@ -141,24 +141,24 @@ public class HospitalEnterprise extends javax.swing.JPanel {
 
         jPanel2.add(returnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
-        doctorAssociationPanel.setBackground(new java.awt.Color(255, 255, 255));
-        doctorAssociationPanel.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorAssociationPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        manageDoctorsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        manageDoctorsPanel.setPreferredSize(new java.awt.Dimension(100, 48));
+        manageDoctorsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorAssociationPanelMousePressed(evt);
+                manageDoctorsPanelMousePressed(evt);
             }
         });
-        doctorAssociationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        manageDoctorsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-stethoscope-24.png"))); // NOI18N
-        doctorAssociationPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        manageDoctorsPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
         jLabel6.setText("Manage Doctors");
-        doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        manageDoctorsPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 290, 60));
+        jPanel2.add(manageDoctorsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 290, 60));
 
         PandemicTestCentreJPanel.setBackground(new java.awt.Color(255, 255, 255));
         PandemicTestCentreJPanel.setPreferredSize(new java.awt.Dimension(100, 48));
@@ -292,15 +292,15 @@ public class HospitalEnterprise extends javax.swing.JPanel {
         add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
+    private void manageDoctorsPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDoctorsPanelMousePressed
         // TODO add your handling code here:
         manageDoctor();
-    }//GEN-LAST:event_doctorAssociationPanelMousePressed
+    }//GEN-LAST:event_manageDoctorsPanelMousePressed
 
     private void returnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnPanelMousePressed
         // TODO add your handling code here:
         returnPanel.setBackground(new Color(213,230,249));
-        doctorAssociationPanel.setBackground(new Color(255,255,255));
+        manageDoctorsPanel.setBackground(new Color(255,255,255));
         PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
         container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
@@ -319,7 +319,6 @@ public class HospitalEnterprise extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PandemicTestCentreJPanel;
-    private javax.swing.JPanel doctorAssociationPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -354,13 +353,14 @@ public class HospitalEnterprise extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JPanel manageDoctorsPanel;
     private javax.swing.JPanel returnPanel;
     private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 
     private void manageDoctor() {
-         doctorAssociationPanel.setBackground(new Color(213,230,249));
+         manageDoctorsPanel.setBackground(new Color(213,230,249));
          PandemicTestCentreJPanel.setBackground(new Color(255,255,255));
         DoctorRegistration dr=new DoctorRegistration(system, rightSidePanel);
         rightSidePanel.add(dr);
@@ -374,7 +374,7 @@ public class HospitalEnterprise extends javax.swing.JPanel {
 
     private void managePandemicCenter() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    doctorAssociationPanel.setBackground(new Color(255,255,255));
+    manageDoctorsPanel.setBackground(new Color(255,255,255));
     PandemicTestCentreJPanel.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
         PandemicRegistration pcr=new PandemicRegistration (system, rightSidePanel, locationPoint);

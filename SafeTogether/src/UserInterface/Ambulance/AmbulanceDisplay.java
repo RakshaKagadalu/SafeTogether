@@ -46,11 +46,11 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        falseAlarm = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         bookButton2 = new javax.swing.JButton();
-        bookButton = new javax.swing.JButton();
-        bookButton1 = new javax.swing.JButton();
+        closeCaseButton = new javax.swing.JButton();
+        respondButton = new javax.swing.JButton();
         locationButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -58,13 +58,13 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1920, 1080));
 
-        jPanel1.setBackground(new java.awt.Color(250, 249, 251));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        falseAlarm.setBackground(new java.awt.Color(250, 249, 251));
+        falseAlarm.setPreferredSize(new java.awt.Dimension(1920, 1080));
+        falseAlarm.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel1.setText("Ambulance Details");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
+        falseAlarm.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
         bookButton2.setBackground(new java.awt.Color(255, 55, 95));
         bookButton2.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
@@ -76,31 +76,31 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
                 bookButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 180, 50));
+        falseAlarm.add(bookButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 180, 50));
 
-        bookButton.setBackground(new java.awt.Color(255, 69, 58));
-        bookButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton.setText("Close Case");
-        bookButton.setBorder(null);
-        bookButton.addActionListener(new java.awt.event.ActionListener() {
+        closeCaseButton.setBackground(new java.awt.Color(255, 69, 58));
+        closeCaseButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        closeCaseButton.setForeground(new java.awt.Color(255, 255, 255));
+        closeCaseButton.setText("Close Case");
+        closeCaseButton.setBorder(null);
+        closeCaseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
+                closeCaseButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 590, 180, 50));
+        falseAlarm.add(closeCaseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 590, 180, 50));
 
-        bookButton1.setBackground(new java.awt.Color(10, 132, 255));
-        bookButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton1.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton1.setText("Respond");
-        bookButton1.setBorder(null);
-        bookButton1.addActionListener(new java.awt.event.ActionListener() {
+        respondButton.setBackground(new java.awt.Color(10, 132, 255));
+        respondButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        respondButton.setForeground(new java.awt.Color(255, 255, 255));
+        respondButton.setText("Respond");
+        respondButton.setBorder(null);
+        respondButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButton1ActionPerformed(evt);
+                respondButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
+        falseAlarm.add(respondButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
 
         locationButton.setBackground(new java.awt.Color(172, 142, 104));
         locationButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
@@ -112,7 +112,7 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
                 locationButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(locationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 180, 50));
+        falseAlarm.add(locationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 180, 50));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,11 +138,11 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(falseAlarm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(falseAlarm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -194,7 +194,7 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_bookButton2ActionPerformed
 
-    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+    private void closeCaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeCaseButtonActionPerformed
         // TODO add your handling code here:
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
@@ -238,9 +238,9 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Select A Row!!");
         }
-    }//GEN-LAST:event_bookButtonActionPerformed
+    }//GEN-LAST:event_closeCaseButtonActionPerformed
 
-    private void bookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton1ActionPerformed
+    private void respondButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_respondButtonActionPerformed
         // TODO add your handling code here:
          DefaultTableModel  table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
@@ -285,7 +285,7 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Select A Row!!");
         }
-    }//GEN-LAST:event_bookButton1ActionPerformed
+    }//GEN-LAST:event_respondButtonActionPerformed
 
     private void locationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationButtonActionPerformed
         // TODO add your handling code here:
@@ -358,13 +358,13 @@ public class AmbulanceDisplay extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookButton;
-    private javax.swing.JButton bookButton1;
     private javax.swing.JButton bookButton2;
+    private javax.swing.JButton closeCaseButton;
+    private javax.swing.JPanel falseAlarm;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton locationButton;
+    private javax.swing.JButton respondButton;
     // End of variables declaration//GEN-END:variables
 }

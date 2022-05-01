@@ -68,7 +68,7 @@ public class PharmacyDoctor extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        bookButton1 = new javax.swing.JButton();
+        placeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         orderList = new javax.swing.JTable();
@@ -84,16 +84,16 @@ public class PharmacyDoctor extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(1160, 750));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bookButton1.setBackground(new java.awt.Color(10, 132, 255));
-        bookButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton1.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton1.setText("Place");
-        bookButton1.addActionListener(new java.awt.event.ActionListener() {
+        placeButton.setBackground(new java.awt.Color(10, 132, 255));
+        placeButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        placeButton.setForeground(new java.awt.Color(255, 255, 255));
+        placeButton.setText("Place");
+        placeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButton1ActionPerformed(evt);
+                placeButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
+        jPanel1.add(placeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel1.setText("Pharmacy Doctor");
@@ -172,12 +172,12 @@ public class PharmacyDoctor extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton1ActionPerformed
+    private void placeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeButtonActionPerformed
         // TODO add your handling code here:
 
         placeOrder();
 
-    }//GEN-LAST:event_bookButton1ActionPerformed
+    }//GEN-LAST:event_placeButtonActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
@@ -200,7 +200,6 @@ public class PharmacyDoctor extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -209,6 +208,7 @@ public class PharmacyDoctor extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable medList;
     private javax.swing.JTable orderList;
+    private javax.swing.JButton placeButton;
     // End of variables declaration//GEN-END:variables
 
     private void placeOrder() {
