@@ -309,7 +309,7 @@ public class PharmacyRegistration extends javax.swing.JPanel {
             system.getPharmaDir().addToPharma(pc);
          //  System.out.println(system.getUserAccDir().getUserAccList().get(1)); 
             displayTable();
-            
+            populateDashBoard();
             locationInputField.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");

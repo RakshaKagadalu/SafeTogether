@@ -9,6 +9,8 @@ import Business.EmergencyPolice.Police;
 import Business.UserAcc.UserAcc;
 import Business.WorkQueue.Req_Emergency;
 import Business.WorkQueue.Req_EmergencyDir;
+import UserInterface.SysAdmin.MapViewerTwo;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,7 +25,8 @@ public class PoliceDisplay extends javax.swing.JPanel {
     private UserAcc userAcc;
     private EcoSystem system;
     private JPanel container;
-    
+    String locationCordinate;
+   
     /**
      * Creates new form PoliceDisplay
      */
@@ -46,11 +49,12 @@ public class PoliceDisplay extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        bookButton2 = new javax.swing.JButton();
+        locationButton = new javax.swing.JButton();
         bookButton = new javax.swing.JButton();
         bookButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        bookButton3 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -63,17 +67,17 @@ public class PoliceDisplay extends javax.swing.JPanel {
         jLabel1.setText("Police Details");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 31, -1, -1));
 
-        bookButton2.setBackground(new java.awt.Color(255, 55, 95));
-        bookButton2.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton2.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton2.setText("False Alarm");
-        bookButton2.setBorder(null);
-        bookButton2.addActionListener(new java.awt.event.ActionListener() {
+        locationButton.setBackground(new java.awt.Color(172, 142, 104));
+        locationButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        locationButton.setForeground(new java.awt.Color(255, 255, 255));
+        locationButton.setText("View Location");
+        locationButton.setBorder(null);
+        locationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButton2ActionPerformed(evt);
+                locationButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 180, 50));
+        jPanel1.add(locationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 180, 50));
 
         bookButton.setBackground(new java.awt.Color(255, 69, 58));
         bookButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
@@ -101,17 +105,14 @@ public class PoliceDisplay extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Name", "Location", "Status", "Response"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -121,6 +122,18 @@ public class PoliceDisplay extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 853, -1));
+
+        bookButton3.setBackground(new java.awt.Color(255, 55, 95));
+        bookButton3.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        bookButton3.setForeground(new java.awt.Color(255, 255, 255));
+        bookButton3.setText("False Alarm");
+        bookButton3.setBorder(null);
+        bookButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bookButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 180, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -134,53 +147,49 @@ public class PoliceDisplay extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bookButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton2ActionPerformed
+    private void locationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationButtonActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel table2 = (DefaultTableModel) jTable1.getModel();
-        int selectedRow = jTable1.getSelectedRow();
+        showMap();
+        
+    }//GEN-LAST:event_locationButtonActionPerformed
+
+    private void showMap() {
+                // TODO add your handling code here:
+         DefaultTableModel  table2 = (DefaultTableModel) jTable1.getModel();
+        int selectedRow=jTable1.getSelectedRow();
         if(selectedRow>=0)
-        {
+        {       
         int rowId = Integer.parseInt(table2.getValueAt(selectedRow, 0).toString());
-        Req_EmergencyDir reqEmergencyDirectory = system.getEmergencyReqDir();
-        ArrayList<Req_Emergency> requestEmergencies = reqEmergencyDirectory.getEmergencyUserList();
-        Police a=(Police)userAcc;
-        int size = requestEmergencies.size();
+        Req_EmergencyDir reqEmergencyDirectory=system.getEmergencyReqDir();
+        ArrayList<Req_Emergency> reqEmergencyList = reqEmergencyDirectory.getEmergencyUserList();
+        int size= reqEmergencyList.size();
+        Police police =(Police) userAcc;
         for(int i=0;i<size;i++)
         {
-            Req_Emergency emergency = requestEmergencies.get(i);
-            if(rowId == emergency.getId())
+            Req_Emergency emergency = reqEmergencyList.get(i);
+            if(rowId ==emergency.getId())
             {
-                if(emergency.getStatus().matches("Closed"))
-                {
-                    JOptionPane.showMessageDialog(null, "Emergency Closed");
-                }
-                else if(emergency.getStatus().matches("False Alarm"))
-                {
-                    JOptionPane.showMessageDialog(null, "Emergency is a false Alaram");
-                }
-                else if(emergency.getResponse().matches("No Response"))
-                {
-                    JOptionPane.showMessageDialog(null, "respond to emergency");
-                }
-                else
-                {
-                    emergency.setStatus("False Alarm");
-                }
-                
-                
-
+                locationCordinate = emergency.getLocation();
             }
 
         }
-        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Emergency","Location","Status","Response"}));
-        populate_table();
+        String [] parts = locationCordinate.split(",");
+        String lattitude = parts[0].replaceAll("\\s","");
+        String longitude = parts[1].replaceAll("\\s","");
+        
+        MapViewerTwo oLJP = new MapViewerTwo(container, lattitude, longitude);
+        container.add("MapViewr", oLJP);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
         }
         else
         {
             JOptionPane.showMessageDialog(null, "Select A Row!!");
         }
-    }//GEN-LAST:event_bookButton2ActionPerformed
 
+        
+    }
+    
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
         // TODO add your handling code here:
         
@@ -236,12 +245,13 @@ public class PoliceDisplay extends javax.swing.JPanel {
         Req_EmergencyDir reqEmergencyDirectory=system.getEmergencyReqDir();
         ArrayList<Req_Emergency> reqEmergencyList = reqEmergencyDirectory.getEmergencyUserList();
         int size= reqEmergencyList.size();
-        Police police =(Police)userAcc;
+        Police police =(Police) userAcc;
         for(int i=0;i<size;i++)
         {
             Req_Emergency emergency = reqEmergencyList.get(i);
             if(rowId ==emergency.getId())
             {
+                locationCordinate = emergency.getLocation();
                 if(emergency.getStatus().matches("Closed"))
                 {
                     JOptionPane.showMessageDialog(null, "Emergency Closed");
@@ -272,6 +282,10 @@ public class PoliceDisplay extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_bookButton1ActionPerformed
 
+    private void bookButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookButton3ActionPerformed
+
     
     
     public void populate_table()
@@ -301,10 +315,11 @@ public class PoliceDisplay extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookButton;
     private javax.swing.JButton bookButton1;
-    private javax.swing.JButton bookButton2;
+    private javax.swing.JButton bookButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton locationButton;
     // End of variables declaration//GEN-END:variables
 }

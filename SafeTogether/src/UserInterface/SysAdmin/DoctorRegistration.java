@@ -8,6 +8,7 @@ import Business.DatabaseUtil.DB4OUtil;
 import Business.Doctor.Doctor;
 import Business.Doctor.DoctorDir;
 import Business.EcoSystem;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel rightSidePanel;
-       ArrayList<String> hospitals = new ArrayList<String>();
+    ArrayList<String> hospitals = new ArrayList<String>();
     ArrayList<String> specializations = new ArrayList<String>();
     int hospitalCount = 0;
     int specializationCount = 0;
@@ -84,7 +85,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(250, 249, 251));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -280,7 +281,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 270, 220));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 740));
+        add(jPanel1, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -299,7 +300,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
             displayTable();
             populateDashBoard();
             
-              userNameTextField3.setText("");
+            userNameTextField3.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
             userNameTextField6.setText("");
@@ -368,9 +369,8 @@ public class DoctorRegistration extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Cannot Update User ID , it is unique!!");
             }
         }
-          displayTable();
-          
-            
+
+          displayTable();        
               userNameTextField3.setText("");
             userNameTextField4.setText("");
             userNameTextField5.setText("");
@@ -479,13 +479,15 @@ public class DoctorRegistration extends javax.swing.JPanel {
                     }
         }
           displayTable();
+          anotherLoad();
           userNameTextField3.setText("");
-            userNameTextField4.setText("");
-            userNameTextField5.setText("");
-            userNameTextField6.setText("");
-            userNameTextField7.setText("");
-            userNameTextField8.setText("");
+          userNameTextField4.setText("");
+          userNameTextField5.setText("");
+          userNameTextField6.setText("");
+          userNameTextField7.setText("");
+          userNameTextField8.setText("");
              }
+
         else
         {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
@@ -493,10 +495,19 @@ public class DoctorRegistration extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void anotherLoad() {
+        populateDashBoard();
+        DoctorRegistration dr=new DoctorRegistration(system, rightSidePanel);
+        rightSidePanel.add(dr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+          
+    }
+    
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         
-          DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
           if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a Person from table", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -508,10 +519,7 @@ public class DoctorRegistration extends javax.swing.JPanel {
         userNameTextField6.setText(table.getValueAt(selectedRow,3).toString());
         userNameTextField7.setText(table.getValueAt(selectedRow,4).toString());
         userNameTextField8.setText(table.getValueAt(selectedRow,5).toString());
-        
-          }
-        
-        
+        }    
     }//GEN-LAST:event_jTable1MouseClicked
 
 
@@ -576,18 +584,25 @@ public class DoctorRegistration extends javax.swing.JPanel {
         
     }
     
+    
      private void populateDashBoard() {
         // Print the count of the location
         // Converting it to hash set
+        System.out.println(hospitals.size());
+        System.out.println(specializations.size());
         HashSet<String> uniqueHospital = new HashSet<String>(hospitals);
         HashSet<String> uniqueSpecialization = new HashSet<String>(specializations);
+
         
         // get the count of hash sets
         hospitalCount = uniqueHospital.size();
         specializationCount = uniqueSpecialization.size();
         
+     
         hosCount.setText(Integer.toString(hospitalCount));
         splCount.setText(Integer.toString(specializationCount));
+ 
+
         
     }
     }
