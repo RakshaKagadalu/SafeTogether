@@ -74,8 +74,8 @@ public class VacRequest extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        addbtn = new javax.swing.JButton();
-        deleteBtn = new javax.swing.JButton();
+        approveButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -102,27 +102,27 @@ public class VacRequest extends javax.swing.JPanel {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        addbtn.setBackground(new java.awt.Color(10, 132, 255));
-        addbtn.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        addbtn.setForeground(new java.awt.Color(255, 255, 255));
-        addbtn.setText("Approve Request");
-        addbtn.addActionListener(new java.awt.event.ActionListener() {
+        approveButton.setBackground(new java.awt.Color(10, 132, 255));
+        approveButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        approveButton.setForeground(new java.awt.Color(255, 255, 255));
+        approveButton.setText("Approve Request");
+        approveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addbtnActionPerformed(evt);
+                approveButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(addbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 180, 39));
+        jPanel7.add(approveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 180, 39));
 
-        deleteBtn.setBackground(new java.awt.Color(255, 55, 95));
-        deleteBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
-        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBtn.setText("Cancel Request");
-        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setBackground(new java.awt.Color(255, 55, 95));
+        cancelButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(255, 255, 255));
+        cancelButton.setText("Cancel Request");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtnActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 580, 200, 39));
+        jPanel7.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 580, 200, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel2.setText("Enter Details");
@@ -210,7 +210,7 @@ public class VacRequest extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
+    private void approveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveButtonActionPerformed
         // TODO add your handling code here:
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
@@ -268,9 +268,9 @@ else
         {
             JOptionPane.showMessageDialog(null,"Select a Row");
         }
-    }//GEN-LAST:event_addbtnActionPerformed
+    }//GEN-LAST:event_approveButtonActionPerformed
 
-    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
          DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
@@ -306,7 +306,7 @@ else
             JOptionPane.showMessageDialog(null,"Select a Row");
         }
 
-    }//GEN-LAST:event_deleteBtnActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
@@ -335,8 +335,8 @@ else
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addbtn;
-    private javax.swing.JButton deleteBtn;
+    private javax.swing.JButton approveButton;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;

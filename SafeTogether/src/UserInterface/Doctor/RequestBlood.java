@@ -63,7 +63,7 @@ public class RequestBlood extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         units = new javax.swing.JPanel();
-        addbtn = new javax.swing.JButton();
+        requestButtonButton = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -119,16 +119,16 @@ public class RequestBlood extends javax.swing.JPanel {
         units.setBackground(new java.awt.Color(255, 255, 255));
         units.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        addbtn.setBackground(new java.awt.Color(10, 132, 255));
-        addbtn.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        addbtn.setForeground(new java.awt.Color(255, 255, 255));
-        addbtn.setText("Request Blood");
-        addbtn.addActionListener(new java.awt.event.ActionListener() {
+        requestButtonButton.setBackground(new java.awt.Color(10, 132, 255));
+        requestButtonButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        requestButtonButton.setForeground(new java.awt.Color(255, 255, 255));
+        requestButtonButton.setText("Request Blood");
+        requestButtonButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addbtnActionPerformed(evt);
+                requestButtonButtonActionPerformed(evt);
             }
         });
-        units.add(addbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 200, 39));
+        units.add(requestButtonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 200, 39));
 
         cancel.setBackground(new java.awt.Color(255, 55, 95));
         cancel.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
@@ -209,12 +209,12 @@ public class RequestBlood extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable3MouseClicked
 
-    private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
+    private void requestButtonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestButtonButtonActionPerformed
         // TODO add your handling code here:
         addBloodReq();
 
 
-    }//GEN-LAST:event_addbtnActionPerformed
+    }//GEN-LAST:event_requestButtonButtonActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
@@ -243,7 +243,6 @@ public class RequestBlood extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addbtn;
     private javax.swing.JComboBox<String> bloodGroup;
     private javax.swing.JComboBox<String> bloodbank;
     private javax.swing.JButton cancel;
@@ -258,6 +257,7 @@ public class RequestBlood extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable3;
     private javax.swing.JPanel request;
+    private javax.swing.JButton requestButtonButton;
     private javax.swing.JTextField unit;
     private javax.swing.JPanel units;
     // End of variables declaration//GEN-END:variables

@@ -57,8 +57,8 @@ public class PharmaOrder extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        updateStatus = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -161,29 +161,29 @@ public class PharmaOrder extends javax.swing.JPanel {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 360, 190));
 
-        jButton1.setBackground(new java.awt.Color(10, 132, 255));
-        jButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Update status");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        updateStatus.setBackground(new java.awt.Color(10, 132, 255));
+        updateStatus.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        updateStatus.setForeground(new java.awt.Color(255, 255, 255));
+        updateStatus.setText("Update status");
+        updateStatus.setBorder(null);
+        updateStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                updateStatusActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 670, 200, 39));
+        jPanel1.add(updateStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 670, 200, 39));
 
-        jButton4.setBackground(new java.awt.Color(255, 55, 95));
-        jButton4.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Reset");
-        jButton4.setBorder(null);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        resetButton.setBackground(new java.awt.Color(255, 55, 95));
+        resetButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        resetButton.setForeground(new java.awt.Color(255, 255, 255));
+        resetButton.setText("Reset");
+        resetButton.setBorder(null);
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                resetButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 670, 180, 39));
+        jPanel1.add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 670, 180, 39));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -197,15 +197,15 @@ public class PharmaOrder extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void updateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStatusActionPerformed
         // TODO add your handling code here:
         UpdateStatus();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_updateStatusActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
        resetOrder();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_resetButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -215,8 +215,6 @@ public class PharmaOrder extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -229,6 +227,8 @@ public class PharmaOrder extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JButton resetButton;
+    private javax.swing.JButton updateStatus;
     // End of variables declaration//GEN-END:variables
 
     private void displayTable() {

@@ -47,10 +47,10 @@ public class VaccinationFrame extends javax.swing.JPanel {
 
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        btnComplete = new javax.swing.JButton();
+        buttonComplete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
-        setPreferredSize(new java.awt.Dimension(0, 0));
+        setPreferredSize(new java.awt.Dimension(1160, 50));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -65,24 +65,24 @@ public class VaccinationFrame extends javax.swing.JPanel {
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 605, 105));
 
-        btnComplete.setText("Mark as complete");
-        btnComplete.addActionListener(new java.awt.event.ActionListener() {
+        buttonComplete.setText("Mark as complete");
+        buttonComplete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCompleteActionPerformed(evt);
+                buttonCompleteActionPerformed(evt);
             }
         });
-        add(btnComplete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 230, 60));
+        add(buttonComplete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 230, 60));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
+    private void buttonCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCompleteActionPerformed
         // TODO add your handling code here:
         markCompleteVac();
 
-    }//GEN-LAST:event_btnCompleteActionPerformed
+    }//GEN-LAST:event_buttonCompleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnComplete;
+    private javax.swing.JButton buttonComplete;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables

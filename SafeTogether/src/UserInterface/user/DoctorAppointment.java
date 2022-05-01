@@ -62,12 +62,12 @@ public class DoctorAppointment extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         specializationCombo = new javax.swing.JComboBox<>();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        bookAppointment1 = new javax.swing.JButton();
+        viewAppointmentButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDocAvail = new javax.swing.JTable();
-        bookAppointment2 = new javax.swing.JButton();
+        bookAppointment = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
-        cancel1 = new javax.swing.JButton();
+        findDoctor = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -110,18 +110,18 @@ public class DoctorAppointment extends javax.swing.JPanel {
 
         container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 1090, 90));
 
-        bookAppointment1.setBackground(new java.awt.Color(10, 132, 255));
-        bookAppointment1.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
-        bookAppointment1.setForeground(new java.awt.Color(255, 255, 255));
-        bookAppointment1.setText("View Appointment Status");
-        bookAppointment1.setBorder(null);
-        bookAppointment1.setFocusPainted(false);
-        bookAppointment1.addActionListener(new java.awt.event.ActionListener() {
+        viewAppointmentButton.setBackground(new java.awt.Color(94, 92, 255));
+        viewAppointmentButton.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        viewAppointmentButton.setForeground(new java.awt.Color(255, 255, 255));
+        viewAppointmentButton.setText("View Appointment Status");
+        viewAppointmentButton.setBorder(null);
+        viewAppointmentButton.setFocusPainted(false);
+        viewAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookAppointment1ActionPerformed(evt);
+                viewAppointmentButtonActionPerformed(evt);
             }
         });
-        container.add(bookAppointment1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 680, 230, 50));
+        container.add(viewAppointmentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 680, 230, 50));
 
         tblDocAvail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,20 +135,20 @@ public class DoctorAppointment extends javax.swing.JPanel {
 
         container.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 1090, 250));
 
-        bookAppointment2.setBackground(new java.awt.Color(10, 132, 255));
-        bookAppointment2.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
-        bookAppointment2.setForeground(new java.awt.Color(255, 255, 255));
-        bookAppointment2.setText("Book Appointment");
-        bookAppointment2.setBorder(null);
-        bookAppointment2.setFocusPainted(false);
-        bookAppointment2.addActionListener(new java.awt.event.ActionListener() {
+        bookAppointment.setBackground(new java.awt.Color(10, 132, 255));
+        bookAppointment.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        bookAppointment.setForeground(new java.awt.Color(255, 255, 255));
+        bookAppointment.setText("Book Appointment");
+        bookAppointment.setBorder(null);
+        bookAppointment.setFocusPainted(false);
+        bookAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookAppointment2ActionPerformed(evt);
+                bookAppointmentActionPerformed(evt);
             }
         });
-        container.add(bookAppointment2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 680, 230, 50));
+        container.add(bookAppointment, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 680, 230, 50));
 
-        cancel.setBackground(new java.awt.Color(10, 132, 255));
+        cancel.setBackground(new java.awt.Color(255, 69, 50));
         cancel.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
         cancel.setForeground(new java.awt.Color(255, 255, 255));
         cancel.setText("Cancel Appointment");
@@ -161,18 +161,18 @@ public class DoctorAppointment extends javax.swing.JPanel {
         });
         container.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 680, 230, 50));
 
-        cancel1.setBackground(new java.awt.Color(10, 132, 255));
-        cancel1.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
-        cancel1.setForeground(new java.awt.Color(255, 255, 255));
-        cancel1.setText("Find Doctor");
-        cancel1.setBorder(null);
-        cancel1.setFocusPainted(false);
-        cancel1.addActionListener(new java.awt.event.ActionListener() {
+        findDoctor.setBackground(new java.awt.Color(62, 200, 224));
+        findDoctor.setFont(new java.awt.Font("SF Pro", 0, 14)); // NOI18N
+        findDoctor.setForeground(new java.awt.Color(255, 255, 255));
+        findDoctor.setText("Find Doctor");
+        findDoctor.setBorder(null);
+        findDoctor.setFocusPainted(false);
+        findDoctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancel1ActionPerformed(evt);
+                findDoctorActionPerformed(evt);
             }
         });
-        container.add(cancel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 680, 230, 50));
+        container.add(findDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 680, 230, 50));
 
         add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1139, 1073));
     }// </editor-fold>//GEN-END:initComponents
@@ -182,17 +182,17 @@ public class DoctorAppointment extends javax.swing.JPanel {
         DoctorDisplay();
     }//GEN-LAST:event_specializationComboActionPerformed
 
-    private void bookAppointment1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment1ActionPerformed
+    private void viewAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAppointmentButtonActionPerformed
         // TODO add your handling code here:
         // viewAppointmentStatus();
         displayAppointmentStatus();
-    }//GEN-LAST:event_bookAppointment1ActionPerformed
+    }//GEN-LAST:event_viewAppointmentButtonActionPerformed
 
-    private void bookAppointment2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointment2ActionPerformed
+    private void bookAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppointmentActionPerformed
         // TODO add your handling code here:
 
         bookDocAppointment();
-    }//GEN-LAST:event_bookAppointment2ActionPerformed
+    }//GEN-LAST:event_bookAppointmentActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
@@ -200,18 +200,17 @@ public class DoctorAppointment extends javax.swing.JPanel {
         cancelAppoint();
     }//GEN-LAST:event_cancelActionPerformed
 
-    private void cancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel1ActionPerformed
+    private void findDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findDoctorActionPerformed
         // TODO add your handling code here:
         DoctorDisplay();
-    }//GEN-LAST:event_cancel1ActionPerformed
+    }//GEN-LAST:event_findDoctorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookAppointment1;
-    private javax.swing.JButton bookAppointment2;
+    private javax.swing.JButton bookAppointment;
     private javax.swing.JButton cancel;
-    private javax.swing.JButton cancel1;
     private javax.swing.JPanel container;
+    private javax.swing.JButton findDoctor;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -222,6 +221,7 @@ public class DoctorAppointment extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> specializationCombo;
     private javax.swing.JTable tblDocAvail;
     private javax.swing.JComboBox<String> timeCombo;
+    private javax.swing.JButton viewAppointmentButton;
     // End of variables declaration//GEN-END:variables
 
     private void specializationCombo() {

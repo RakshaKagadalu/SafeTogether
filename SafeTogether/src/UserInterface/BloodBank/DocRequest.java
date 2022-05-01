@@ -48,8 +48,8 @@ public class DocRequest extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        bookButton1 = new javax.swing.JButton();
-        bookButton = new javax.swing.JButton();
+        processRequest = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(250, 249, 251));
@@ -78,27 +78,27 @@ public class DocRequest extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 853, -1));
 
-        bookButton1.setBackground(new java.awt.Color(10, 132, 255));
-        bookButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton1.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton1.setText("Process Request");
-        bookButton1.addActionListener(new java.awt.event.ActionListener() {
+        processRequest.setBackground(new java.awt.Color(10, 132, 255));
+        processRequest.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        processRequest.setForeground(new java.awt.Color(255, 255, 255));
+        processRequest.setText("Process Request");
+        processRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButton1ActionPerformed(evt);
+                processRequestActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
+        jPanel1.add(processRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
 
-        bookButton.setBackground(new java.awt.Color(255, 69, 58));
-        bookButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton.setText("Cancel");
-        bookButton.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setBackground(new java.awt.Color(255, 69, 58));
+        cancelButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(255, 255, 255));
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 590, 180, 50));
+        jPanel1.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 590, 180, 50));
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel1.setText("Process Request");
@@ -116,24 +116,24 @@ public class DocRequest extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton1ActionPerformed
+    private void processRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processRequestActionPerformed
         // TODO add your handling code here:
         AcceptReq();
-    }//GEN-LAST:event_bookButton1ActionPerformed
+    }//GEN-LAST:event_processRequestActionPerformed
 
-    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         rejectReq();
-    }//GEN-LAST:event_bookButtonActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookButton;
-    private javax.swing.JButton bookButton1;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton processRequest;
     // End of variables declaration//GEN-END:variables
 
     private void displayTable() {

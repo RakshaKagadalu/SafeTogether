@@ -55,9 +55,9 @@ public class PandemicRegistration extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         locationInputField = new javax.swing.JTextField();
@@ -118,40 +118,40 @@ public class PandemicRegistration extends javax.swing.JPanel {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(10, 132, 255));
-        jButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addButton.setBackground(new java.awt.Color(10, 132, 255));
+        addButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        addButton.setForeground(new java.awt.Color(255, 255, 255));
+        addButton.setText("Add");
+        addButton.setBorder(null);
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 140, 39));
+        jPanel7.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 140, 39));
 
-        jButton2.setBackground(new java.awt.Color(94, 92, 230));
-        jButton2.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Update");
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        updateButton.setBackground(new java.awt.Color(94, 92, 230));
+        updateButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        updateButton.setForeground(new java.awt.Color(255, 255, 255));
+        updateButton.setText("Update");
+        updateButton.setBorder(null);
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                updateButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 140, 39));
+        jPanel7.add(updateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 140, 39));
 
-        jButton3.setBackground(new java.awt.Color(172, 142, 104));
-        jButton3.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Delete");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setBackground(new java.awt.Color(172, 142, 104));
+        deleteButton.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        deleteButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 150, 39));
+        jPanel7.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 150, 39));
 
         jLabel2.setFont(new java.awt.Font("SF Pro Display", 1, 36)); // NOI18N
         jLabel2.setText("Enter Details");
@@ -216,7 +216,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
         add(jPanel2, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
          String name = (userNameTextField4.getText());
             String location = (locationInputField.getText());
@@ -260,9 +260,9 @@ public class PandemicRegistration extends javax.swing.JPanel {
        
    
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
         
         String username= userNameTextField5.getText();
@@ -319,7 +319,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Please Select a Row!!");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -340,7 +340,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         
          String username=userNameTextField5.getText();
@@ -417,7 +417,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
 //            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
 //        }
 //        
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     public void populateLongituteLatitude(MapCoordinates locationPoint) {
         this.locationPoint = locationPoint;
@@ -434,9 +434,8 @@ public class PandemicRegistration extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -452,6 +451,7 @@ public class PandemicRegistration extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField locationInputField;
+    private javax.swing.JButton updateButton;
     private javax.swing.JTextField userNameTextField4;
     private javax.swing.JTextField userNameTextField5;
     private javax.swing.JTextField userNameTextField6;

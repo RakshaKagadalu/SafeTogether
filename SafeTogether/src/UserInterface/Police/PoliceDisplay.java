@@ -50,11 +50,11 @@ public class PoliceDisplay extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         locationButton = new javax.swing.JButton();
-        bookButton = new javax.swing.JButton();
-        bookButton1 = new javax.swing.JButton();
+        closeCaseButton = new javax.swing.JButton();
+        respondButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        bookButton3 = new javax.swing.JButton();
+        falseAlarmButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
         setPreferredSize(new java.awt.Dimension(1160, 750));
@@ -79,29 +79,29 @@ public class PoliceDisplay extends javax.swing.JPanel {
         });
         jPanel1.add(locationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 180, 50));
 
-        bookButton.setBackground(new java.awt.Color(255, 69, 58));
-        bookButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton.setText("Close Case");
-        bookButton.setBorder(null);
-        bookButton.addActionListener(new java.awt.event.ActionListener() {
+        closeCaseButton.setBackground(new java.awt.Color(255, 69, 58));
+        closeCaseButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        closeCaseButton.setForeground(new java.awt.Color(255, 255, 255));
+        closeCaseButton.setText("Close Case");
+        closeCaseButton.setBorder(null);
+        closeCaseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
+                closeCaseButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 590, 180, 50));
+        jPanel1.add(closeCaseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 590, 180, 50));
 
-        bookButton1.setBackground(new java.awt.Color(10, 132, 255));
-        bookButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton1.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton1.setText("Respond");
-        bookButton1.setBorder(null);
-        bookButton1.addActionListener(new java.awt.event.ActionListener() {
+        respondButton.setBackground(new java.awt.Color(10, 132, 255));
+        respondButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        respondButton.setForeground(new java.awt.Color(255, 255, 255));
+        respondButton.setText("Respond");
+        respondButton.setBorder(null);
+        respondButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButton1ActionPerformed(evt);
+                respondButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
+        jPanel1.add(respondButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,17 +123,17 @@ public class PoliceDisplay extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 853, -1));
 
-        bookButton3.setBackground(new java.awt.Color(255, 55, 95));
-        bookButton3.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton3.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton3.setText("False Alarm");
-        bookButton3.setBorder(null);
-        bookButton3.addActionListener(new java.awt.event.ActionListener() {
+        falseAlarmButton.setBackground(new java.awt.Color(255, 55, 95));
+        falseAlarmButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        falseAlarmButton.setForeground(new java.awt.Color(255, 255, 255));
+        falseAlarmButton.setText("False Alarm");
+        falseAlarmButton.setBorder(null);
+        falseAlarmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButton3ActionPerformed(evt);
+                falseAlarmButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 180, 50));
+        jPanel1.add(falseAlarmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 180, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -190,7 +190,7 @@ public class PoliceDisplay extends javax.swing.JPanel {
         
     }
     
-    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+    private void closeCaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeCaseButtonActionPerformed
         // TODO add your handling code here:
         
         DefaultTableModel table2 = (DefaultTableModel) jTable1.getModel();
@@ -233,9 +233,9 @@ public class PoliceDisplay extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Select A Row!!");
         }
-    }//GEN-LAST:event_bookButtonActionPerformed
+    }//GEN-LAST:event_closeCaseButtonActionPerformed
 
-    private void bookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton1ActionPerformed
+    private void respondButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_respondButtonActionPerformed
         // TODO add your handling code here:
          DefaultTableModel  table2 = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
@@ -280,11 +280,11 @@ public class PoliceDisplay extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Select A Row!!");
         }
-    }//GEN-LAST:event_bookButton1ActionPerformed
+    }//GEN-LAST:event_respondButtonActionPerformed
 
-    private void bookButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton3ActionPerformed
+    private void falseAlarmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_falseAlarmButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bookButton3ActionPerformed
+    }//GEN-LAST:event_falseAlarmButtonActionPerformed
 
     
     
@@ -313,13 +313,13 @@ public class PoliceDisplay extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookButton;
-    private javax.swing.JButton bookButton1;
-    private javax.swing.JButton bookButton3;
+    private javax.swing.JButton closeCaseButton;
+    private javax.swing.JButton falseAlarmButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton locationButton;
+    private javax.swing.JButton respondButton;
     // End of variables declaration//GEN-END:variables
 }

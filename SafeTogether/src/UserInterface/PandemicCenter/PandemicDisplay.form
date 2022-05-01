@@ -138,7 +138,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jComboBox1" min="-2" pref="148" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="bookButton1" min="-2" pref="124" max="-2" attributes="0"/>
+                      <Component id="setResult" min="-2" pref="124" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -149,7 +149,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="bookButton1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="setResult" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jComboBox1" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
@@ -160,7 +160,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="bookButton1">
+            <Component class="javax.swing.JButton" name="setResult">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="84" red="a" type="rgb"/>
@@ -177,7 +177,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bookButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setResultActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox1">

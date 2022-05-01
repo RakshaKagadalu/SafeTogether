@@ -69,7 +69,7 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         goBack = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        doctorAssociationPanel = new javax.swing.JPanel();
+        managePharmacies = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -132,24 +132,24 @@ public class PharmaEnterprises extends javax.swing.JPanel {
 
         jPanel2.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
-        doctorAssociationPanel.setBackground(new java.awt.Color(255, 255, 255));
-        doctorAssociationPanel.setPreferredSize(new java.awt.Dimension(100, 48));
-        doctorAssociationPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        managePharmacies.setBackground(new java.awt.Color(255, 255, 255));
+        managePharmacies.setPreferredSize(new java.awt.Dimension(100, 48));
+        managePharmacies.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                doctorAssociationPanelMousePressed(evt);
+                managePharmaciesMousePressed(evt);
             }
         });
-        doctorAssociationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        managePharmacies.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-medical-expenses-insurance-24.png"))); // NOI18N
-        doctorAssociationPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        managePharmacies.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel6.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(115, 120, 128));
         jLabel6.setText("Manage Pharmacies");
-        doctorAssociationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        managePharmacies.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel2.add(doctorAssociationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
+        jPanel2.add(managePharmacies, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 290, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
@@ -272,14 +272,13 @@ public class PharmaEnterprises extends javax.swing.JPanel {
         layout.previous(container);
     }                                   
 
-    private void doctorAssociationPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorAssociationPanelMousePressed
+    private void managePharmaciesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmaciesMousePressed
         // TODO add your handling code here:
        managePharmacy();
-    }//GEN-LAST:event_doctorAssociationPanelMousePressed
+    }//GEN-LAST:event_managePharmaciesMousePressed
   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel doctorAssociationPanel;
     private javax.swing.JPanel goBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -313,13 +312,14 @@ public class PharmaEnterprises extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JPanel managePharmacies;
     private javax.swing.JPanel rightSidePanel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 
     private void managePharmacy() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    doctorAssociationPanel.setBackground(new Color(213,230,249));
+    managePharmacies.setBackground(new Color(213,230,249));
         //255,255,255 PandemicTestCentreJPanel
         PharmacyRegistration pcr=new PharmacyRegistration (system, rightSidePanel, locationPoint);
         rightSidePanel.add(pcr);

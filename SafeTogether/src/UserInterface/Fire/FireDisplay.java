@@ -53,9 +53,9 @@ public class FireDisplay extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        bookButton1 = new javax.swing.JButton();
-        bookButton = new javax.swing.JButton();
-        bookButton2 = new javax.swing.JButton();
+        respondButton = new javax.swing.JButton();
+        closeCase = new javax.swing.JButton();
+        falseAlarm = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         locationButton = new javax.swing.JButton();
 
@@ -86,41 +86,41 @@ public class FireDisplay extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 853, -1));
 
-        bookButton1.setBackground(new java.awt.Color(10, 132, 255));
-        bookButton1.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton1.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton1.setText("Respond");
-        bookButton1.setBorder(null);
-        bookButton1.addActionListener(new java.awt.event.ActionListener() {
+        respondButton.setBackground(new java.awt.Color(10, 132, 255));
+        respondButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        respondButton.setForeground(new java.awt.Color(255, 255, 255));
+        respondButton.setText("Respond");
+        respondButton.setBorder(null);
+        respondButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButton1ActionPerformed(evt);
+                respondButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
+        jPanel1.add(respondButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 180, 50));
 
-        bookButton.setBackground(new java.awt.Color(255, 69, 58));
-        bookButton.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton.setText("Close Case");
-        bookButton.setBorder(null);
-        bookButton.addActionListener(new java.awt.event.ActionListener() {
+        closeCase.setBackground(new java.awt.Color(255, 69, 58));
+        closeCase.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        closeCase.setForeground(new java.awt.Color(255, 255, 255));
+        closeCase.setText("Close Case");
+        closeCase.setBorder(null);
+        closeCase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
+                closeCaseActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 590, 180, 50));
+        jPanel1.add(closeCase, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 590, 180, 50));
 
-        bookButton2.setBackground(new java.awt.Color(255, 55, 95));
-        bookButton2.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
-        bookButton2.setForeground(new java.awt.Color(255, 255, 255));
-        bookButton2.setText("False Alarm");
-        bookButton2.setBorder(null);
-        bookButton2.addActionListener(new java.awt.event.ActionListener() {
+        falseAlarm.setBackground(new java.awt.Color(255, 55, 95));
+        falseAlarm.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
+        falseAlarm.setForeground(new java.awt.Color(255, 255, 255));
+        falseAlarm.setText("False Alarm");
+        falseAlarm.setBorder(null);
+        falseAlarm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButton2ActionPerformed(evt);
+                falseAlarmActionPerformed(evt);
             }
         });
-        jPanel1.add(bookButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 180, 50));
+        jPanel1.add(falseAlarm, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 180, 50));
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel1.setText("Fire emergency details");
@@ -150,7 +150,7 @@ public class FireDisplay extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bookButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton2ActionPerformed
+    private void falseAlarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_falseAlarmActionPerformed
         // TODO add your handling code here:
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
@@ -197,9 +197,9 @@ public class FireDisplay extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Select A Row!!");
         }
-    }//GEN-LAST:event_bookButton2ActionPerformed
+    }//GEN-LAST:event_falseAlarmActionPerformed
 
-    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+    private void closeCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeCaseActionPerformed
         // TODO add your handling code here:
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
@@ -242,9 +242,9 @@ public class FireDisplay extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Select A Row!!");
         }
-    }//GEN-LAST:event_bookButtonActionPerformed
+    }//GEN-LAST:event_closeCaseActionPerformed
 
-    private void bookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButton1ActionPerformed
+    private void respondButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_respondButtonActionPerformed
         // TODO add your handling code here:
         DefaultTableModel  table = (DefaultTableModel) jTable1.getModel();
         int selectedRow=jTable1.getSelectedRow();
@@ -289,7 +289,7 @@ public class FireDisplay extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Select A Row!!");
         }
-    }//GEN-LAST:event_bookButton1ActionPerformed
+    }//GEN-LAST:event_respondButtonActionPerformed
 
     private void locationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationButtonActionPerformed
         // TODO add your handling code here:
@@ -332,13 +332,13 @@ public class FireDisplay extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookButton;
-    private javax.swing.JButton bookButton1;
-    private javax.swing.JButton bookButton2;
+    private javax.swing.JButton closeCase;
+    private javax.swing.JButton falseAlarm;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton locationButton;
+    private javax.swing.JButton respondButton;
     // End of variables declaration//GEN-END:variables
 }
