@@ -307,9 +307,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="loginButton">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="SF Pro Text" size="18" style="1"/>
             </Property>
@@ -330,7 +327,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="454" y="670" width="179" height="56"/>
+              <AbsoluteConstraints x="460" y="660" width="190" height="60"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -355,7 +352,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="229" y="665" width="179" height="56"/>
+              <AbsoluteConstraints x="190" y="660" width="179" height="60"/>
             </Constraint>
           </Constraints>
         </Component>

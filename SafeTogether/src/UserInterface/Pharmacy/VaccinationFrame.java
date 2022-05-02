@@ -50,7 +50,7 @@ public class VaccinationFrame extends javax.swing.JPanel {
         buttonComplete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(250, 249, 251));
-        setPreferredSize(new java.awt.Dimension(1160, 50));
+        setPreferredSize(new java.awt.Dimension(1160, 750));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -63,15 +63,19 @@ public class VaccinationFrame extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(jTable2);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 605, 105));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 1090, 520));
 
+        buttonComplete.setBackground(new java.awt.Color(255, 153, 153));
+        buttonComplete.setFont(new java.awt.Font("SF Pro", 1, 14)); // NOI18N
+        buttonComplete.setForeground(new java.awt.Color(255, 255, 255));
         buttonComplete.setText("Mark as complete");
+        buttonComplete.setBorder(null);
         buttonComplete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCompleteActionPerformed(evt);
             }
         });
-        add(buttonComplete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 230, 60));
+        add(buttonComplete, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 620, 230, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCompleteActionPerformed
