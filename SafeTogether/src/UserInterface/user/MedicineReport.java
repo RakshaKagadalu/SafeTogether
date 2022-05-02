@@ -10,6 +10,7 @@ import Business.UserAcc.UserAcc;
 import Business.WorkQueue.Req_Medicine;
 import Business.WorkQueue.Req_MedicineDir;
 import Business.userR.User;
+import Utility.Notification;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -297,6 +298,14 @@ public class MedicineReport extends javax.swing.JPanel {
     
     
     }
+    
+    public void sendmail(String subject, String content) {
+        Notification notification = new Notification();
+        String toEmail = "aedproject22@gmail.com";
+        String emailSubject = subject;
+        String emailContent = content;
+        notification.sendMail(toEmail, emailSubject, emailContent);
+    }
 
     private void cancelOrder() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -320,6 +329,9 @@ public class MedicineReport extends javax.swing.JPanel {
                 if(!o.getStatus().matches("Order Recieved"))
                 {
                 o.setStatus("Cancelled");
+                String subject = "Request Cancelled";
+                String content = "Medicine request was cancelled.";
+                sendmail(subject, content);
                 }
                 else
                 {
