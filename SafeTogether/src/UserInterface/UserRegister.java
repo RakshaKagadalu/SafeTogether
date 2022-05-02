@@ -156,7 +156,6 @@ public class UserRegister extends javax.swing.JPanel {
         passwordTextField.setBackground(new java.awt.Color(248, 248, 249));
         jPanel2.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 438, 271, 48));
 
-        loginButton.setBackground(new java.awt.Color(255, 255, 255));
         loginButton.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
         loginButton.setForeground(new java.awt.Color(235, 97, 91));
         loginButton.setText("Login");
@@ -166,7 +165,7 @@ public class UserRegister extends javax.swing.JPanel {
                 loginButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 670, 179, 56));
+        jPanel2.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 660, 190, 60));
 
         signUpButton.setBackground(new java.awt.Color(235, 97, 91));
         signUpButton.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
@@ -178,7 +177,7 @@ public class UserRegister extends javax.swing.JPanel {
                 signUpButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(signUpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 665, 179, 56));
+        jPanel2.add(signUpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 660, 179, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
