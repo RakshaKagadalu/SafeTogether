@@ -11,6 +11,7 @@ import Business.UserAcc.UserAcc;
 import Business.WorkQueue.DonateBlood;
 import Business.WorkQueue.DonateBlood_Dir;
 import Business.userR.User;
+import Utility.Notification;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -238,6 +239,8 @@ public class BloodDonations extends javax.swing.JPanel {
                 DonateBlood_Dir bloodDir = system.getDonateBloodDir();
                 bloodDir.addrequest(donate);
                 jTable1.setModel(new DefaultTableModel(null, new String[]{"ID", "Center", "Status", "Date", "Time"}));
+                JOptionPane.showMessageDialog(null, "Appointment Booked!");
+                sendmail();
                 displayTable();
             } else {
                 JOptionPane.showMessageDialog(null, "Appointment Available from Tomorrow");
@@ -246,6 +249,14 @@ public class BloodDonations extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Pick A Date!!");
         }
 
+    }
+    
+    public void sendmail() {
+        Notification notification = new Notification();
+        String toEmail = "aedproject22@gmail.com";
+        String emailSubject = "Blood Donation";
+        String emailContent = "Successfully booked your blood donation appointment!!";
+        notification.sendMail(toEmail, emailSubject, emailContent);
     }
 
     

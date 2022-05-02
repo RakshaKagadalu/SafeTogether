@@ -144,7 +144,7 @@ public class UserLogin extends javax.swing.JPanel {
         passwordTextField.setBackground(new java.awt.Color(248, 248, 249));
         jPanel1.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 450, 50));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 530, 520));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 530, 520));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fusion-medical-animation-rnr8D3FNUNY-unsplash.jpg"))); // NOI18N
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));

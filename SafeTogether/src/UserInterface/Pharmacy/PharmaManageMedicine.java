@@ -114,7 +114,7 @@ public class PharmaManageMedicine extends javax.swing.JPanel {
                 delMedActionPerformed(evt);
             }
         });
-        jPanel2.add(delMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 520, 140, 39));
+        jPanel2.add(delMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 520, 140, 50));
 
         addMed.setBackground(new java.awt.Color(10, 132, 255));
         addMed.setFont(new java.awt.Font("SF Pro Text", 0, 14)); // NOI18N
@@ -126,7 +126,7 @@ public class PharmaManageMedicine extends javax.swing.JPanel {
                 addMedActionPerformed(evt);
             }
         });
-        jPanel2.add(addMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, 140, 39));
+        jPanel2.add(addMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, 140, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 820, 580));
 

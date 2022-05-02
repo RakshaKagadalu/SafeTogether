@@ -10,25 +10,13 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Business.DatabaseUtil.DB4OUtil;
-import Business.Vac.Vaccinations;
-import Business.WorkQueue.OutbreakTracer;
-import Business.WorkQueue.OutbreakTracerDir;
-import Business.WorkQueue.VacRequest_Dir;
-import Utility.MapCoordinates;
-import com.sun.mail.imap.Rights;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.Timer;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.data.general.DefaultPieDataset;
+
 
 /**
  *
@@ -88,7 +76,7 @@ public class GovernmentView extends javax.swing.JPanel {
         goBack2 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        orderPanel = new javax.swing.JPanel();
+        regUsersList = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         vacPanel = new javax.swing.JPanel();
@@ -96,6 +84,9 @@ public class GovernmentView extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
+        statisticsPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         timeLabel = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -136,29 +127,29 @@ public class GovernmentView extends javax.swing.JPanel {
 
         jPanel6.add(goBack2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 290, 60));
 
-        orderPanel.setBackground(new java.awt.Color(255, 255, 255));
-        orderPanel.setPreferredSize(new java.awt.Dimension(100, 48));
-        orderPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        regUsersList.setBackground(new java.awt.Color(255, 255, 255));
+        regUsersList.setPreferredSize(new java.awt.Dimension(100, 48));
+        regUsersList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                orderPanelMousePressed(evt);
+                regUsersListMousePressed(evt);
             }
         });
-        orderPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        regUsersList.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-delivery-24.png"))); // NOI18N
-        orderPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+        regUsersList.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
 
         jLabel10.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(115, 120, 128));
-        jLabel10.setText("Statistics");
+        jLabel10.setText("Registered Users");
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel10MouseClicked(evt);
             }
         });
-        orderPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        regUsersList.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jPanel6.add(orderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 60));
+        jPanel6.add(regUsersList, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 290, 60));
 
         vacPanel.setBackground(new java.awt.Color(255, 255, 255));
         vacPanel.setPreferredSize(new java.awt.Dimension(100, 48));
@@ -182,6 +173,30 @@ public class GovernmentView extends javax.swing.JPanel {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo/safe together-logos_transparent copy.png"))); // NOI18N
         jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 90));
+
+        statisticsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        statisticsPanel.setPreferredSize(new java.awt.Dimension(100, 48));
+        statisticsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                statisticsPanelMousePressed(evt);
+            }
+        });
+        statisticsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icons/icons8-delivery-24.png"))); // NOI18N
+        statisticsPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, -1));
+
+        jLabel13.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(115, 120, 128));
+        jLabel13.setText("Statistics");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+        statisticsPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+
+        jPanel6.add(statisticsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 60));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 288, 1080));
 
@@ -231,54 +246,50 @@ public class GovernmentView extends javax.swing.JPanel {
         sendToVacReqScreen();
     }//GEN-LAST:event_vacPanelMousePressed
 
-    private void orderPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPanelMousePressed
+    private void regUsersListMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regUsersListMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_orderPanelMousePressed
+        sendToRegisteredUsers();
+    }//GEN-LAST:event_regUsersListMousePressed
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         // TODO add your handling code here:
-        OutbreakTracerDir vaccinationDirectory = system.getOutbreakStatusDir();
-        ArrayList<OutbreakTracer> c1= vaccinationDirectory.getOutbreakLog();
-        
-        int a=0;
-        int b=0;
-        for(int i=0;i<c1.size();i++)
-        {
-            
-            OutbreakTracer c2 = c1.get(i);
-            if(c2.getResult().matches("Positive"))
-            {
-                a+=1;
-            }
-            else if(c2.getResult().matches("Negative"))
-            {
-                b+=1;
-            }
-            
-        }
-        
-        DefaultPieDataset pie=new DefaultPieDataset();
-        pie.setValue("Positive Case", a);
-        pie.setValue("Negative Case", b);
-        JFreeChart c2=ChartFactory.createPieChart("Covid-19 Statistics", pie,true,true,true);
-        PiePlot p = (PiePlot)c2.getPlot();
-        ChartFrame f=new ChartFrame("Pie Chart",c2);
-        f.setVisible(false);
-        f.setSize(300, 400);
-        ChartPanel cp=new ChartPanel(c2);
-        cp.setSize(500, 600);
-        rightSidePanel.removeAll();
-        rightSidePanel.add(cp);
-        rightSidePanel.updateUI();
-      
-       
-      
     }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void statisticsPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statisticsPanelMousePressed
+        // TODO add your handling code here:
+        sendToStatsScreen();
+    }//GEN-LAST:event_statisticsPanelMousePressed
 
     
     public void sendToVacReqScreen(){
         vacPanel.setBackground(new Color(213,230,249));
+        statisticsPanel.setBackground(new Color(255, 255, 255));
+        regUsersList.setBackground(new Color(255, 255, 255));
         VacRequest pr=new VacRequest(container,userAcc, system);
+        rightSidePanel.add(pr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }
+    
+    public void sendToStatsScreen(){
+        regUsersList.setBackground(new Color(255, 255, 255));
+        statisticsPanel.setBackground(new Color(213,230,249));
+        vacPanel.setBackground(new Color(255, 255, 255));
+        Statistics pr = new Statistics(userAcc, system);
+        rightSidePanel.add(pr);
+        CardLayout layout = (CardLayout) rightSidePanel.getLayout();
+        layout.next(rightSidePanel);
+    }
+    
+    public void sendToRegisteredUsers(){
+        regUsersList.setBackground(new Color(213,230,249));
+        vacPanel.setBackground(new Color(255, 255, 255));
+        statisticsPanel.setBackground(new Color(255, 255, 255));
+        registeredUsersList pr = new registeredUsersList(container,userAcc, system);
         rightSidePanel.add(pr);
         CardLayout layout = (CardLayout) rightSidePanel.getLayout();
         layout.next(rightSidePanel);
@@ -292,19 +303,22 @@ public class GovernmentView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPanel orderPanel;
+    private javax.swing.JPanel regUsersList;
     private javax.swing.JPanel rightSidePanel;
+    private javax.swing.JPanel statisticsPanel;
     private javax.swing.JLabel timeLabel;
     private javax.swing.JPanel vacPanel;
     // End of variables declaration//GEN-END:variables

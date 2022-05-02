@@ -12,6 +12,7 @@ import Business.WorkQueue.Req_EmergencyDir;
 import Business.userR.User;
 import UserInterface.SysAdmin.MapViewr;
 import Utility.MapCoordinates;
+import Utility.Notification;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -285,6 +286,9 @@ public class EmergencyReport extends javax.swing.JPanel {
         re.setResponse("No Response");
             Req_EmergencyDir red=system.getEmergencyReqDir();
         red.addEmergencyUser(re);
+        String subject = "Emergency request raised";
+        String content = "Emergency request has been raised.";
+        sendmail(subject, content);
         tblEmergency.setModel(new DefaultTableModel(null,new String[]{"ID","Emergency","Location","Status","Response"}));
         displayTable();
                     JOptionPane.showMessageDialog(null, "Reported Emergency Successfully!!!");
@@ -296,6 +300,15 @@ public class EmergencyReport extends javax.swing.JPanel {
         }
     }
 
+    public void sendmail(String subject, String content) {
+        Notification notification = new Notification();
+        String toEmail = "aedproject22@gmail.com";
+        String emailSubject = subject;
+        String emailContent = content;
+        notification.sendMail(toEmail, emailSubject, emailContent);
+    }
+
+    
     private void cancelEmergency() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         DefaultTableModel table = (DefaultTableModel) tblEmergency.getModel();
@@ -310,6 +323,9 @@ public class EmergencyReport extends javax.swing.JPanel {
                 if (sRow == reqEmer.getId()) {
                     if (reqEmer.getStatus().matches("In Progress")) {
                         reqEmer.setStatus("Closed");
+                        String subject = "Emergency request closed";
+                        String content = "Emergency request has been closed.";
+                        sendmail(subject, content);
                         JOptionPane.showMessageDialog(null, "Case Closed");
 
                     } else if (reqEmer.getStatus().matches("Closed")) {
