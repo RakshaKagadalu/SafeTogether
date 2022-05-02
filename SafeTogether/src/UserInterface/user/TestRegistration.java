@@ -12,6 +12,7 @@ import Business.WorkQueue.OutbreakTracer;
 import Business.WorkQueue.OutbreakTracerDir;
 import Business.userR.User;
 import UserInterface.SysAdmin.MapViewerTwo;
+import Utility.Notification;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -429,6 +430,9 @@ public class TestRegistration extends javax.swing.JPanel {
                 cdd.addrequest(c1);
                 jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Status","Center","Temperature","Date","Time","Result"}));
                 displayCenter();
+                String subject = "Request received";
+                String content = "Test registration was booked sucessfully.";
+                sendmail(subject, content);
                  JOptionPane.showMessageDialog(null, "Your Appointment Booked successfully!!");
             }
             else
@@ -441,6 +445,15 @@ public class TestRegistration extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Please select A Date!!");
         }
     
+    }
+    
+    
+    public void sendmail(String subject, String content) {
+        Notification notification = new Notification();
+        String toEmail = "aedproject22@gmail.com";
+        String emailSubject = subject;
+        String emailContent = content;
+        notification.sendMail(toEmail, emailSubject, emailContent);
     }
     
     public boolean isAreadyBooked(String date){
