@@ -1,8 +1,8 @@
-# SafeTogether-AED-FinalProject
+# SafeTogether-FinalProject
 
 Pandemic Management Systems
 
-This is a pandemic management system for AED- INFO5100 final project
+This is a pandemic management system as part of final project
 
 ## Authors
 
